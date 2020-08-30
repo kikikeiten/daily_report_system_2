@@ -93,3 +93,21 @@ button {
     color: #721c24;
     background-color: #f8d7da;
 }
+
+table#employee_list th {
+    width: 30%;
+    padding: 10px 2%;
+}
+
+table#employee_list td {
+    width: 29%;
+    padding: 10px 2%;
+}
+
+tr.row1 {
+    background-color: #f2f2f2;
+}
+
+tr.row0 {
+    background-color: #ffffff;
+}
