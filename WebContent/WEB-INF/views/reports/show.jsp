@@ -21,7 +21,9 @@
                         </tr>
                         <tr>
                             <th>内容</th>
-                            <td><pre><c:out value="${report.content}" /></pre></td>
+                            <td><pre>
+                                    <c:out value="${report.content}" />
+                                </pre></td>
                         </tr>
                         <tr>
                             <th>登録日時</th>
@@ -33,8 +35,19 @@
                             <td><fmt:formatDate value="${report.updated_at}"
                                     pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         </tr>
+                        <tr>
+                            <th>いいね数</th>
+                            <td><c:out value="${report.likes}" /></td>
+                        </tr>
                     </tbody>
                 </table>
+                <br>
+                <!-- いいねボタンを追加 -->
+                <c:if test="${sessionScope.login_employee.id != report.employee.id}">
+                    <form method="POST" action="<c:url value='/likes/create' />">
+                        <button type="submit" name="likes" value="${1}">いいね！</button>
+                    </form>
+                </c:if>
 
                 <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                     <p>
