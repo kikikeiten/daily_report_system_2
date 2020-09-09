@@ -42,10 +42,10 @@ public class LikesCreateServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 確認
-        System.out.println("セッション中のreport_id : " + request.getSession().getAttribute("report_id"));
+        //System.out.println("セッション中のreport_id : " + request.getSession().getAttribute("report_id"));
 
-        // セッションスコープからレポートのIDを取得して該当のIDのレポート1件のみをデータベースから取得
-        Report r = em.find(Report.class, (Integer) (request.getSession().getAttribute("report_id")));
+        // リクエストパラメータからレポートのIDを取得して該当のIDのレポート1件のみをデータベースから取得
+        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("report_id")));
 
         // いいねをプロパティにvalue(1)を上書き
         r.setLikes(Integer.parseInt(request.getParameter("likes")) + r.getLikes());
@@ -57,7 +57,7 @@ public class LikesCreateServlet extends HttpServlet {
         request.getSession().setAttribute("flush", "いいねしました。");
 
         // セッションスコープ上の不要になったデータを削除
-        request.getSession().removeAttribute("report_id");
+        //request.getSession().removeAttribute("report_id");
 
         // indexページへリダイレクト
         response.sendRedirect(request.getContextPath() + "/reports/index");

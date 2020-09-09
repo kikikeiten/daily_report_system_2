@@ -43,6 +43,7 @@
                 <!-- いいねボタンを追加 -->
                 <c:if test="${sessionScope.login_employee.id != report.employee.id}">
                     <form method="POST" action="<c:url value='/likes/create' />">
+                        <input type="hidden" name="report_id" value="${report.id}">
                         <button type="submit" name="likes" value="${1}">いいね！</button>
                     </form>
                 </c:if>
