@@ -29,7 +29,16 @@
                         <td class="report_title">${report.title}</td>
                         <td class="report_action"><a
                             href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
-                        <td class="report_likes"><c:out value="${report.likes}" /></td>
+                        <c:choose>
+                            <c:when test="${report.likes == 0}">
+                                <td class="report_likes"><c:out value="${report.likes}" /></td>
+                            </c:when>
+                            <c:otherwise>
+                                <td class="report_likes"><a
+                                    href="<c:url value='/likes/index?report_id=${report.id}' />"><c:out
+                                            value="${report.likes}" /></a></td>
+                            </c:otherwise>
+                        </c:choose>
                     </tr>
                 </c:forEach>
             </tbody>

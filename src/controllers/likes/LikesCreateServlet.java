@@ -1,6 +1,7 @@
 package controllers.likes;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Employee;
+import models.Like;
 import models.Report;
 import utils.DBUtil;
 
@@ -34,30 +37,29 @@ public class LikesCreateServlet extends HttpServlet {
             throws ServletException, IOException {
         // TODO Auto-generated method stub
 
-        // CSRF対策のチェック
-        //String _token = (String) request.getParameter("_token");
-        //if (_token != null && _token.equals(request.getSession().getId())) {
-
         // EntityManagerのオブジェクトを生成
         EntityManager em = DBUtil.createEntityManager();
 
-        // 確認
-        //System.out.println("セッション中のreport_id : " + request.getSession().getAttribute("report_id"));
-
         // リクエストパラメータからレポートのIDを取得して該当のIDのレポート1件のみをデータベースから取得
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("report_id")));
+
+        Like l = new Like();
+
+        l.setEmployee((Employee) request.getSession().getAttribute("login_employee"));
+        l.setReport(r);
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        l.setCreated_at(currentTime);
+        l.setUpdated_at(currentTime);
 
         // いいねをプロパティにvalue(1)を上書き
         r.setLikes(Integer.parseInt(request.getParameter("likes")) + r.getLikes());
 
         // データベースを更新
         em.getTransaction().begin();
+        em.persist(l);
         em.getTransaction().commit();
         em.close();
         request.getSession().setAttribute("flush", "いいねしました。");
-
-        // セッションスコープ上の不要になったデータを削除
-        //request.getSession().removeAttribute("report_id");
 
         // indexページへリダイレクト
         response.sendRedirect(request.getContextPath() + "/reports/index");
