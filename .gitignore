@@ -21,3 +21,5 @@ Thumbs.db
 
 # Application Properties
 WebContent/META-INF/application.properties
+
+persistence.xml

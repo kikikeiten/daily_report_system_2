@@ -162,7 +162,15 @@ table#report_list .report_action {
 pre {
     font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
         Arial, sans-serif;
-    word-break: break-word;
+    /* Mozilla */
+    white-space: -moz-pre-wrap;
+    /* Opera 4-6 */ 06
+    white-space: -pre-wrap;
+    /* Opera 7 */ 09
+    white-space: -o-pre-wrap;
+    /* CSS3 */ 12
+    white-space: pre-wrap;
+    /* IE 5.5+ */ 15
     word-wrap: break-word;
 }
 
