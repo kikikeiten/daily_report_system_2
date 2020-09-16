@@ -24,22 +24,30 @@
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><c:out
                                 value="${report.employee.name}" /></td>
-
                         <c:choose>
-                            <c:when test="${report.employee.id != follow.follower}">
-                                <td class="follow">
-                                    <form method="POST" action="<c:url value='/follow/create' />">
-                                    <input type="hidden" name="report_id" value="${report.employee.id}">
-                                        <button>フォロー</button>
-                                    </form>
-                                </td>
+                            <c:when
+                                test="${sessionScope.login_employee.id != report.employee.id}">
+                                <c:choose>
+                                    <c:when test="${report.employee.id != follow.follow}">
+                                        <td class="follow">
+                                            <form method="POST" action="<c:url value='/follow/create' />">
+                                                <button type="submit" name="following"
+                                                    value="${report.employee.id}">フォロー</button>
+                                            </form>
+                                        </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td class="follow">
+                                            <form method="POST"
+                                                action="<c:url value='/follow/destroy' />">
+                                                <button>フォロー中</button>
+                                            </form>
+                                        </td>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:when>
                             <c:otherwise>
-                                <td class="follow">
-                                    <form method="POST" action="<c:url value='/follow/destroy' />">
-                                        <button>フォロー中</button>
-                                    </form>
-                                </td>
+                                <td></td>
                             </c:otherwise>
                         </c:choose>
 
