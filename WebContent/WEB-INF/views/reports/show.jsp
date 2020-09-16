@@ -15,6 +15,9 @@
                             <td><c:out value="${report.employee.name}" /></td>
                         </tr>
                         <tr>
+                            <th>フォロー</th>
+                            <td><button>テスト</button></td>
+                        <tr>
                             <th>日付</th>
                             <td><fmt:formatDate value="${report.report_date}"
                                     pattern="yyyy-MM-dd" /></td>

@@ -14,6 +14,7 @@
             <tbody>
                 <tr>
                     <th class="report_name">氏名</th>
+                    <th class="follow">フォロー</th>
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
@@ -23,6 +24,25 @@
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><c:out
                                 value="${report.employee.name}" /></td>
+
+                        <c:choose>
+                            <c:when test="${report.employee.id != follow.follower}">
+                                <td class="follow">
+                                    <form method="POST" action="<c:url value='/follow/create' />">
+                                    <input type="hidden" name="report_id" value="${report.employee.id}">
+                                        <button>フォロー</button>
+                                    </form>
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td class="follow">
+                                    <form method="POST" action="<c:url value='/follow/destroy' />">
+                                        <button>フォロー中</button>
+                                    </form>
+                                </td>
+                            </c:otherwise>
+                        </c:choose>
+
                         <td class="report_date"><fmt:formatDate
                                 value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>
