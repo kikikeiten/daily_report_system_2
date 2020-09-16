@@ -25,7 +25,7 @@ public class Follow {
     private Employee employee;
 
     @JoinColumn(name = "follow_id", nullable = false)
-    private Employee follow;
+    private Integer follow;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -49,11 +49,11 @@ public class Follow {
         this.employee = employee;
     }
 
-    public Employee getFollow() {
-        return employee;
+    public Integer getFollow() {
+        return follow;
     }
 
-    public void setFollow(Employee follow) {
+    public void setFollow(Integer follow) {
         this.follow = follow;
     }
 
