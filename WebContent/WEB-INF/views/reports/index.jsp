@@ -40,7 +40,8 @@
                                         <td class="follow">
                                             <form method="POST"
                                                 action="<c:url value='/follow/destroy' />">
-                                                <button>フォロー中</button>
+                                                <button type="submit" name="employee_id"
+                                                    value="${report.employee.id}">フォロー中</button>
                                             </form>
                                         </td>
                                     </c:otherwise>
