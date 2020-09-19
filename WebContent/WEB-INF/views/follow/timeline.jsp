@@ -15,7 +15,8 @@
                     <th class="report_action">操作</th>
                     <th class="report_like">いいね数</th>
                 </tr>
-                <c:forEach var="report" items="${reports}" varStatus="status">
+                <c:forEach var="report" items="${getMyFollowAllReports}"
+                    varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><c:out
                                 value="${report.employee.name}" /></td>
@@ -40,7 +41,7 @@
                         </c:choose>
 
                         <td class="report_date"><fmt:formatDate
-                                value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
+                                value='${report.created_at}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
                         <td class="report_title">${report.title}</td>
                         <td class="report_action"><a
                             href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
@@ -60,15 +61,15 @@
         </table>
 
         <div id="pagination">
-            （全 ${reports_count} 件）<br />
-            <c:forEach var="i" begin="1" end="${((reports_count - 1) / 10) + 1}"
-                step="1">
+            （全 ${getMyFollowReportsCount} 件）<br />
+            <c:forEach var="i" begin="1"
+                end="${((getMyFollowReportsCount - 1) / 10) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/reports/index?page=${i}' />"><c:out
+                        <a href="<c:url value='/timeline/index?page=${i}' />"><c:out
                                 value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>

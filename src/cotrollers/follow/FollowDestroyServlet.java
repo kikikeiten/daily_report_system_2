@@ -37,7 +37,7 @@ public class FollowDestroyServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Integer ei = 0;
-        ei = em.createNamedQuery("FollowDestroy", Integer.class)
+        ei = em.createNamedQuery("followDestroy", Integer.class)
                 .setParameter("follow", Integer.parseInt(request.getParameter("employee_id")))
                 .getSingleResult();
 
