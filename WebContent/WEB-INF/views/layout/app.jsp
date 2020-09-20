@@ -20,12 +20,14 @@
                 <c:if test="${sessionScope.login_employee != null}">
                     <c:if test="${sessionScope.login_employee.admin_flag == 1}">
                         <a href="<c:url value='/employees/index' />">従業員管理</a>&nbsp;
-                        </c:if>
+                    </c:if>
                     <a href="<c:url value='/reports/index' />">日報管理</a>&nbsp;
                     <a href="<c:url value='/timeline/index' />">タイムライン</a>&nbsp;
-                    <a href="<c:url value='/following/index' />"><b>test</b>フォロー中</a>&nbsp;
-                    <a href="<c:url value='/follower/index' />"><b>test</b>フォロワー</a>&nbsp;
-                    </c:if>
+                    <a href="<c:url value='/following/index' />"><b><c:out
+                                value="${getMyFollowingCount}" /></b>フォロー中</a>&nbsp;
+                    <a href="<c:url value='/follower/index' />"><b><c:out
+                                value="${getMyFollowerCount}" /></b>フォロワー</a>&nbsp;
+                 </c:if>
             </div>
             <c:if test="${sessionScope.login_employee != null}">
                 <div id="employee_name">
