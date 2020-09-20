@@ -16,8 +16,10 @@ import javax.persistence.Table;
 @Table(name = "follows")
 @NamedQueries({
         @NamedQuery(name = "followDestroy", query = "SELECT f.id FROM Follow AS f WHERE f.follow  = :follow"),
-        @NamedQuery(name = "getMyFollowAllReports", query = "SELECT r FROM Report AS r, Follow AS f WHERE f.employee = :employee AND r.employee.id = f.follow ORDER BY r.id DESC"),
-        @NamedQuery(name = "getMyFollowReportsCount", query = "SELECT COUNT(r) FROM Report AS r, Follow AS f WHERE f.employee = :employee AND r.employee.id = f.follow")
+        @NamedQuery(name = "getMyFollowAllReports", query = "SELECT r FROM Report AS r, Follow AS f WHERE f.employee = :employee AND r.employee.id = f.follow.id ORDER BY r.id DESC"),
+        @NamedQuery(name = "getMyFollowReportsCount", query = "SELECT COUNT(r) FROM Report AS r, Follow AS f WHERE f.employee = :employee AND r.employee.id = f.follow.id"),
+        @NamedQuery(name = "getMyAllFollowing", query = "SELECT f FROM Employee AS e, Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id ORDER BY f.id DESC"),
+        @NamedQuery(name = "getMyFollowingCount", query = "SELECT COUNT(f) FROM Employee AS e, Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id")
 
 })
 
@@ -32,8 +34,9 @@ public class Follow {
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 
+    @ManyToOne
     @JoinColumn(name = "follow_id", nullable = false)
-    private Integer follow;
+    private Employee follow;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -57,11 +60,11 @@ public class Follow {
         this.employee = employee;
     }
 
-    public Integer getFollow() {
+    public Employee getFollow() {
         return follow;
     }
 
-    public void setFollow(Integer follow) {
+    public void setFollow(Employee follow) {
         this.follow = follow;
     }
 

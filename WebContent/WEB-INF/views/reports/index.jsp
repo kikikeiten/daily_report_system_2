@@ -32,7 +32,7 @@
                                         <td class="follow">
                                             <form method="POST" action="<c:url value='/follow/create' />">
                                                 <button type="submit" name="following"
-                                                    value="${report.employee.id}">フォロー</button>
+                                                    value="${report.id}">フォロー</button>
                                             </form>
                                         </td>
                                     </c:when>
@@ -41,7 +41,7 @@
                                             <form method="POST"
                                                 action="<c:url value='/follow/destroy' />">
                                                 <button type="submit" name="employee_id"
-                                                    value="${report.employee.id}">フォロー中</button>
+                                                    value="${report.id}">フォロー中</button>
                                             </form>
                                         </td>
                                     </c:otherwise>

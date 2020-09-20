@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
 import models.Follow;
+import models.Report;
 import utils.DBUtil;
 
 /**
@@ -40,9 +41,10 @@ public class FollowCreateServlet extends HttpServlet {
 
         Follow f = new Follow();
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("following")));
 
         f.setEmployee((Employee) request.getSession().getAttribute("login_employee"));
-        f.setFollow(Integer.parseInt(request.getParameter("following")));
+        f.setFollow(r.getEmployee());
         f.setCreated_at(currentTime);
         f.setUpdated_at(currentTime);
 

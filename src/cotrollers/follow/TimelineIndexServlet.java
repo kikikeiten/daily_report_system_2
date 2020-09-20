@@ -40,7 +40,6 @@ public class TimelineIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
-        System.out.println("ログインしているidは" + login_employee);
 
         int page;
         try {
@@ -64,10 +63,6 @@ public class TimelineIndexServlet extends HttpServlet {
         request.setAttribute("getMyFollowAllReports", getMyFollowAllReports);
         request.setAttribute("getMyFollowReportsCount", getMyFollowReportsCount);
         request.setAttribute("page", page);
-        if (request.getSession().getAttribute("flush") != null) {
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
-        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/timeline.jsp");
         rd.forward(request, response);

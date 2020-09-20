@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Follow;
+import models.Report;
 import utils.DBUtil;
 
 /**
@@ -35,10 +36,11 @@ public class FollowDestroyServlet extends HttpServlet {
         // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
+        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("employee_id")));
 
         Integer ei = 0;
         ei = em.createNamedQuery("followDestroy", Integer.class)
-                .setParameter("follow", Integer.parseInt(request.getParameter("employee_id")))
+                .setParameter("follow", r.getEmployee())
                 .getSingleResult();
 
         Follow f = em.find(Follow.class, ei);
