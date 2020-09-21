@@ -54,14 +54,9 @@ public class FollowerIndexServlet extends HttpServlet {
                 .setMaxResults(10)
                 .getResultList();
 
-        long getMyFollowerCount = (long) em.createNamedQuery("getMyFollowerCount", Long.class)
-                .setParameter("employee", login_employee)
-                .getSingleResult();
-
         em.close();
 
         request.setAttribute("getMyAllFollower", getMyAllFollower);
-        request.setAttribute("getMyFollowerCount", getMyFollowerCount);
         request.setAttribute("page", page);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/follower.jsp");

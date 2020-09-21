@@ -22,21 +22,21 @@
                                 value="${report.employee.name}" /></td>
 
                         <c:choose>
-                            <c:when test="${report.employee.id != follow.follower}">
+                            <c:when
+                                test="${sessionScope.login_employee.id != report.employee.id}">
+
                                 <td class="follow">
                                     <form method="POST" action="<c:url value='/follow/create' />">
-                                        <input type="hidden" name="report_id"
-                                            value="${report.employee.id}">
-                                        <button>フォロー</button>
+                                        <button type="submit" name="following" value="${report.id}">フォロー</button>
+                                    </form>
+                                    <form method="POST" action="<c:url value='/follow/destroy' />">
+                                        <button type="submit" name="employee_id" value="${report.id}">フォロー解除</button>
                                     </form>
                                 </td>
+
                             </c:when>
                             <c:otherwise>
-                                <td class="follow">
-                                    <form method="POST" action="<c:url value='/follow/destroy' />">
-                                        <button>フォロー中</button>
-                                    </form>
-                                </td>
+                                <td></td>
                             </c:otherwise>
                         </c:choose>
 

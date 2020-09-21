@@ -27,25 +27,13 @@
                                 <td class="following_name"><c:out
                                         value="${following.follow.name}" /></td>
 
-                                <c:choose>
-                                    <c:when test="${report.employee.id != follow.follower}">
-                                        <td class="follow">
-                                            <form method="POST" action="<c:url value='/follow/create' />">
-                                                <input type="hidden" name="report_id"
-                                                    value="${report.employee.id}">
-                                                <button>フォロー</button>
-                                            </form>
-                                        </td>
-                                    </c:when>
-                                    <c:otherwise>
                                         <td class="follow">
                                             <form method="POST"
-                                                action="<c:url value='/follow/destroy' />">
-                                                <button>フォロー中</button>
+                                                action="<c:url value='/following/destroy' />">
+                                                <button type="submit" name="follow_id"
+                                                    value="${following.id}">フォロー解除</button>
                                             </form>
                                         </td>
-                                    </c:otherwise>
-                                </c:choose>
 
                                 <td class="following_date"><fmt:formatDate
                                         value='${following.created_at}' pattern='yyyy-MM-dd HH:mm:ss' /></td>

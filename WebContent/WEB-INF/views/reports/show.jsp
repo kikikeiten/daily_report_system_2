@@ -16,31 +16,56 @@
                         </tr>
                         <tr>
                             <th>フォロー</th>
-                            <td><button>テスト</button></td>
-                        <tr>
+
+                            <c:choose>
+                                <c:when
+                                    test="${sessionScope.login_employee.id != report.employee.id}">
+
+                                    <td class="follow">
+                                        <form method="POST" action="<c:url value='/follow/create' />">
+                                            <button type="submit" name="following" value="${report.id}">フォロー</button>
+                                        </form>
+                                        <form method="POST" action="<c:url value='/follow/destroy' />">
+                                            <button type="submit" name="employee_id" value="${report.id}">フォロー解除</button>
+                                        </form>
+                                    </td>
+
+                                </c:when>
+                                <c:otherwise>
+                                    <td></td>
+                                </c:otherwise>
+                            </c:choose>
+
+
                             <th>日付</th>
-                            <td><fmt:formatDate value="${report.report_date}"
-                                    pattern="yyyy-MM-dd" /></td>
+                            <td><fmt:formatDate
+                                    value="${report.report_date}" pattern="yyyy-MM-dd" /></td>
                         </tr>
+
                         <tr>
                             <th>内容</th>
-                            <td><pre><c:out value="${report.content}" /></pre></td>
+                            <td><pre><c:out value="${report.content}" /></pre>
+                            </td>
                         </tr>
+
                         <tr>
                             <th>登録日時</th>
-                            <td><fmt:formatDate value="${report.created_at}"
-                                    pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate
+                                    value="${report.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         </tr>
+
                         <tr>
                             <th>更新日時</th>
-                            <td><fmt:formatDate value="${report.updated_at}"
-                                    pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate
+                                    value="${report.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         </tr>
+
                         <tr>
                             <th>いいね数</th>
                             <c:choose>
                                 <c:when test="${report.likes == 0}">
-                                    <td class="report_likes"><c:out value="${report.likes}" /></td>
+                                    <td class="report_likes"><c:out
+                                            value="${report.likes}" /></td>
                                 </c:when>
                                 <c:otherwise>
                                     <td class="report_likes"><a
@@ -49,20 +74,27 @@
                                 </c:otherwise>
                             </c:choose>
                         </tr>
+
+
                     </tbody>
                 </table>
                 <br>
                 <!-- いいねボタンを追加 -->
-                <c:if test="${sessionScope.login_employee.id != report.employee.id}">
-                    <form method="POST" action="<c:url value='/likes/create' />">
-                        <input type="hidden" name="report_id" value="${report.id}">
+                <c:if
+                    test="${sessionScope.login_employee.id != report.employee.id}">
+                    <form method="POST"
+                        action="<c:url value='/likes/create' />">
+                        <input type="hidden" name="report_id"
+                            value="${report.id}">
                         <button type="submit" name="likes" value="${1}">いいね！</button>
                     </form>
                 </c:if>
 
-                <c:if test="${sessionScope.login_employee.id == report.employee.id}">
+                <c:if
+                    test="${sessionScope.login_employee.id == report.employee.id}">
                     <p>
-                        <a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a>
+                        <a
+                            href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a>
                     </p>
                 </c:if>
             </c:when>

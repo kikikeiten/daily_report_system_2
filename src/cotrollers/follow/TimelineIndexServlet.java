@@ -58,6 +58,7 @@ public class TimelineIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
+
         em.close();
 
         request.setAttribute("getMyFollowAllReports", getMyFollowAllReports);

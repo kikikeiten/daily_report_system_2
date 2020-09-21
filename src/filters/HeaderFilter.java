@@ -62,7 +62,6 @@ public class HeaderFilter implements Filter {
         request.setAttribute("getMyFollowingCount", getMyFollowingCount);
         request.setAttribute("getMyFollowerCount", getMyFollowerCount);
 
-
         chain.doFilter(request, response);
     }
 
