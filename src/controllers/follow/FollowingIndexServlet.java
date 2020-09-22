@@ -1,4 +1,4 @@
-package cotrollers.follow;
+package controllers.follow;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,16 +16,16 @@ import models.Follow;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class FollowerIndexServlet
+ * Servlet implementation class FollowingIndexServlet
  */
-@WebServlet("/follower/index")
-public class FollowerIndexServlet extends HttpServlet {
+@WebServlet("/following/index")
+public class FollowingIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowerIndexServlet() {
+    public FollowingIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,7 +48,7 @@ public class FollowerIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Follow> getMyAllFollower = em.createNamedQuery("getMyAllFollower", Follow.class)
+        List<Follow> getMyAllFollowing = em.createNamedQuery("getMyAllFollowing", Follow.class)
                 .setParameter("employee", login_employee)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)
@@ -56,10 +56,10 @@ public class FollowerIndexServlet extends HttpServlet {
 
         em.close();
 
-        request.setAttribute("getMyAllFollower", getMyAllFollower);
+        request.setAttribute("getMyAllFollowing", getMyAllFollowing);
         request.setAttribute("page", page);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/follower.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/following.jsp");
         rd.forward(request, response);
 
     }

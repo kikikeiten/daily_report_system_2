@@ -1,4 +1,4 @@
-package cotrollers.follow;
+package controllers.follow;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -12,19 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
 import models.Follow;
+import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class FollowerCreateServlet
+ * Servlet implementation class FollowCreateServlet
  */
-@WebServlet("/follower/create")
-public class FollowerCreateServlet extends HttpServlet {
+@WebServlet("/follow/create")
+public class FollowCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowerCreateServlet() {
+    public FollowCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +33,18 @@ public class FollowerCreateServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
         Follow f = new Follow();
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        Follow ff = em.find(Follow.class, Integer.parseInt(request.getParameter("follow_id")));
+        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("following")));
 
         f.setEmployee((Employee) request.getSession().getAttribute("login_employee"));
-        f.setFollow(ff.getEmployee());
+        f.setFollow(r.getEmployee());
         f.setCreated_at(currentTime);
         f.setUpdated_at(currentTime);
 
