@@ -1,6 +1,7 @@
 package controllers.reports;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Employee;
 import models.Report;
 import utils.DBUtil;
 
@@ -36,6 +38,32 @@ public class ReportsShowServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
+
+        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+
+        //フォロー判定
+        List<Employee> getMyReportEmployee = em.createNamedQuery("getMyReportEmployee", Employee.class)
+                .getResultList();
+
+        System.out.println("レポートを書いた従業員idは" + getMyReportEmployee + "です。");
+
+        for (Employee report_employee : getMyReportEmployee) {
+            List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
+                    .setParameter("employee", login_employee)
+                    .getResultList();
+
+            System.out.println("ログイン中の従業員がフォローしている従業員idは" + checkMyFollow + "です。");
+            System.out.println("レポートの従業員idは" + report_employee + "です。");
+
+            request.setAttribute("report_employee", report_employee);
+            request.setAttribute("checkMyFollow", checkMyFollow);
+
+            int follow_count = checkMyFollow.indexOf(report_employee);
+            System.out.println("indexOf(int follow_count)で「report_employee」の検索結果：" + follow_count);
+
+            request.setAttribute("follow_count", follow_count);
+        }
+        //フォロー判定ここまで
 
         em.close();
 
