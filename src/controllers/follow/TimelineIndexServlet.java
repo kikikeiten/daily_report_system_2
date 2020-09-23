@@ -54,6 +54,30 @@ public class TimelineIndexServlet extends HttpServlet {
                 .setMaxResults(10)
                 .getResultList();
 
+      //フォロー判定
+        List<Employee> getMyReportEmployee = em.createNamedQuery("getMyReportEmployee", Employee.class)
+                .getResultList();
+
+        System.out.println("レポートを書いた従業員idは" + getMyReportEmployee + "です。");
+
+        for (Employee report_employee : getMyReportEmployee) {
+            List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
+                    .setParameter("employee", login_employee)
+                    .getResultList();
+
+            System.out.println("ログイン中の従業員がフォローしている従業員idは" + checkMyFollow + "です。");
+            System.out.println("レポートの従業員idは" + report_employee + "です。");
+
+            request.setAttribute("report_employee", report_employee);
+            request.setAttribute("checkMyFollow", checkMyFollow);
+
+            int follow_count = checkMyFollow.indexOf(report_employee);
+            System.out.println("indexOf(int follow_count)で「report_employee」の検索結果：" + follow_count);
+
+            request.setAttribute("follow_count", follow_count);
+        }
+        //フォロー判定ここまで
+
         long getMyFollowReportsCount = (long) em.createNamedQuery("getMyFollowReportsCount", Long.class)
                 .setParameter("employee", login_employee)
                 .getSingleResult();
