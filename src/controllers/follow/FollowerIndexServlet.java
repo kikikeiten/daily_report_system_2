@@ -69,9 +69,6 @@ public class FollowerIndexServlet extends HttpServlet {
             System.out.println("ログイン中の従業員がフォローしている従業員idは" + checkMyFollow + "です。");
             System.out.println("フォロワーの従業員idは" + follower_employee + "です。");
 
-            request.setAttribute("follower_employee", follower_employee);
-            request.setAttribute("checkMyFollow", checkMyFollow);
-
             boolean follow_count = checkMyFollow.contains(follower_employee);
             System.out.println("contains(boolean follow_count)で「follower_employee」の検索結果：" + follow_count);
 

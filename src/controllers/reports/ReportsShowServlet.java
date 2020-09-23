@@ -55,9 +55,6 @@ public class ReportsShowServlet extends HttpServlet {
             System.out.println("ログイン中の従業員がフォローしている従業員idは" + checkMyFollow + "です。");
             System.out.println("レポートの従業員idは" + report_employee + "です。");
 
-            request.setAttribute("report_employee", report_employee);
-            request.setAttribute("checkMyFollow", checkMyFollow);
-
             boolean follow_count = checkMyFollow.contains(report_employee);
             System.out.println("contains(boolean follow_count)で「report_employee」の検索結果：" + follow_count);
 
