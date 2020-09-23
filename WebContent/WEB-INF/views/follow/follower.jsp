@@ -26,16 +26,26 @@
                             <tr class="row${status.count % 2}">
                                 <td class="report_name"><c:out
                                         value="${follower.employee.name}" /></td>
-
-                                <td class="follow">
-                                    <form method="POST" action="<c:url value='/follower/create' />">
-                                        <button type="submit" name="follow_id" value="${follower.id}">フォロー</button>
-                                    </form>
-                                    <form method="POST" action="<c:url value='/follower/destroy' />">
-                                        <button type="submit" name="employee_id" value="${follower.id}">フォロー解除</button>
-                                    </form>
-                                </td>
-
+                                <c:choose>
+                                    <c:when test="${follow_count != 1}">
+                                        <td class="follow">
+                                            <form method="POST"
+                                                action="<c:url value='/follower/create' />">
+                                                <button type="submit" name="follow_id"
+                                                    value="${follower.id}">フォロー</button>
+                                            </form>
+                                        </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td class="follow">
+                                            <form method="POST"
+                                                action="<c:url value='/follower/destroy' />">
+                                                <button type="submit" name="employee_id"
+                                                    value="${follower.id}">フォロー解除</button>
+                                            </form>
+                                        </td>
+                                    </c:otherwise>
+                                </c:choose>
                                 <td class="report_date"><fmt:formatDate
                                         value='${follower.created_at}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
                             </tr>

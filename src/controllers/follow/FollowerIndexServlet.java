@@ -54,6 +54,31 @@ public class FollowerIndexServlet extends HttpServlet {
                 .setMaxResults(10)
                 .getResultList();
 
+        //フォロー判定
+        List<Employee> getMyFollowerEmployee = em.createNamedQuery("getMyFollowerEmployee", Employee.class)
+                .setParameter("employee", login_employee)
+                .getResultList();
+
+        System.out.println("フォロワーの従業員idは" + getMyFollowerEmployee + "です。");
+
+        for (Employee follower_employee : getMyFollowerEmployee) {
+            List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
+                    .setParameter("employee", login_employee)
+                    .getResultList();
+
+            System.out.println("ログイン中の従業員がフォローしている従業員idは" + checkMyFollow + "です。");
+            System.out.println("フォロワーの従業員idは" + follower_employee + "です。");
+
+            request.setAttribute("follower_employee", follower_employee);
+            request.setAttribute("checkMyFollow", checkMyFollow);
+
+            int follow_count = checkMyFollow.indexOf(follower_employee);
+            System.out.println("indexOf(int follow_count)で「follower_employee」の検索結果：" + follow_count);
+
+            request.setAttribute("follow_count", follow_count);
+        }
+        //フォロー判定ここまで
+
         em.close();
 
         request.setAttribute("getMyAllFollower", getMyAllFollower);
