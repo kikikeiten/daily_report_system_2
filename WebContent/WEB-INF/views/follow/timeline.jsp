@@ -26,7 +26,7 @@
                                 test="${sessionScope.login_employee.id != report.employee.id}">
 
                                 <c:choose>
-                                <c:when test="${follow_count != 1}">
+                                <c:when test="${!follow_count}">
                                 <td class="follow">
                                     <form method="POST" action="<c:url value='/follow/create' />">
                                         <button type="submit" name="following" value="${report.id}">フォロー</button>

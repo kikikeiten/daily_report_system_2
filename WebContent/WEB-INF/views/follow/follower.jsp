@@ -27,7 +27,7 @@
                                 <td class="report_name"><c:out
                                         value="${follower.employee.name}" /></td>
                                 <c:choose>
-                                    <c:when test="${follow_count != 1}">
+                                    <c:when test="${!follow_count}">
                                         <td class="follow">
                                             <form method="POST"
                                                 action="<c:url value='/follower/create' />">

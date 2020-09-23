@@ -58,8 +58,8 @@ public class ReportsShowServlet extends HttpServlet {
             request.setAttribute("report_employee", report_employee);
             request.setAttribute("checkMyFollow", checkMyFollow);
 
-            int follow_count = checkMyFollow.indexOf(report_employee);
-            System.out.println("indexOf(int follow_count)で「report_employee」の検索結果：" + follow_count);
+            boolean follow_count = checkMyFollow.contains(report_employee);
+            System.out.println("contains(boolean follow_count)で「report_employee」の検索結果：" + follow_count);
 
             request.setAttribute("follow_count", follow_count);
         }
