@@ -28,7 +28,6 @@
                             <c:when
                                 test="${sessionScope.login_employee.id != report.employee.id}">
 
-                                <!-- フォローボタン -->>
                                 <c:choose>
                                 <c:when test="${follow_count != 1}">
                                 <td class="follow">
