@@ -137,6 +137,8 @@ h1 a {
     color: #eeeeee;
 }
 
+/* 日報一覧ページ */
+
 table#report_list th {
     font-weight: bold;
     padding: 10px 2%;
@@ -164,6 +166,38 @@ table#report_list .report_action {
 }
 
 table#report_list .report_like {
+    width: 10%;
+}
+
+/* タイムライン */
+
+table#timeline_list th {
+    font-weight: bold;
+    padding: 10px 2%;
+}
+
+table#timeline_list .report_name {
+    width: 20%;
+    padding: 10px 2%;
+}
+
+table#timeline_list .follow {
+    width: 15%;
+}
+
+table#timeline_list .report_date {
+    width: 15%;
+}
+
+table#timeline_list .report_title {
+    width: 25%;
+}
+
+table#timeline_list .report_action {
+    width: 15%;
+}
+
+table#timeline_list .report_like {
     width: 10%;
 }
 
