@@ -147,16 +147,24 @@ table#report_list .report_name {
     padding: 10px 2%;
 }
 
+table#report_list .follow {
+    width: 15%;
+}
+
 table#report_list .report_date {
-    width: 20%;
+    width: 15%;
 }
 
 table#report_list .report_title {
-    width: 37%;
+    width: 25%;
 }
 
 table#report_list .report_action {
-    width: 13%;
+    width: 15%;
+}
+
+table#report_list .report_like {
+    width: 10%;
 }
 
 pre {
