@@ -92,7 +92,10 @@ button {
     background-color: #f8d7da;
 }
 
+/* 従業員一覧ページ */
+
 table#employee_list th {
+    font-weight: bold;
     width: 30%;
     padding: 10px 2%;
 }
