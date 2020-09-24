@@ -221,6 +221,26 @@ table#following_list .following_date {
     width: 33%;
 }
 
+/* フォロワー一覧 */
+
+table#follower_list th {
+    font-weight: bold;
+    padding: 10px 2%;
+}
+
+table#follower_list .follower_name {
+    width: 34%;
+    padding: 10px 2%;
+}
+
+table#follower_list .follow {
+    width: 33%;
+}
+
+table#follower_list .follower_date {
+    width: 33%;
+}
+
 pre {
     font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
         Arial, sans-serif;
