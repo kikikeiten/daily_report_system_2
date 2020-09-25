@@ -27,13 +27,14 @@
                                 <td class="following_name"><c:out
                                         value="${following.follow.name}" /></td>
 
-                                        <td class="follow">
-                                            <form method="POST"
-                                                action="<c:url value='/following/destroy' />">
-                                                <button type="submit" name="follow_id"
-                                                    value="${following.id}">フォロー解除</button>
-                                            </form>
-                                        </td>
+                                <td class="follow">
+                                    <form method="POST"
+                                        action="<c:url value='/following/destroy' />">
+                                        <button type="submit" name="follow_id" value="${following.id}"
+                                            onmouseover="this.innerText='フォロー解除'"
+                                            onmouseout="this.innerText='フォロー中'">フォロー中</button>
+                                    </form>
+                                </td>
 
                                 <td class="following_date"><fmt:formatDate
                                         value='${following.created_at}' pattern='yyyy-MM-dd HH:mm:ss' /></td>

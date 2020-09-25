@@ -32,7 +32,8 @@
                                                 <form method="POST"
                                                     action="<c:url value='/follow/destroy' />">
                                                     <button type="submit" name="employee_id"
-                                                        value="${report.id}">フォロー中</button>
+                                                        value="${report.id}" onmouseover="this.innerText='フォロー解除'"
+                                                        onmouseout="this.innerText='フォロー中'">フォロー中</button>
                                                 </form>
                                             </td>
                                         </c:otherwise>
@@ -42,13 +43,15 @@
                                     <td></td>
                                 </c:otherwise>
                             </c:choose>
-                            <tr>
-                        <th>日付</th>
+                        <tr>
+                            <th>日付</th>
                             <td><fmt:formatDate value="${report.report_date}"
                                     pattern="yyyy-MM-dd" /></td>
-                        </tr><tr>
+                        </tr>
+                        <tr>
                             <th>内容</th>
-                            <td><pre><c:out value="${report.content}" /></pre></td>
+                            <td><pre><c:out value="${report.content}" /></pre>
+                            </td>
                         </tr>
                         <tr>
                             <th>登録日時</th>

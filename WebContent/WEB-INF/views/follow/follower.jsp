@@ -41,7 +41,9 @@
                                             <form method="POST"
                                                 action="<c:url value='/follower/destroy' />">
                                                 <button type="submit" name="employee_id"
-                                                    value="${follower.id}">フォロー解除</button>
+                                                    value="${follower.id}"
+                                                    onmouseover="this.innerText='フォロー解除'"
+                                                    onmouseout="this.innerText='フォロー中'">フォロー中</button>
                                             </form>
                                         </td>
                                     </c:otherwise>
