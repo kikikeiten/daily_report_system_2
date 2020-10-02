@@ -30,7 +30,7 @@
                                     <a href="<c:url value='/employees/show?id=${employee.id}' />">詳細を表示</a>
                                 </c:otherwise>
                             </c:choose></td>
-                            <td><a href="<c:url value='/follow/management/unfollow?id=${employee.id}' />">詳細を表示</a></td>
+                            <td><a href="<c:url value='/management/unfollow?id=${employee.id}' />">詳細を表示</a></td>
                             <td><a href="<c:url value='/follow/management/follow?id=${employee.id}' />">詳細を表示</a></td>
                     </tr>
                 </c:forEach>

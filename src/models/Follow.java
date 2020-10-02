@@ -24,7 +24,9 @@ import javax.persistence.Table;
         @NamedQuery(name = "getMyAllFollower", query = "SELECT f FROM Employee AS e, Follow AS f WHERE f.follow = :employee AND e.id = f.employee.id ORDER BY f.id DESC"),
         @NamedQuery(name = "getMyFollowerCount", query = "SELECT COUNT(f) FROM Employee AS e, Follow AS f WHERE f.follow = :employee AND e.id = f.employee.id"),
         @NamedQuery(name = "checkMyFollow", query = "SELECT f.follow FROM Follow AS f WHERE f.employee = :employee"),
-        @NamedQuery(name = "getMyFollowerEmployee", query = "SELECT f.employee FROM Employee AS e, Follow AS f WHERE f.follow = :employee AND e.id = f.employee.id")
+        @NamedQuery(name = "getMyFollowerEmployee", query = "SELECT f.employee FROM Employee AS e, Follow AS f WHERE f.follow = :employee AND e.id = f.employee.id"),
+        @NamedQuery(name = "getEmployeeFollowing", query = "SELECT f FROM Follow AS f WHERE f.employee = :employee ORDER BY f.id DESC"), // Follow-up list for any employee
+        @NamedQuery(name = "getEmployeeFollowingCount", query = "SELECT COUNT(f) FROM Follow AS f WHERE f.employee = :employee") //Follow count for any employee
 })
 
 @Entity
