@@ -63,6 +63,7 @@ public class ManagementFollowIndexServlet extends HttpServlet {
 
         String employee_name = ee.getName();
         Integer page_number = Integer.parseInt(request.getParameter("id"));
+        Integer employee_operated = ee.getId();
 
         em.close();
 
@@ -71,6 +72,12 @@ public class ManagementFollowIndexServlet extends HttpServlet {
         request.setAttribute("getEmployeeNotFollowingCount", getEmployeeNotFollowingCount);
         request.setAttribute("employee_name", employee_name);
         request.setAttribute("page_number", page_number);
+        request.setAttribute("employee_operated", employee_operated);
+
+        if (request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/management/follow.jsp");
         rd.forward(request, response);

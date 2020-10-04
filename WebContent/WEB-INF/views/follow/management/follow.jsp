@@ -4,12 +4,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
+        <c:if test="${flush != null}">
+            <div id="flush_success">
+                <c:out value="${flush}"></c:out>
+            </div>
+        </c:if>
         <h2>
             <c:out value="${employee_name}" />
             さんにフォローさせる
         </h2>
         <c:choose>
-            <c:when test="${getMyFollowingCount == 0}">
+            <c:when test="${getEmployeeNotFollowingCount == 0}">
                 <h3>
                     <c:out value="${employee_name}" />
                     さんは全ての従業員をフォローしています。
@@ -28,8 +33,10 @@
                                 <td class="following_name"><c:out value="${following.name}" /></td>
                                 <td class="follow">
                                     <form method="POST"
-                                        action="<c:url value='/following/destroy' />">
+                                        action="<c:url value='/management/follow/create' />">
                                         <button type="submit" name="follow_id" value="${following.id}">フォロー</button>
+                                        <input type="hidden" name="employee_operated"
+                                            value="${employee_operated}">
                                     </form>
                                 </td>
                             </tr>
