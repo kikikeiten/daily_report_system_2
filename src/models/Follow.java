@@ -27,8 +27,8 @@ import javax.persistence.Table;
         @NamedQuery(name = "getMyFollowerEmployee", query = "SELECT f.employee FROM Employee AS e, Follow AS f WHERE f.follow = :employee AND e.id = f.employee.id"),
         @NamedQuery(name = "getEmployeeFollowing", query = "SELECT f FROM Follow AS f WHERE f.employee = :employee ORDER BY f.id DESC"), // Follow-up list for any employee
         @NamedQuery(name = "getEmployeeFollowingCount", query = "SELECT COUNT(f) FROM Follow AS f WHERE f.employee = :employee"), //Follow count for any employee
-        @NamedQuery(name = "getEmployeeNotFollowing", query = "SELECT e FROM Employee AS e, Follow AS f WHERE f.employee = :employee AND e.id <> f.follow.id AND e.id <> f.employee.id ORDER BY e.id DESC"), // List of other employees that the employee doesn't follow
-        @NamedQuery(name = "getEmployeeNotFollowingCount", query = "SELECT COUNT(e) FROM Employee AS e, Follow AS f WHERE f.employee = :employee AND e.id <> f.follow.id AND e.id <> f.employee.id")
+        @NamedQuery(name = "getEmployeeNotFollowing", query = "SELECT e FROM Employee AS e WHERE NOT EXISTS (SELECT f FROM Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id) AND e.id <> :employee ORDER BY e.id DESC"), // List of other employees that one employee doesn't follow
+        @NamedQuery(name = "getEmployeeNotFollowingCount", query = "SELECT COUNT(e) FROM Employee AS e WHERE NOT EXISTS (SELECT f FROM Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id) AND e.id <> :employee") //Counts on the list of other employees that one employee doesn't follow
 })
 
 @Entity
