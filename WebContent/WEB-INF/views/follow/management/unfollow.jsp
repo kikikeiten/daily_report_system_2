@@ -4,6 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
+        <c:if test="${flush != null}">
+            <div id="flush_success">
+                <c:out value="${flush}"></c:out>
+            </div>
+        </c:if>
         <h2>
             <c:out value="${employee_name}" />
             さんのフォローしている従業員一覧
@@ -31,7 +36,7 @@
                                         value="${following.follow.name}" /></td>
                                 <td class="follow">
                                     <form method="POST"
-                                        action="<c:url value='/following/destroy' />">
+                                        action="<c:url value='/management/follow/destroy' />">
                                         <button type="submit" name="follow_id" value="${following.id}"
                                             onmouseover="this.innerText='フォロー解除'"
                                             onmouseout="this.innerText='フォロー中'">フォロー中</button>

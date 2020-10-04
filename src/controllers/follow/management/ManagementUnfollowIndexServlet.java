@@ -69,6 +69,11 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
         request.setAttribute("employee_name", employee_name);
         request.setAttribute("page_number", page_number);
 
+        if (request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
+
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/management/unfollow.jsp");
         rd.forward(request, response);
     }
