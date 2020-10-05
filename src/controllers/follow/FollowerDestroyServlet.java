@@ -48,11 +48,14 @@ public class FollowerDestroyServlet extends HttpServlet {
 
         Follow f = em.find(Follow.class, ei);
 
+        Employee unfollow = ff.getEmployee();
+        String unfollow_name = unfollow.getName();
+
         em.getTransaction().begin();
         em.remove(f);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", "フォロー解除しました。");
+        request.getSession().setAttribute("flush", unfollow_name + "さんのフォローを解除しました。");
 
         response.sendRedirect(request.getContextPath() + "/reports/index");
     }
