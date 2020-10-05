@@ -32,7 +32,8 @@ public class FollowerCreateServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
@@ -46,11 +47,14 @@ public class FollowerCreateServlet extends HttpServlet {
         f.setCreated_at(currentTime);
         f.setUpdated_at(currentTime);
 
+        Employee follow = ff.getEmployee();
+        String follow_name = follow.getName();
+
         em.getTransaction().begin();
         em.persist(f);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", "フォローしました。");
+        request.getSession().setAttribute("flush", follow_name + "さんをフォローしました。");
 
         response.sendRedirect(request.getContextPath() + "/reports/index");
     }
