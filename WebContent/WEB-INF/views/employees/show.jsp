@@ -7,7 +7,6 @@
         <c:choose>
             <c:when test="${employee != null}">
                 <h2>id : ${employee.id} の従業員情報 詳細ページ</h2>
-
                 <table>
                     <tbody>
                         <tr>
@@ -37,7 +36,6 @@
                         </tr>
                     </tbody>
                 </table>
-
                 <p>
                     <a href="<c:url value='/employees/edit?id=${employee.id}' />">この従業員情報を編集する</a>
                 </p>
@@ -46,9 +44,8 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-
         <p>
-            <a href="<c:url value='/employees/index' />">一覧に戻る</a>
+            <a href="<c:url value='/employees' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>

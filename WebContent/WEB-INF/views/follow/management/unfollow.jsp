@@ -67,7 +67,7 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value='/employees/index' />">従業員一覧へ戻る</a>
+            <a href="<c:url value='/employees' />">従業員一覧へ戻る</a>
         </p>
     </c:param>
 </c:import>

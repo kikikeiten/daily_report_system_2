@@ -62,7 +62,7 @@ public class LikesCreateServlet extends HttpServlet {
         request.getSession().setAttribute("flush", "いいねしました。");
 
         // indexページへリダイレクト
-        response.sendRedirect(request.getContextPath() + "/reports/index");
+        response.sendRedirect(request.getContextPath() + "/reports");
 
     }
 }

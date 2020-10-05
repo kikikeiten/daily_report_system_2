@@ -30,13 +30,14 @@
                                     <a href="<c:url value='/employees/show?id=${employee.id}' />">詳細を表示</a>
                                 </c:otherwise>
                             </c:choose></td>
-                            <td><a href="<c:url value='/management/unfollow?id=${employee.id}' />">詳細を表示</a></td>
-                            <td><a href="<c:url value='/management/follow?id=${employee.id}' />">詳細を表示</a></td>
+                        <td><a
+                            href="<c:url value='/management/unfollow?id=${employee.id}' />">詳細を表示</a></td>
+                        <td><a
+                            href="<c:url value='/management/follow?id=${employee.id}' />">詳細を表示</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-
         <div id="pagination">
             （全 ${employees_count} 件）<br />
             <c:forEach var="i" begin="1"
@@ -46,7 +47,7 @@
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/employees/index?page=${i}' />"><c:out
+                        <a href="<c:url value='/employees?page=${i}' />"><c:out
                                 value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
@@ -55,6 +56,5 @@
         <p>
             <a href="<c:url value='/employees/new' />">新規従業員の登録</a>
         </p>
-
     </c:param>
 </c:import>

@@ -18,7 +18,7 @@ import utils.DBUtil;
 /**
  * Servlet implementation class LikesIndexServlet
  */
-@WebServlet("/likes/index")
+@WebServlet("/likes")
 public class LikesIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

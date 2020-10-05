@@ -10,7 +10,6 @@
                 <form method="POST" action="<c:url value='/employees/update' />">
                     <c:import url="_form.jsp" />
                 </form>
-
                 <p>
                     <a href="#" onclick="confirmDestroy();">この従業員情報を削除する</a>
                 </p>
@@ -29,9 +28,8 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-
         <p>
-            <a href="<c:url value='/employees/index' />">一覧に戻る</a>
+            <a href="<c:url value='/employees' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>

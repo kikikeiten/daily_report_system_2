@@ -18,7 +18,7 @@ import utils.DBUtil;
 /**
  * Servlet implementation class FollowingIndexServlet
  */
-@WebServlet("/following/index")
+@WebServlet("/following")
 public class FollowingIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

@@ -22,7 +22,6 @@
                         </c:forEach>
                     </tbody>
                 </table>
-
                 <div id="pagination">
                     （全 ${likes_count} 件）<br />
                     <c:forEach var="i" begin="1" end="${((likes_count - 1) / 10) + 1}"
@@ -32,7 +31,8 @@
                                 <c:out value="${i}" />&nbsp;
                             </c:when>
                             <c:otherwise>
-                                <a href="<c:url value='/likes/index?report_id=${reportUrl}&page=${i}' />"><c:out
+                                <a
+                                    href="<c:url value='/likes?report_id=${reportUrl}&page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
                             </c:otherwise>
                         </c:choose>
@@ -44,7 +44,7 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value="/reports/index" />">一覧に戻る</a>
+            <a href="<c:url value="/reports" />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>

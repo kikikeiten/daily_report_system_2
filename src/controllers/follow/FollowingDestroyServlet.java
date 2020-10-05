@@ -47,7 +47,7 @@ public class FollowingDestroyServlet extends HttpServlet {
         em.close();
         request.getSession().setAttribute("flush", unfollow_name + "さんのフォローを解除しました。");
 
-        response.sendRedirect(request.getContextPath() + "/reports/index");
+        response.sendRedirect(request.getContextPath() + "/reports");
     }
 
 }

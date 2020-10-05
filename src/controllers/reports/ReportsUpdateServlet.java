@@ -66,7 +66,7 @@ public class ReportsUpdateServlet extends HttpServlet {
 
                 request.getSession().removeAttribute("report_id");
 
-                response.sendRedirect(request.getContextPath() + "/reports/index");
+                response.sendRedirect(request.getContextPath() + "/reports");
             }
         }
     }

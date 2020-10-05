@@ -57,7 +57,7 @@ public class FollowCreateServlet extends HttpServlet {
         em.close();
         request.getSession().setAttribute("flush", unfollow_name + "さんをフォローしました。");
 
-        response.sendRedirect(request.getContextPath() + "/reports/index");
+        response.sendRedirect(request.getContextPath() + "/reports");
     }
 
 }

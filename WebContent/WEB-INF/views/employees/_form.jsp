@@ -8,7 +8,6 @@
             ・<c:out value="${error}" />
             <br />
         </c:forEach>
-
     </div>
 </c:if>
 <label for="code">社員番号</label>
@@ -16,19 +15,16 @@
 <input type="text" name="code" value="${employee.code}" />
 <br />
 <br />
-
 <label for="name">氏名</label>
 <br />
 <input type="text" name="name" value="${employee.name}" />
 <br />
 <br />
-
 <label for="password">パスワード</label>
 <br />
 <input type="password" name="password" />
 <br />
 <br />
-
 <label for="admin_flag">権限</label>
 <br />
 <select name="admin_flag">
@@ -39,6 +35,5 @@
 </select>
 <br />
 <br />
-
 <input type="hidden" name="_token" value="${_token}" />
 <button type="submit">投稿</button>

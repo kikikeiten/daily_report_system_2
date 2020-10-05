@@ -27,7 +27,6 @@
                         <c:choose>
                             <c:when
                                 test="${sessionScope.login_employee.id != report.employee.id}">
-
                                 <c:choose>
                                     <c:when test="${!follow_count}">
                                         <td class="follow">
@@ -47,13 +46,11 @@
                                         </td>
                                     </c:otherwise>
                                 </c:choose>
-
                             </c:when>
                             <c:otherwise>
                                 <td></td>
                             </c:otherwise>
                         </c:choose>
-
                         <td class="report_date"><fmt:formatDate
                                 value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>
@@ -65,7 +62,7 @@
                             </c:when>
                             <c:otherwise>
                                 <td class="report_likes"><a
-                                    href="<c:url value='/likes/index?report_id=${report.id}' />"><c:out
+                                    href="<c:url value='/likes?report_id=${report.id}' />"><c:out
                                             value="${report.likes}" /></a></td>
                             </c:otherwise>
                         </c:choose>
@@ -73,7 +70,6 @@
                 </c:forEach>
             </tbody>
         </table>
-
         <div id="pagination">
             （全 ${reports_count} 件）<br />
             <c:forEach var="i" begin="1" end="${((reports_count - 1) / 10) + 1}"
@@ -83,7 +79,7 @@
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/reports/index?page=${i}' />"><c:out
+                        <a href="<c:url value='/reports?page=${i}' />"><c:out
                                 value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
@@ -92,6 +88,5 @@
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>
         </p>
-
     </c:param>
 </c:import>

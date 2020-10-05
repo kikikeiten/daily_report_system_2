@@ -26,7 +26,6 @@
                             <tr class="row${status.count % 2}">
                                 <td class="following_name"><c:out
                                         value="${following.follow.name}" /></td>
-
                                 <td class="follow">
                                     <form method="POST"
                                         action="<c:url value='/following/destroy' />">
@@ -35,7 +34,6 @@
                                             onmouseout="this.innerText='フォロー中'">フォロー中</button>
                                     </form>
                                 </td>
-
                                 <td class="following_date"><fmt:formatDate
                                         value='${following.created_at}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
                             </tr>
@@ -50,9 +48,8 @@
                             <c:when test="${i == page}">
                                 <c:out value="${i}" />&nbsp;
                     </c:when>
-
                             <c:otherwise>
-                                <a href="<c:url value='/following/index?page=${i}' />"><c:out
+                                <a href="<c:url value='/following?page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
                     </c:otherwise>
                         </c:choose>
@@ -61,8 +58,7 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value='/index.html' />">トップページへ戻る</a>
+            <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>
-
     </c:param>
 </c:import>

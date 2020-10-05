@@ -63,7 +63,7 @@
                                 <c:out value="${i}" />&nbsp;
                     </c:when>
                             <c:otherwise>
-                                <a href="<c:url value='/follower/index?page=${i}' />"><c:out
+                                <a href="<c:url value='/follower?page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
                     </c:otherwise>
                         </c:choose>
@@ -72,8 +72,7 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value='/index.html' />">トップページへ戻る</a>
+            <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>
-
     </c:param>
 </c:import>

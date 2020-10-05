@@ -18,7 +18,7 @@ import utils.DBUtil;
 /**
  * Servlet implementation class TimelineIndexServlet
  */
-@WebServlet("/timeline/index")
+@WebServlet("/timeline")
 public class TimelineIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -54,7 +54,7 @@ public class TimelineIndexServlet extends HttpServlet {
                 .setMaxResults(10)
                 .getResultList();
 
-      //フォロー判定
+        //フォロー判定
         List<Employee> getMyReportEmployee = em.createNamedQuery("getMyReportEmployee", Employee.class)
                 .getResultList();
 
@@ -78,7 +78,6 @@ public class TimelineIndexServlet extends HttpServlet {
         long getMyFollowReportsCount = (long) em.createNamedQuery("getMyFollowReportsCount", Long.class)
                 .setParameter("employee", login_employee)
                 .getSingleResult();
-
 
         em.close();
 

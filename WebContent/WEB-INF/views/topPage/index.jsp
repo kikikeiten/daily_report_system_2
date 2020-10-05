@@ -35,7 +35,7 @@
                             </c:when>
                             <c:otherwise>
                                 <td class="report_likes"><a
-                                    href="<c:url value='/likes/index?report_id=${report.id}' />"><c:out
+                                    href="<c:url value='/likes?report_id=${report.id}' />"><c:out
                                             value="${report.likes}" /></a></td>
                             </c:otherwise>
                         </c:choose>
@@ -43,7 +43,6 @@
                 </c:forEach>
             </tbody>
         </table>
-
         <div id="pagination">
             （全 ${reports_count} 件）<br />
             <c:forEach var="i" begin="1" end="${((reports_count - 1) / 10) + 1}"
