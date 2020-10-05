@@ -51,7 +51,7 @@ public class ManagementFollowDestroy extends HttpServlet {
         em.remove(f);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", employee_name + "さんが" + unfollow_name + "さんのフォロー解除しました。");
+        request.getSession().setAttribute("flush", employee_name + "さんが" + unfollow_name + "さんのフォローを解除しました。");
 
         response.sendRedirect(request.getContextPath() + "/management/unfollow?id=" + employee_id);
     }
