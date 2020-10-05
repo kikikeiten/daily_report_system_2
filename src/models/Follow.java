@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Table(name = "follows")
 @NamedQueries({
-        @NamedQuery(name = "followDestroy", query = "SELECT f.id FROM Follow AS f WHERE f.follow  = :follow"),
+        @NamedQuery(name = "followDestroy", query = "SELECT f.id FROM Follow AS f WHERE f.follow  = :follow AND f.employee = :employee"),
         @NamedQuery(name = "followerDestroy", query = "SELECT f.id FROM Follow AS f WHERE f.follow  = :employee AND f.employee = :follow"),
         @NamedQuery(name = "getMyFollowAllReports", query = "SELECT r FROM Report AS r, Follow AS f WHERE f.employee = :employee AND r.employee.id = f.follow.id ORDER BY r.id DESC"),
         @NamedQuery(name = "getMyFollowReportsCount", query = "SELECT COUNT(r) FROM Report AS r, Follow AS f WHERE f.employee = :employee AND r.employee.id = f.follow.id"),
