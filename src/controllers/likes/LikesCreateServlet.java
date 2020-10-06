@@ -37,10 +37,8 @@ public class LikesCreateServlet extends HttpServlet {
             throws ServletException, IOException {
         // TODO Auto-generated method stub
 
-        // EntityManagerのオブジェクトを生成
         EntityManager em = DBUtil.createEntityManager();
 
-        // リクエストパラメータからレポートのIDを取得して該当のIDのレポート1件のみをデータベースから取得
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("report_id")));
 
         Like l = new Like();
@@ -51,17 +49,19 @@ public class LikesCreateServlet extends HttpServlet {
         l.setCreated_at(currentTime);
         l.setUpdated_at(currentTime);
 
-        // いいねをプロパティにvalue(1)を上書き
         r.setLikes(Integer.parseInt(request.getParameter("likes")) + r.getLikes());
 
-        // データベースを更新
+        Employee employee = r.getEmployee();
+        String employee_name = employee.getName();
+
+        String report_title = r.getTitle();
+
         em.getTransaction().begin();
         em.persist(l);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", "いいねしました。");
+        request.getSession().setAttribute("flush", employee_name + "さんの日報「" + report_title + "」にいいねしました。");
 
-        // indexページへリダイレクト
         response.sendRedirect(request.getContextPath() + "/reports");
 
     }
