@@ -61,18 +61,24 @@ public class ManagementFollowIndexServlet extends HttpServlet {
                 .setParameter("employee", ee)
                 .getSingleResult();
 
-        String employee_name = ee.getName();
+        try {
+            String employee_name = ee.getName();
+            Integer employee_operated = ee.getId();
+
+            request.setAttribute("employee_name", employee_name);
+            request.setAttribute("employee_operated", employee_operated);
+        } catch (Exception e) {
+
+        }
         Integer page_number = Integer.parseInt(request.getParameter("id"));
-        Integer employee_operated = ee.getId();
 
         em.close();
 
+        request.setAttribute("employee", ee);
         request.setAttribute("getEmployeeNotFollowing", getEmployeeNotFollowing);
         request.setAttribute("page", page);
         request.setAttribute("getEmployeeNotFollowingCount", getEmployeeNotFollowingCount);
-        request.setAttribute("employee_name", employee_name);
         request.setAttribute("page_number", page_number);
-        request.setAttribute("employee_operated", employee_operated);
 
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
