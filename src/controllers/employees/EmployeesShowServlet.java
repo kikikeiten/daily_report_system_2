@@ -35,11 +35,18 @@ public class EmployeesShowServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee e = em.find(Employee.class, Integer.parseInt(request.getParameter("id")));
+        Employee ee = em.find(Employee.class, Integer.parseInt(request.getParameter("id")));
+
+        try {
+            String employee_name = ee.getName();
+            request.setAttribute("employee_name", employee_name);
+        } catch (Exception e) {
+
+        }
 
         em.close();
 
-        request.setAttribute("employee", e);
+        request.setAttribute("employee", ee);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/show.jsp");
         rd.forward(request, response);
