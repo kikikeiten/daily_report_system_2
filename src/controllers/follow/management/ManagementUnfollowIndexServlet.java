@@ -58,15 +58,22 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
                 .setParameter("employee", ee)
                 .getSingleResult();
 
-        String employee_name = ee.getName();
+
+        try {
+            String employee_name = ee.getName();
+
+            request.setAttribute("employee_name", employee_name);
+        } catch (Exception e) {
+
+        }
         Integer page_number = Integer.parseInt(request.getParameter("id"));
 
         em.close();
 
+        request.setAttribute("employee", ee);
         request.setAttribute("getEmployeeFollowing", getEmployeeFollowing);
         request.setAttribute("page", page);
         request.setAttribute("getEmployeeFollowingCount", getEmployeeFollowingCount);
-        request.setAttribute("employee_name", employee_name);
         request.setAttribute("page_number", page_number);
 
         if (request.getSession().getAttribute("flush") != null) {
