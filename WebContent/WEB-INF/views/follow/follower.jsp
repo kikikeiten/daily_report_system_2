@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <h2>フォロワー</h2>
@@ -27,7 +28,8 @@
                                 <td class="report_name"><c:out
                                         value="${follower.employee.name}" /></td>
                                 <c:choose>
-                                    <c:when test="${!follow_count}">
+                                    <c:when
+                                        test="${!fn:contains(list_report_id,follower.employee.id)}">
                                         <td class="follow">
                                             <form method="POST"
                                                 action="<c:url value='/follower/create' />">

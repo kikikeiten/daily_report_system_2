@@ -1,6 +1,7 @@
 package controllers.follow;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -55,25 +56,19 @@ public class FollowerIndexServlet extends HttpServlet {
                 .getResultList();
 
         //フォロー判定
-        List<Employee> getMyFollowerEmployee = em.createNamedQuery("getMyFollowerEmployee", Employee.class)
+        List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
                 .setParameter("employee", login_employee)
                 .getResultList();
 
-        System.out.println("フォロワーの従業員idは" + getMyFollowerEmployee + "です。");
+        List<Integer> list_report_id = new ArrayList<Integer>();
 
-        for (Employee follower_employee : getMyFollowerEmployee) {
-            List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
-                    .setParameter("employee", login_employee)
-                    .getResultList();
-
-            System.out.println("ログイン中の従業員がフォローしている従業員idは" + checkMyFollow + "です。");
-            System.out.println("フォロワーの従業員idは" + follower_employee + "です。");
-
-            boolean follow_count = checkMyFollow.contains(follower_employee);
-            System.out.println("contains(boolean follow_count)で「follower_employee」の検索結果：" + follow_count);
-
-            request.setAttribute("follow_count", follow_count);
+        for (Employee report_id : checkMyFollow) {
+            Integer int_report_id = report_id.getId();
+            list_report_id.add(int_report_id);
+            System.out.println("ログイン中の従業員がフォローしている従業員id一覧は" + list_report_id + "です。");
+            request.setAttribute("list_report_id", list_report_id);
         }
+
         //フォロー判定ここまで
 
         em.close();
