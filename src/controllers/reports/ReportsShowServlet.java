@@ -42,7 +42,7 @@ public class ReportsShowServlet extends HttpServlet {
 
         Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
 
-      //フォロー判定
+        //フォロー判定
         List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
                 .setParameter("employee", login_employee)
                 .getResultList();
