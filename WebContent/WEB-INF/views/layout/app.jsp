@@ -32,7 +32,10 @@
             <c:if test="${sessionScope.login_employee != null}">
                 <div id="employee_name">
                     <c:out value="${sessionScope.login_employee.name}" />
-                    &nbsp;さん&nbsp;&nbsp;&nbsp; <a href="<c:url value='/logout' />">ログアウト</a>
+                    &nbsp;
+                    <c:if test="${employee_position == 0}">社員</c:if>
+                    <c:if test="${employee_position == 1}">管理者</c:if>
+                    &nbsp;&nbsp;&nbsp; <a href="<c:url value='/logout' />">ログアウト</a>
                 </div>
             </c:if>
         </div>

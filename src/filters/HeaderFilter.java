@@ -57,10 +57,19 @@ public class HeaderFilter implements Filter {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
+        try {
+            Integer employee_position = login_employee.getAdmin_flag();
+            request.setAttribute("employee_position", employee_position);
+        } catch (Exception e) {
+
+        }
+
+
         em.close();
 
         request.setAttribute("getMyFollowingCount", getMyFollowingCount);
         request.setAttribute("getMyFollowerCount", getMyFollowerCount);
+
 
         chain.doFilter(request, response);
     }
