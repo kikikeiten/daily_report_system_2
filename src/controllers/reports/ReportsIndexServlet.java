@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
 import models.Report;
 import utils.DBUtil;
 
@@ -37,8 +36,6 @@ public class ReportsIndexServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
-
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -49,27 +46,6 @@ public class ReportsIndexServlet extends HttpServlet {
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)
                 .getResultList();
-
-        //フォロー判定
-        List<Employee> getMyReportEmployee = em.createNamedQuery("getMyReportEmployee", Employee.class)
-                .getResultList();
-
-        System.out.println("レポートを書いた従業員idは" + getMyReportEmployee + "です。");
-
-        for (Employee report_employee : getMyReportEmployee) {
-            List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
-                    .setParameter("employee", login_employee)
-                    .getResultList();
-
-            System.out.println("ログイン中の従業員がフォローしている従業員idは" + checkMyFollow + "です。");
-            System.out.println("レポートの従業員idは" + report_employee + "です。");
-
-            boolean follow_count = checkMyFollow.contains(report_employee);
-            System.out.println("contains(boolean follow_count)で「report_employee」の検索結果：" + follow_count);
-
-            request.setAttribute("follow_count", follow_count);
-        }
-        //フォロー判定ここまで
 
         long reports_count = (long) em.createNamedQuery("getReportsCount", Long.class)
                 .getSingleResult();
