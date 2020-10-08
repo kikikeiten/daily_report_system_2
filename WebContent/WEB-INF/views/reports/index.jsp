@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
@@ -28,7 +29,8 @@
                             <c:when
                                 test="${sessionScope.login_employee.id != report.employee.id}">
                                 <c:choose>
-                                    <c:when test="${!follow_count}">
+                                    <c:when
+                                        test="${!fn:contains(list_report_id,report.employee.id)}">
                                         <td class="follow">
                                             <form method="POST" action="<c:url value='/follow/create' />">
                                                 <button type="submit" name="following" value="${report.id}">フォロー</button>
