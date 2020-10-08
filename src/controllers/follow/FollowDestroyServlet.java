@@ -50,11 +50,9 @@ public class FollowDestroyServlet extends HttpServlet {
 
         Employee unfollow = r.getEmployee();
         String unfollow_name = unfollow.getName();
-        r.setFollow_flag(0);
 
         em.getTransaction().begin();
         em.remove(f);
-        em.persist(r);
         em.getTransaction().commit();
         em.close();
         request.getSession().setAttribute("flush", unfollow_name + "さんのフォローを解除しました。");

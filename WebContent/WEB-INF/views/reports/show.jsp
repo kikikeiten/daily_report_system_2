@@ -19,7 +19,7 @@
                                 <c:when
                                     test="${sessionScope.login_employee.id != report.employee.id}">
                                     <c:choose>
-                                        <c:when test="${report.follow_flag == 0}">
+                                        <c:when test="${!follow_count}">
                                             <td class="follow">
                                                 <form method="POST"
                                                     action="<c:url value='/follow/create' />">

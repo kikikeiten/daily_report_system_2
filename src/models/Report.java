@@ -53,9 +53,6 @@ public class Report {
     @Column(name = "likes", nullable = false)
     private Integer likes;
 
-    @Column(name = "follow_flag", nullable = false)
-    private Integer follow_flag;
-
     public Integer getId() {
         return id;
     }
@@ -120,11 +117,4 @@ public class Report {
         this.likes = likes;
     }
 
-    public Integer getFollow_flag() {
-        return follow_flag;
-    }
-
-    public void setFollow_flag(Integer follow_flag) {
-        this.follow_flag = follow_flag;
-    }
 }

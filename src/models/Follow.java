@@ -46,9 +46,6 @@ public class Follow {
     @JoinColumn(name = "follow_id", nullable = false)
     private Employee follow;
 
-    @Column(name = "follow_flag", nullable = false)
-    private Integer follow_flag;
-
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
 
@@ -77,14 +74,6 @@ public class Follow {
 
     public void setFollow(Employee follow) {
         this.follow = follow;
-    }
-
-    public Integer getFollow_flag() {
-        return follow_flag;
-    }
-
-    public void setFollow_flag(Integer follow_flag) {
-        this.follow_flag = follow_flag;
     }
 
     public Timestamp getCreated_at() {

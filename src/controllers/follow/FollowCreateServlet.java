@@ -47,14 +47,12 @@ public class FollowCreateServlet extends HttpServlet {
         f.setFollow(r.getEmployee());
         f.setCreated_at(currentTime);
         f.setUpdated_at(currentTime);
-        r.setFollow_flag(1);
 
         Employee unfollow = r.getEmployee();
         String unfollow_name = unfollow.getName();
 
         em.getTransaction().begin();
         em.persist(f);
-        em.persist(r);
         em.getTransaction().commit();
         em.close();
         request.getSession().setAttribute("flush", unfollow_name + "さんをフォローしました。");
