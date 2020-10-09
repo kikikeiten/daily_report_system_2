@@ -32,6 +32,10 @@
         <c:if test="${employee.admin_flag == 0}"> selected</c:if>>一般</option>
     <option value="1"
         <c:if test="${employee.admin_flag == 1}"> selected</c:if>>管理者</option>
+    <option value="2"
+        <c:if test="${employee.admin_flag == 2}"> selected</c:if>>課長</option>
+    <option value="3"
+        <c:if test="${employee.admin_flag == 3}"> selected</c:if>>部長</option>
 </select>
 <br />
 <br />
