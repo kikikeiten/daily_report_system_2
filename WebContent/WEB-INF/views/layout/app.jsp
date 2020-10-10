@@ -33,8 +33,10 @@
                 <div id="employee_name">
                     <c:out value="${sessionScope.login_employee.name}" />
                     &nbsp;
-                    <c:if test="${employee_position == 0}">社員</c:if>
-                    <c:if test="${employee_position == 1}">管理者</c:if>
+                    <c:if test="${sessionScope.login_employee.admin_flag == 0}">社員</c:if>
+                    <c:if test="${sessionScope.login_employee.admin_flag == 1}">管理者</c:if>
+                    <c:if test="${sessionScope.login_employee.admin_flag == 2}">課長</c:if>
+                    <c:if test="${sessionScope.login_employee.admin_flag == 3}">部長</c:if>
                     &nbsp;&nbsp;&nbsp; <a href="<c:url value='/logout' />">ログアウト</a>
                 </div>
             </c:if>
