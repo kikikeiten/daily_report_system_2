@@ -7,7 +7,7 @@
     <c:param name="content">
         <c:choose>
             <c:when test="${report != null}">
-                <h2>日報 詳細ページ</h2>
+                <h2>日報「${report.title}」の詳細ページ</h2>
                 <table>
                     <tbody>
                         <tr>
