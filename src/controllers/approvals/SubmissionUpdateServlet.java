@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Employee;
 import models.Report;
 import utils.DBUtil;
 
@@ -36,15 +37,31 @@ public class SubmissionUpdateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        Employee e = (Employee) request.getSession().getAttribute("login_employee");
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("report_id")));
-        Integer sudmit = Integer.parseInt(request.getParameter("submit"));
 
-        r.setApproval(sudmit);
+        r.setApproval(Integer.parseInt(request.getParameter("submit")));
 
         em.getTransaction().begin();
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", "更新が完了しました。");
+
+        String title = r.getTitle();
+
+        switch (e.getAdmin_flag()) {
+        case 0:
+            request.getSession().setAttribute("flush", "日報「" + title + "」を課長に提出しました。");
+            break;
+        case 1:
+            request.getSession().setAttribute("flush", "日報「" + title + "」を課長に提出しました。");
+            break;
+        case 2:
+            request.getSession().setAttribute("flush", "日報「" + title + "」を部長に提出しました。");
+            break;
+        case 3:
+            request.getSession().setAttribute("flush", "日報「" + title + "」を提出しました。");
+            break;
+        }
 
         response.sendRedirect(request.getContextPath() + "/drafts");
     }
