@@ -33,13 +33,15 @@ public class ManagerApprovalCreate extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
         Employee e = (Employee) request.getSession().getAttribute("login_employee");
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("report_id")));
+        Integer submit = Integer.parseInt(request.getParameter("submit"));
 
         r.setApproval(Integer.parseInt(request.getParameter("submit")));
 
@@ -47,7 +49,7 @@ public class ManagerApprovalCreate extends HttpServlet {
 
         a.setReport(r);
         a.setEmployee(e);
-        a.setApproval(Integer.parseInt(request.getParameter("submit")));
+        a.setApproval(submit);
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         a.setCreated_at(currentTime);
         a.setUpdated_at(currentTime);
@@ -56,6 +58,38 @@ public class ManagerApprovalCreate extends HttpServlet {
         em.persist(a);
         em.getTransaction().commit();
         em.close();
+
+        Employee report_employee = r.getEmployee();
+        Integer admin_flag = report_employee.getAdmin_flag();
+        String report_name = report_employee.getName();
+
+        if (submit == 1) {
+            switch (admin_flag) {
+            case 0:
+                request.getSession().setAttribute("flush",
+                        "日報「" + r.getTitle() + "」を" + report_name + "社員に差し戻しました。");
+                break;
+            case 1:
+                request.getSession().setAttribute("flush",
+                        "日報「" + r.getTitle() + "」を" + report_name + "管理者に差し戻しました。");
+                break;
+            }
+        } else {
+            switch (admin_flag) {
+            case 0:
+                request.getSession().setAttribute("flush",
+                        report_name + "社員の日報「" + r.getTitle() + "」を承認しました。");
+                break;
+            case 1:
+                request.getSession().setAttribute("flush",
+                        report_name + "管理者の日報「" + r.getTitle() + "」を承認しました。");
+                break;
+            case 2:
+                request.getSession().setAttribute("flush",
+                        report_name + "課長の日報「" + r.getTitle() + "」を承認しました。");
+                break;
+            }
+        }
 
         response.sendRedirect(request.getContextPath() + "/approval/manager");
     }
