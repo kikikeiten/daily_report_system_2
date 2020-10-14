@@ -52,6 +52,9 @@ public class Report {
     @Column(name = "likes", nullable = false)
     private Integer likes;
 
+    @Column(name = "approval", nullable = false)
+    private Integer approval;
+
     public Integer getId() {
         return id;
     }
@@ -114,6 +117,14 @@ public class Report {
 
     public void setLikes(Integer likes) {
         this.likes = likes;
+    }
+
+    public Integer getApproval() {
+        return approval;
+    }
+
+    public void setApproval(Integer approval) {
+        this.approval = approval;
     }
 
 }
