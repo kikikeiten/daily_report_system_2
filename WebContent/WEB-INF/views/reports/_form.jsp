@@ -33,4 +33,4 @@
 <br />
 <br />
 <input type="hidden" name="_token" value="${_token}" />
-<button type="submit">投稿</button>
+<button type="submit" name="draft" value="${0}">下書き</button>
