@@ -18,7 +18,7 @@ import utils.DBUtil;
 /**
  * Servlet implementation class ManagerRemandCreateServlet
  */
-@WebServlet("/manager/remand/reate")
+@WebServlet("/manager/remand/create")
 public class ManagerRemandCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -57,6 +57,8 @@ public class ManagerRemandCreateServlet extends HttpServlet {
         em.persist(a);
         em.getTransaction().commit();
         em.close();
+
+        request.getSession().setAttribute("flush", "日報「" + r.getTitle() + "」を課長に再提出しました。");
 
         response.sendRedirect(request.getContextPath() + "/remand/manager");
     }
