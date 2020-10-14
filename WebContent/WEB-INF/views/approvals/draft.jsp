@@ -28,14 +28,15 @@
                         <td class="draft_action"><a
                             href="<c:url value='/reports/show?id=${draft.id}' />">詳細を見る</a></td>
                         <td class="draft_submit">
-                            <form method="POST"
-                                action="<c:url value='/approvals/submission' />">
+                            <form method="POST" action="<c:url value='/submission/update' />">
                                 <c:choose>
                                     <c:when test="${sessionScope.login_employee.admin_flag != 3}">
                                         <button type="submit" name="submit" value="${2}">提出</button>
+                                        <input type="hidden" name="report_id" value="${draft.id}" />
                                     </c:when>
                                     <c:otherwise>
                                         <button type="submit" name="submit" value="${4}">提出</button>
+                                        <input type="hidden" name="report_id" value="${draft.id}" />
                                     </c:otherwise>
                                 </c:choose>
                             </form>
