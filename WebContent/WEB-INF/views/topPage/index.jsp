@@ -129,5 +129,8 @@
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>
         </p>
+        <p>
+            <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
+        </p>
     </c:param>
 </c:import>
