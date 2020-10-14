@@ -22,7 +22,9 @@ import javax.persistence.Table;
         @NamedQuery(name = "getMyAllReports", query = "SELECT r FROM Report AS r WHERE r.employee = :employee ORDER BY r.id DESC"),
         @NamedQuery(name = "getMyReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee"),
         @NamedQuery(name = "getMyAllDrafts", query = "SELECT r FROM Report AS r WHERE r.employee = :employee AND r.approval = 0 ORDER BY r.id DESC"), //List of my daily draft reports
-        @NamedQuery(name = "getMyDraftsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 0") //Count my daily draft report
+        @NamedQuery(name = "getMyDraftsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 0"), //Count my daily draft report
+        @NamedQuery(name = "getAllManagerApprovalReports", query = "SELECT r FROM Report AS r WHERE r.approval = 2 AND NOT EXISTS (SELECT r FROM Report AS r WHERE r.employee = :employee) ORDER BY r.id DESC"), //List of daily reports waiting for approval by the section chief excluding my own daily reports
+        @NamedQuery(name = "getManagerApprovalReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.approval = 2 AND NOT EXISTS (SELECT r FROM Report AS r WHERE r.employee = :employee)") //Total number of daily reports waiting for approval by the section chief, excluding my own daily reports
 })
 @Entity
 public class Report {
