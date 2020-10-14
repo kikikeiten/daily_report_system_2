@@ -41,10 +41,11 @@
                             </c:otherwise>
                         </c:choose>
                         <td class="report_approval">
-                                <form method="POST" action="<c:url value='/manager/remand/create' />">
-                                    <input type="hidden" name="report_id" value="${report.id}" />
-                                    <button type="submit" name="submit" value="${2}">再提出</button>
-                                </form>
+                            <form method="POST"
+                                action="<c:url value='/manager/remand/create' />">
+                                <input type="hidden" name="report_id" value="${report.id}" />
+                                <button type="submit" name="submit" value="${2}">再提出</button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
