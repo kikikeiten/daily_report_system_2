@@ -18,7 +18,8 @@
                 </h1>
                 &nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_employee != null}">
-                    <c:if test="${sessionScope.login_employee.admin_flag == 1}">
+                    <c:if
+                        test="${sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
                         <a href="<c:url value='/employees' />">従業員管理</a>&nbsp;
                     </c:if>
                     <a href="<c:url value='/reports' />">日報管理</a>&nbsp;
