@@ -21,6 +21,8 @@ import javax.persistence.Table;
         @NamedQuery(name = "getReportsCount", query = "SELECT COUNT(r) FROM Report AS r"),
         @NamedQuery(name = "getMyAllReports", query = "SELECT r FROM Report AS r WHERE r.employee = :employee ORDER BY r.id DESC"),
         @NamedQuery(name = "getMyReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee"),
+        @NamedQuery(name = "getMyAllDrafts", query = "SELECT r FROM Report AS r WHERE r.employee = :employee AND r.approval = 0 ORDER BY r.id DESC"), //List of my daily draft reports
+        @NamedQuery(name = "getMyDraftsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 0") //Count my daily draft report
 })
 @Entity
 public class Report {
