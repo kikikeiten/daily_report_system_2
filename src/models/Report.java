@@ -26,8 +26,9 @@ import javax.persistence.Table;
         @NamedQuery(name = "getAllManagerApprovalReports", query = "SELECT r FROM Report AS r WHERE r.approval = 2 AND NOT EXISTS (SELECT r FROM Report AS r WHERE r.employee = :employee) ORDER BY r.id DESC"), //List of daily reports waiting for approval by the section chief excluding my own daily reports
         @NamedQuery(name = "getManagerApprovalReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.approval = 2 AND NOT EXISTS (SELECT r FROM Report AS r WHERE r.employee = :employee)"), //Total number of daily reports waiting for approval by the section chief, excluding my own daily reports
         @NamedQuery(name = "getAllDirectorApprovalReports", query = "SELECT r FROM Report AS r WHERE r.approval = 4 AND NOT EXISTS (SELECT r FROM Report AS r WHERE r.employee = :employee) ORDER BY r.id DESC"), //List of daily reports waiting for approval by the director excluding my own daily reports
-        @NamedQuery(name = "getDirectorApprovalReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.approval = 4 AND NOT EXISTS (SELECT r FROM Report AS r WHERE r.employee = :employee)") //Total number of daily reports waiting for approval by the director, excluding my own daily reports
-
+        @NamedQuery(name = "getDirectorApprovalReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.approval = 4 AND NOT EXISTS (SELECT r FROM Report AS r WHERE r.employee = :employee)"), //Total number of daily reports waiting for approval by the director, excluding my own daily reports
+        @NamedQuery(name = "getAllManagerRemandReports", query = "SELECT r FROM Report AS r WHERE r.employee = :employee AND r.approval = 1 ORDER BY r.id DESC"), //List of daily reports returned by the section chief for the logged-in employee
+        @NamedQuery(name = "getManagerRemandReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 1") //Total daily reports sent back by the section chief to logged-in employee
 
 })
 @Entity
