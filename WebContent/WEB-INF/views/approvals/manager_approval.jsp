@@ -42,12 +42,14 @@
                         </c:choose>
                         <td class="report_approval">
                             <div style="display: inline-flex">
-                                <form method="POST" action="<c:url value='/manager/approval/create' />">
+                                <form method="POST"
+                                    action="<c:url value='/manager/approval/create' />">
                                     <input type="hidden" name="report_id" value="${report.id}" />
                                     <button type="submit" name="submit" value="${4}">承認</button>
                                 </form>
                                 &nbsp;
-                                <form method="POST" action="<c:url value='/manager/approval/create' />">
+                                <form method="POST"
+                                    action="<c:url value='/manager/approval/create' />">
                                     <input type="hidden" name="report_id" value="${report.id}" />
                                     <button type="submit" name="submit" value="${1}">差し戻し</button>
                                 </form>
@@ -77,6 +79,9 @@
         </p>
         <p>
             <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
+        </p>
+        <p>
+            <a href="<c:url value='/remand/director' />">部長差し戻しの日報一覧（${getDirectorRemandReportsCount}）</a>
         </p>
     </c:param>
 </c:import>
