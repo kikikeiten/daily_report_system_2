@@ -40,21 +40,22 @@
                                             value="${report.likes}" /></a></td>
                             </c:otherwise>
                         </c:choose>
-                        <td class="report_approval">
-                            <div style="display: inline-flex">
-                                <form method="POST"
-                                    action="<c:url value='/manager/approval/create' />">
-                                    <input type="hidden" name="report_id" value="${report.id}" />
-                                    <button type="submit" name="submit" value="${4}">承認</button>
-                                </form>
-                                &nbsp;
-                                <form method="POST"
-                                    action="<c:url value='/manager/approval/create' />">
-                                    <input type="hidden" name="report_id" value="${report.id}" />
-                                    <button type="submit" name="submit" value="${1}">差し戻し</button>
-                                </form>
-                            </div>
-                        </td>
+                        <td class="report_approval"><c:if
+                                test="${sessionScope.login_employee.id != report.employee.id}">
+                                <div style="display: inline-flex">
+                                    <form method="POST"
+                                        action="<c:url value='/manager/approval/create' />">
+                                        <input type="hidden" name="report_id" value="${report.id}" />
+                                        <button type="submit" name="submit" value="${4}">承認</button>
+                                    </form>
+                                    &nbsp;
+                                    <form method="POST"
+                                        action="<c:url value='/manager/approval/create' />">
+                                        <input type="hidden" name="report_id" value="${report.id}" />
+                                        <button type="submit" name="submit" value="${1}">差し戻し</button>
+                                    </form>
+                                </div>
+                            </c:if></td>
                     </tr>
                 </c:forEach>
             </tbody>

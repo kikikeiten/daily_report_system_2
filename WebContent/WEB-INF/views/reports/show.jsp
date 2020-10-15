@@ -82,8 +82,11 @@
                             <td><c:if
                                     test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
                                     <c:choose>
-                                        <c:when test="${report.approval == 0}">
+                                        <c:when test="${report.approval == 0 && sessionScope.login_employee.id == report.employee.id}">
                                             <a href="<c:url value='/drafts' />">下書き</a>
+                                        </c:when>
+                                        <c:when test="${report.approval == 0 && sessionScope.login_employee.id != report.employee.id}">
+                                            下書き
                                         </c:when>
                                         <c:when test="${report.approval == 1 && sessionScope.login_employee.id == report.employee.id}">
                                             <a href="<c:url value='/remand/manager' />">課長差し戻し</a>
@@ -94,8 +97,11 @@
                                         <c:when test="${report.approval == 2}">
                                             課長承認待ち
                                         </c:when>
-                                        <c:when test="${report.approval == 3}">
+                                        <c:when test="${report.approval == 3 && sessionScope.login_employee.id == report.employee.id}">
                                             <a href="<c:url value='/remand/director' />">部長差し戻し</a>
+                                        </c:when>
+                                        <c:when test="${report.approval == 3 && sessionScope.login_employee.id != report.employee.id}">
+                                            部長差し戻し
                                         </c:when>
                                         <c:when test="${report.approval == 4}">
                                             部長承認待ち
@@ -106,17 +112,26 @@
                                     </c:choose>
                                 </c:if> <c:if test="${sessionScope.login_employee.admin_flag == 2}">
                                     <c:choose>
-                                        <c:when test="${report.approval == 0}">
+                                        <c:when test="${report.approval == 0 && sessionScope.login_employee.id == report.employee.id}">
                                             <a href="<c:url value='/drafts' />">下書き</a>
+                                        </c:when>
+                                        <c:when test="${report.approval == 0 && sessionScope.login_employee.id != report.employee.id}">
+                                            下書き
                                         </c:when>
                                         <c:when test="${report.approval == 1}">
                                             課長差し戻し
                                         </c:when>
-                                        <c:when test="${report.approval == 2}">
+                                        <c:when test="${report.approval == 2 && sessionScope.login_employee.id != report.employee.id}">
                                             <a href="<c:url value='/approval/manager' />">課長承認待ち</a>
                                         </c:when>
-                                        <c:when test="${report.approval == 3}">
+                                        <c:when test="${report.approval == 2 && sessionScope.login_employee.id == report.employee.id}">
+                                            課長承認待ち
+                                        </c:when>
+                                        <c:when test="${report.approval == 3 && sessionScope.login_employee.id == report.employee.id}">
                                             <a href="<c:url value='/remand/director' />">部長差し戻し</a>
+                                        </c:when>
+                                        <c:when test="${report.approval == 3 && sessionScope.login_employee.id != report.employee.id}">
+                                            部長差し戻し
                                         </c:when>
                                         <c:when test="${report.approval == 4}">
                                             部長承認待ち
@@ -127,8 +142,11 @@
                                     </c:choose>
                                 </c:if> <c:if test="${sessionScope.login_employee.admin_flag == 3}">
                                     <c:choose>
-                                        <c:when test="${report.approval == 0}">
+                                        <c:when test="${report.approval == 0 && sessionScope.login_employee.id == report.employee.id}">
                                             <a href="<c:url value='/drafts' />">下書き</a>
+                                        </c:when>
+                                        <c:when test="${report.approval == 0 && sessionScope.login_employee.id != report.employee.id}">
+                                            下書き
                                         </c:when>
                                         <c:when test="${report.approval == 1}">
                                             課長差し戻し
@@ -153,7 +171,7 @@
                             <td><c:if
                                     test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
                                     <c:choose>
-                                        <c:when test="${report.approval == 0}">
+                                        <c:when test="${report.approval == 0 && sessionScope.login_employee.id == report.employee.id}">
                                             <form method="POST"
                                                 action="<c:url value='/submission/update' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
@@ -169,7 +187,7 @@
                                         </c:when>
                                         <c:when test="${report.approval == 2}">
                                         </c:when>
-                                        <c:when test="${report.approval == 3}">
+                                        <c:when test="${report.approval == 3 && sessionScope.login_employee.id == report.employee.id}">
                                             <form method="POST"
                                                 action="<c:url value='/director/remand/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
@@ -183,7 +201,7 @@
                                     </c:choose>
                                 </c:if> <c:if test="${sessionScope.login_employee.admin_flag == 2}">
                                     <c:choose>
-                                        <c:when test="${report.approval == 0}">
+                                        <c:when test="${report.approval == 0 && sessionScope.login_employee.id == report.employee.id}">
                                             <form method="POST"
                                                 action="<c:url value='/submission/update' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
@@ -192,7 +210,7 @@
                                         </c:when>
                                         <c:when test="${report.approval == 1}">
                                         </c:when>
-                                        <c:when test="${report.approval == 2}">
+                                        <c:when test="${report.approval == 2 && sessionScope.login_employee.id != report.employee.id}">
                                             <div style="display: inline-flex">
                                                 <form method="POST"
                                                     action="<c:url value='/manager/approval/create' />">
@@ -207,7 +225,7 @@
                                                 </form>
                                             </div>
                                         </c:when>
-                                        <c:when test="${report.approval == 3}">
+                                        <c:when test="${report.approval == 3 && sessionScope.login_employee.id == report.employee.id}">
                                             <form method="POST"
                                                 action="<c:url value='/director/remand/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
@@ -221,7 +239,7 @@
                                     </c:choose>
                                 </c:if> <c:if test="${sessionScope.login_employee.admin_flag == 3}">
                                     <c:choose>
-                                        <c:when test="${report.approval == 0}">
+                                        <c:when test="${report.approval == 0 && sessionScope.login_employee.id == report.employee.id}">
                                             <form method="POST"
                                                 action="<c:url value='/submission/update' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
