@@ -18,7 +18,8 @@
                 </h1>
                 &nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_employee != null}">
-                    <c:if test="${sessionScope.login_employee.admin_flag == 1}">
+                    <c:if
+                        test="${sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
                         <a href="<c:url value='/employees' />">従業員管理</a>&nbsp;
                     </c:if>
                     <a href="<c:url value='/reports' />">日報管理</a>&nbsp;
@@ -27,7 +28,16 @@
                                 value="${getMyFollowingCount}" /></b>フォロー中</a>&nbsp;
                     <a href="<c:url value='/follower' />"><b><c:out
                                 value="${getMyFollowerCount}" /></b>フォロワー</a>&nbsp;
-                 </c:if>
+                    <c:if
+                        test="${sessionScope.login_employee.admin_flag == 2}">
+                        <a href="<c:url value='/approval/manager' />">承認待ち<b><c:out
+                                    value="${getManagerApprovalReportsCount}" />件</b></a>&nbsp;
+                    </c:if>
+                    <c:if test="${sessionScope.login_employee.admin_flag == 3}">
+                        <a href="<c:url value='/approval/director' />">承認待ち<b><c:out
+                                    value="${getDirectorApprovalReportsCount}" />件</b></a>&nbsp;
+                    </c:if>
+                </c:if>
             </div>
             <c:if test="${sessionScope.login_employee != null}">
                 <div id="employee_name">

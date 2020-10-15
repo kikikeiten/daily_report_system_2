@@ -1,7 +1,6 @@
-package controllers.reports;
+package controllers.approvals;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,16 +16,16 @@ import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsIndexServlet
+ * Servlet implementation class ManagerRemandIndexServlet
  */
-@WebServlet("/reports")
-public class ReportsIndexServlet extends HttpServlet {
+@WebServlet("/remand/manager")
+public class ManagerRemandIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsIndexServlet() {
+    public ManagerRemandIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,6 +35,8 @@ public class ReportsIndexServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // TODO Auto-generated method stub
+
         EntityManager em = DBUtil.createEntityManager();
 
         Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
@@ -46,35 +47,18 @@ public class ReportsIndexServlet extends HttpServlet {
         } catch (Exception e) {
             page = 1;
         }
-        List<Report> reports = em.createNamedQuery("getAllReports", Report.class)
+
+        List<Report> getAllManagerRemandReports = em.createNamedQuery("getAllManagerRemandReports", Report.class)
+                .setParameter("employee", login_employee)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)
                 .getResultList();
 
-        //フォロー判定
-        List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
+        long getManagerRemandReportsCount = (long) em.createNamedQuery("getManagerRemandReportsCount", Long.class)
                 .setParameter("employee", login_employee)
-                .getResultList();
-
-        List<Integer> list_report_id = new ArrayList<Integer>();
-
-        for (Employee report_id : checkMyFollow) {
-            Integer int_report_id = report_id.getId();
-            list_report_id.add(int_report_id);
-            System.out.println("ログイン中の従業員がフォローしている従業員id一覧は" + list_report_id + "です。");
-            request.setAttribute("list_report_id", list_report_id);
-        }
-
-        //フォロー判定ここまで
-
-        long reports_count = (long) em.createNamedQuery("getReportsCount", Long.class)
                 .getSingleResult();
 
         long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
-                .setParameter("employee", login_employee)
-                .getSingleResult();
-
-        long getManagerRemandReportsCount = (long) em.createNamedQuery("getManagerRemandReportsCount", Long.class)
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
@@ -84,18 +68,17 @@ public class ReportsIndexServlet extends HttpServlet {
 
         em.close();
 
-        request.setAttribute("reports", reports);
-        request.setAttribute("reports_count", reports_count);
+        request.setAttribute("getAllManagerRemandReports", getAllManagerRemandReports);
+        request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
-        request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
         request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/manager_remand.jsp");
         rd.forward(request, response);
     }
 

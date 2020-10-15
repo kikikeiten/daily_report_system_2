@@ -19,6 +19,7 @@
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
                     <th class="report_likes">いいね数</th>
+                    <th class="report_approval">承認状況</th>
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
                     <tr class="row${status.count % 2}">
@@ -39,6 +40,71 @@
                                             value="${report.likes}" /></a></td>
                             </c:otherwise>
                         </c:choose>
+                        <td class="report_approval"><c:if
+                                test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
+                                <c:choose>
+                                    <c:when test="${report.approval == 0}">
+                                        <a href="<c:url value='/drafts' />">下書き</a>
+                                    </c:when>
+                                    <c:when test="${report.approval == 1}">
+                                        <a href="<c:url value='/remand/manager' />">課長差し戻し</a>
+                                    </c:when>
+                                    <c:when test="${report.approval == 2}">
+                                        課長承認待ち
+                                    </c:when>
+                                    <c:when test="${report.approval == 3}">
+                                        <a href="<c:url value='/remand/director' />">部長差し戻し</a>
+                                    </c:when>
+                                    <c:when test="${report.approval == 4}">
+                                        部長承認待ち
+                                    </c:when>
+                                    <c:otherwise>
+                                        承認済み
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:if> <c:if test="${sessionScope.login_employee.admin_flag == 2}">
+                                <c:choose>
+                                    <c:when test="${report.approval == 0}">
+                                        <a href="<c:url value='/drafts' />">下書き</a>
+                                    </c:when>
+                                    <c:when test="${report.approval == 1}">
+                                        課長差し戻し
+                                    </c:when>
+                                    <c:when test="${report.approval == 2 }">
+                                        課長承認待ち
+                                    </c:when>
+                                    <c:when test="${report.approval == 3}">
+                                        <a href="<c:url value='/remand/director' />">部長差し戻し</a>
+                                    </c:when>
+                                    <c:when test="${report.approval == 4}">
+                                        部長承認待ち
+                                    </c:when>
+                                    <c:otherwise>
+                                        承認済み
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:if> <c:if test="${sessionScope.login_employee.admin_flag == 3}">
+                                <c:choose>
+                                    <c:when test="${report.approval == 0}">
+                                        <a href="<c:url value='/drafts' />">下書き</a>
+                                    </c:when>
+                                    <c:when test="${report.approval == 1}">
+                                        課長差し戻し
+                                    </c:when>
+                                    <c:when test="${report.approval == 2}">
+                                        課長承認待ち
+                                    </c:when>
+                                    <c:when test="${report.approval == 3}">
+                                        部長差し戻し
+                                    </c:when>
+                                    <c:when test="${report.approval == 4}">
+                                        部長承認待ち
+                                    </c:when>
+                                    <c:otherwise>
+                                        承認済み
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:if></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -60,5 +126,30 @@
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>
         </p>
+        <p>
+            <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
+        </p>
+        <c:if
+            test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
+            <p>
+                <a href="<c:url value='/remand/manager' />">課長差し戻しの日報一覧（${getManagerRemandReportsCount}）</a>
+            </p>
+        </c:if>
+        <c:if test="${sessionScope.login_employee.admin_flag == 2}">
+            <p>
+                <a href="<c:url value='/approval/manager' />">課長承認待ちの日報一覧（${getManagerApprovalReportsCount}）</a>
+            </p>
+        </c:if>
+        <c:if
+            test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
+            <p>
+                <a href="<c:url value='/remand/director' />">部長差し戻しの日報一覧（${getDirectorRemandReportsCount}）</a>
+            </p>
+        </c:if>
+        <c:if test="${sessionScope.login_employee.admin_flag == 3}">
+            <p>
+                <a href="<c:url value='/approval/director' />">部長承認待ちの日報一覧（${getDirectorApprovalReportsCount}）</a>
+            </p>
+        </c:if>
     </c:param>
 </c:import>

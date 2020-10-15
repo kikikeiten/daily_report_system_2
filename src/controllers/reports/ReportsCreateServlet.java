@@ -42,6 +42,8 @@ public class ReportsCreateServlet extends HttpServlet {
         if (_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
+            Employee e = (Employee) request.getSession().getAttribute("login_employee");
+            Integer sudmit = Integer.parseInt(request.getParameter("submit"));
             Report r = new Report();
 
             r.setEmployee((Employee) request.getSession().getAttribute("login_employee"));
@@ -51,12 +53,12 @@ public class ReportsCreateServlet extends HttpServlet {
             if (rd_str != null && !rd_str.equals("")) {
                 report_date = Date.valueOf(request.getParameter("report_date"));
             }
-            r.setReport_date(report_date);
 
+            r.setReport_date(report_date);
             r.setTitle(request.getParameter("title"));
             r.setContent(request.getParameter("content"));
-
             r.setLikes(0);
+            r.setApproval(sudmit);
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             r.setCreated_at(currentTime);
@@ -77,7 +79,17 @@ public class ReportsCreateServlet extends HttpServlet {
                 em.persist(r);
                 em.getTransaction().commit();
                 em.close();
-                request.getSession().setAttribute("flush", "登録が完了しました。");
+
+                if (sudmit == 0) {
+                    request.getSession().setAttribute("flush",
+                            "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                } else if (sudmit == 2 && e.getAdmin_flag() == 0 || e.getAdmin_flag() == 1) {
+                    request.getSession().setAttribute("flush", "日報「" + request.getParameter("title") + "」を課長に提出しました。");
+                } else if (sudmit == 2 && e.getAdmin_flag() == 2) {
+                    request.getSession().setAttribute("flush", "日報「" + request.getParameter("title") + "」を部長に提出しました。");
+                } else {
+                    request.getSession().setAttribute("flush", "日報「" + request.getParameter("title") + "」を提出しました。");
+                }
 
                 response.sendRedirect(request.getContextPath() + "/reports");
             }

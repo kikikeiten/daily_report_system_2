@@ -21,6 +21,16 @@ import javax.persistence.Table;
         @NamedQuery(name = "getReportsCount", query = "SELECT COUNT(r) FROM Report AS r"),
         @NamedQuery(name = "getMyAllReports", query = "SELECT r FROM Report AS r WHERE r.employee = :employee ORDER BY r.id DESC"),
         @NamedQuery(name = "getMyReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee"),
+        @NamedQuery(name = "getMyAllDrafts", query = "SELECT r FROM Report AS r WHERE r.employee = :employee AND r.approval = 0 ORDER BY r.id DESC"), //List of my daily draft reports
+        @NamedQuery(name = "getMyDraftsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 0"), //Count my daily draft report
+        @NamedQuery(name = "getAllManagerApprovalReports", query = "SELECT r FROM Report AS r WHERE r.approval = 2 ORDER BY r.id DESC"), //List of daily reports waiting for approval by the section chief excluding my own daily reports
+        @NamedQuery(name = "getManagerApprovalReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.approval = 2"), //Total number of daily reports waiting for approval by the section chief, excluding my own daily reports
+        @NamedQuery(name = "getAllDirectorApprovalReports", query = "SELECT r FROM Report AS r WHERE r.approval = 4 ORDER BY r.id DESC"), //List of daily reports waiting for approval by the director excluding my own daily reports
+        @NamedQuery(name = "getDirectorApprovalReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.approval = 4"), //Total number of daily reports waiting for approval by the director, excluding my own daily reports
+        @NamedQuery(name = "getAllManagerRemandReports", query = "SELECT r FROM Report AS r WHERE r.employee = :employee AND r.approval = 1 ORDER BY r.id DESC"), //List of daily reports returned by the section chief for the logged-in employee
+        @NamedQuery(name = "getManagerRemandReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 1"), //Total daily reports sent back by the section chief to logged-in employee
+        @NamedQuery(name = "getAllDirectorRemandReports", query = "SELECT r FROM Report AS r WHERE r.employee = :employee AND r.approval = 3 ORDER BY r.id DESC"), //List of daily reports returned by the director for the logged-in employee
+        @NamedQuery(name = "getDirectorRemandReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 3") //Total daily reports sent back by the director to logged-in employee
 })
 @Entity
 public class Report {
@@ -51,6 +61,9 @@ public class Report {
 
     @Column(name = "likes", nullable = false)
     private Integer likes;
+
+    @Column(name = "approval", nullable = false)
+    private Integer approval;
 
     public Integer getId() {
         return id;
@@ -114,6 +127,14 @@ public class Report {
 
     public void setLikes(Integer likes) {
         this.likes = likes;
+    }
+
+    public Integer getApproval() {
+        return approval;
+    }
+
+    public void setApproval(Integer approval) {
+        this.approval = approval;
     }
 
 }

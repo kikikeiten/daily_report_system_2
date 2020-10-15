@@ -57,10 +57,18 @@ public class HeaderFilter implements Filter {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
+        long getManagerApprovalReportsCount = (long) em.createNamedQuery("getManagerApprovalReportsCount", Long.class)
+                .getSingleResult();
+
+        long getDirectorApprovalReportsCount = (long) em.createNamedQuery("getDirectorApprovalReportsCount", Long.class)
+                .getSingleResult();
+
         em.close();
 
         request.setAttribute("getMyFollowingCount", getMyFollowingCount);
         request.setAttribute("getMyFollowerCount", getMyFollowerCount);
+        request.setAttribute("getManagerApprovalReportsCount", getManagerApprovalReportsCount);
+        request.setAttribute("getDirectorApprovalReportsCount", getDirectorApprovalReportsCount);
 
         chain.doFilter(request, response);
     }
