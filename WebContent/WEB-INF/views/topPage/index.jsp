@@ -62,8 +62,7 @@
                                         承認済み
                                     </c:otherwise>
                                 </c:choose>
-                            </c:if>
-                            <c:if test="${sessionScope.login_employee.admin_flag == 2}">
+                            </c:if> <c:if test="${sessionScope.login_employee.admin_flag == 2}">
                                 <c:choose>
                                     <c:when test="${report.approval == 0}">
                                         <a href="<c:url value='#' />">下書き</a>
@@ -84,8 +83,7 @@
                                         承認済み
                                     </c:otherwise>
                                 </c:choose>
-                            </c:if>
-                            <c:if test="${sessionScope.login_employee.admin_flag == 3}">
+                            </c:if> <c:if test="${sessionScope.login_employee.admin_flag == 3}">
                                 <c:choose>
                                     <c:when test="${report.approval == 0}">
                                         <a href="<c:url value='#' />">下書き</a>
@@ -106,8 +104,7 @@
                                         承認済み
                                     </c:otherwise>
                                 </c:choose>
-                            </c:if>
-                       </td>
+                            </c:if></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -132,5 +129,27 @@
         <p>
             <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
         </p>
+        <c:if
+            test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
+            <p>
+                <a href="<c:url value='/remand/manager' />">課長差し戻しの日報一覧（${getManagerRemandReportsCount}）</a>
+            </p>
+        </c:if>
+        <c:if test="${sessionScope.login_employee.admin_flag == 2}">
+            <p>
+                <a href="<c:url value='/approval/manager' />">課長承認待ちの日報一覧（${getManagerApprovalReportsCount}）</a>
+            </p>
+        </c:if>
+        <c:if
+            test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
+            <p>
+                <a href="<c:url value='/remand/director' />">部長差し戻しの日報一覧（${getDirectorRemandReportsCount}）</a>
+            </p>
+        </c:if>
+        <c:if test="${sessionScope.login_employee.admin_flag == 3}">
+            <p>
+                <a href="<c:url value='/approval/director' />">部長承認待ちの日報一覧（${getDirectorApprovalReportsCount}）</a>
+            </p>
+        </c:if>
     </c:param>
 </c:import>
