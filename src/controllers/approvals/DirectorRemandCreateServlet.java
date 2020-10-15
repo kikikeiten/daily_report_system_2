@@ -44,6 +44,8 @@ public class DirectorRemandCreateServlet extends HttpServlet {
         em.getTransaction().commit();
         em.close();
 
+        request.getSession().setAttribute("flush", "日報「" + r.getTitle() + "」を部長に再提出しました。");
+
         response.sendRedirect(request.getContextPath() + "/remand/director");
     }
 
