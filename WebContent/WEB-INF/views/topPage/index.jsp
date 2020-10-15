@@ -70,8 +70,8 @@
                                     <c:when test="${report.approval == 1}">
                                         課長差し戻し
                                     </c:when>
-                                    <c:when test="${report.approval == 2}">
-                                        <a href="<c:url value='/approval/manager' />">課長承認待ち</a>
+                                    <c:when test="${report.approval == 2 }">
+                                        課長承認待ち
                                     </c:when>
                                     <c:when test="${report.approval == 3}">
                                         <a href="<c:url value='/remand/director' />">部長差し戻し</a>
@@ -98,7 +98,7 @@
                                         部長差し戻し
                                     </c:when>
                                     <c:when test="${report.approval == 4}">
-                                        <a href="<c:url value='/approval/director' />">部長承認待ち</a>
+                                        部長承認待ち
                                     </c:when>
                                     <c:otherwise>
                                         承認済み
