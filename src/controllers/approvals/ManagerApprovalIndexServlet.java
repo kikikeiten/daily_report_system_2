@@ -49,7 +49,6 @@ public class ManagerApprovalIndexServlet extends HttpServlet {
         }
 
         List<Report> getAllManagerApprovalReports = em.createNamedQuery("getAllManagerApprovalReports", Report.class)
-                .setParameter("employee", login_employee)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)
                 .getResultList();

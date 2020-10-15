@@ -58,11 +58,9 @@ public class HeaderFilter implements Filter {
                 .getSingleResult();
 
         long getManagerApprovalReportsCount = (long) em.createNamedQuery("getManagerApprovalReportsCount", Long.class)
-                .setParameter("employee", login_employee)
                 .getSingleResult();
 
         long getDirectorApprovalReportsCount = (long) em.createNamedQuery("getDirectorApprovalReportsCount", Long.class)
-                .setParameter("employee", login_employee)
                 .getSingleResult();
 
         em.close();
