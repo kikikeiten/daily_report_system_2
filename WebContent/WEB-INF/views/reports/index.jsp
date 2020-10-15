@@ -72,14 +72,20 @@
                         <td class="report_approval"><c:if
                                 test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
                                 <c:choose>
-                                    <c:when test="${report.approval == 1}">
+                                    <c:when test="${report.approval == 1 && sessionScope.login_employee.id == report.employee.id}">
                                         <a href="<c:url value='/remand/manager' />">課長差し戻し</a>
+                                    </c:when>
+                                    <c:when test="${report.approval == 1 && sessionScope.login_employee.id != report.employee.id}">
+                                        課長差し戻し
                                     </c:when>
                                     <c:when test="${report.approval == 2}">
                                         課長承認待ち
                                     </c:when>
-                                    <c:when test="${report.approval == 3}">
+                                    <c:when test="${report.approval == 3 && sessionScope.login_employee.id == report.employee.id}">
                                         <a href="<c:url value='/remand/director' />">部長差し戻し</a>
+                                    </c:when>
+                                    <c:when test="${report.approval == 3 && sessionScope.login_employee.id != report.employee.id}">
+                                        部長差し戻し
                                     </c:when>
                                     <c:when test="${report.approval == 4}">
                                         部長承認待ち
