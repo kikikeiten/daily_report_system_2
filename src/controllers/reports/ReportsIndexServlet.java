@@ -78,15 +78,7 @@ public class ReportsIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
-        long getManagerApprovalReportsCount = (long) em.createNamedQuery("getManagerApprovalReportsCount", Long.class)
-                .setParameter("employee", login_employee)
-                .getSingleResult();
-
         long getDirectorRemandReportsCount = (long) em.createNamedQuery("getDirectorRemandReportsCount", Long.class)
-                .setParameter("employee", login_employee)
-                .getSingleResult();
-
-        long getDirectorApprovalReportsCount = (long) em.createNamedQuery("getDirectorApprovalReportsCount", Long.class)
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
@@ -97,9 +89,7 @@ public class ReportsIndexServlet extends HttpServlet {
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
         request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
-        request.setAttribute("getManagerApprovalReportsCount", getManagerApprovalReportsCount);
         request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);
-        request.setAttribute("getDirectorApprovalReportsCount", getDirectorApprovalReportsCount);
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");

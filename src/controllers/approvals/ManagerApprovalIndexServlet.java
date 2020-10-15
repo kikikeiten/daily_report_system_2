@@ -54,10 +54,6 @@ public class ManagerApprovalIndexServlet extends HttpServlet {
                 .setMaxResults(10)
                 .getResultList();
 
-        long getManagerApprovalReportsCount = (long) em.createNamedQuery("getManagerApprovalReportsCount", Long.class)
-                .setParameter("employee", login_employee)
-                .getSingleResult();
-
         long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
                 .setParameter("employee", login_employee)
                 .getSingleResult();
@@ -69,7 +65,6 @@ public class ManagerApprovalIndexServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("getAllManagerApprovalReports", getAllManagerApprovalReports);
-        request.setAttribute("getManagerApprovalReportsCount", getManagerApprovalReportsCount);
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
         request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);

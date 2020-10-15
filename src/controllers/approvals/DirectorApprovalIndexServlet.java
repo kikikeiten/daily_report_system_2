@@ -54,10 +54,6 @@ public class DirectorApprovalIndexServlet extends HttpServlet {
                 .setMaxResults(10)
                 .getResultList();
 
-        long getDirectorApprovalReportsCount = (long) em.createNamedQuery("getDirectorApprovalReportsCount", Long.class)
-                .setParameter("employee", login_employee)
-                .getSingleResult();
-
         long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
                 .setParameter("employee", login_employee)
                 .getSingleResult();
@@ -65,7 +61,6 @@ public class DirectorApprovalIndexServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("getAllDirectorApprovalReports", getAllDirectorApprovalReports);
-        request.setAttribute("getDirectorApprovalReportsCount", getDirectorApprovalReportsCount);
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
         if (request.getSession().getAttribute("flush") != null) {
