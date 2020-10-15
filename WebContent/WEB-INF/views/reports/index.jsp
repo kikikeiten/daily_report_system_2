@@ -129,8 +129,11 @@
                                     <c:when test="${report.approval == 3}">
                                         部長差し戻し
                                     </c:when>
-                                    <c:when test="${report.approval == 4}">
-                                        <a href="<c:url value='/remand/director' />">部長承認待ち</a>
+                                    <c:when test="${report.approval == 4 && sessionScope.login_employee.id != report.employee.id}">
+                                        <a href="<c:url value='/approval/director' />">部長承認待ち</a>
+                                    </c:when>
+                                    <c:when test="${report.approval == 4 && sessionScope.login_employee.id == report.employee.id}">
+                                        部長承認待ち
                                     </c:when>
                                     <c:when test="${report.approval == 6}">
                                         承認済み
