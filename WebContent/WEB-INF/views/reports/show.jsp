@@ -52,7 +52,8 @@
                         </tr>
                         <tr>
                             <th>内容</th>
-                            <td><pre><c:out value="${report.content}" /></pre></td>
+                            <td><pre><c:out value="${report.content}" />
+                                </pre></td>
                         </tr>
                         <tr>
                             <th>登録日時</th>
@@ -279,7 +280,7 @@
                                         <c:when test="${report.approval == 3}">
                                         </c:when>
                                         <c:when
-                                            test="${report.approval == 4 && sessionScope.login_employee.id != report.employee.id}">
+                                            test="${report.approval == 4 && sessionScope.login_employee.id != report.employee.id && report.employee.admin_flag != 3}">
                                             <div style="display: inline-flex">
                                                 <form method="POST"
                                                     action="<c:url value='/director/approval/create' />">
@@ -291,6 +292,16 @@
                                                     action="<c:url value='/director/approval/create' />">
                                                     <input type="hidden" name="report_id" value="${report.id}" />
                                                     <button type="submit" name="submit" value="${3}">差し戻し</button>
+                                                </form>
+                                            </div>
+                                        </c:when>
+                                        <c:when
+                                            test="${report.approval == 4 && sessionScope.login_employee.id != report.employee.id && report.employee.admin_flag == 3}">
+                                            <div style="display: inline-flex">
+                                                <form method="POST"
+                                                    action="<c:url value='/director/approval/create' />">
+                                                    <input type="hidden" name="report_id" value="${report.id}" />
+                                                    <button type="submit" name="submit" value="${6}">承認</button>
                                                 </form>
                                             </div>
                                         </c:when>
