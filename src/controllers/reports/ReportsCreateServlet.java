@@ -83,12 +83,12 @@ public class ReportsCreateServlet extends HttpServlet {
                 if (sudmit == 0) {
                     request.getSession().setAttribute("flush",
                             "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
-                } else if (sudmit == 2 && e.getAdmin_flag() == 0 || e.getAdmin_flag() == 1) {
-                    request.getSession().setAttribute("flush", "日報「" + request.getParameter("title") + "」を課長に提出しました。");
+                } else if (sudmit == 2 && (e.getAdmin_flag() == 0 || e.getAdmin_flag() == 1)) {
+                    request.getSession().setAttribute("flush", "日報「" + request.getParameter("title") + "」を課長へ提出しました。");
                 } else if (sudmit == 2 && e.getAdmin_flag() == 2) {
-                    request.getSession().setAttribute("flush", "日報「" + request.getParameter("title") + "」を部長に提出しました。");
+                    request.getSession().setAttribute("flush", "日報「" + request.getParameter("title") + "」を他課長へ提出しました。");
                 } else {
-                    request.getSession().setAttribute("flush", "日報「" + request.getParameter("title") + "」を提出しました。");
+                    request.getSession().setAttribute("flush", "日報「" + request.getParameter("title") + "」を他部長へ提出しました。");
                 }
 
                 response.sendRedirect(request.getContextPath() + "/reports");
