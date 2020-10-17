@@ -42,6 +42,8 @@ public class ReportsShowServlet extends HttpServlet {
 
         Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
 
+        Integer approval = r.getApproval();
+
         //フォロー判定
         List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
                 .setParameter("employee", login_employee)
@@ -61,6 +63,7 @@ public class ReportsShowServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("report", r);
+        request.setAttribute("approval", approval);
         request.setAttribute("_token", request.getSession().getId());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
