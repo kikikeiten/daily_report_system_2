@@ -46,22 +46,26 @@
                                                     value="${report.likes}" /></a></td>
                                     </c:otherwise>
                                 </c:choose>
-                                <td class="report_approval"><c:if
-                                        test="${sessionScope.login_employee.id != report.employee.id}">
-                                        <div style="display: inline-flex">
+                                <td class="report_approval"><div
+                                        style="display: inline-flex">
+                                        <c:if
+                                            test="${sessionScope.login_employee.id != report.employee.id}">
                                             <form method="POST"
                                                 action="<c:url value='/director/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
                                                 <button type="submit" name="submit" value="${6}">承認</button>
                                             </form>
+                                        </c:if>
+                                        <c:if
+                                            test="${sessionScope.login_employee.id != report.employee.id && report.employee.admin_flag != 3}">
                                             &nbsp;
                                             <form method="POST"
                                                 action="<c:url value='/director/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
                                                 <button type="submit" name="submit" value="${3}">差し戻し</button>
                                             </form>
-                                        </div>
-                                    </c:if></td>
+                                        </c:if>
+                                    </div></td>
                             </tr>
                         </c:forEach>
                     </tbody>
