@@ -38,7 +38,7 @@
 &nbsp;
 </c:if>
 <c:if
-    test="${approval == null || approval == 0 || approval == 1 || approval == 3}">
+    test="${approval == null || approval == 0}">
     <c:choose>
         <c:when test="${sessionScope.login_employee.admin_flag != 3}">
             <input type="hidden" name="_token" value="${_token}" />
@@ -47,6 +47,19 @@
         <c:otherwise>
             <input type="hidden" name="_token" value="${_token}" />
             <button type="submit" name="submit" value="${4}">提出</button>
+        </c:otherwise>
+    </c:choose>
+</c:if>
+<c:if
+    test="${approval == 1 || approval == 3}">
+    <c:choose>
+        <c:when test="${sessionScope.login_employee.admin_flag != 3}">
+            <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${2}">再提出</button>
+        </c:when>
+        <c:otherwise>
+            <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${4}">再提出</button>
         </c:otherwise>
     </c:choose>
 </c:if>
