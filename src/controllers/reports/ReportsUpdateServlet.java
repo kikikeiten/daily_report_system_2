@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Employee;
 import models.Report;
 import models.validators.ReportValidator;
 import utils.DBUtil;
@@ -42,11 +43,14 @@ public class ReportsUpdateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
 
             Report r = em.find(Report.class, (Integer) (request.getSession().getAttribute("report_id")));
+            Integer submit = Integer.parseInt(request.getParameter("submit"));
+            Employee e = (Employee) request.getSession().getAttribute("login_employee");
 
             r.setReport_date(Date.valueOf(request.getParameter("report_date")));
             r.setTitle(request.getParameter("title"));
             r.setContent(request.getParameter("content"));
             r.setUpdated_at(new Timestamp(System.currentTimeMillis()));
+            r.setApproval(submit);
 
             List<String> errors = ReportValidator.validate(r);
             if (errors.size() > 0) {
@@ -62,7 +66,61 @@ public class ReportsUpdateServlet extends HttpServlet {
                 em.getTransaction().begin();
                 em.getTransaction().commit();
                 em.close();
-                request.getSession().setAttribute("flush", "更新が完了しました。");
+
+                if (e.getAdmin_flag() == 0 || e.getAdmin_flag() == 1) {
+                    switch (submit) {
+                    case 0:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                        break;
+                    case 1:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を課長に再提出しました。");
+                        break;
+                    case 2:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を課長に提出しました。");
+                        break;
+                    case 3:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
+                        break;
+                    case 4:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を部長に提出しました。");
+                        break;
+                    }
+                }
+
+                if (e.getAdmin_flag() == 2) {
+                    switch (submit) {
+                    case 0:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                        break;
+                    case 2:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を他課長に提出しました。");
+                        break;
+                    case 3:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
+                        break;
+                    case 4:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を部長に提出しました。");
+                        break;
+                    }
+                }
+
+                if (e.getAdmin_flag() == 3) {
+                    switch (submit) {
+                    case 4:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を他部長に提出しました。");
+                        break;
+                    }
+                }
 
                 request.getSession().removeAttribute("report_id");
 
