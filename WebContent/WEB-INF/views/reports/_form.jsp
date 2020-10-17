@@ -37,7 +37,8 @@
     <button type="submit" name="submit" value="${0}">下書き</button>
 &nbsp;
 </c:if>
-<c:if test="${approval == 0 || approval == 1 || approval == 3}">
+<c:if
+    test="${approval == null || approval == 0 || approval == 1 || approval == 3}">
     <c:choose>
         <c:when test="${sessionScope.login_employee.admin_flag != 3}">
             <input type="hidden" name="_token" value="${_token}" />
