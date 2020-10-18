@@ -67,7 +67,7 @@ public class ReportsIndexServlet extends HttpServlet {
 
         //フォロー判定ここまで
 
-        long reports_count = (long) em.createNamedQuery("getReportsCount", Long.class)
+        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
                 .getSingleResult();
 
         long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
@@ -85,7 +85,7 @@ public class ReportsIndexServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("getAllReportsButDrafts", getAllReportsButDrafts);
-        request.setAttribute("reports_count", reports_count);
+        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
         request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
