@@ -22,7 +22,7 @@
                     <th class="report_like">いいね数</th>
                     <th class="report_approval">承認状況</th>
                 </tr>
-                <c:forEach var="report" items="${reports}" varStatus="status">
+                <c:forEach var="report" items="${getAllReportsButDrafts}" varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><c:out
                                 value="${report.employee.name}" /></td>

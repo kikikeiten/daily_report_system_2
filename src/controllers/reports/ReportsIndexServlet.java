@@ -46,7 +46,7 @@ public class ReportsIndexServlet extends HttpServlet {
         } catch (Exception e) {
             page = 1;
         }
-        List<Report> reports = em.createNamedQuery("getAllReports", Report.class)
+        List<Report> getAllReportsButDrafts = em.createNamedQuery("getAllReportsButDrafts", Report.class)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)
                 .getResultList();
@@ -84,7 +84,7 @@ public class ReportsIndexServlet extends HttpServlet {
 
         em.close();
 
-        request.setAttribute("reports", reports);
+        request.setAttribute("getAllReportsButDrafts", getAllReportsButDrafts);
         request.setAttribute("reports_count", reports_count);
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
