@@ -93,7 +93,6 @@ button {
 }
 
 /* 従業員一覧ページ */
-
 table#employee_list th {
     font-weight: bold;
     width: 30%;
@@ -141,7 +140,6 @@ h1 a {
 }
 
 /* 日報一覧ページ */
-
 table#report_list th {
     font-weight: bold;
     padding: 10px 2%;
@@ -149,7 +147,6 @@ table#report_list th {
 
 table#report_list .report_name {
     width: 20%;
-    padding: 10px 2%;
 }
 
 table#report_list .follow {
@@ -173,7 +170,6 @@ table#report_list .report_like {
 }
 
 /* タイムライン */
-
 table#timeline_list th {
     font-weight: bold;
     padding: 10px 2%;
@@ -205,7 +201,6 @@ table#timeline_list .report_like {
 }
 
 /* フォロー中一覧 */
-
 table#following_list th {
     font-weight: bold;
     padding: 10px 2%;
@@ -225,7 +220,6 @@ table#following_list .following_date {
 }
 
 /* フォロワー一覧 */
-
 table#follower_list th {
     font-weight: bold;
     padding: 10px 2%;
@@ -242,6 +236,35 @@ table#follower_list .follow {
 
 table#follower_list .follower_date {
     width: 33%;
+}
+
+/* Manager remand reports list */
+table#mr_report_list th {
+    font-weight: bold;
+}
+
+table#mr_report_list .mr_report_name {
+    width: 20%;
+}
+
+table#mr_report_list .mr_report_date {
+    width: 15%;
+}
+
+table#mr_report_list .mr_report_title {
+    width: 35%;
+}
+
+table#mr_report_list .mr_report_action {
+    width: 10%;
+}
+
+table#mr_report_list .mr_report_like {
+    width: 10%;
+}
+
+table#mr_report_list .mr_report_approval {
+    width: 10%;
 }
 
 pre {
