@@ -22,7 +22,7 @@
                                     <c:choose>
                                         <c:when
                                             test="${!fn:contains(list_report_id,report.employee.id)}">
-                                            <td class="follow">
+                                            <td>
                                                 <form method="POST"
                                                     action="<c:url value='/follow/create' />">
                                                     <button type="submit" name="following" value="${report.id}">フォロー</button>
@@ -30,7 +30,7 @@
                                             </td>
                                         </c:when>
                                         <c:otherwise>
-                                            <td class="follow">
+                                            <td>
                                                 <form method="POST"
                                                     action="<c:url value='/follow/destroy' />">
                                                     <button type="submit" name="employee_id"
