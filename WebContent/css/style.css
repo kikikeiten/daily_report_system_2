@@ -379,6 +379,35 @@ table#draft_list .draft_approval {
     width: 10%;
 }
 
+/* Top page report list */
+table#tp_report_list th {
+    font-weight: bold;
+}
+
+table#tp_report_list .tp_report_name {
+    width: 20%;
+}
+
+table#tp_report_list .tp_report_date {
+    width: 15%;
+}
+
+table#tp_report_list .tp_report_title {
+    width: 30%;
+}
+
+table#tp_report_list .tp_report_action {
+    width: 10%;
+}
+
+table#tp_report_list .tp_report_likes {
+    width: 10%;
+}
+
+table#tp_report_list .tp_report_approval {
+    width: 15%;
+}
+
 pre {
     font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
         Arial, sans-serif;
