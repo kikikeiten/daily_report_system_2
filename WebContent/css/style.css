@@ -325,6 +325,35 @@ table#ma_report_list .ma_report_approval {
     width: 15%;
 }
 
+/* Director approval waiting list page */
+table#da_report_list th {
+    font-weight: bold;
+}
+
+table#da_report_list .da_report_name {
+    width: 20%;
+}
+
+table#da_report_list .da_report_date {
+    width: 15%;
+}
+
+table#da_report_list .da_report_title {
+    width: 30%;
+}
+
+table#da_report_list .da_report_action {
+    width: 10%;
+}
+
+table#da_report_list .da_report_like {
+    width: 10%;
+}
+
+table#da_report_list .da_report_approval {
+    width: 15%;
+}
+
 pre {
     font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
         Arial, sans-serif;
