@@ -354,6 +354,31 @@ table#da_report_list .da_report_approval {
     width: 15%;
 }
 
+/* Draft list page */
+table#draft_list th {
+    font-weight: bold;
+}
+
+table#draft_list .draft_name {
+    width: 20%;
+}
+
+table#draft_list .draft_date {
+    width: 15%;
+}
+
+table#draft_list .draft_title {
+    width: 45%;
+}
+
+table#draft_list .draft_action {
+    width: 10%;
+}
+
+table#draft_list .draft_approval {
+    width: 10%;
+}
+
 pre {
     font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
         Arial, sans-serif;
