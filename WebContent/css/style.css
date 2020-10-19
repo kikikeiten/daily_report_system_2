@@ -139,7 +139,7 @@ h1 a {
     color: #eeeeee;
 }
 
-/* 日報一覧ページ */
+/* Report list */
 table#report_list th {
     font-weight: bold;
 }
@@ -172,34 +172,33 @@ table#report_list .report_approval {
     width: 15%;
 }
 
-/* タイムライン */
+/* Timeline */
 table#timeline_list th {
     font-weight: bold;
-    padding: 10px 2%;
 }
 
-table#timeline_list .report_name {
+table#timeline_list .timeline_name {
     width: 20%;
     padding: 10px 2%;
 }
 
-table#timeline_list .follow {
+table#timeline_list .timeline_follow {
     width: 15%;
 }
 
-table#timeline_list .report_date {
-    width: 15%;
+table#timeline_list .timeline_date {
+    width: 20%;
 }
 
-table#timeline_list .report_title {
+table#timeline_list .timeline_title {
     width: 25%;
 }
 
-table#timeline_list .report_action {
-    width: 15%;
+table#timeline_list .timeline_action {
+    width: 10%;
 }
 
-table#timeline_list .report_like {
+table#timeline_list .timeline_like {
     width: 10%;
 }
 
