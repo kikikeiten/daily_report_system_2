@@ -267,6 +267,35 @@ table#mr_report_list .mr_report_approval {
     width: 10%;
 }
 
+/* Director remand reports list */
+table#dr_report_list th {
+    font-weight: bold;
+}
+
+table#dr_report_list .dr_report_name {
+    width: 20%;
+}
+
+table#dr_report_list .dr_report_date {
+    width: 15%;
+}
+
+table#dr_report_list .dr_report_title {
+    width: 35%;
+}
+
+table#dr_report_list .dr_report_action {
+    width: 10%;
+}
+
+table#dr_report_list .dr_report_like {
+    width: 10%;
+}
+
+table#dr_report_list .dr_report_approval {
+    width: 10%;
+}
+
 pre {
     font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
         Arial, sans-serif;
