@@ -211,7 +211,14 @@
                                     </c:choose>
                                 </c:if></td>
                         </tr>
-
+                        <tr>
+                            <th>D課長差し戻しコメント</th>
+                            <td>〇〇</td>
+                        </tr>
+                        <tr>
+                            <th>新規コメント</th>
+                            <td><textarea name="comment" rows="10" cols="50">${comment}</textarea></td>
+                        </tr>
                         <tr>
                             <th>承認</th>
                             <td><c:if
