@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,6 +31,10 @@ public class Approval {
 
     @Column(name = "approval", nullable = false)
     private Integer approval;
+
+    @Lob
+    @Column(name = "comment", nullable = true)
+    private String comment;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -67,6 +72,14 @@ public class Approval {
 
     public void setApproval(Integer approval) {
         this.approval = approval;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Timestamp getCreated_at() {
