@@ -19,14 +19,14 @@
                 <p>下書きを作成するとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="report_list">
+                <table id="draft_list">
                     <tbody>
                         <tr>
                             <th class="draft_name">氏名</th>
                             <th class="draft_date">日付</th>
                             <th class="draft_title">タイトル</th>
                             <th class="draft_action">操作</th>
-                            <th class="draft_submit">承認</th>
+                            <th class="draft_approval">承認</th>
                         </tr>
                         <c:forEach var="draft" items="${getMyAllDrafts}"
                             varStatus="status">
@@ -38,7 +38,7 @@
                                 <td class="draft_title">${draft.title}</td>
                                 <td class="draft_action"><a
                                     href="<c:url value='/reports/show?id=${draft.id}' />">詳細を見る</a></td>
-                                <td class="draft_submit">
+                                <td class="draft_approval">
                                     <form method="POST"
                                         action="<c:url value='/submission/update' />">
                                         <c:choose>

@@ -73,21 +73,13 @@ public class ReportsUpdateServlet extends HttpServlet {
                         request.getSession().setAttribute("flush",
                                 "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
                         break;
-                    case 1:
-                        request.getSession().setAttribute("flush",
-                                "日報「" + request.getParameter("title") + "」を課長に再提出しました。");
-                        break;
                     case 2:
                         request.getSession().setAttribute("flush",
                                 "日報「" + request.getParameter("title") + "」を課長に提出しました。");
                         break;
-                    case 3:
-                        request.getSession().setAttribute("flush",
-                                "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
-                        break;
                     case 4:
                         request.getSession().setAttribute("flush",
-                                "日報「" + request.getParameter("title") + "」を部長に提出しました。");
+                                "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
                         break;
                     }
                 }
@@ -102,19 +94,19 @@ public class ReportsUpdateServlet extends HttpServlet {
                         request.getSession().setAttribute("flush",
                                 "日報「" + request.getParameter("title") + "」を他課長に提出しました。");
                         break;
-                    case 3:
-                        request.getSession().setAttribute("flush",
-                                "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
-                        break;
                     case 4:
                         request.getSession().setAttribute("flush",
-                                "日報「" + request.getParameter("title") + "」を部長に提出しました。");
+                                "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
                         break;
                     }
                 }
 
                 if (e.getAdmin_flag() == 3) {
                     switch (submit) {
+                    case 0:
+                        request.getSession().setAttribute("flush",
+                                "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                        break;
                     case 4:
                         request.getSession().setAttribute("flush",
                                 "日報「" + request.getParameter("title") + "」を他部長に提出しました。");

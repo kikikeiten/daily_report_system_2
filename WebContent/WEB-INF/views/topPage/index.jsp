@@ -11,36 +11,36 @@
         </c:if>
         <h2>日報管理システムへようこそ</h2>
         <h3>【自分の日報 一覧】</h3>
-        <table id="report_list">
+        <table id="tp_report_list">
             <tbody>
                 <tr>
-                    <th class="report_name">氏名</th>
-                    <th class="report_date">日付</th>
-                    <th class="report_title">タイトル</th>
-                    <th class="report_action">操作</th>
-                    <th class="report_likes">いいね数</th>
-                    <th class="report_approval">承認状況</th>
+                    <th class="tp_report_name">氏名</th>
+                    <th class="tp_report_date">日付</th>
+                    <th class="tp_report_title">タイトル</th>
+                    <th class="tp_report_action">操作</th>
+                    <th class="tp_report_likes">いいね数</th>
+                    <th class="tp_report_approval">承認状況</th>
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out
+                        <td class="tp_report_name"><c:out
                                 value="${report.employee.name}" /></td>
-                        <td class="report_date"><fmt:formatDate
+                        <td class="tp_report_date"><fmt:formatDate
                                 value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
-                        <td class="report_title">${report.title}</td>
-                        <td class="report_action"><a
+                        <td class="tp_report_title">${report.title}</td>
+                        <td class="tp_report_action"><a
                             href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
                         <c:choose>
                             <c:when test="${report.likes == 0}">
-                                <td class="report_likes"><c:out value="${report.likes}" /></td>
+                                <td class="tp_report_likes"><c:out value="${report.likes}" /></td>
                             </c:when>
                             <c:otherwise>
-                                <td class="report_likes"><a
+                                <td class="tp_report_likes"><a
                                     href="<c:url value='/likes?report_id=${report.id}' />"><c:out
                                             value="${report.likes}" /></a></td>
                             </c:otherwise>
                         </c:choose>
-                        <td class="report_approval"><c:if
+                        <td class="tp_report_approval"><c:if
                                 test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
                                 <c:choose>
                                     <c:when test="${report.approval == 0}">
