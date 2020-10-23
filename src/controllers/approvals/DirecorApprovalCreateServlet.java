@@ -50,6 +50,7 @@ public class DirecorApprovalCreateServlet extends HttpServlet {
         a.setReport(r);
         a.setEmployee(e);
         a.setApproval(submit);
+        a.setComment(request.getParameter("comment"));
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         a.setCreated_at(currentTime);
         a.setUpdated_at(currentTime);

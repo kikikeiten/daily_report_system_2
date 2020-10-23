@@ -217,7 +217,7 @@
                         </tr>
                         <tr>
                             <th>新規コメント</th>
-                            <td><textarea name="comment" rows="10" cols="50">${comment}</textarea></td>
+                            <td><textarea name="comment" rows="10" cols="50"></textarea></td>
                         </tr>
                         <tr>
                             <th>承認</th>
