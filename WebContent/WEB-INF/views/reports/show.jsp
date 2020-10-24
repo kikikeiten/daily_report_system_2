@@ -207,13 +207,13 @@
                                 </c:if></td>
                         </tr>
                         <tr>
-                            <th><c:out value="${name}" /><c:out value="${position}" /><c:out value="${approval_status}" />コメント</th>
-                            <td><c:out value="${comment}" /></td>
+                            <th>承認履歴</th>
+                            <td><a
+                            href="<c:url value='/approval/history?id=${approval_id}' />">詳細を見る</a></td>
                         </tr>
                         <tr>
-                            <th>コメント履歴</th>
-                            <td><a
-                            href="<c:url value='/approvals/comment?id=${approval_id}' />">詳細を見る</a></td>
+                            <th><c:out value="${name}" /><c:out value="${position}" /><c:out value="${approval_status}" />コメント</th>
+                            <td><c:out value="${comment}" /></td>
                         </tr>
                         <tr>
                             <th>新規コメント</th>
