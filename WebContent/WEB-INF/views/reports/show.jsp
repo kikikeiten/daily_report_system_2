@@ -207,7 +207,7 @@
                                 </c:if></td>
                         </tr>
                         <tr>
-                            <th>D課長差し戻しコメント</th>
+                            <th><c:out value="${name}" /><c:out value="${position}" /><c:out value="${approval_status}" />コメント</th>
                             <td><c:out value="${comment}" /></td>
                         </tr>
                         <tr>

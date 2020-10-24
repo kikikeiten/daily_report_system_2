@@ -64,9 +64,28 @@ public class ReportsShowServlet extends HttpServlet {
         try {
             Approval getLatestApproval = em.createNamedQuery("getLatestApproval", Approval.class)
                     .setParameter("report", r)
+                    .setMaxResults(1)
                     .getSingleResult();
             String comment = getLatestApproval.getComment();
+            Employee e = getLatestApproval.getEmployee();
+            String name = e.getName();
+            Integer int_admin_flag = e.getAdmin_flag();
             request.setAttribute("comment", comment);
+            request.setAttribute("name", name);
+            switch (int_admin_flag) {
+            case 2:
+                request.setAttribute("position", "課長");
+                break;
+            case 3:
+                request.setAttribute("position", "部長");
+                break;
+            }
+            Integer int_approval = getLatestApproval.getApproval();
+            if (int_approval == 1 || int_approval == 3) {
+                request.setAttribute("approval_status", "差し戻し");
+            } else if (int_approval == 4 || int_approval == 6) {
+                request.setAttribute("approval_status", "承認");
+            }
         } catch (Exception e) {
         }
 
