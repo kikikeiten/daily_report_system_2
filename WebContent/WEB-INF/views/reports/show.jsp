@@ -45,29 +45,25 @@
                                     <td></td>
                                 </c:otherwise>
                             </c:choose>
-                        <tr>
+
                             <th>日付</th>
                             <td><fmt:formatDate
                                     value="${report.report_date}" pattern="yyyy-MM-dd" /></td>
                         </tr>
-
                         <tr>
                             <th>内容</th>
                             <td><pre><c:out value="${report.content}" /></pre></td>
                         </tr>
-
                         <tr>
                             <th>登録日時</th>
                             <td><fmt:formatDate
                                     value="${report.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         </tr>
-
                         <tr>
                             <th>更新日時</th>
                             <td><fmt:formatDate
                                     value="${report.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         </tr>
-
                         <tr>
                             <th>いいね数</th>
                             <c:choose>
@@ -82,7 +78,6 @@
                                 </c:otherwise>
                             </c:choose>
                         </tr>
-
                         <tr>
                             <th>承認状況</th>
                             <td><c:if
@@ -217,7 +212,13 @@
                         </tr>
                         <tr>
                             <th>新規コメント</th>
-                            <td><textarea name="comment" rows="10" cols="50"></textarea></td>
+                            <td>
+                            <c:if
+                                    test="${(sessionScope.login_employee.admin_flag == 2 && report.approval == 2 && sessionScope.login_employee.id != report.employee.id) || (sessionScope.login_employee.admin_flag == 3 && report.approval == 4 && sessionScope.login_employee.id != report.employee.id)}">
+                            <textarea name="comment" rows="10" cols="50"
+                                        form="form_id"></textarea>
+                                </c:if>
+                            </td>
                         </tr>
                         <tr>
                             <th>承認</th>
@@ -285,17 +286,14 @@
                                             <div
                                                 style="display: inline-flex">
                                                 <form method="POST"
-                                                    action="<c:url value='/manager/approval/create' />">
+                                                    action="<c:url value='/manager/approval/create' />"
+                                                    id="form_id">
                                                     <input type="hidden"
                                                         name="report_id" value="${report.id}" />
                                                     <button
                                                         type="submit" name="submit" value="${4}">承認</button>
-                                                </form>
-                                                &nbsp;
-                                                <form method="POST"
-                                                    action="<c:url value='/manager/approval/create' />">
-                                                    <input type="hidden"
-                                                        name="report_id" value="${report.id}" />
+                                                    &nbsp; <input
+                                                        type="hidden" name="report_id" value="${report.id}" />
                                                     <button
                                                         type="submit" name="submit" value="${1}">差し戻し</button>
                                                 </form>
@@ -306,7 +304,8 @@
                                             <div
                                                 style="display: inline-flex">
                                                 <form method="POST"
-                                                    action="<c:url value='/manager/approval/create' />">
+                                                    action="<c:url value='/manager/approval/create' />"
+                                                    id="form_id">
                                                     <input type="hidden"
                                                         name="report_id" value="${report.id}" />
                                                     <button
@@ -358,17 +357,14 @@
                                             <div
                                                 style="display: inline-flex">
                                                 <form method="POST"
-                                                    action="<c:url value='/director/approval/create' />">
+                                                    action="<c:url value='/director/approval/create' />"
+                                                    id="form_id">
                                                     <input type="hidden"
                                                         name="report_id" value="${report.id}" />
                                                     <button
                                                         type="submit" name="submit" value="${6}">承認</button>
-                                                </form>
-                                                &nbsp;
-                                                <form method="POST"
-                                                    action="<c:url value='/director/approval/create' />">
-                                                    <input type="hidden"
-                                                        name="report_id" value="${report.id}" />
+                                                    &nbsp; <input
+                                                        type="hidden" name="report_id" value="${report.id}" />
                                                     <button
                                                         type="submit" name="submit" value="${3}">差し戻し</button>
                                                 </form>
@@ -379,7 +375,8 @@
                                             <div
                                                 style="display: inline-flex">
                                                 <form method="POST"
-                                                    action="<c:url value='/director/approval/create' />">
+                                                    action="<c:url value='/director/approval/create' />"
+                                                    id="form_id">
                                                     <input type="hidden"
                                                         name="report_id" value="${report.id}" />
                                                     <button
@@ -393,8 +390,6 @@
                                     </c:choose>
                                 </c:if></td>
                         </tr>
-
-
                     </tbody>
                 </table>
                 <br>
