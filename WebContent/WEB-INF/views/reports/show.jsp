@@ -45,7 +45,7 @@
                                     <td></td>
                                 </c:otherwise>
                             </c:choose>
-
+                        <tr>
                             <th>日付</th>
                             <td><fmt:formatDate
                                     value="${report.report_date}" pattern="yyyy-MM-dd" /></td>
@@ -208,7 +208,7 @@
                         </tr>
                         <tr>
                             <th>D課長差し戻しコメント</th>
-                            <td>〇〇</td>
+                            <td><c:out value="${comment}" /></td>
                         </tr>
                         <tr>
                             <th>新規コメント</th>

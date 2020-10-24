@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Approval;
 import models.Employee;
 import models.Report;
 import utils.DBUtil;
@@ -59,6 +60,15 @@ public class ReportsShowServlet extends HttpServlet {
         }
 
         //フォロー判定ここまで
+
+        try {
+            Approval getLatestApproval = em.createNamedQuery("getLatestApproval", Approval.class)
+                    .setParameter("report", r)
+                    .getSingleResult();
+            String comment = getLatestApproval.getComment();
+            request.setAttribute("comment", comment);
+        } catch (Exception e) {
+        }
 
         em.close();
 

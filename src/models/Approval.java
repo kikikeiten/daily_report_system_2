@@ -10,9 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Table(name = "approvals")
+@NamedQueries({
+        @NamedQuery(name = "getLatestApproval", query = "SELECT a FROM Approval AS a WHERE a.report = :report ORDER BY a.id DESC")
+})
 
 @Entity
 public class Approval {
