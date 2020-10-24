@@ -211,6 +211,11 @@
                             <td><c:out value="${comment}" /></td>
                         </tr>
                         <tr>
+                            <th>コメント履歴</th>
+                            <td><a
+                            href="<c:url value='/approvals/comment?id=${approval_id}' />">詳細を見る</a></td>
+                        </tr>
+                        <tr>
                             <th>新規コメント</th>
                             <td>
                             <c:if
