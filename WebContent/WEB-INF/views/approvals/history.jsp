@@ -24,7 +24,7 @@
                             varStatus="status">
                             <tr class="row${status.count % 2}">
                                 <td class="approval_date"><fmt:formatDate
-                                        value='${approval.created_at}' pattern='yyyy-MM-dd' /></td>
+                                        value='${approval.created_at}' pattern='yyyy-MM-dd HH:mm' /></td>
                                 <td class="approval_status"><c:if
                                         test="${approval.approval == 1 || approval.approval == 3}">
                                 差し戻し
