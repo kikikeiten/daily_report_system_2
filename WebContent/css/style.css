@@ -410,6 +410,31 @@ table#tp_report_list .tp_report_approval {
     width: 15%;
 }
 
+/* Approval history list */
+table#approval_list th {
+    font-weight: bold;
+}
+
+table#approval_list .approval_date {
+    width: 15%;
+}
+
+table#approval_list .approval_status {
+    width: 10%;
+}
+
+table#approval_list .approval_comment {
+    width: 55%;
+}
+
+table#approval_list .approval_name {
+    width: 10%;
+}
+
+table#approval_list .approval_position {
+    width: 10%;
+}
+
 pre {
     font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
         Arial, sans-serif;
