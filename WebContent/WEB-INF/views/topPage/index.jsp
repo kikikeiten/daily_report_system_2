@@ -10,6 +10,9 @@
             </div>
         </c:if>
         <h2>日報管理システムへようこそ</h2>
+        <c:if test="${前日の日報がある場合 != 0}">
+        <div id="flush_error"><a href=""><c:out value="日報"/>の日報が<c:out value="件数"/>件あります。</a></div>
+        </c:if>
         <h3>【自分の日報 一覧】</h3>
         <table id="tp_report_list">
             <tbody>
