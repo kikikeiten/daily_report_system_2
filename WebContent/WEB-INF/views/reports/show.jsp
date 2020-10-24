@@ -209,7 +209,7 @@
                         <tr>
                             <th>承認履歴</th>
                             <td><a
-                            href="<c:url value='/approval/history?id=${approval_id}' />">詳細を見る</a></td>
+                            href="<c:url value='/approval/history?id=${report.id}' />">詳細を見る</a></td>
                         </tr>
                         <tr>
                             <th><c:out value="${name}" /><c:out value="${position}" /><c:out value="${approval_status}" />コメント</th>

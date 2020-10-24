@@ -4,51 +4,52 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>日報〇〇の承認履歴一覧</h2>
+        <h2>日報「<c:out value="${report_title}"></c:out>」の承認履歴一覧</h2>
         <c:choose>
-            <c:when test="${承認履歴 == 0}">
-                <h3>日報〇〇に承認履歴はありません。</h3>
+            <c:when test="${getReportApprovalsCount == 0}">
+                <h3>日報「<c:out value="${report_title}"></c:out>」に承認履歴はありません。</h3>
                 <p>日報が承認または差し戻しされるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="comment_list">
+                <table id="approval_list">
                     <tbody>
                         <tr>
-                            <th class="comment_date">日付</th>
-                            <th class="comment_comment">コメント</th>
-                            <th class="comment_name">承認者</th>
-                            <th class="comment_position">役職</th>
-                            <th class="comment_status">承認状況</th>
+                            <th class="approval_date">日付</th>
+                            <th class="approval_status">承認状況</th>
+                            <th class="approval_comment">コメント</th>
+                            <th class="approval_name">承認者</th>
+                            <th class="approval_position">役職</th>
                         </tr>
-                        <c:forEach var="comment" items="${コメントリスト}" varStatus="status">
+                        <c:forEach var="approval" items="${getReportApprovals}"
+                            varStatus="status">
                             <tr class="row${status.count % 2}">
-                                <td class="comment_date"><fmt:formatDate
-                                        value='${comment.created_at}' pattern='yyyy-MM-dd' /></td>
-                                <td class="comment_comment"><c:out
-                                        value="${comment.comment}" /></td>
-                                <td class="comment_name"><c:out
-                                        value="${comment.employee.name}" /></td>
-                                <td><c:if test="${comment.employee.admin_flag == 2}">
-                                課長
-                                </c:if> <c:if
-                                        test="${comment.employee.admin_flag == 3}">
-                                部長
-                                </c:if></td>
-                                <td><c:if
-                                        test="${comment.approval == 1 || comment.approval == 3}">
+                                <td class="approval_date"><fmt:formatDate
+                                        value='${approval.created_at}' pattern='yyyy-MM-dd' /></td>
+                                <td class="approval_status"><c:if
+                                        test="${approval.approval == 1 || approval.approval == 3}">
                                 差し戻し
                                 </c:if> <c:if
-                                        test="${comment.approval == 4 || comment.approval == 6}">
+                                        test="${approval.approval == 4 || approval.approval == 6}">
                                 承認
+                                </c:if></td>
+                                <td class="approval_comment"><c:out
+                                        value="${approval.comment}" /></td>
+                                <td class="approval_name"><c:out
+                                        value="${approval.employee.name}" /></td>
+                                <td class="approval_position"><c:if test="${approval.employee.admin_flag == 2}">
+                                課長
+                                </c:if> <c:if
+                                        test="${approval.employee.admin_flag == 3}">
+                                部長
                                 </c:if></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
                 <div id="pagination">
-                    （全 ${コメント件数} 件）<br />
-                    <c:forEach var="i" begin="1" end="${((コメント件数 - 1) / 10) + 1}"
-                        step="1">
+                    （全 ${getReportApprovalsCount} 件）<br />
+                    <c:forEach var="i" begin="1"
+                        end="${((getReportApprovalsCount - 1) / 10) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
                                 <c:out value="${i}" />&nbsp;
@@ -63,7 +64,7 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value='/reports/show?id=${レポートID}' />">日報詳細に戻る</a>
+            <a href="<c:url value='/reports/show?id=${report_id}' />">日報詳細ページに戻る</a>
         </p>
     </c:param>
 </c:import>
