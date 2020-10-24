@@ -62,12 +62,12 @@ public class ReportsShowServlet extends HttpServlet {
         //フォロー判定ここまで
 
         try {
-            Approval getLatestApproval = em.createNamedQuery("getLatestApproval", Approval.class)
+            Approval getReportApprovals = em.createNamedQuery("getReportApprovals", Approval.class)
                     .setParameter("report", r)
                     .setMaxResults(1)
                     .getSingleResult();
-            String comment = getLatestApproval.getComment();
-            Employee e = getLatestApproval.getEmployee();
+            String comment = getReportApprovals.getComment();
+            Employee e = getReportApprovals.getEmployee();
             String name = e.getName();
             Integer int_admin_flag = e.getAdmin_flag();
             request.setAttribute("comment", comment);
@@ -80,7 +80,7 @@ public class ReportsShowServlet extends HttpServlet {
                 request.setAttribute("position", "部長");
                 break;
             }
-            Integer int_approval = getLatestApproval.getApproval();
+            Integer int_approval = getReportApprovals.getApproval();
             if (int_approval == 1 || int_approval == 3) {
                 request.setAttribute("approval_status", "差し戻し");
             } else if (int_approval == 4 || int_approval == 6) {
