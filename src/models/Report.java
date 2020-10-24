@@ -32,7 +32,10 @@ import javax.persistence.Table;
         @NamedQuery(name = "getAllManagerRemandReports", query = "SELECT r FROM Report AS r WHERE r.employee = :employee AND r.approval = 1 ORDER BY r.id DESC"), //List of daily reports returned by the section chief for the logged-in employee
         @NamedQuery(name = "getManagerRemandReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 1"), //Total daily reports sent back by the section chief to logged-in employee
         @NamedQuery(name = "getAllDirectorRemandReports", query = "SELECT r FROM Report AS r WHERE r.employee = :employee AND r.approval = 3 ORDER BY r.id DESC"), //List of daily reports returned by the director for the logged-in employee
-        @NamedQuery(name = "getDirectorRemandReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 3") //Total daily reports sent back by the director to logged-in employee
+        @NamedQuery(name = "getDirectorRemandReportsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 3"), //Total daily reports sent back by the director to logged-in employee
+        @NamedQuery(name = "getYesterdayManagerApprovalsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.approval = 2 AND :admin_flag = 2 AND r.report_date < :now"),
+        @NamedQuery(name = "getYesterdayDirectorApprovalsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.approval = 4 AND :admin_flag = 3 AND r.report_date < :now"),
+        @NamedQuery(name = "getYesterdayDraftsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 0 AND r.report_date < :now")
 })
 @Entity
 public class Report {

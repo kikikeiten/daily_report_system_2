@@ -1,6 +1,7 @@
 package controllers.toppage;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -67,6 +68,22 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
+        Date now = new Date(System.currentTimeMillis());
+        long getYesterdayDraftsCount = (long) em.createNamedQuery("getYesterdayDraftsCount", Long.class)
+                .setParameter("now", now)
+                .setParameter("employee", login_employee)
+                .getSingleResult();
+
+        long getYesterdayManagerApprovalsCount = (long) em.createNamedQuery("getYesterdayManagerApprovalsCount", Long.class)
+                .setParameter("now", now)
+                .setParameter("admin_flag", login_employee.getAdmin_flag())
+                .getSingleResult();
+
+        long getYesterdayDirectorApprovalsCount = (long) em.createNamedQuery("getYesterdayDirectorApprovalsCount", Long.class)
+                .setParameter("now", now)
+                .setParameter("admin_flag", login_employee.getAdmin_flag())
+                .getSingleResult();
+
         em.close();
 
         request.setAttribute("reports", reports);
@@ -75,6 +92,9 @@ public class TopPageIndexServlet extends HttpServlet {
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
         request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
         request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);
+        request.setAttribute("getYesterdayDraftsCount", getYesterdayDraftsCount);
+        request.setAttribute("getYesterdayManagerApprovalsCount", getYesterdayManagerApprovalsCount);
+        request.setAttribute("getYesterdayDirectorApprovalsCount", getYesterdayDirectorApprovalsCount);
 
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
