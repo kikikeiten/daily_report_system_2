@@ -32,34 +32,55 @@
 <textarea name="content" rows="10" cols="50">${report.content}</textarea>
 <br />
 <br />
-<c:if test="${approval == null || approval == 0}">
-    <input type="hidden" name="_token" value="${_token}" />
-    <button type="submit" name="submit" value="${0}">下書き</button>
-&nbsp;
-</c:if>
 <c:if
-    test="${approval == null || approval == 0}">
+    test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
     <c:choose>
-        <c:when test="${sessionScope.login_employee.admin_flag != 3}">
+        <c:when test="${approval == null || approval == 0}">
             <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${0}">下書き</button>
+    &nbsp;
+    <input type="hidden" name="_token" value="${_token}" />
             <button type="submit" name="submit" value="${2}">提出</button>
         </c:when>
-        <c:otherwise>
-            <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${4}">提出</button>
-        </c:otherwise>
-    </c:choose>
-</c:if>
-<c:if
-    test="${approval == 1 || approval == 3}">
-    <c:choose>
-        <c:when test="${sessionScope.login_employee.admin_flag != 3}">
+        <c:when test="${approval == 1}">
             <input type="hidden" name="_token" value="${_token}" />
             <button type="submit" name="submit" value="${2}">再提出</button>
         </c:when>
-        <c:otherwise>
+        <c:when test="${approval == 3}">
             <input type="hidden" name="_token" value="${_token}" />
             <button type="submit" name="submit" value="${4}">再提出</button>
-        </c:otherwise>
+        </c:when>
+    </c:choose>
+</c:if>
+
+<c:if test="${sessionScope.login_employee.admin_flag == 2}">
+    <c:choose>
+        <c:when test="${approval == null || approval == 0}">
+            <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${0}">下書き</button>
+            &nbsp;
+            <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${2}">提出</button>
+        </c:when>
+        <c:when test="${approval == 3}">
+            <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${4}">再提出</button>
+        </c:when>
+    </c:choose>
+</c:if>
+
+<c:if test="${sessionScope.login_employee.admin_flag == 3}">
+    <c:choose>
+        <c:when test="${approval == null || approval == 0}">
+            <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${0}">下書き</button>
+            &nbsp;
+            <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${4}">提出</button>
+        </c:when>
+        <c:when test="${approval == 3}">
+            <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${4}">再提出</button>
+        </c:when>
     </c:choose>
 </c:if>

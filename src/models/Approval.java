@@ -8,10 +8,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Table(name = "approvals")
+@NamedQueries({
+        @NamedQuery(name = "getReportApprovals", query = "SELECT a FROM Approval AS a WHERE a.report = :report ORDER BY a.id DESC"),
+        @NamedQuery(name = "getReportApprovalsCount", query = "SELECT COUNT(a) FROM Approval AS a WHERE a.report = :report")
+})
 
 @Entity
 public class Approval {
@@ -30,6 +37,10 @@ public class Approval {
 
     @Column(name = "approval", nullable = false)
     private Integer approval;
+
+    @Lob
+    @Column(name = "comment", nullable = true)
+    private String comment;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -67,6 +78,14 @@ public class Approval {
 
     public void setApproval(Integer approval) {
         this.approval = approval;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Timestamp getCreated_at() {

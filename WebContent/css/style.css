@@ -93,7 +93,6 @@ button {
 }
 
 /* 従業員一覧ページ */
-
 table#employee_list th {
     font-weight: bold;
     width: 30%;
@@ -140,19 +139,16 @@ h1 a {
     color: #eeeeee;
 }
 
-/* 日報一覧ページ */
-
+/* Report list */
 table#report_list th {
     font-weight: bold;
-    padding: 10px 2%;
 }
 
 table#report_list .report_name {
-    width: 20%;
-    padding: 10px 2%;
+    width: 15%;
 }
 
-table#report_list .follow {
+table#report_list .report_follow {
     width: 15%;
 }
 
@@ -161,51 +157,52 @@ table#report_list .report_date {
 }
 
 table#report_list .report_title {
-    width: 25%;
+    width: 20%;
 }
 
 table#report_list .report_action {
-    width: 15%;
+    width: 10%;
 }
 
 table#report_list .report_like {
     width: 10%;
 }
 
-/* タイムライン */
-
-table#timeline_list th {
-    font-weight: bold;
-    padding: 10px 2%;
+table#report_list .report_approval {
+    width: 15%;
 }
 
-table#timeline_list .report_name {
+/* Timeline */
+table#timeline_list th {
+    font-weight: bold;
+}
+
+table#timeline_list .timeline_name {
     width: 20%;
     padding: 10px 2%;
 }
 
-table#timeline_list .follow {
+table#timeline_list .timeline_follow {
     width: 15%;
 }
 
-table#timeline_list .report_date {
-    width: 15%;
+table#timeline_list .timeline_date {
+    width: 20%;
 }
 
-table#timeline_list .report_title {
+table#timeline_list .timeline_title {
     width: 25%;
 }
 
-table#timeline_list .report_action {
-    width: 15%;
+table#timeline_list .timeline_action {
+    width: 10%;
 }
 
-table#timeline_list .report_like {
+table#timeline_list .timeline_like {
     width: 10%;
 }
 
 /* フォロー中一覧 */
-
 table#following_list th {
     font-weight: bold;
     padding: 10px 2%;
@@ -225,7 +222,6 @@ table#following_list .following_date {
 }
 
 /* フォロワー一覧 */
-
 table#follower_list th {
     font-weight: bold;
     padding: 10px 2%;
@@ -242,6 +238,201 @@ table#follower_list .follow {
 
 table#follower_list .follower_date {
     width: 33%;
+}
+
+/* Manager remand reports list */
+table#mr_report_list th {
+    font-weight: bold;
+}
+
+table#mr_report_list .mr_report_name {
+    width: 20%;
+}
+
+table#mr_report_list .mr_report_date {
+    width: 15%;
+}
+
+table#mr_report_list .mr_report_title {
+    width: 35%;
+}
+
+table#mr_report_list .mr_report_action {
+    width: 10%;
+}
+
+table#mr_report_list .mr_report_like {
+    width: 10%;
+}
+
+table#mr_report_list .mr_report_approval {
+    width: 10%;
+}
+
+/* Director remand reports list */
+table#dr_report_list th {
+    font-weight: bold;
+}
+
+table#dr_report_list .dr_report_name {
+    width: 20%;
+}
+
+table#dr_report_list .dr_report_date {
+    width: 15%;
+}
+
+table#dr_report_list .dr_report_title {
+    width: 35%;
+}
+
+table#dr_report_list .dr_report_action {
+    width: 10%;
+}
+
+table#dr_report_list .dr_report_like {
+    width: 10%;
+}
+
+table#dr_report_list .dr_report_approval {
+    width: 10%;
+}
+
+/* Manager approval waiting list page */
+table#ma_report_list th {
+    font-weight: bold;
+}
+
+table#ma_report_list .ma_report_name {
+    width: 20%;
+}
+
+table#ma_report_list .ma_report_date {
+    width: 15%;
+}
+
+table#ma_report_list .ma_report_title {
+    width: 30%;
+}
+
+table#ma_report_list .ma_report_action {
+    width: 10%;
+}
+
+table#ma_report_list .ma_report_like {
+    width: 10%;
+}
+
+table#ma_report_list .ma_report_approval {
+    width: 15%;
+}
+
+/* Director approval waiting list page */
+table#da_report_list th {
+    font-weight: bold;
+}
+
+table#da_report_list .da_report_name {
+    width: 20%;
+}
+
+table#da_report_list .da_report_date {
+    width: 15%;
+}
+
+table#da_report_list .da_report_title {
+    width: 30%;
+}
+
+table#da_report_list .da_report_action {
+    width: 10%;
+}
+
+table#da_report_list .da_report_like {
+    width: 10%;
+}
+
+table#da_report_list .da_report_approval {
+    width: 15%;
+}
+
+/* Draft list page */
+table#draft_list th {
+    font-weight: bold;
+}
+
+table#draft_list .draft_name {
+    width: 20%;
+}
+
+table#draft_list .draft_date {
+    width: 15%;
+}
+
+table#draft_list .draft_title {
+    width: 45%;
+}
+
+table#draft_list .draft_action {
+    width: 10%;
+}
+
+table#draft_list .draft_approval {
+    width: 10%;
+}
+
+/* Top page report list */
+table#tp_report_list th {
+    font-weight: bold;
+}
+
+table#tp_report_list .tp_report_name {
+    width: 20%;
+}
+
+table#tp_report_list .tp_report_date {
+    width: 15%;
+}
+
+table#tp_report_list .tp_report_title {
+    width: 30%;
+}
+
+table#tp_report_list .tp_report_action {
+    width: 10%;
+}
+
+table#tp_report_list .tp_report_likes {
+    width: 10%;
+}
+
+table#tp_report_list .tp_report_approval {
+    width: 15%;
+}
+
+/* Approval history list */
+table#approval_list th {
+    font-weight: bold;
+}
+
+table#approval_list .approval_date {
+    width: 15%;
+}
+
+table#approval_list .approval_status {
+    width: 10%;
+}
+
+table#approval_list .approval_comment {
+    width: 55%;
+}
+
+table#approval_list .approval_name {
+    width: 10%;
+}
+
+table#approval_list .approval_position {
+    width: 10%;
 }
 
 pre {

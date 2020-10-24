@@ -22,7 +22,7 @@
                     <th class="report_like">いいね数</th>
                     <th class="report_approval">承認状況</th>
                 </tr>
-                <c:forEach var="report" items="${reports}" varStatus="status">
+                <c:forEach var="report" items="${getAllReportsButDrafts}" varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><c:out
                                 value="${report.employee.name}" /></td>
@@ -145,8 +145,8 @@
             </tbody>
         </table>
         <div id="pagination">
-            （全 ${reports_count} 件）<br />
-            <c:forEach var="i" begin="1" end="${((reports_count - 1) / 10) + 1}"
+            （全 ${getReportsCountButDrafts} 件）<br />
+            <c:forEach var="i" begin="1" end="${((getReportsCountButDrafts - 1) / 10) + 1}"
                 step="1">
                 <c:choose>
                     <c:when test="${i == page}">
