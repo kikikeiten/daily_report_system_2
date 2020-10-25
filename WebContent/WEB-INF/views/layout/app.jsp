@@ -6,8 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>日報管理システム</title>
-<link rel="stylesheet" href="<c:url value='/css/reset.css' />">
-<link rel="stylesheet" href="<c:url value='/css/style.css' />">
+<link rel="stylesheet" type="text/css"
+    href="semantic/dist/semantic.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
 </head>
 <body>
     <div id="wrapper">
