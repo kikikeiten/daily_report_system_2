@@ -40,4 +40,4 @@
 <br />
 <br />
 <input type="hidden" name="_token" value="${_token}" />
-<button type="submit">投稿</button>
+<button type="submit" class="ui positive button">投稿</button>

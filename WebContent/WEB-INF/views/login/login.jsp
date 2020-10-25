@@ -12,14 +12,14 @@
             </div>
         </c:if>
         <h2>ログイン</h2>
-        <form method="POST" action="<c:url value='/login' />">
+        <form class="ui fluid form" method="POST" action="<c:url value='/login' />">
             <label for="code">社員番号</label><br />
             <input type="text" name="code"
                 value="${code}" /> <br /> <br />
             <label for="password">パスワード</label><br />
             <input type="password" name="password" /> <br /> <br />
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit">ログイン</button>
+            <button class="ui primary button" type="submit">ログイン</button>
         </form>
     </c:param>
 </c:import>

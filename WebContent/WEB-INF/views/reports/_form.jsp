@@ -73,10 +73,10 @@
     <c:choose>
         <c:when test="${approval == null || approval == 0}">
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${0}">下書き</button>
+            <button type="submit" name="submit" value="${0}" class="ui primary button">下書き</button>
             &nbsp;
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${4}">提出</button>
+            <button type="submit" name="submit" value="${4}" class="ui positive button">提出</button>
         </c:when>
         <c:when test="${approval == 3}">
             <input type="hidden" name="_token" value="${_token}" />
