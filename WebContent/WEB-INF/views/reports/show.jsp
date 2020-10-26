@@ -219,7 +219,7 @@
                                             <form method="POST"
                                                 action="<c:url value='/manager/remand/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${2}" class="ui primary button">再提出</button>
+                                                <button type="submit" name="submit" value="${2}" class="ui positive button">再提出</button>
                                             </form>
                                         </c:when>
                                         <c:when test="${report.approval == 2}">
@@ -229,7 +229,7 @@
                                             <form method="POST"
                                                 action="<c:url value='/director/remand/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${4}" class="ui primary button">再提出</button>
+                                                <button type="submit" name="submit" value="${4}" class="ui positive button">再提出</button>
                                             </form>
                                         </c:when>
                                         <c:when test="${report.approval == 4}">
@@ -279,7 +279,7 @@
                                             <form method="POST"
                                                 action="<c:url value='/director/remand/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${4}" class="ui primary button">再提出</button>
+                                                <button type="submit" name="submit" value="${4}" class="ui positive button">再提出</button>
                                             </form>
                                         </c:when>
                                         <c:when test="${report.approval == 4}">
@@ -378,7 +378,7 @@
                         </form>
                     </c:when>
                 </c:choose>
-
+                <br>
                 <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                     <c:if test="${approval == 0 || approval == 1 || approval == 3}">
                         <p>
@@ -391,7 +391,6 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-        <br>
         <p>
             <a href="<c:url value="/reports" />">一覧に戻る</a>
         </p>

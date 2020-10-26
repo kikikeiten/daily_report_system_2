@@ -304,7 +304,7 @@ table#ma_report_list .ma_report_date {
 }
 
 table#ma_report_list .ma_report_title {
-    width: 30%;
+    width: 25%;
 }
 
 table#ma_report_list .ma_report_action {
@@ -316,7 +316,7 @@ table#ma_report_list .ma_report_like {
 }
 
 table#ma_report_list .ma_report_approval {
-    width: 15%;
+    width: 20%;
 }
 
 /* Director approval waiting list page */

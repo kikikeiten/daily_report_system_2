@@ -16,7 +16,7 @@
                 <p>他の社員が課長に提出するとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="ma_report_list">
+                <table id="ma_report_list" class="ui striped table">
                     <tbody>
                         <tr>
                             <th class="ma_report_name">氏名</th>
@@ -54,7 +54,7 @@
                                             <form method="POST"
                                                 action="<c:url value='/manager/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${4}">承認</button>
+                                                <button type="submit" name="submit" value="${4}" class="ui positive button">承認</button>
                                             </form>
                                         </c:if>
                                         <c:if
@@ -63,7 +63,7 @@
                                             <form method="POST"
                                                 action="<c:url value='/manager/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${1}">差し戻し</button>
+                                                <button type="submit" name="submit" value="${1}" class="ui negative button">差し戻し</button>
                                             </form>
                                         </c:if>
                                     </div></td>
@@ -88,6 +88,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>
         </p>
