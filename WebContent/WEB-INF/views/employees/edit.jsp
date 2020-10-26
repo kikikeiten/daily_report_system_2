@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
+    <div class="ui text container">
         <c:choose>
             <c:when test="${employee != null}">
                 <h2>id : ${employee.id} の従業員情報 編集ページ</h2>
@@ -31,5 +32,6 @@
         <p>
             <a href="<c:url value='/employees' />">一覧に戻る</a>
         </p>
+        </div>
     </c:param>
 </c:import>
