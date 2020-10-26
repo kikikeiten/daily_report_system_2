@@ -43,10 +43,6 @@ a {
     color: #24738e;
 }
 
-table, tr, th, td {
-    border: 1px solid #cccccc;
-}
-
 table {
     width: 100%;
     table-layout: fixed;
@@ -102,14 +98,6 @@ table#employee_list th {
 table#employee_list td {
     width: 29%;
     padding: 10px 2%;
-}
-
-tr.row1 {
-    background-color: #f2f2f2;
-}
-
-tr.row0 {
-    background-color: #ffffff;
 }
 
 select {

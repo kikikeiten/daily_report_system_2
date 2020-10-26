@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
+    <div class="ui container">
         <c:if test="${flush != null}">
             <div id="flush_success">
                 <c:out value="${flush}"></c:out>
@@ -12,7 +13,7 @@
         <h2>日報管理システムへようこそ</h2>
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount != 0}">
-            <div id="flush_error">
+            <div class="ui error message">
                 <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                         value="${getYesterdayDraftsCount}" />件あります。
                 </a><br> <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out
@@ -22,7 +23,7 @@
         </c:if>
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayDirectorApprovalsCount != 0}">
-            <div id="flush_error">
+            <div class="ui error message">
                 <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                         value="${getYesterdayDraftsCount}" />件あります。
                 </a><br> <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out
@@ -32,7 +33,7 @@
         </c:if>
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount == 0 && getYesterdayDirectorApprovalsCount == 0}">
-            <div id="flush_error">
+            <div class="ui error message">
                 <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                         value="${getYesterdayDraftsCount}" />件あります。
                 </a>
@@ -40,7 +41,7 @@
         </c:if>
         <c:if
             test="${getYesterdayManagerApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
-            <div id="flush_error">
+            <div class="ui error message">
                 <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out
                         value="${getYesterdayManagerApprovalsCount}" />件あります。
                 </a>
@@ -48,14 +49,14 @@
         </c:if>
         <c:if
             test="${getYesterdayDirectorApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
-            <div id="flush_error">
+            <div class="ui error message">
                 <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out
                         value="${getYesterdayDirectorApprovalsCount}" />件あります。
                 </a>
             </div>
         </c:if>
         <h3>【自分の日報 一覧】</h3>
-        <table id="tp_report_list">
+        <table id="tp_report_list" class="ui striped table">
             <tbody>
                 <tr>
                     <th class="tp_report_name">氏名</th>
@@ -167,6 +168,7 @@
                 </c:choose>
             </c:forEach>
         </div>
+        <br>
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>
         </p>
@@ -195,5 +197,6 @@
                 <a href="<c:url value='/approval/director' />">部長承認待ちの日報一覧（${getDirectorApprovalReportsCount}）</a>
             </p>
         </c:if>
+        </div>
     </c:param>
 </c:import>
