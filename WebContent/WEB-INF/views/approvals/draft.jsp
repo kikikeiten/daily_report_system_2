@@ -19,7 +19,7 @@
                 <p>下書きを作成するとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="draft_list">
+                <table id="draft_list" class="ui striped table">
                     <tbody>
                         <tr>
                             <th class="draft_name">氏名</th>
@@ -43,11 +43,11 @@
                                         action="<c:url value='/submission/update' />">
                                         <c:choose>
                                             <c:when test="${sessionScope.login_employee.admin_flag != 3}">
-                                                <button type="submit" name="submit" value="${2}">提出</button>
+                                                <button type="submit" name="submit" value="${2}" class="ui primary button">提出</button>
                                                 <input type="hidden" name="report_id" value="${draft.id}" />
                                             </c:when>
                                             <c:otherwise>
-                                                <button type="submit" name="submit" value="${4}">提出</button>
+                                                <button type="submit" name="submit" value="${4}" class="ui primary button">提出</button>
                                                 <input type="hidden" name="report_id" value="${draft.id}" />
                                             </c:otherwise>
                                         </c:choose>
@@ -74,6 +74,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>
         </p>
