@@ -15,7 +15,7 @@
                 <p>あなたがフォローされるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="follower_list">
+                <table id="follower_list" class="ui striped table">
                     <tbody>
                         <tr>
                             <th class="follower_name">氏名</th>
@@ -33,8 +33,10 @@
                                         <td class="follow">
                                             <form method="POST"
                                                 action="<c:url value='/follower/create' />">
-                                                <button type="submit" name="follow_id"
-                                                    value="${follower.id}">フォロー</button>
+                                                <button class="ui tiny active button" type="submit"
+                                                    name="follow_id" value="${follower.id}">
+                                                    <i class="user icon"></i> フォロー
+                                                </button>
                                             </form>
                                         </td>
                                     </c:when>
@@ -42,16 +44,21 @@
                                         <td class="follow">
                                             <form method="POST"
                                                 action="<c:url value='/follower/destroy' />">
-                                                <button type="submit" name="employee_id"
-                                                    value="${follower.id}"
-                                                    onmouseover="this.innerText='フォロー解除'"
-                                                    onmouseout="this.innerText='フォロー中'">フォロー中</button>
+                                                <button class="ui tiny animated button" type="submit"
+                                                    name="employee_id" value="${follower.id}">
+                                                    <div class="visible content">
+                                                        <i class="user icon"></i>フォロー中
+                                                    </div>
+                                                    <div class="hidden content">
+                                                        <i class="user icon"></i>フォロー解除
+                                                    </div>
+                                                </button>
                                             </form>
                                         </td>
                                     </c:otherwise>
                                 </c:choose>
                                 <td class="report_date"><fmt:formatDate
-                                        value='${follower.created_at}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
+                                        value='${follower.created_at}' pattern='yyyy-MM-dd HH:mm' /></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -73,6 +80,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>
