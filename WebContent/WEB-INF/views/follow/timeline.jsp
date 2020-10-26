@@ -15,7 +15,7 @@
                 <p>作成されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="timeline_list">
+                <table id="timeline_list" class="ui striped table">
                     <tbody>
                         <tr>
                             <th class="timeline_name">氏名</th>
@@ -36,22 +36,29 @@
                                         <c:choose>
                                             <c:when
                                                 test="${!fn:contains(list_report_id,report.employee.id)}">
-                                                <td class="timeline_follow">
+                                                <td class="report_follow">
                                                     <form method="POST"
                                                         action="<c:url value='/follow/create' />">
-                                                        <button type="submit" name="following"
-                                                            value="${report.id}">フォロー</button>
+                                                        <button class="ui tiny active button" type="submit"
+                                                            name="following" value="${report.id}">
+                                                            <i class="user icon"></i> フォロー
+                                                        </button>
                                                     </form>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td class="timeline_follow">
+                                                <td class="report_follow">
                                                     <form method="POST"
                                                         action="<c:url value='/follow/destroy' />">
-                                                        <button type="submit" name="employee_id"
-                                                            value="${report.id}"
-                                                            onmouseover="this.innerText='フォロー解除'"
-                                                            onmouseout="this.innerText='フォロー中'">フォロー中</button>
+                                                        <button class="ui tiny animated button" type="submit"
+                                                            name="employee_id" value="${report.id}">
+                                                            <div class="visible content">
+                                                                <i class="user icon"></i>フォロー中
+                                                            </div>
+                                                            <div class="hidden content">
+                                                                <i class="user icon"></i>フォロー解除
+                                                            </div>
+                                                        </button>
                                                     </form>
                                                 </td>
                                             </c:otherwise>
@@ -62,7 +69,7 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <td class="timeline_date"><fmt:formatDate
-                                        value='${report.created_at}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
+                                        value='${report.created_at}' pattern='yyyy-MM-dd HH:mm' /></td>
                                 <td class="timeline_title">${report.title}</td>
                                 <td class="timeline_action"><a
                                     href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
@@ -97,6 +104,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>
