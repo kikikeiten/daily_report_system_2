@@ -14,7 +14,7 @@
                 <p>作成されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="following_list">
+                <table id="following_list" class="ui striped table">
                     <tbody>
                         <tr>
                             <th class="following_name">氏名</th>
@@ -29,13 +29,19 @@
                                 <td class="follow">
                                     <form method="POST"
                                         action="<c:url value='/following/destroy' />">
-                                        <button type="submit" name="follow_id" value="${following.id}"
-                                            onmouseover="this.innerText='フォロー解除'"
-                                            onmouseout="this.innerText='フォロー中'">フォロー中</button>
+                                        <button class="ui tiny animated button" type="submit"
+                                            name="follow_id" value="${following.id}">
+                                            <div class="visible content">
+                                                <i class="user icon"></i>フォロー中
+                                            </div>
+                                            <div class="hidden content">
+                                                <i class="user icon"></i>フォロー解除
+                                            </div>
+                                        </button>
                                     </form>
                                 </td>
                                 <td class="following_date"><fmt:formatDate
-                                        value='${following.created_at}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
+                                        value='${following.created_at}' pattern='yyyy-MM-dd HH:mm' /></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -57,6 +63,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>
