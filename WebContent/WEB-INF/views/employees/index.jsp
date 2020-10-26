@@ -9,7 +9,7 @@
             </div>
         </c:if>
         <h2>従業員 一覧</h2>
-        <table id="employee_list">
+        <table id="employee_list" class="ui striped table">
             <tbody>
                 <tr>
                     <th>社員番号</th>
@@ -53,6 +53,7 @@
                 </c:choose>
             </c:forEach>
         </div>
+        <br>
         <p>
             <a href="<c:url value='/employees/new' />">新規従業員の登録</a>
         </p>

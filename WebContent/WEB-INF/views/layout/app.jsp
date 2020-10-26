@@ -56,7 +56,7 @@
                 </div>
             </c:if>
         </div>
-        <div id="content">${param.content}</div>
+        <div id="content"><div class="ui container">${param.content}</div></div>
         <div id="footer">© 2020 KIKI.</div>
     </div>
 </body>
