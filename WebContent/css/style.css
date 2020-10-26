@@ -88,6 +88,10 @@ button {
     background-color: #f8d7da;
 }
 
+table#likes_list th {
+    font-weight: bold;
+}
+
 /* 従業員一覧ページ */
 table#employee_list th {
     font-weight: bold;

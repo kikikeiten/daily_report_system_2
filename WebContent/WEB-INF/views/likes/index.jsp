@@ -7,7 +7,7 @@
         <c:choose>
             <c:when test="${report_id != null}">
                 <h2>いいねした人</h2>
-                <table id="likes_list">
+                <table id="likes_list" class="ui striped table">
                     <tbody>
                         <tr>
                             <th class="likes_name">氏名</th>
@@ -17,7 +17,7 @@
                             <tr class="row${status.count % 2}">
                                 <td class="likes_name"><c:out value="${like.employee.name}" /></td>
                                 <td class="likes_date"><fmt:formatDate
-                                        value="${like.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                                        value="${like.created_at}" pattern="yyyy-MM-dd HH:mm" /></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -43,6 +43,7 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value="/reports" />">一覧に戻る</a>
         </p>
