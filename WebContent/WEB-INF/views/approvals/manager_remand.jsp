@@ -16,7 +16,7 @@
                 <p>提出した日報が課長に差し戻されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="mr_report_list">
+                <table id="mr_report_list" class="ui striped table">
                     <tbody>
                         <tr>
                             <th class="mr_report_name">氏名</th>
@@ -50,7 +50,7 @@
                                     <form method="POST"
                                         action="<c:url value='/manager/remand/create' />">
                                         <input type="hidden" name="report_id" value="${report.id}" />
-                                        <button type="submit" name="submit" value="${2}">再提出</button>
+                                        <button type="submit" name="submit" value="${2}" class="ui positive button">再提出</button>
                                     </form>
                                 </td>
                             </tr>
@@ -74,6 +74,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>
         </p>
