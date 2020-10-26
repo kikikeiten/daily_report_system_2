@@ -197,7 +197,9 @@
                             <th>新規コメント</th>
                             <td><c:if
                                     test="${(sessionScope.login_employee.admin_flag == 2 && report.approval == 2 && sessionScope.login_employee.id != report.employee.id) || (sessionScope.login_employee.admin_flag == 3 && report.approval == 4 && sessionScope.login_employee.id != report.employee.id)}">
+                                    <form class="ui form">
                                     <textarea name="comment" rows="10" cols="50" form="form_id"></textarea>
+                                    </form>
                                 </c:if></td>
                         </tr>
 
@@ -211,7 +213,7 @@
                                             <form method="POST"
                                                 action="<c:url value='/submission/update' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${2}" class="ui primary button">提出</button>
+                                                <button type="submit" name="submit" value="${2}" class="ui positive button">提出</button>
                                             </form>
                                         </c:when>
                                         <c:when
@@ -244,7 +246,7 @@
                                             <form method="POST"
                                                 action="<c:url value='/submission/update' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${2}" class="ui primary button">提出</button>
+                                                <button type="submit" name="submit" value="${2}" class="ui positive button">提出</button>
                                             </form>
                                         </c:when>
                                         <c:when test="${report.approval == 1}">
@@ -294,7 +296,7 @@
                                             <form method="POST"
                                                 action="<c:url value='/submission/update' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${4}" class="ui primary button">提出</button>
+                                                <button type="submit" name="submit" value="${4}" class="ui positive button">提出</button>
                                             </form>
                                         </c:when>
                                         <c:when test="${report.approval == 1}">

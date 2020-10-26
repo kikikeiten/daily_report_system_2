@@ -333,7 +333,7 @@ table#da_report_list .da_report_date {
 }
 
 table#da_report_list .da_report_title {
-    width: 30%;
+    width: 25%;
 }
 
 table#da_report_list .da_report_action {
@@ -345,7 +345,7 @@ table#da_report_list .da_report_like {
 }
 
 table#da_report_list .da_report_approval {
-    width: 15%;
+    width: 20%;
 }
 
 /* Draft list page */
