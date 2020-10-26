@@ -23,7 +23,7 @@
                         </h3>
                     </c:when>
                     <c:otherwise>
-                        <table id="following_list">
+                        <table id="following_list" class="ui striped table">
                             <tbody>
                                 <tr>
                                     <th class="following_name">氏名</th>
@@ -37,8 +37,10 @@
                                         <td class="follow">
                                             <form method="POST"
                                                 action="<c:url value='/management/follow/create' />">
-                                                <button type="submit" name="follow_id"
-                                                    value="${following.id}">フォロー</button>
+                                                <button class="ui tiny active button" type="submit"
+                                                    name="follow_id" value="${following.id}">
+                                                    <i class="user icon"></i> フォロー
+                                                </button>
                                                 <input type="hidden" name="employee_operated"
                                                     value="${employee_operated}">
                                             </form>
@@ -70,6 +72,7 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value='/employees' />">従業員一覧へ戻る</a>
         </p>
