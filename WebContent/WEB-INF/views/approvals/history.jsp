@@ -11,10 +11,10 @@
                 <p>日報が承認または差し戻しされるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="approval_list">
+                <table id="approval_list" class="ui striped table">
                     <tbody>
                         <tr>
-                            <th class="approval_date">日付</th>
+                            <th class="approval_date">承認日時</th>
                             <th class="approval_status">承認状況</th>
                             <th class="approval_comment">コメント</th>
                             <th class="approval_name">承認者</th>
@@ -63,6 +63,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value='/reports/show?id=${report_id}' />">日報詳細ページに戻る</a>
         </p>
