@@ -18,7 +18,7 @@
     <div id="wrapper">
         <br>
         <div class="ui borderless container menu">
-            <a href="<c:url value='/' />" class="item">日報管理システム</a>
+            <a href="<c:url value='/' />" class="item"><b>日報管理システム</b></a>
             <c:if test="${sessionScope.login_employee != null}">
                 <c:if
                     test="${sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
