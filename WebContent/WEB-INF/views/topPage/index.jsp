@@ -16,6 +16,15 @@
             </div>
         </c:if>
         <h2>日報管理システムへようこそ</h2>
+        <c:choose>
+            <c:when test="${reports_count == 0}">
+                <h3>
+                    <c:out value="${sessionScope.login_employee.name}" />
+                    さんの日報はまだありません。
+                </h3>
+                <p>作成されるとここに表示されます。</p>
+            </c:when>
+            <c:otherwise>
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount != 0}">
             <div class="ui error message">
@@ -206,6 +215,8 @@
                 </c:choose>
             </c:forEach>
         </div>
+        </c:otherwise>
+        </c:choose>
         <br>
         <br>
         <button onclick="location.href='<c:url value='/reports/new' />'"

@@ -15,6 +15,14 @@
             </div>
         </c:if>
         <h2>従業員 一覧</h2>
+        <c:choose>
+            <c:when test="${employees_count == 0}">
+                <h3>
+                    従業員は未登録です。
+                </h3>
+                <p>登録されるとここに表示されます。</p>
+            </c:when>
+            <c:otherwise>
         <table id="employee_list" class="ui celled striped table">
             <tbody>
                 <tr>
@@ -62,6 +70,8 @@
                 </c:choose>
             </c:forEach>
         </div>
+        </c:otherwise>
+        </c:choose>
         <br>
         <br>
         <button onclick="location.href='<c:url value='/employees/new' />'"
