@@ -86,9 +86,10 @@
         </c:choose>
         <br>
         <br>
-        <p>
-            <a href="<c:url value='/reports/new' />">新規日報の登録</a>
-        </p>
+        <button onclick="location.href='<c:url value='/reports/new' />'"
+            class="ui positive button">新規日報</button>
+        <br>
+        <br>
         <c:if
             test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
             <p>

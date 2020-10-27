@@ -189,9 +189,10 @@
         </div>
         <br>
         <br>
-        <p>
-            <a href="<c:url value='/reports/new' />">新規日報の登録</a>
-        </p>
+        <button onclick="location.href='<c:url value='/reports/new' />'"
+            class="ui positive button">新規日報</button>
+        <br>
+        <br>
         <p>
             <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
         </p>
