@@ -17,6 +17,14 @@
             </div>
         </c:if>
         <h2>日報 一覧</h2>
+        <c:choose>
+            <c:when test="${getReportsCountButDrafts == 0}">
+                <h3>
+                    日報はまだありません。
+                </h3>
+                <p>作成されるとここに表示されます。</p>
+            </c:when>
+            <c:otherwise>
         <table id="report_list" class="ui celled striped table">
             <tbody>
                 <tr>
@@ -187,6 +195,8 @@
                 </c:choose>
             </c:forEach>
         </div>
+        </c:otherwise>
+        </c:choose>
         <br>
         <br>
         <button onclick="location.href='<c:url value='/reports/new' />'"
