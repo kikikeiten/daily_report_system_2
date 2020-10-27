@@ -7,7 +7,7 @@
         <c:choose>
             <c:when test="${report_id != null}">
                 <h2>いいねした人</h2>
-                <table id="likes_list" class="ui striped table">
+                <table id="likes_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="likes_name">氏名</th>

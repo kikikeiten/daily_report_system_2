@@ -15,7 +15,7 @@
                 <p>作成されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="timeline_list" class="ui striped table">
+                <table id="timeline_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="timeline_name">氏名</th>
@@ -79,7 +79,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <td class="timeline_likes"><a
-                                            href="<c:url value='/likes/index?report_id=${report.id}' />"><c:out
+                                            href="<c:url value='/likes?report_id=${report.id}' />"><c:out
                                                     value="${report.likes}" /></a></td>
                                     </c:otherwise>
                                 </c:choose>

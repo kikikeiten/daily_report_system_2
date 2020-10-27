@@ -91,7 +91,7 @@
             </div>
         </c:if>
         <h3>【自分の日報 一覧】</h3>
-        <table id="tp_report_list" class="ui striped table">
+        <table id="tp_report_list" class="ui celled striped table">
             <tbody>
                 <tr>
                     <th class="tp_report_name">氏名</th>

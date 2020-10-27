@@ -7,7 +7,7 @@
         <c:choose>
             <c:when test="${employee != null}">
                 <h2>${employee_name}さんの従業員情報 詳細ページ</h2>
-                <table class="ui striped table">
+                <table class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th>社員番号</th>

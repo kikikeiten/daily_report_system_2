@@ -14,7 +14,7 @@
                 <p>作成されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="following_list" class="ui striped table">
+                <table id="following_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="following_name">氏名</th>

@@ -15,7 +15,7 @@
             </div>
         </c:if>
         <h2>従業員 一覧</h2>
-        <table id="employee_list" class="ui striped table">
+        <table id="employee_list" class="ui celled striped table">
             <tbody>
                 <tr>
                     <th>社員番号</th>

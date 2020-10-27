@@ -8,7 +8,7 @@
         <c:choose>
             <c:when test="${report != null}">
                 <h2>日報「${report.title}」の詳細ページ</h2>
-                <table class="ui striped table">
+                <table class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th>氏名</th>

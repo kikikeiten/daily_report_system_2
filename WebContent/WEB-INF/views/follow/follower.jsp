@@ -15,7 +15,7 @@
                 <p>あなたがフォローされるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="follower_list" class="ui striped table">
+                <table id="follower_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="follower_name">氏名</th>

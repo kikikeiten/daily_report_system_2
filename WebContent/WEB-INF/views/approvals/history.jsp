@@ -11,7 +11,7 @@
                 <p>日報が承認または差し戻しされるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="approval_list" class="ui striped table">
+                <table id="approval_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="approval_date">承認日時</th>

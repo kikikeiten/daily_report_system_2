@@ -22,7 +22,7 @@
                 <p>他の社員が課長に提出するとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="ma_report_list" class="ui striped table">
+                <table id="ma_report_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="ma_report_name">氏名</th>

@@ -22,7 +22,7 @@
                 <p>提出した日報が課長に差し戻されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="mr_report_list" class="ui striped table">
+                <table id="mr_report_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="mr_report_name">氏名</th>

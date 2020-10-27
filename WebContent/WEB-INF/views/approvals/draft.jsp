@@ -25,7 +25,7 @@
                 <p>下書きを作成するとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="draft_list" class="ui striped table">
+                <table id="draft_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="draft_name">氏名</th>
