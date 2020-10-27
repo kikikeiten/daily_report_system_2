@@ -5,14 +5,26 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
-            <div id="flush_success">
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
         <h2>日報管理システムへようこそ</h2>
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount != 0}">
-            <div id="flush_error">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                         value="${getYesterdayDraftsCount}" />件あります。
                 </a><br> <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out
@@ -22,7 +34,13 @@
         </c:if>
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayDirectorApprovalsCount != 0}">
-            <div id="flush_error">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                         value="${getYesterdayDraftsCount}" />件あります。
                 </a><br> <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out
@@ -32,7 +50,13 @@
         </c:if>
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount == 0 && getYesterdayDirectorApprovalsCount == 0}">
-            <div id="flush_error">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                         value="${getYesterdayDraftsCount}" />件あります。
                 </a>
@@ -40,7 +64,13 @@
         </c:if>
         <c:if
             test="${getYesterdayManagerApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
-            <div id="flush_error">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out
                         value="${getYesterdayManagerApprovalsCount}" />件あります。
                 </a>
@@ -48,14 +78,20 @@
         </c:if>
         <c:if
             test="${getYesterdayDirectorApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
-            <div id="flush_error">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out
                         value="${getYesterdayDirectorApprovalsCount}" />件あります。
                 </a>
             </div>
         </c:if>
         <h3>【自分の日報 一覧】</h3>
-        <table id="tp_report_list">
+        <table id="tp_report_list" class="ui celled striped table">
             <tbody>
                 <tr>
                     <th class="tp_report_name">氏名</th>
@@ -153,23 +189,29 @@
                 </c:forEach>
             </tbody>
         </table>
-        <div id="pagination">
-            （全 ${reports_count} 件）<br />
+        <div class="ui label">日報件数 ${reports_count}</div>&nbsp;
+        <div class="ui mini pagination menu">
             <c:forEach var="i" begin="1" end="${((reports_count - 1) / 10) + 1}"
                 step="1">
                 <c:choose>
                     <c:when test="${i == page}">
-                        <c:out value="${i}" />&nbsp;
+                        <div class="item active">
+                            <c:out value="${i}" />
+                        </div>
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                        <a class="item" href="<c:url value='/?page=${i}' />"><c:out
+                                value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         </div>
-        <p>
-            <a href="<c:url value='/reports/new' />">新規日報の登録</a>
-        </p>
+        <br>
+        <br>
+        <button onclick="location.href='<c:url value='/reports/new' />'"
+            class="ui positive button">新規日報</button>
+        <br>
+        <br>
         <p>
             <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
         </p>

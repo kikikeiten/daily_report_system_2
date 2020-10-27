@@ -5,7 +5,13 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
-            <div id="flush_success">
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
@@ -16,7 +22,7 @@
                 <p>提出した日報が部長に差し戻されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="dr_report_list">
+                <table id="dr_report_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="dr_report_name">氏名</th>
@@ -38,7 +44,8 @@
                                     href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
                                 <c:choose>
                                     <c:when test="${report.likes == 0}">
-                                        <td class="dr_report_likes"><c:out value="${report.likes}" /></td>
+                                        <td class="dr_report_likes"><c:out
+                                                value="${report.likes}" /></td>
                                     </c:when>
                                     <c:otherwise>
                                         <td class="dr_report_likes"><a
@@ -50,23 +57,27 @@
                                     <form method="POST"
                                         action="<c:url value='/director/remand/create' />">
                                         <input type="hidden" name="report_id" value="${report.id}" />
-                                        <button type="submit" name="submit" value="${4}">再提出</button>
+                                        <button type="submit" name="submit" value="${4}"
+                                            class="ui positive button">再提出</button>
                                     </form>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-                <div id="pagination">
-                    （全 ${getDirectorRemandReportsCount} 件）<br />
+                <div class="ui label">差し戻し件数 ${getDirectorRemandReportsCount}</div>&nbsp;
+                <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
                         end="${((getDirectorRemandReportsCount - 1) / 10) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
-                                <c:out value="${i}" />&nbsp;
+                                <div class="item active">
+                                    <c:out value="${i}" />
+                                </div>
                             </c:when>
                             <c:otherwise>
-                                <a href="<c:url value='/remand/director?page=${i}' />"><c:out
+                                <a class="item"
+                                    href="<c:url value='/remand/director?page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
                             </c:otherwise>
                         </c:choose>
@@ -74,9 +85,12 @@
                 </div>
             </c:otherwise>
         </c:choose>
-        <p>
-            <a href="<c:url value='/reports/new' />">新規日報の登録</a>
-        </p>
+        <br>
+        <br>
+        <button onclick="location.href='<c:url value='/reports/new' />'"
+            class="ui positive button">新規日報</button>
+        <br>
+        <br>
         <p>
             <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
         </p>

@@ -7,7 +7,7 @@
         <c:choose>
             <c:when test="${report_id != null}">
                 <h2>いいねした人</h2>
-                <table id="likes_list">
+                <table id="likes_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="likes_name">氏名</th>
@@ -17,24 +17,26 @@
                             <tr class="row${status.count % 2}">
                                 <td class="likes_name"><c:out value="${like.employee.name}" /></td>
                                 <td class="likes_date"><fmt:formatDate
-                                        value="${like.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                                        value="${like.created_at}" pattern="yyyy-MM-dd HH:mm" /></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-                <div id="pagination">
-                    （全 ${likes_count} 件）<br />
+                <div class="ui label">いいね数 ${likes_count}</div>&nbsp;
+                <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1" end="${((likes_count - 1) / 10) + 1}"
                         step="1">
                         <c:choose>
                             <c:when test="${i == page}">
-                                <c:out value="${i}" />&nbsp;
+                                <div class="item active">
+                                    <c:out value="${i}" />
+                                </div>
                             </c:when>
                             <c:otherwise>
-                                <a
+                                <a class="item"
                                     href="<c:url value='/likes?report_id=${reportUrl}&page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
-                            </c:otherwise>
+                    </c:otherwise>
                         </c:choose>
                     </c:forEach>
                 </div>
@@ -43,6 +45,7 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
+        <br>
         <p>
             <a href="<c:url value="/reports" />">一覧に戻る</a>
         </p>

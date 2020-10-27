@@ -6,18 +6,6 @@ body {
         Arial, sans-serif;
 }
 
-#header {
-    width: 100%;
-    height: 70px;
-    background-color: #333333;
-}
-
-#content {
-    width: 94%;
-    margin-top: 15px;
-    padding-left: 3%;
-}
-
 h1 {
     font-size: 24px;
     display: inline;
@@ -41,10 +29,6 @@ p {
 a {
     text-decoration: none;
     color: #24738e;
-}
-
-table, tr, th, td {
-    border: 1px solid #cccccc;
 }
 
 table {
@@ -92,6 +76,10 @@ button {
     background-color: #f8d7da;
 }
 
+table#likes_list th {
+    font-weight: bold;
+}
+
 /* 従業員一覧ページ */
 table#employee_list th {
     font-weight: bold;
@@ -102,41 +90,6 @@ table#employee_list th {
 table#employee_list td {
     width: 29%;
     padding: 10px 2%;
-}
-
-tr.row1 {
-    background-color: #f2f2f2;
-}
-
-tr.row0 {
-    background-color: #ffffff;
-}
-
-select {
-    height: 30px;
-}
-
-#header_menu {
-    width: 57%;
-    padding-top: 17px;
-    padding-left: 3%;
-    display: inline-block;
-}
-
-#employee_name {
-    color: #cccccc;
-    width: 36%;
-    padding-right: 3%;
-    text-align: right;
-    display: inline-block;
-}
-
-#header a {
-    color: #eeeeee;
-}
-
-h1 a {
-    color: #eeeeee;
 }
 
 /* Report list */
@@ -312,7 +265,7 @@ table#ma_report_list .ma_report_date {
 }
 
 table#ma_report_list .ma_report_title {
-    width: 30%;
+    width: 25%;
 }
 
 table#ma_report_list .ma_report_action {
@@ -324,7 +277,7 @@ table#ma_report_list .ma_report_like {
 }
 
 table#ma_report_list .ma_report_approval {
-    width: 15%;
+    width: 20%;
 }
 
 /* Director approval waiting list page */
@@ -341,7 +294,7 @@ table#da_report_list .da_report_date {
 }
 
 table#da_report_list .da_report_title {
-    width: 30%;
+    width: 25%;
 }
 
 table#da_report_list .da_report_action {
@@ -353,7 +306,7 @@ table#da_report_list .da_report_like {
 }
 
 table#da_report_list .da_report_approval {
-    width: 15%;
+    width: 20%;
 }
 
 /* Draft list page */

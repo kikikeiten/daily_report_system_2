@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:if test="${errors != null}">
-    <div id="flush_error">
+    <div class="ui message">
         入力内容にエラーがあります。<br />
         <c:forEach var="error" items="${errors}">
             ・<c:out value="${error}" />
@@ -27,7 +27,7 @@
 <br />
 <label for="admin_flag">権限</label>
 <br />
-<select name="admin_flag">
+<select name="admin_flag" class="ui selection dropdown">
     <option value="0"
         <c:if test="${employee.admin_flag == 0}"> selected</c:if>>一般</option>
     <option value="1"
@@ -40,4 +40,4 @@
 <br />
 <br />
 <input type="hidden" name="_token" value="${_token}" />
-<button type="submit">投稿</button>
+<button type="submit" class="ui positive button">投稿</button>

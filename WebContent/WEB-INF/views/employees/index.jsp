@@ -4,12 +4,18 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
-            <div id="flush_success">
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
         <h2>従業員 一覧</h2>
-        <table id="employee_list">
+        <table id="employee_list" class="ui celled striped table">
             <tbody>
                 <tr>
                     <th>社員番号</th>
@@ -38,23 +44,27 @@
                 </c:forEach>
             </tbody>
         </table>
-        <div id="pagination">
-            （全 ${employees_count} 件）<br />
+        <div class="ui label">従業員数 ${employees_count}</div>&nbsp;
+        <div class="ui mini pagination menu">
             <c:forEach var="i" begin="1"
                 end="${((employees_count - 1) / 10) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
-                        <c:out value="${i}" />&nbsp;
+                        <div class="item active">
+                            <c:out value="${i}" />
+                        </div>
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/employees?page=${i}' />"><c:out
+                        <a class="item"
+                            href="<c:url value='/employees?page=${i}' />"><c:out
                                 value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         </div>
-        <p>
-            <a href="<c:url value='/employees/new' />">新規従業員の登録</a>
-        </p>
+        <br>
+        <br>
+        <button onclick="location.href='<c:url value='/employees/new' />'"
+            class="ui positive button">新規従業員</button>
     </c:param>
 </c:import>
