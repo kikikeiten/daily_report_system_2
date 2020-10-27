@@ -14,7 +14,7 @@
                 <p>作成されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="following_list">
+                <table id="following_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="following_name">氏名</th>
@@ -29,27 +29,35 @@
                                 <td class="follow">
                                     <form method="POST"
                                         action="<c:url value='/following/destroy' />">
-                                        <button type="submit" name="follow_id" value="${following.id}"
-                                            onmouseover="this.innerText='フォロー解除'"
-                                            onmouseout="this.innerText='フォロー中'">フォロー中</button>
+                                        <button class="ui tiny animated button" type="submit"
+                                            name="follow_id" value="${following.id}">
+                                            <div class="visible content">
+                                                <i class="user icon"></i>フォロー中
+                                            </div>
+                                            <div class="hidden content">
+                                                <i class="user icon"></i>フォロー解除
+                                            </div>
+                                        </button>
                                     </form>
                                 </td>
                                 <td class="following_date"><fmt:formatDate
-                                        value='${following.created_at}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
+                                        value='${following.created_at}' pattern='yyyy-MM-dd HH:mm' /></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-                <div id="pagination">
-                    （全 ${getMyFollowingCount} 件）<br />
+                <div class="ui label">フォロー中 ${getMyFollowingCount}</div>&nbsp;
+                <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
                         end="${((getMyFollowingCount - 1) / 10) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
-                                <c:out value="${i}" />&nbsp;
-                    </c:when>
+                                <div class="item active">
+                                    <c:out value="${i}" />
+                                </div>
+                            </c:when>
                             <c:otherwise>
-                                <a href="<c:url value='/following?page=${i}' />"><c:out
+                                <a class="item" href="<c:url value='/following?page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
                     </c:otherwise>
                         </c:choose>
@@ -57,6 +65,8 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
+        <br>
         <p>
             <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>

@@ -5,7 +5,13 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
-            <div id="flush_success">
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
@@ -19,7 +25,7 @@
                 <p>下書きを作成するとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="draft_list">
+                <table id="draft_list" class="ui celled striped table">
                     <tbody>
                         <tr>
                             <th class="draft_name">氏名</th>
@@ -43,11 +49,13 @@
                                         action="<c:url value='/submission/update' />">
                                         <c:choose>
                                             <c:when test="${sessionScope.login_employee.admin_flag != 3}">
-                                                <button type="submit" name="submit" value="${2}">提出</button>
+                                                <button type="submit" name="submit" value="${2}"
+                                                    class="ui positive button">提出</button>
                                                 <input type="hidden" name="report_id" value="${draft.id}" />
                                             </c:when>
                                             <c:otherwise>
-                                                <button type="submit" name="submit" value="${4}">提出</button>
+                                                <button type="submit" name="submit" value="${4}"
+                                                    class="ui positive button">提出</button>
                                                 <input type="hidden" name="report_id" value="${draft.id}" />
                                             </c:otherwise>
                                         </c:choose>
@@ -57,26 +65,31 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <div id="pagination">
-                    （全 ${getMyDraftsCount} 件）<br />
+                <div class="ui label">下書き件数 ${getMyDraftsCount}</div>&nbsp;
+                <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
                         end="${((getMyDraftsCount - 1) / 10) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
-                                <c:out value="${i}" />&nbsp;
+                                <div class="item active">
+                                    <c:out value="${i}" />
+                                </div>
                             </c:when>
                             <c:otherwise>
-                                <a href="<c:url value='/draft?page=${i}' />"><c:out
+                                <a class="item" href="<c:url value='/draft?page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
-                            </c:otherwise>
+                    </c:otherwise>
                         </c:choose>
                     </c:forEach>
                 </div>
             </c:otherwise>
         </c:choose>
-        <p>
-            <a href="<c:url value='/reports/new' />">新規日報の登録</a>
-        </p>
+        <br>
+        <br>
+        <button onclick="location.href='<c:url value='/reports/new' />'"
+            class="ui positive button">新規日報</button>
+        <br>
+        <br>
         <c:if
             test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
             <p>

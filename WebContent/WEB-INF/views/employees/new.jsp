@@ -3,12 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
+    <div class="ui text container">
         <h2>従業員 新規登録ページ</h2>
-        <form method="POST" action="<c:url value='/employees/create' />">
+        <form method="POST" action="<c:url value='/employees/create' />" class="ui fluid form">
             <c:import url="_form.jsp" />
         </form>
+        <br>
         <p>
             <a href="<c:url value='/employees' />">一覧に戻る</a>
         </p>
+        </div>
     </c:param>
 </c:import>

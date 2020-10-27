@@ -5,7 +5,13 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
-            <div id="flush_success">
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
@@ -23,7 +29,7 @@
                         </h3>
                     </c:when>
                     <c:otherwise>
-                        <table id="following_list">
+                        <table id="following_list" class="ui celled striped table">
                             <tbody>
                                 <tr>
                                     <th class="following_name">氏名</th>
@@ -37,8 +43,10 @@
                                         <td class="follow">
                                             <form method="POST"
                                                 action="<c:url value='/management/follow/create' />">
-                                                <button type="submit" name="follow_id"
-                                                    value="${following.id}">フォロー</button>
+                                                <button class="ui tiny active button" type="submit"
+                                                    name="follow_id" value="${following.id}">
+                                                    <i class="user icon"></i> フォロー
+                                                </button>
                                                 <input type="hidden" name="employee_operated"
                                                     value="${employee_operated}">
                                             </form>
@@ -47,19 +55,21 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                        <div id="pagination">
-                            （全 ${getEmployeeNotFollowingCount} 件）<br />
+                        <div class="ui label">未フォロー ${getEmployeeNotFollowingCount}</div>&nbsp;
+                        <div class="ui mini pagination menu">
                             <c:forEach var="i" begin="1"
                                 end="${((getEmployeeNotFollowingCount - 1) / 10) + 1}" step="1">
                                 <c:choose>
                                     <c:when test="${i == page}">
-                                        <c:out value="${i}" />&nbsp;
+                                        <div class="item active">
+                                            <c:out value="${i}" />
+                                        </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <a
+                                        <a class="item"
                                             href="<c:url value='/management/follow?id=${page_number}&page=${i}' />"><c:out
                                                 value="${i}" /></a>&nbsp;
-                    </c:otherwise>
+                                    </c:otherwise>
                                 </c:choose>
                             </c:forEach>
                         </div>
@@ -70,6 +80,8 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
+        <br>
+        <br>
         <p>
             <a href="<c:url value='/employees' />">従業員一覧へ戻る</a>
         </p>
