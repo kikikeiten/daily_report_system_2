@@ -49,11 +49,13 @@
                                         action="<c:url value='/submission/update' />">
                                         <c:choose>
                                             <c:when test="${sessionScope.login_employee.admin_flag != 3}">
-                                                <button type="submit" name="submit" value="${2}" class="ui positive button">提出</button>
+                                                <button type="submit" name="submit" value="${2}"
+                                                    class="ui positive button">提出</button>
                                                 <input type="hidden" name="report_id" value="${draft.id}" />
                                             </c:when>
                                             <c:otherwise>
-                                                <button type="submit" name="submit" value="${4}" class="ui positive button">提出</button>
+                                                <button type="submit" name="submit" value="${4}"
+                                                    class="ui positive button">提出</button>
                                                 <input type="hidden" name="report_id" value="${draft.id}" />
                                             </c:otherwise>
                                         </c:choose>
@@ -63,23 +65,26 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <div id="pagination">
-                    （全 ${getMyDraftsCount} 件）<br />
+                <div class="ui label">下書き件数 ${getMyDraftsCount}</div>&nbsp;
+                <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
                         end="${((getMyDraftsCount - 1) / 10) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
-                                <c:out value="${i}" />&nbsp;
+                                <div class="item active">
+                                    <c:out value="${i}" />
+                                </div>
                             </c:when>
                             <c:otherwise>
-                                <a href="<c:url value='/draft?page=${i}' />"><c:out
+                                <a class="item" href="<c:url value='/draft?page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
-                            </c:otherwise>
+                    </c:otherwise>
                         </c:choose>
                     </c:forEach>
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <br>
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>

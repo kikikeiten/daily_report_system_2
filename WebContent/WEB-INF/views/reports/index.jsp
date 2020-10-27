@@ -170,21 +170,24 @@
                 </c:forEach>
             </tbody>
         </table>
-        <div id="pagination">
-            （全 ${getReportsCountButDrafts} 件）<br />
+        <div class="ui label">日報件数 ${getReportsCountButDrafts}</div>&nbsp;
+        <div class="ui mini pagination menu">
             <c:forEach var="i" begin="1"
                 end="${((getReportsCountButDrafts - 1) / 10) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
-                        <c:out value="${i}" />&nbsp;
+                        <div class="item active">
+                            <c:out value="${i}" />
+                        </div>
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/reports?page=${i}' />"><c:out
+                        <a class="item" href="<c:url value='/reports?page=${i}' />"><c:out
                                 value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         </div>
+        <br>
         <br>
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>

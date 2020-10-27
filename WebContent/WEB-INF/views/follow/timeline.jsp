@@ -87,16 +87,18 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <div id="pagination">
-                    （全 ${getMyFollowReportsCount} 件）<br />
+                <div class="ui label">日報件数 ${getMyFollowReportsCount}</div>&nbsp;
+                <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
                         end="${((getMyFollowReportsCount - 1) / 10) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
-                                <c:out value="${i}" />&nbsp;
-                    </c:when>
+                                <div class="item active">
+                                    <c:out value="${i}" />
+                                </div>
+                            </c:when>
                             <c:otherwise>
-                                <a href="<c:url value='/timeline?page=${i}' />"><c:out
+                                <a class="item" href="<c:url value='/timeline?page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
                     </c:otherwise>
                         </c:choose>
@@ -104,6 +106,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <br>
         <p>
             <a href="<c:url value='/' />">トップページへ戻る</a>

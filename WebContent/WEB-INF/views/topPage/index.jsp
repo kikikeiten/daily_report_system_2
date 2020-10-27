@@ -6,7 +6,7 @@
     <c:param name="content">
         <c:if test="${flush != null}">
             <div class="ui success message">
-            <i class="close icon"></i>
+                <i class="close icon"></i>
                 <script>
                     $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
@@ -19,7 +19,7 @@
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount != 0}">
             <div class="ui error message">
-            <i class="close icon"></i>
+                <i class="close icon"></i>
                 <script>
                     $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
@@ -35,7 +35,7 @@
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayDirectorApprovalsCount != 0}">
             <div class="ui error message">
-            <i class="close icon"></i>
+                <i class="close icon"></i>
                 <script>
                     $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
@@ -51,7 +51,7 @@
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount == 0 && getYesterdayDirectorApprovalsCount == 0}">
             <div class="ui error message">
-            <i class="close icon"></i>
+                <i class="close icon"></i>
                 <script>
                     $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
@@ -65,7 +65,7 @@
         <c:if
             test="${getYesterdayManagerApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
             <div class="ui error message">
-            <i class="close icon"></i>
+                <i class="close icon"></i>
                 <script>
                     $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
@@ -79,7 +79,7 @@
         <c:if
             test="${getYesterdayDirectorApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
             <div class="ui error message">
-            <i class="close icon"></i>
+                <i class="close icon"></i>
                 <script>
                     $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
@@ -189,20 +189,24 @@
                 </c:forEach>
             </tbody>
         </table>
-        <div id="pagination">
-            （全 ${reports_count} 件）<br />
+        <div class="ui label">日報件数 ${reports_count}</div>&nbsp;
+        <div class="ui mini pagination menu">
             <c:forEach var="i" begin="1" end="${((reports_count - 1) / 10) + 1}"
                 step="1">
                 <c:choose>
                     <c:when test="${i == page}">
-                        <c:out value="${i}" />&nbsp;
+                        <div class="item active">
+                            <c:out value="${i}" />
+                        </div>
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                        <a class="item" href="<c:url value='/?page=${i}' />"><c:out
+                                value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         </div>
+        <br>
         <br>
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>

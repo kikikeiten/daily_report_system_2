@@ -22,19 +22,21 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <div id="pagination">
-                    （全 ${likes_count} 件）<br />
+                <div class="ui label">いいね数 ${likes_count}</div>&nbsp;
+                <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1" end="${((likes_count - 1) / 10) + 1}"
                         step="1">
                         <c:choose>
                             <c:when test="${i == page}">
-                                <c:out value="${i}" />&nbsp;
+                                <div class="item active">
+                                    <c:out value="${i}" />
+                                </div>
                             </c:when>
                             <c:otherwise>
-                                <a
+                                <a class="item"
                                     href="<c:url value='/likes?report_id=${reportUrl}&page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
-                            </c:otherwise>
+                    </c:otherwise>
                         </c:choose>
                     </c:forEach>
                 </div>

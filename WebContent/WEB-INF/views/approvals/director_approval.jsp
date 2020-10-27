@@ -44,7 +44,8 @@
                                     href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
                                 <c:choose>
                                     <c:when test="${report.likes == 0}">
-                                        <td class="da_report_likes"><c:out value="${report.likes}" /></td>
+                                        <td class="da_report_likes"><c:out
+                                                value="${report.likes}" /></td>
                                     </c:when>
                                     <c:otherwise>
                                         <td class="da_report_likes"><a
@@ -59,7 +60,8 @@
                                             <form method="POST"
                                                 action="<c:url value='/director/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${6}" class="ui positive button">承認</button>
+                                                <button type="submit" name="submit" value="${6}"
+                                                    class="ui positive button">承認</button>
                                             </form>
                                         </c:if>
                                         <c:if
@@ -68,7 +70,8 @@
                                             <form method="POST"
                                                 action="<c:url value='/director/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${3}" class="ui negative button">差し戻し</button>
+                                                <button type="submit" name="submit" value="${3}"
+                                                    class="ui negative button">差し戻し</button>
                                             </form>
                                         </c:if>
                                     </div></td>
@@ -76,16 +79,20 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <div id="pagination">
-                    （全 ${getDirectorApprovalReportsCount} 件）<br />
+                <div class="ui label">承認待ち件数
+                    ${getDirectorApprovalReportsCount}</div>&nbsp;
+                <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
                         end="${((getDirectorApprovalReportsCount - 1) / 10) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
-                                <c:out value="${i}" />&nbsp;
+                                <div class="item active">
+                                    <c:out value="${i}" />
+                                </div>
                             </c:when>
                             <c:otherwise>
-                                <a href="<c:url value='/approval/director?page=${i}' />"><c:out
+                                <a class="item"
+                                    href="<c:url value='/approval/director?page=${i}' />"><c:out
                                         value="${i}" /></a>&nbsp;
                             </c:otherwise>
                         </c:choose>
@@ -93,6 +100,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        <br>
         <br>
         <p>
             <a href="<c:url value='/reports/new' />">新規日報の登録</a>

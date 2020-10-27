@@ -57,23 +57,24 @@
                                             </form>
                                         </td>
                                         <td class="following_date"><fmt:formatDate
-                                                value='${following.created_at}'
-                                                pattern='yyyy-MM-dd HH:mm' /></td>
+                                                value='${following.created_at}' pattern='yyyy-MM-dd HH:mm' /></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
-                        <div id="pagination">
-                            （全 ${getEmployeeFollowingCount} 件）<br />
+                        <div class="ui label">フォロー中 ${getEmployeeFollowingCount}</div>&nbsp;
+                        <div class="ui mini pagination menu">
                             <c:forEach var="i" begin="1"
                                 end="${((getEmployeeFollowingCount - 1) / 10) + 1}" step="1">
                                 <c:choose>
                                     <c:when test="${i == page}">
-                                        <c:out value="${i}" />&nbsp;
+                                        <div class="item active">
+                                            <c:out value="${i}" />
+                                        </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <a
-                                            href="<c:url value='/management/unfollow?id=${page_number}&page=${i}' />"><c:out
+                                        <a class="item"
+                                            href="<c:url value='//management/unfollow?id=${page_number}&page=${i}' />"><c:out
                                                 value="${i}" /></a>&nbsp;
                                     </c:otherwise>
                                 </c:choose>
@@ -86,6 +87,7 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
+        <br>
         <br>
         <p>
             <a href="<c:url value='/employees' />">従業員一覧へ戻る</a>
