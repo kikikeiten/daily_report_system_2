@@ -6,6 +6,12 @@
     <c:param name="content">
         <c:if test="${flush != null}">
             <div class="ui success message">
+            <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
@@ -13,6 +19,12 @@
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount != 0}">
             <div class="ui error message">
+            <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                         value="${getYesterdayDraftsCount}" />件あります。
                 </a><br> <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out
@@ -23,6 +35,12 @@
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayDirectorApprovalsCount != 0}">
             <div class="ui error message">
+            <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                         value="${getYesterdayDraftsCount}" />件あります。
                 </a><br> <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out
@@ -33,6 +51,12 @@
         <c:if
             test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount == 0 && getYesterdayDirectorApprovalsCount == 0}">
             <div class="ui error message">
+            <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                         value="${getYesterdayDraftsCount}" />件あります。
                 </a>
@@ -41,6 +65,12 @@
         <c:if
             test="${getYesterdayManagerApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
             <div class="ui error message">
+            <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out
                         value="${getYesterdayManagerApprovalsCount}" />件あります。
                 </a>
@@ -49,6 +79,12 @@
         <c:if
             test="${getYesterdayDirectorApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
             <div class="ui error message">
+            <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out
                         value="${getYesterdayDirectorApprovalsCount}" />件あります。
                 </a>

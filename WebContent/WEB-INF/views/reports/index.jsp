@@ -7,6 +7,12 @@
     <c:param name="content">
         <c:if test="${flush != null}">
             <div class="ui success message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
@@ -49,8 +55,11 @@
                                                 <button class="ui tiny animated button" type="submit"
                                                     name="employee_id" value="${report.id}">
                                                     <div class="visible content">
-                                                    <i class="user icon"></i>フォロー中</div>
-                                                    <div class="hidden content"><i class="user icon"></i>フォロー解除</div>
+                                                        <i class="user icon"></i>フォロー中
+                                                    </div>
+                                                    <div class="hidden content">
+                                                        <i class="user icon"></i>フォロー解除
+                                                    </div>
                                                 </button>
                                             </form>
                                         </td>

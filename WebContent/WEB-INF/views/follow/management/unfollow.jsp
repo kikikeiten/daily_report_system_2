@@ -5,7 +5,13 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
-            <div id="flush_success">
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
@@ -52,7 +58,7 @@
                                         </td>
                                         <td class="following_date"><fmt:formatDate
                                                 value='${following.created_at}'
-                                                pattern='yyyy-MM-dd HH:mm:ss' /></td>
+                                                pattern='yyyy-MM-dd HH:mm' /></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
