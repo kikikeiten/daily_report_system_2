@@ -6,7 +6,7 @@
     <div class="ui text container">
         <c:choose>
             <c:when test="${employee != null}">
-                <h2>id : ${employee.id} の従業員情報 編集ページ</h2>
+                <h2>${employee.name}さんの従業員情報 編集ページ</h2>
                 <p>（パスワードは変更する場合のみ入力してください）</p>
                 <form method="POST" action="<c:url value='/employees/update' />" class="ui fluid form">
                     <c:import url="_form.jsp" />

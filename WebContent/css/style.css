@@ -78,6 +78,7 @@ button {
 
 table#likes_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 /* 従業員一覧ページ */
@@ -95,10 +96,12 @@ table#employee_list td {
 /* Report list */
 table#report_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 table#report_list .report_name {
     width: 15%;
+    padding: 10px 2%;
 }
 
 table#report_list .report_follow {
@@ -128,6 +131,7 @@ table#report_list .report_approval {
 /* Timeline */
 table#timeline_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 table#timeline_list .timeline_name {
@@ -196,10 +200,12 @@ table#follower_list .follower_date {
 /* Manager remand reports list */
 table#mr_report_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 table#mr_report_list .mr_report_name {
     width: 20%;
+    padding: 10px 2%;
 }
 
 table#mr_report_list .mr_report_date {
@@ -225,10 +231,12 @@ table#mr_report_list .mr_report_approval {
 /* Director remand reports list */
 table#dr_report_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 table#dr_report_list .dr_report_name {
     width: 20%;
+    padding: 10px 2%;
 }
 
 table#dr_report_list .dr_report_date {
@@ -254,10 +262,12 @@ table#dr_report_list .dr_report_approval {
 /* Manager approval waiting list page */
 table#ma_report_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 table#ma_report_list .ma_report_name {
     width: 20%;
+    padding: 10px 2%;
 }
 
 table#ma_report_list .ma_report_date {
@@ -283,10 +293,12 @@ table#ma_report_list .ma_report_approval {
 /* Director approval waiting list page */
 table#da_report_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 table#da_report_list .da_report_name {
     width: 20%;
+    padding: 10px 2%;
 }
 
 table#da_report_list .da_report_date {
@@ -312,10 +324,12 @@ table#da_report_list .da_report_approval {
 /* Draft list page */
 table#draft_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 table#draft_list .draft_name {
     width: 20%;
+    padding: 10px 2%;
 }
 
 table#draft_list .draft_date {
@@ -337,10 +351,12 @@ table#draft_list .draft_approval {
 /* Top page report list */
 table#tp_report_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 table#tp_report_list .tp_report_name {
     width: 20%;
+    padding: 10px 2%;
 }
 
 table#tp_report_list .tp_report_date {
@@ -366,6 +382,7 @@ table#tp_report_list .tp_report_approval {
 /* Approval history list */
 table#approval_list th {
     font-weight: bold;
+    padding: 10px 2%;
 }
 
 table#approval_list .approval_date {
