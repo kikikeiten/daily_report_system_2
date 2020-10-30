@@ -17,10 +17,13 @@
         </c:if>
         <div class="ui info message">
         <i class="close icon"></i>
-        <button onclick="location.href='<c:url value='/reports/new' />'"
-                class="ui positive button">出勤</button>&nbsp;
+        <div style="display:inline-flex">
+        <form method="POST" action="<c:url value='/punchin/create' />">
+        <button type="submit" onclick="location.href='<c:url value='/reports/new' />'"
+                class="ui positive button">出勤</button></form>&nbsp;
+                <form method="POST" action="<c:url value='/punchin/create' />">
             <button onclick="location.href='<c:url value='/reports/new' />'"
-                class="ui negative button">退勤</button>&nbsp;
+                class="ui negative button">退勤</button></form></div>&nbsp;
              <span id="RealtimeClockArea2" class="ui label"></span>
             <script>
     function set2fig(num) {
