@@ -79,6 +79,14 @@ public class Attendance {
         return punch_out;
     }
 
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
     public void getPunch_out(Timestamp punch_out) {
         this.punch_out = punch_out;
     }
