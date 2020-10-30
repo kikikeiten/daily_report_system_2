@@ -51,7 +51,8 @@
             <div class="ui right floated buttons">
                 <button class="ui button"
                     onclick="location.href='<c:url value='/attendance/my' />'">My打刻履歴</button>
-                <button class="ui button">全打刻履歴</button>
+                <button class="ui button"
+                    onclick="location.href='<c:url value='/attendance/all' />'">全打刻履歴</button>
             </div>
         </div>
         <h2>日報管理システムへようこそ</h2>
