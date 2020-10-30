@@ -19,7 +19,8 @@ import javax.persistence.Table;
         @NamedQuery(name = "getMyAllAttendances", query = "SELECT a FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC"),
         @NamedQuery(name = "getMyAttendancesCount", query = "SELECT COUNT(a) FROM Attendance AS a WHERE a.employee = :employee"),
         @NamedQuery(name = "getAllAttendances", query = "SELECT a FROM Attendance AS a ORDER BY a.punch_in DESC"),
-        @NamedQuery(name = "getAllAttendancesCount", query = "SELECT COUNT(a) FROM Attendance AS a")
+        @NamedQuery(name = "getAllAttendancesCount", query = "SELECT COUNT(a) FROM Attendance AS a"),
+        @NamedQuery(name = "getMyLatestAttendance", query = "SELECT a.id FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC"),
 })
 
 @Entity
@@ -87,6 +88,10 @@ public class Attendance {
         return punch_out;
     }
 
+    public void setPunch_out(Timestamp punch_out) {
+        this.punch_out = punch_out;
+    }
+
     public Timestamp getCreated_at() {
         return created_at;
     }
@@ -95,9 +100,6 @@ public class Attendance {
         this.created_at = created_at;
     }
 
-    public void getPunch_out(Timestamp punch_out) {
-        this.punch_out = punch_out;
-    }
 
     public Timestamp getUpdated_at() {
         return updated_at;

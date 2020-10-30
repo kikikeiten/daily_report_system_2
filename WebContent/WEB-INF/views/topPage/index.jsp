@@ -20,12 +20,11 @@
             <div style="display: inline-flex">
                 <form method="POST" action="<c:url value='/punchin/create' />">
                     <button type="submit"
-                        onclick="location.href='<c:url value='/reports/new' />'"
                         class="ui positive button">出勤</button>
                 </form>
                 &nbsp;
-                <form method="POST" action="<c:url value='/punchin/create' />">
-                    <button onclick="location.href='<c:url value='/reports/new' />'"
+                <form method="POST" action="<c:url value='/punchout/create' />">
+                    <button type="submit"
                         class="ui negative button">退勤</button>
                 </form>
             </div>
