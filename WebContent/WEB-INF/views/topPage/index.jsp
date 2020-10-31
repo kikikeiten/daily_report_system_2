@@ -31,6 +31,13 @@
                         class="ui negative button">退勤</button>
                 </form>
             </c:if>
+            <c:if test="${attendance_flag == null}">
+                <form method="POST" action="<c:url value='/punchin/create' />">
+                    <button type="submit"
+                        class="ui positive button">出勤</button>
+                </form>
+                &nbsp;
+            </c:if>
             </div>
             &nbsp; <span id="RealtimeClockArea2" class="ui label"></span>
             <script>
