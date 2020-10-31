@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Attendance;
 import models.Employee;
 import models.Report;
 import utils.DBUtil;
@@ -83,6 +84,22 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setParameter("now", now)
                 .setParameter("admin_flag", login_employee.getAdmin_flag())
                 .getSingleResult();
+
+        try {
+            Attendance getMyLatestAttendance = (Attendance) em.createNamedQuery("getMyLatestAttendance", Attendance.class)
+                    .setParameter("employee", login_employee)
+                    .setMaxResults(1)
+                    .getSingleResult();
+
+            Integer attendance_flag = getMyLatestAttendance.getAttendance_flag();
+            request.setAttribute("attendance_flag", attendance_flag);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
 
         em.close();
 

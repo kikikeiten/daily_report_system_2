@@ -21,7 +21,8 @@ import javax.persistence.Table;
         @NamedQuery(name = "getMyAttendancesCount", query = "SELECT COUNT(a) FROM Attendance AS a WHERE a.employee = :employee"),
         @NamedQuery(name = "getAllAttendances", query = "SELECT a FROM Attendance AS a ORDER BY a.punch_in DESC"),
         @NamedQuery(name = "getAllAttendancesCount", query = "SELECT COUNT(a) FROM Attendance AS a"),
-        @NamedQuery(name = "getMyLatestAttendance", query = "SELECT a.id FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC"),
+        @NamedQuery(name = "getMyLatestAttendanceId", query = "SELECT a.id FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC"),
+        @NamedQuery(name = "getMyLatestAttendance", query = "SELECT a FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC")
 })
 
 @Entity
@@ -46,6 +47,9 @@ public class Attendance {
 
     @Column(name = "working", nullable = true)
     private Time working;
+
+    @Column(name = "attendance_flag", nullable = false)
+    private Integer attendance_flag;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -99,6 +103,14 @@ public class Attendance {
 
     public void setWorking(Time working) {
         this.working = working;
+    }
+
+    public Integer getAttendance_flag() {
+        return attendance_flag;
+    }
+
+    public void setAttendance_flag(Integer attendance_flag) {
+        this.attendance_flag = attendance_flag;
     }
 
     public Timestamp getCreated_at() {

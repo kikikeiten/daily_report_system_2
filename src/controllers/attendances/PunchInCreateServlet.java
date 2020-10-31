@@ -50,6 +50,7 @@ public class PunchInCreateServlet extends HttpServlet {
         a.setPunch_in(currentTime);
         a.setCreated_at(currentTime);
         a.setUpdated_at(currentTime);
+        a.setAttendance_flag(1);
 
         em.getTransaction().begin();
         em.persist(a);

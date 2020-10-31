@@ -17,16 +17,20 @@
         </c:if>
         <div class="ui info message">
             <i class="close icon"></i>
-            <div style="display: inline-flex">
+            <div style="display:inline-flex">
+            <c:if test="${attendance_flag == 0}">
                 <form method="POST" action="<c:url value='/punchin/create' />">
                     <button type="submit"
                         class="ui positive button">出勤</button>
                 </form>
                 &nbsp;
+            </c:if>
+            <c:if test="${attendance_flag == 1}">
                 <form method="POST" action="<c:url value='/punchout/create' />">
                     <button type="submit"
                         class="ui negative button">退勤</button>
                 </form>
+            </c:if>
             </div>
             &nbsp; <span id="RealtimeClockArea2" class="ui label"></span>
             <script>

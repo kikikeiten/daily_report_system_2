@@ -43,12 +43,12 @@ public class PunchOutCreateServlet extends HttpServlet {
 
         Employee e = (Employee) request.getSession().getAttribute("login_employee");
 
-        Integer getMyLatestAttendance = (Integer) em.createNamedQuery("getMyLatestAttendance", Integer.class)
+        Integer getMyLatestAttendanceId = em.createNamedQuery("getMyLatestAttendanceId", Integer.class)
                 .setParameter("employee", e)
                 .setMaxResults(1)
                 .getSingleResult();
 
-        Attendance a = em.find(Attendance.class, getMyLatestAttendance);
+        Attendance a = em.find(Attendance.class, getMyLatestAttendanceId);
 
         a.setEmployee(e);
         a.setAttendance_date(a.getAttendance_date());
@@ -58,6 +58,7 @@ public class PunchOutCreateServlet extends HttpServlet {
         a.setPunch_out(currentTime);
         a.setCreated_at(currentTime);
         a.setUpdated_at(currentTime);
+        a.setAttendance_flag(0);
 
         LocalDateTime nowLocalDate = LocalDateTime.now();
         LocalDateTime punch_in = a.getPunch_in().toLocalDateTime();
