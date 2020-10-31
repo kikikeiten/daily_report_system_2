@@ -76,6 +76,7 @@ public class PunchOutCreateServlet extends HttpServlet {
         em.getTransaction().begin();
         em.getTransaction().commit();
         em.close();
+        request.getSession().setAttribute("flush", "退勤時間を打刻しました。");
 
         response.sendRedirect(request.getContextPath() + "/");
     }

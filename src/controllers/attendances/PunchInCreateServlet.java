@@ -56,6 +56,7 @@ public class PunchInCreateServlet extends HttpServlet {
         em.persist(a);
         em.getTransaction().commit();
         em.close();
+        request.getSession().setAttribute("flush", "出勤時間を打刻しました。");
 
         response.sendRedirect(request.getContextPath() + "/");
     }
