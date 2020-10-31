@@ -24,8 +24,8 @@
                             varStatus="status">
                             <tr class="row${status.count % 2}">
                                 <td class="all_attendance_employee"><c:out
-                                        value="${attendance.employee.name}" /> <c:if
-                                        test="${attendance.attendance_flag == 1}">
+                                        value="${attendance.employee.name}" />
+                                    <c:if test="${attendance.attendance_flag == 1}">
                                         <div class="ui green label">勤務中</div>
                                     </c:if> <c:if test="${attendance.attendance_flag == 2}">
                                         <div class="ui red label">打刻忘れ</div>

@@ -411,6 +411,10 @@ table#my_attendance_list th {
     padding: 10px 2%;
 }
 
+table#my_attendance_list .label {
+    float: right;
+}
+
 /* All attendance  list */
 table#all_attendance_list th {
     font-weight: bold;
