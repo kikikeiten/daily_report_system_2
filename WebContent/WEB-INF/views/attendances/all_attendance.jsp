@@ -24,19 +24,24 @@
                             varStatus="status">
                             <tr class="row${status.count % 2}">
                                 <td class="all_attendance_employee"><c:out
-                                        value="${attendance.employee.name}" />
-                                        <c:if test="${attendance.attendance_flag == 1}">
-                                        <div class="ui green label">
-                                        勤務中</div></c:if>
-                                        </td>
+                                        value="${attendance.employee.name}" /> <c:if
+                                        test="${attendance.attendance_flag == 1}">
+                                        <div class="ui green label">勤務中</div>
+                                    </c:if> <c:if test="${attendance.attendance_flag == 2}">
+                                        <div class="ui red label">打刻忘れ</div>
+                                    </c:if></td>
                                 <td class="all_attendance_date"><fmt:formatDate
                                         value='${attendance.attendance_date}' pattern='MM / dd' /></td>
                                 <td class="all_attendance_punchIn"><fmt:formatDate
                                         value='${attendance.punch_in}' pattern='HH : mm' /></td>
                                 <td class="all_attendance_punchOut"><fmt:formatDate
-                                        value='${attendance.punch_out}' pattern='HH : mm' /></td>
+                                        value='${attendance.punch_out}' pattern='HH : mm' /> <c:if
+                                        test="${attendance.attendance_flag == 2}">
+                                        未登録</c:if></td>
                                 <td class="all_attendance_working"><fmt:formatDate
-                                        value='${attendance.working}' pattern='HH : mm' /></td>
+                                        value='${attendance.working}' pattern='HH : mm' /> <c:if
+                                        test="${attendance.attendance_flag == 2}">
+                                        未登録</c:if></td>
                             </tr>
                         </c:forEach>
                     </tbody>
