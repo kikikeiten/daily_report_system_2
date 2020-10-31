@@ -16,6 +16,9 @@
 </head>
 <body>
     <div id="wrapper">
+        <c:if test="${attendance_flag == 1}">
+            <div class="ui top right attached green label">勤務中</div>
+        </c:if>
         <br>
         <div class="ui borderless container menu">
             <a href="<c:url value='/' />" class="item"><b>日報管理システム</b></a>
