@@ -1,7 +1,10 @@
 package controllers.attendances;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -45,8 +48,6 @@ public class PunchOutCreateServlet extends HttpServlet {
                 .setMaxResults(1)
                 .getSingleResult();
 
-        System.out.println("出退勤IDは" + getMyLatestAttendance +"です。");
-
         Attendance a = em.find(Attendance.class, getMyLatestAttendance);
 
         a.setEmployee(e);
@@ -57,6 +58,19 @@ public class PunchOutCreateServlet extends HttpServlet {
         a.setPunch_out(currentTime);
         a.setCreated_at(currentTime);
         a.setUpdated_at(currentTime);
+
+        LocalDateTime nowLocalDate = LocalDateTime.now();
+        LocalDateTime punch_in = a.getPunch_in().toLocalDateTime();
+
+        long minutes = ChronoUnit.MINUTES.between(punch_in, nowLocalDate);
+
+        long diff_hours = minutes / 60;
+        long diff_minutes = minutes % 60;
+
+        String diff_time = diff_hours + ":" + diff_minutes + ":00";
+        Time working_time = Time.valueOf(diff_time);
+
+        a.setWorking(working_time);
 
         em.getTransaction().begin();
         em.getTransaction().commit();

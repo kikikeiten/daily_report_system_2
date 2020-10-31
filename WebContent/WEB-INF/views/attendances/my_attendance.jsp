@@ -28,10 +28,9 @@
                                         value='${attendance.punch_in}' pattern='HH : mm' /></td>
                                 <td class="my_attendance_punchOut"><fmt:formatDate
                                         value='${attendance.punch_out}' pattern='HH : mm' /></td>
-                                <td class="my_attendance_working"><c:if
-                                        test="attendance.working != null">
-                                        <fmt:formatDate value='${attendance.working}' pattern='HH:mm' />
-                                    </c:if></td>
+                                <td class="my_attendance_working">
+                                        <fmt:formatDate value='${attendance.working}' pattern='HH : mm' />
+                                    </td>
                             </tr>
                         </c:forEach>
                     </tbody>

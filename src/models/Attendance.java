@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -44,7 +45,7 @@ public class Attendance {
     private Timestamp punch_out;
 
     @Column(name = "working", nullable = true)
-    private Timestamp working;
+    private Time working;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -90,6 +91,14 @@ public class Attendance {
 
     public void setPunch_out(Timestamp punch_out) {
         this.punch_out = punch_out;
+    }
+
+    public Time getWorking() {
+        return working;
+    }
+
+    public void setWorking(Time working) {
+        this.working = working;
     }
 
     public Timestamp getCreated_at() {
