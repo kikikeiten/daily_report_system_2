@@ -22,7 +22,8 @@ import javax.persistence.Table;
         @NamedQuery(name = "getAllAttendances", query = "SELECT a FROM Attendance AS a ORDER BY a.punch_in DESC"),
         @NamedQuery(name = "getAllAttendancesCount", query = "SELECT COUNT(a) FROM Attendance AS a"),
         @NamedQuery(name = "getMyLatestAttendanceId", query = "SELECT a.id FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC"),
-        @NamedQuery(name = "getMyLatestAttendance", query = "SELECT a FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC")
+        @NamedQuery(name = "getMyLatestAttendance", query = "SELECT a FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC"),
+        @NamedQuery(name = "getAllForgetAttendances", query = "SELECT a FROM Attendance AS a WHERE a.attendance_flag = 1 AND a.attendance_date <> :today")
 })
 
 @Entity
