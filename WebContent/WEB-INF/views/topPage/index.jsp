@@ -64,8 +64,10 @@
             <div class="ui right floated buttons">
                 <button class="ui button"
                     onclick="location.href='<c:url value='/attendance/my' />'">My打刻履歴</button>
+                <c:if test="${sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
                 <button class="ui button"
                     onclick="location.href='<c:url value='/attendance/all' />'">全打刻履歴</button>
+                </c:if>
             </div>
         </div>
         <h2>日報管理システムへようこそ</h2>
