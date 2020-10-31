@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Attendance;
 import models.Employee;
 import models.Report;
 import utils.DBUtil;
@@ -46,6 +47,7 @@ public class TopPageIndexServlet extends HttpServlet {
         } catch (Exception e) {
             page = 1;
         }
+
         List<Report> reports = em.createNamedQuery("getMyAllReports", Report.class)
                 .setParameter("employee", login_employee)
                 .setFirstResult(10 * (page - 1))
@@ -74,15 +76,48 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
-        long getYesterdayManagerApprovalsCount = (long) em.createNamedQuery("getYesterdayManagerApprovalsCount", Long.class)
+        long getYesterdayManagerApprovalsCount = (long) em
+                .createNamedQuery("getYesterdayManagerApprovalsCount", Long.class)
                 .setParameter("now", now)
                 .setParameter("admin_flag", login_employee.getAdmin_flag())
                 .getSingleResult();
 
-        long getYesterdayDirectorApprovalsCount = (long) em.createNamedQuery("getYesterdayDirectorApprovalsCount", Long.class)
+        long getYesterdayDirectorApprovalsCount = (long) em
+                .createNamedQuery("getYesterdayDirectorApprovalsCount", Long.class)
                 .setParameter("now", now)
                 .setParameter("admin_flag", login_employee.getAdmin_flag())
                 .getSingleResult();
+
+        try {
+            Attendance getMyLatestAttendance = (Attendance) em
+                    .createNamedQuery("getMyLatestAttendance", Attendance.class)
+                    .setParameter("employee", login_employee)
+                    .setMaxResults(1)
+                    .getSingleResult();
+
+            Integer attendance_flag = getMyLatestAttendance.getAttendance_flag();
+            request.setAttribute("attendance_flag", attendance_flag);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            List<Attendance> getAllForgetAttendances = em.createNamedQuery("getAllForgetAttendances", Attendance.class)
+                    .setParameter("today", now)
+                    .getResultList();
+
+            for (Attendance set_forget : getAllForgetAttendances) {
+                set_forget.setAttendance_flag(2);
+                System.out.println("setAttendance_flagの値は" + set_forget.getAttendance_flag() + "です。");
+
+                em.getTransaction().begin();
+                em.getTransaction().commit();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         em.close();
 

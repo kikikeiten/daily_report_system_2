@@ -6,7 +6,7 @@
     <div class="ui text container">
         <c:choose>
             <c:when test="${report != null}">
-                <h2>日報 編集ページ</h2>
+                <h2>日報「${report.title}」の編集ページ</h2>
                 <form method="POST" action="<c:url value='/reports/update' />" class="ui fluid form">
                     <c:import url="_form.jsp" />
                 </form>
