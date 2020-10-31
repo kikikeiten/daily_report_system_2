@@ -24,17 +24,15 @@
                             varStatus="status">
                             <tr class="row${status.count % 2}">
                                 <td class="all_attendance_employee"><c:out
-                                        value="${attendance.employee.name}"/></td>
+                                        value="${attendance.employee.name}" /></td>
                                 <td class="all_attendance_date"><fmt:formatDate
                                         value='${attendance.attendance_date}' pattern='MM / dd' /></td>
                                 <td class="all_attendance_punchIn"><fmt:formatDate
                                         value='${attendance.punch_in}' pattern='HH : mm' /></td>
                                 <td class="all_attendance_punchOut"><fmt:formatDate
                                         value='${attendance.punch_out}' pattern='HH : mm' /></td>
-                                <td class="all_attendance_working"><c:if
-                                        test="attendance.working != null">
-                                        <fmt:formatDate value='${attendance.working}' pattern='HH:mm' />
-                                    </c:if></td>
+                                <td class="all_attendance_working"><fmt:formatDate
+                                        value='${attendance.working}' pattern='HH : mm' /></td>
                             </tr>
                         </c:forEach>
                     </tbody>
