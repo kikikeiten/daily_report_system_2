@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import models.Attendance;
 import models.Employee;
 import utils.DBUtil;
 
@@ -62,6 +63,19 @@ public class HeaderFilter implements Filter {
 
         long getDirectorApprovalReportsCount = (long) em.createNamedQuery("getDirectorApprovalReportsCount", Long.class)
                 .getSingleResult();
+
+        try {
+            Attendance getMyLatestAttendance = (Attendance) em.createNamedQuery("getMyLatestAttendance", Attendance.class)
+                    .setParameter("employee", login_employee)
+                    .setMaxResults(1)
+                    .getSingleResult();
+
+            Integer attendance_flag = getMyLatestAttendance.getAttendance_flag();
+            request.setAttribute("attendance_flag", attendance_flag);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         em.close();
 

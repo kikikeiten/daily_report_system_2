@@ -16,12 +16,33 @@
             </div>
         </c:if>
         <div class="ui info message">
-        <i class="close icon"></i>
-        <button onclick="location.href='<c:url value='/reports/new' />'"
-                class="ui positive button">出勤</button>&nbsp;
-            <button onclick="location.href='<c:url value='/reports/new' />'"
-                class="ui negative button">退勤</button>&nbsp;
-             <span id="RealtimeClockArea2" class="ui label"></span>
+            <i class="close icon"></i>
+            <div style="display: inline-flex">
+                <c:if test="${attendance_flag == 0}">
+                    <form method="POST" action="<c:url value='/punchin/create' />">
+                        <button type="submit" class="ui positive button">出勤</button>
+                    </form>
+                &nbsp;
+            </c:if>
+                <c:if test="${attendance_flag == 1}">
+                    <form method="POST" action="<c:url value='/punchout/create' />">
+                        <button type="submit" class="ui negative button">退勤</button>
+                    </form>
+                </c:if>
+                <c:if test="${attendance_flag == 2}">
+                    <form method="POST" action="<c:url value='/punchin/create' />">
+                        <button type="submit" class="ui positive button">出勤</button>
+                    </form>
+                &nbsp;
+            </c:if>
+                <c:if test="${attendance_flag == null}">
+                    <form method="POST" action="<c:url value='/punchin/create' />">
+                        <button type="submit" class="ui positive button">出勤</button>
+                    </form>
+                &nbsp;
+            </c:if>
+            </div>
+            &nbsp; <span id="RealtimeClockArea2" class="ui label"></span>
             <script>
     function set2fig(num) {
            var ret;
@@ -38,11 +59,16 @@
            document.getElementById("RealtimeClockArea2").innerHTML = msg;
         }
         setInterval('showClock2()',1000);
-    </script>&nbsp;
-    <div class="ui right floated buttons">
-  <button class="ui button">My打刻履歴</button>
-  <button class="ui button">全打刻履歴</button>
-</div>
+    </script>
+            &nbsp;
+            <div class="ui right floated buttons">
+                <button class="ui button"
+                    onclick="location.href='<c:url value='/attendance/my' />'">My打刻履歴</button>
+                <c:if test="${sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
+                <button class="ui button"
+                    onclick="location.href='<c:url value='/attendance/all' />'">全打刻履歴</button>
+                </c:if>
+            </div>
         </div>
         <h2>日報管理システムへようこそ</h2>
         <c:choose>
@@ -62,7 +88,7 @@
                     $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
                     });
-                </script>
+                        </script>
                         <a href="<c:url value='/drafts' />">下書きの日報が<c:out
                                 value="${getYesterdayDraftsCount}" />件あります。
                         </a><br> <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out
