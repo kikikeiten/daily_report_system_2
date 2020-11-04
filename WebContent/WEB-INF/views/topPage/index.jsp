@@ -23,7 +23,7 @@
                         <button type="submit" class="ui positive button">出勤</button>
                     </form>
                 &nbsp;
-            </c:if>
+                </c:if>
                 <c:if test="${attendance_flag == 1}">
                     <form method="POST" action="<c:url value='/punchout/create' />">
                         <button type="submit" class="ui negative button">退勤</button>
@@ -34,7 +34,13 @@
                         <button type="submit" class="ui positive button">出勤</button>
                     </form>
                 &nbsp;
-            </c:if>
+                </c:if>
+                <c:if test="${attendance_flag == 3}">
+                    <form method="POST" action="<c:url value='/punchin/create' />">
+                        <button type="submit" class="ui positive button">出勤</button>
+                    </form>
+                &nbsp;
+                </c:if>
                 <c:if test="${attendance_flag == null}">
                     <form method="POST" action="<c:url value='/punchin/create' />">
                         <button type="submit" class="ui positive button">出勤</button>
