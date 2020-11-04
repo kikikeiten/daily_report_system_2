@@ -13,6 +13,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Table(name = "follows")
 @NamedQueries({
         @NamedQuery(name = "followDestroy", query = "SELECT f.id FROM Follow AS f WHERE f.follow  = :follow AND f.employee = :employee"),
@@ -30,6 +33,8 @@ import javax.persistence.Table;
         @NamedQuery(name = "getEmployeeNotFollowingCount", query = "SELECT COUNT(e) FROM Employee AS e WHERE NOT EXISTS (SELECT f FROM Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id) AND e.id <> :employee") //Counts on the list of other employees that one employee doesn't follow
 })
 
+@Getter
+@Setter
 @Entity
 public class Follow {
     @Id
@@ -50,45 +55,4 @@ public class Follow {
 
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Employee getFollow() {
-        return follow;
-    }
-
-    public void setFollow(Employee follow) {
-        this.follow = follow;
-    }
-
-    public Timestamp getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
-    }
-
-    public Timestamp getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
-    }
-
 }
