@@ -20,12 +20,12 @@ import lombok.Setter;
 
 @Table(name = "attendances")
 @NamedQueries({
-        @NamedQuery(name = "getMyAllAttendances", query = "SELECT a FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC"),
+        @NamedQuery(name = "getMyAllAttendances", query = "SELECT a FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.updated_at DESC"),
         @NamedQuery(name = "getMyAttendancesCount", query = "SELECT COUNT(a) FROM Attendance AS a WHERE a.employee = :employee"),
-        @NamedQuery(name = "getAllAttendances", query = "SELECT a FROM Attendance AS a ORDER BY a.punch_in DESC"),
+        @NamedQuery(name = "getAllAttendances", query = "SELECT a FROM Attendance AS a ORDER BY a.updated_at DESC"),
         @NamedQuery(name = "getAllAttendancesCount", query = "SELECT COUNT(a) FROM Attendance AS a"),
-        @NamedQuery(name = "getMyLatestAttendanceId", query = "SELECT a.id FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC"),
-        @NamedQuery(name = "getMyLatestAttendance", query = "SELECT a FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.punch_in DESC"),
+        @NamedQuery(name = "getMyLatestAttendanceId", query = "SELECT a.id FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.updated_at DESC"),
+        @NamedQuery(name = "getMyLatestAttendance", query = "SELECT a FROM Attendance AS a WHERE a.employee = :employee ORDER BY a.updated_at DESC"),
         @NamedQuery(name = "getAllForgetAttendances", query = "SELECT a FROM Attendance AS a WHERE a.attendance_flag = 1 AND a.attendance_date <> :today")
 })
 
