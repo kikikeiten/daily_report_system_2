@@ -28,7 +28,10 @@
                                         test="${attendance.attendance_flag == 1}">
                                         <div class="ui green label">勤務中</div>
                                     </c:if> <c:if test="${attendance.attendance_flag == 2}">
-                                        <a href="<c:url value='/leave/edit?id=${attendance.id}'/>" class="ui red label">打刻忘れ</A>
+                                        <a href="<c:url value='/leave/edit?id=${attendance.id}'/>"
+                                            class="ui red label">打刻忘れ</A>
+                                    </c:if> <c:if test="${attendance.attendance_flag == 3}">
+                                        <div class="ui orange label">修正済み</div>
                                     </c:if></td>
                                 <td class="all_attendance_date"><fmt:formatDate
                                         value='${attendance.attendance_date}' pattern='MM / dd' /></td>
