@@ -8,11 +8,12 @@
 <title>日報管理システム</title>
 <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
 <link rel="stylesheet" href="<c:url value='/css/style.css' />">
-<link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.js"></script>
 <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+    src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
+<script
+    src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
 </head>
 <body>
     <div id="wrapper">
