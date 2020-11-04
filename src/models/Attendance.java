@@ -46,10 +46,10 @@ public class Attendance {
     private Date attendance_date;
 
     @Column(name = "punch_in", nullable = false)
-    private Timestamp punch_in;
+    private Time punch_in;
 
     @Column(name = "punch_out", nullable = true)
-    private Timestamp punch_out;
+    private Time punch_out;
 
     @Column(name = "working", nullable = true)
     private Time working;

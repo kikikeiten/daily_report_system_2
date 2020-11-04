@@ -2,6 +2,7 @@ package controllers.attendances;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 import javax.persistence.EntityManager;
@@ -47,7 +48,8 @@ public class PunchInCreateServlet extends HttpServlet {
         a.setAttendance_date(attendance_date);
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        a.setPunch_in(currentTime);
+        Time currentTime2 = new Time(System.currentTimeMillis());
+        a.setPunch_in(currentTime2);
         a.setCreated_at(currentTime);
         a.setUpdated_at(currentTime);
         a.setAttendance_flag(1);
