@@ -5,15 +5,19 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
-            <div class="ui success message">
-                <i class="close icon"></i>
-                <script>
-                    $('.message .close').on('click', function() {
-                        $(this).closest('.message').transition('fade');
-                    });
-                </script>
-                <c:out value="${flush}"></c:out>
-            </div>
+            <script>
+            $('body')
+            .toast({
+              class: 'success',
+              message: "${flush}",
+              showProgress: 'top',
+              progressUp: true,
+              className: {
+                  toast: 'ui message'
+              }
+            })
+          ;
+            </script>
         </c:if>
         <div class="ui info message">
             <i class="close icon"></i>
@@ -70,9 +74,10 @@
             <div class="ui right floated buttons">
                 <button class="ui button"
                     onclick="location.href='<c:url value='/attendance/my' />'">My打刻履歴</button>
-                <c:if test="${sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
-                <button class="ui button"
-                    onclick="location.href='<c:url value='/attendance/all' />'">全打刻履歴</button>
+                <c:if
+                    test="${sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
+                    <button class="ui button"
+                        onclick="location.href='<c:url value='/attendance/all' />'">全打刻履歴</button>
                 </c:if>
             </div>
         </div>
