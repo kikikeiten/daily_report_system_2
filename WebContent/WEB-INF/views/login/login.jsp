@@ -15,15 +15,19 @@
             </div>
         </c:if>
         <c:if test="${flush != null}">
-            <div class="ui success message">
-                <i class="close icon"></i>
-                <script>
-                    $('.message .close').on('click', function() {
-                        $(this).closest('.message').transition('fade');
-                    });
-                </script>
-                <c:out value="${flush}"></c:out>
-            </div>
+            <script>
+            $('body')
+            .toast({
+              class: 'success',
+              message: "${flush}",
+              showProgress: 'top',
+              progressUp: true,
+              className: {
+                  toast: 'ui message'
+              }
+            })
+          ;
+            </script>
         </c:if>
         <br>
         <br>
