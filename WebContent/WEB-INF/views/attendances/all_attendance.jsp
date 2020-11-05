@@ -4,6 +4,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
+        <c:if test="${flush != null}">
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <script>
+                    $('.message .close').on('click', function() {
+                        $(this).closest('.message').transition('fade');
+                    });
+                </script>
+                <c:out value="${flush}"></c:out>
+            </div>
+        </c:if>
         <h2>全打刻履歴</h2>
         <c:choose>
             <c:when test="${getAllAttendancesCount == 0}">
