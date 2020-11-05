@@ -14,20 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Attendance;
-import models.Employee;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class PunchOutCreateServlet
+ * Servlet implementation class LeaveUpdateServlet
  */
-@WebServlet("/punchout/create")
-public class PunchOutCreateServlet extends HttpServlet {
+@WebServlet("/leave/update")
+public class LeaveUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PunchOutCreateServlet() {
+    public LeaveUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,27 +39,21 @@ public class PunchOutCreateServlet extends HttpServlet {
         // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
+        Attendance a = em.find(Attendance.class, Integer.parseInt(request.getParameter("id")));
 
-        Employee e = (Employee) request.getSession().getAttribute("login_employee");
-
-        Integer getMyLatestAttendanceId = em.createNamedQuery("getMyLatestAttendanceId", Integer.class)
-                .setParameter("employee", e)
-                .setMaxResults(1)
-                .getSingleResult();
-
-        Attendance a = em.find(Attendance.class, getMyLatestAttendanceId);
+        String leave_time = Integer.parseInt(request.getParameter("leave_hour")) + ":"
+                + Integer.parseInt(request.getParameter("leave_minute")) + ":00";
+        Time leave_time2 = Time.valueOf(leave_time);
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        Time currentTime2 = new Time(System.currentTimeMillis());
-        a.setPunch_out(currentTime2);
+        a.setPunch_out(leave_time2);
         a.setCreated_at(currentTime);
         a.setUpdated_at(currentTime);
-        a.setAttendance_flag(0);
+        a.setAttendance_flag(3); // 3 == Fixed flag
 
-        LocalTime nowLocalDate = LocalTime.now();
         LocalTime punch_in = a.getPunch_in().toLocalTime();
-
-        long minutes = ChronoUnit.MINUTES.between(punch_in, nowLocalDate);
+        LocalTime punch_out = leave_time2.toLocalTime();
+        long minutes = ChronoUnit.MINUTES.between(punch_in, punch_out);
 
         long diff_hours = minutes / 60;
         long diff_minutes = minutes % 60;
@@ -73,9 +66,9 @@ public class PunchOutCreateServlet extends HttpServlet {
         em.getTransaction().begin();
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", "退勤時間を打刻しました。");
+        request.getSession().setAttribute("flush", "退勤時間を修正しました。");
 
-        response.sendRedirect(request.getContextPath() + "/");
+        response.sendRedirect(request.getContextPath() + "/attendance/all");
     }
 
 }

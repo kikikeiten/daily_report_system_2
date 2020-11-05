@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="daily_report_system_2:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>daily_report_system_2</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="daily_report_system_2-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="daily_report_system_2:war exploded" />
+    </root>
+  </artifact>
+</component>

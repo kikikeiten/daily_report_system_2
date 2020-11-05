@@ -15,6 +15,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Table(name = "reports")
 @NamedQueries({
         @NamedQuery(name = "getAllReports", query = "SELECT r FROM Report AS r ORDER BY r.id DESC"),
@@ -37,6 +40,9 @@ import javax.persistence.Table;
         @NamedQuery(name = "getYesterdayDirectorApprovalsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.approval = 4 AND :admin_flag = 3 AND r.report_date < :now"),
         @NamedQuery(name = "getYesterdayDraftsCount", query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee AND r.approval = 0 AND r.report_date < :now")
 })
+
+@Getter
+@Setter
 @Entity
 public class Report {
     @Id
@@ -69,77 +75,4 @@ public class Report {
 
     @Column(name = "approval", nullable = false)
     private Integer approval;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Date getReport_date() {
-        return report_date;
-    }
-
-    public void setReport_date(Date report_date) {
-        this.report_date = report_date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Timestamp getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
-    }
-
-    public Timestamp getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public Integer getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Integer likes) {
-        this.likes = likes;
-    }
-
-    public Integer getApproval() {
-        return approval;
-    }
-
-    public void setApproval(Integer approval) {
-        this.approval = approval;
-    }
-
 }

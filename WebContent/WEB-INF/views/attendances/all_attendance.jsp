@@ -4,6 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
+        <c:if test="${flush != null}">
+            <script>
+            $('body')
+            .toast({
+              class: 'success',
+              message: "${flush}",
+              showProgress: 'top',
+              progressUp: true,
+              className: {
+                  toast: 'ui message'
+              }
+            })
+          ;
+            </script>
+        </c:if>
         <h2>全打刻履歴</h2>
         <c:choose>
             <c:when test="${getAllAttendancesCount == 0}">
@@ -24,11 +39,14 @@
                             varStatus="status">
                             <tr class="row${status.count % 2}">
                                 <td class="all_attendance_employee"><c:out
-                                        value="${attendance.employee.name}" />
-                                    <c:if test="${attendance.attendance_flag == 1}">
+                                        value="${attendance.employee.name}" /> <c:if
+                                        test="${attendance.attendance_flag == 1}">
                                         <div class="ui green label">勤務中</div>
                                     </c:if> <c:if test="${attendance.attendance_flag == 2}">
-                                        <div class="ui red label">打刻忘れ</div>
+                                        <a href="<c:url value='/leave/edit?id=${attendance.id}'/>"
+                                            class="ui red label">打刻忘れ</A>
+                                    </c:if> <c:if test="${attendance.attendance_flag == 3}">
+                                        <div class="ui orange label">修正済み</div>
                                     </c:if></td>
                                 <td class="all_attendance_date"><fmt:formatDate
                                         value='${attendance.attendance_date}' pattern='MM / dd' /></td>
