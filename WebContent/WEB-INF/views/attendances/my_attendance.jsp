@@ -24,9 +24,16 @@
                             <tr class="row${status.count % 2}">
                                 <td class="my_attendance_date"><fmt:formatDate
                                         value='${attendance.attendance_date}' pattern='MM / dd' />
+                                    <c:if test="${attendance.attendance_flag == 1}">
+                                        <div class="ui green label">勤務中</div>
+                                    </c:if>
                                     <c:if test="${attendance.attendance_flag == 2}">
                                         <div class="ui red label">打刻忘れ</div>
-                                    </c:if></td>
+                                    </c:if>
+                                    <c:if test="${attendance.attendance_flag == 3}">
+                                        <div class="ui orange label">修正済み</div>
+                                    </c:if>
+                                    </td>
                                 <td class="my_attendance_punchIn"><fmt:formatDate
                                         value='${attendance.punch_in}' pattern='HH : mm' /></td>
                                 <td class="my_attendance_punchOut"><fmt:formatDate

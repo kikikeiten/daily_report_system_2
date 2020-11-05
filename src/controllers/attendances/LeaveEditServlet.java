@@ -38,10 +38,10 @@ public class LeaveEditServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Attendance a = em.find(Attendance.class, Integer.parseInt(request.getParameter("id")));
-        Integer aa = a.getId();
-        System.out.println("出退勤IDは" + aa + "です。");
 
-        request.setAttribute("attendance_id", aa);
+        request.setAttribute("attendance", a);
+
+        em.close();
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/attendances/leave.jsp");
         rd.forward(request, response);

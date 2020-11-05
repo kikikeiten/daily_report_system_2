@@ -41,8 +41,8 @@ public class LeaveUpdateServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
         Attendance a = em.find(Attendance.class, Integer.parseInt(request.getParameter("id")));
 
-        String leave_time = Integer.parseInt(request.getParameter("punch_hour")) + ":"
-                + Integer.parseInt(request.getParameter("punch_minute")) + ":00";
+        String leave_time = Integer.parseInt(request.getParameter("leave_hour")) + ":"
+                + Integer.parseInt(request.getParameter("leave_minute")) + ":00";
         Time leave_time2 = Time.valueOf(leave_time);
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
