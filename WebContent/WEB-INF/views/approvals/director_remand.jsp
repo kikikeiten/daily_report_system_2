@@ -5,15 +5,19 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
-            <div class="ui success message">
-                <i class="close icon"></i>
-                <script>
-                    $('.message .close').on('click', function() {
-                        $(this).closest('.message').transition('fade');
-                    });
-                </script>
-                <c:out value="${flush}"></c:out>
-            </div>
+            <script>
+            $('body')
+            .toast({
+              class: 'success',
+              message: "${flush}",
+              showProgress: 'top',
+              progressUp: true,
+              className: {
+                  toast: 'ui message'
+              }
+            })
+          ;
+            </script>
         </c:if>
         <h2>部長差し戻しの日報一覧</h2>
         <c:choose>
