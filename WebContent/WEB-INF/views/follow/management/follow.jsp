@@ -5,8 +5,7 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
-            <c:if test="${flush != null}">
-                <script>
+            <script>
             $('body')
             .toast({
               class: 'success',
@@ -19,7 +18,6 @@
             })
           ;
             </script>
-            </c:if>
         </c:if>
         <c:choose>
             <c:when test="${employee != null}">
