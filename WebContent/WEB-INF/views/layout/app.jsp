@@ -5,7 +5,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>日報管理システム</title>
+<title>TipSwatch</title>
 <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
 <link rel="stylesheet" href="<c:url value='/css/style.css' />">
 <script
@@ -22,7 +22,7 @@
         </c:if>
         <br>
         <div class="ui borderless container menu">
-            <a href="<c:url value='/' />" class="item"><b>日報管理システム</b></a>
+            <a href="<c:url value='/' />" class="item"><b>TipSwatch</b></a>
             <c:if test="${sessionScope.login_employee != null}">
                 <c:if
                     test="${sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
