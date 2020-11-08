@@ -18,7 +18,7 @@
 <body>
     <div id="wrapper">
         <c:if test="${attendance_flag == 1}">
-            <div class="ui top right attached green label">勤務中</div>
+            <div class="ui top right attached green label">作業中</div>
         </c:if>
         <br>
         <div class="ui borderless container menu">
@@ -26,9 +26,9 @@
             <c:if test="${sessionScope.login_employee != null}">
                 <c:if
                     test="${sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
-                    <a href="<c:url value='/employees' />" class="item">従業員管理</a>&nbsp;
+                    <a href="<c:url value='/employees' />" class="item">メンバー管理</a>&nbsp;
                     </c:if>
-                <a href="<c:url value='/reports' />" class="item">日報管理</a>&nbsp;
+                <a href="<c:url value='/reports' />" class="item">メモ管理</a>&nbsp;
                     <a href="<c:url value='/timeline' />" class="item">タイムライン</a>&nbsp;
                     <a href="<c:url value='/following' />" class="item"><b><c:out
                             value="${getMyFollowingCount}" /></b>フォロー中</a>&nbsp;

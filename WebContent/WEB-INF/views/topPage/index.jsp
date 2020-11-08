@@ -24,30 +24,30 @@
             <div style="display: inline-flex">
                 <c:if test="${attendance_flag == 0}">
                     <form method="POST" action="<c:url value='/punchin/create' />">
-                        <button type="submit" class="ui positive button">出勤</button>
+                        <button type="submit" class="ui positive button">Work!</button>
                     </form>
                 &nbsp;
                 </c:if>
                 <c:if test="${attendance_flag == 1}">
                     <form method="POST" action="<c:url value='/punchout/create' />">
-                        <button type="submit" class="ui negative button">退勤</button>
+                        <button type="submit" class="ui negative button">Finish!</button>
                     </form>
                 </c:if>
                 <c:if test="${attendance_flag == 2}">
                     <form method="POST" action="<c:url value='/punchin/create' />">
-                        <button type="submit" class="ui positive button">出勤</button>
+                        <button type="submit" class="ui positive button">Work!</button>
                     </form>
                 &nbsp;
                 </c:if>
                 <c:if test="${attendance_flag == 3}">
                     <form method="POST" action="<c:url value='/punchin/create' />">
-                        <button type="submit" class="ui positive button">出勤</button>
+                        <button type="submit" class="ui positive button">Work!</button>
                     </form>
                 &nbsp;
                 </c:if>
                 <c:if test="${attendance_flag == null}">
                     <form method="POST" action="<c:url value='/punchin/create' />">
-                        <button type="submit" class="ui positive button">出勤</button>
+                        <button type="submit" class="ui positive button">Work!</button>
                     </form>
                 &nbsp;
             </c:if>
@@ -86,7 +86,7 @@
             <c:when test="${reports_count == 0}">
                 <h3>
                     <c:out value="${sessionScope.login_employee.name}" />
-                    さんの日報はまだありません。
+                    さんのメモはまだありません。
                 </h3>
                 <p>作成されるとここに表示されます。</p>
             </c:when>
@@ -100,7 +100,7 @@
                         $(this).closest('.message').transition('fade');
                     });
                         </script>
-                        <a href="<c:url value='/drafts' />">下書きの日報が<c:out
+                        <a href="<c:url value='/drafts' />">下書きのメモが<c:out
                                 value="${getYesterdayDraftsCount}" />件あります。
                         </a><br> <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out
                                 value="${getYesterdayManagerApprovalsCount}" />件あります。
@@ -116,7 +116,7 @@
                         $(this).closest('.message').transition('fade');
                     });
                 </script>
-                        <a href="<c:url value='/drafts' />">下書きの日報が<c:out
+                        <a href="<c:url value='/drafts' />">下書きのメモが<c:out
                                 value="${getYesterdayDraftsCount}" />件あります。
                         </a><br> <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out
                                 value="${getYesterdayDirectorApprovalsCount}" />件あります。
@@ -132,7 +132,7 @@
                         $(this).closest('.message').transition('fade');
                     });
                 </script>
-                        <a href="<c:url value='/drafts' />">下書きの日報が<c:out
+                        <a href="<c:url value='/drafts' />">下書きのメモが<c:out
                                 value="${getYesterdayDraftsCount}" />件あります。
                         </a>
                     </div>
@@ -165,7 +165,7 @@
                         </a>
                     </div>
                 </c:if>
-                <h3>My swatches</h3>
+                <h3>My Swatches</h3>
                 <table id="tp_report_list" class="ui celled striped table">
                     <tbody>
                         <tr>
