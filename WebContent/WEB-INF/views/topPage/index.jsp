@@ -283,10 +283,6 @@
         </c:choose>
         <br>
         <br>
-        <button onclick="location.href='<c:url value='/reports/new' />'"
-            class="ui positive button">Add new</button>
-        <br>
-        <br>
         <p>
             <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
         </p>
