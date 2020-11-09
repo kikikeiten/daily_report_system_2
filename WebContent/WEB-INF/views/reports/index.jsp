@@ -20,27 +20,54 @@
           ;
             </script>
         </c:if>
-        <h2>日報 一覧</h2>
+        <h2>Swatch list</h2>
         <c:choose>
             <c:when test="${getReportsCountButDrafts == 0}">
                 <h3>日報はまだありません。</h3>
                 <p>作成されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
+
+<a class="ui three raised link cards" href="<c:url value='/reports/show?id=${report.id}' />">
+            <c:forEach var="report" items="${getAllReportsButDrafts}"
+                            varStatus="status">
+
+                            <div class="ui pink card">
+  <div class="content">
+    <span class="right floated"><c:out
+                                        value="${report.employee.name}" /></span>
+    <span class="header"><c:out
+                                        value="${report.title}" /></span>
+    <span class="description">
+    </span>
+  </div>
+  <div class="extra content">
+    <span class="left floated like">
+      <em data-emoji=":cupid:"></em> <c:out value="${report.likes}" />
+    </span>
+    <span class="right floated date">
+      <fmt:formatDate
+                                        value='${report.report_date}' pattern='yyyy-MM-dd' />
+    </span>
+  </div>
+</div>
+</c:forEach></a>
+
                 <table id="report_list" class="ui celled striped table">
                     <tbody>
                         <tr>
-                            <th class="report_name">氏名</th>
-                            <th class="report_follow">フォロー</th>
-                            <th class="report_date">日付</th>
-                            <th class="report_title">タイトル</th>
-                            <th class="report_action">操作</th>
-                            <th class="report_like">いいね数</th>
-                            <th class="report_approval">承認状況</th>
+                            <th class="report_name">Name</th>
+                            <th class="report_follow">Follow</th>
+                            <th class="report_date">Date</th>
+                            <th class="report_title">Title</th>
+                            <th class="report_action">Action</th>
+                            <th class="report_like">Likes</th>
+                            <th class="report_approval">Flow</th>
                         </tr>
                         <c:forEach var="report" items="${getAllReportsButDrafts}"
                             varStatus="status">
-                            <tr class="row${status.count % 2}">
+
+                              <tr class="row${status.count % 2}">
                                 <td class="report_name"><c:out
                                         value="${report.employee.name}" /></td>
                                 <c:choose>
@@ -200,10 +227,6 @@
                 </div>
             </c:otherwise>
         </c:choose>
-        <br>
-        <br>
-        <button onclick="location.href='<c:url value='/reports/new' />'"
-            class="ui positive button">新規日報</button>
         <br>
         <br>
         <p>

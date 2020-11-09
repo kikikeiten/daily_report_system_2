@@ -81,7 +81,7 @@
                 </c:if>
             </div>
         </div>
-        <h2>TipSwatch</h2>
+        <h2>TipSwatchへようこそ</h2>
         <c:choose>
             <c:when test="${reports_count == 0}">
                 <h3>
