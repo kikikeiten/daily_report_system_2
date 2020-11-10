@@ -21,7 +21,7 @@
             </script>
         </c:if>
         <h2>Swatch list</h2>
-        <div class="ui section divider"></div>
+        <div class="ui raised very padded container segment">
         <c:choose>
             <c:when test="${getReportsCountButDrafts == 0}">
                 <h3>日報はまだありません。</h3>
@@ -53,7 +53,7 @@
                         </div>
                     </c:forEach>
                 </div>
-                <div class="ui section divider"></div>
+                </div>
                 <div class="ui label">日報件数 ${getReportsCountButDrafts}</div>&nbsp;
         <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
