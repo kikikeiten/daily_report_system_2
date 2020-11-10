@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
+
     <c:param name="content">
+
         <c:if test="${flush != null}">
             <script>
             $('body')
@@ -15,9 +17,10 @@
                   toast: 'ui message'
               }
             })
-          ;
+            ;
             </script>
         </c:if>
+
         <h2>Manager approval</h2>
 
         <div class="circular ui icon green mini button" data-variation="inverted"></div>
@@ -37,8 +40,8 @@
                     <h3>課長承認待ちの日報はありません。</h3>
                     <p>他の社員が課長に提出するとここに表示されます。</p>
                 </c:when>
-                <c:otherwise>
 
+                <c:otherwise>
                     <div class="ui three stackable raised link cards">
                         <c:forEach var="report" items="${getAllManagerApprovalReports}" varStatus="status">
 
@@ -79,7 +82,7 @@
 
                     <div class="ui hidden divider"></div>
 
-                <div class="ui mini pagination menu">
+                    <div class="ui mini pagination menu">
                         <c:forEach var="i" begin="1" end="${((getManagerApprovalReportsCount - 1) / 12) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
@@ -93,6 +96,7 @@
                             </c:choose>
                         </c:forEach>
                     </div>
+
                 </c:otherwise>
             </c:choose>
 
@@ -104,7 +108,6 @@
                 <a href="<c:url value='/reports' />"> ${getReportsCountButDrafts} </a>
             </div>
         </div>
-
 
         <div class="ui image label">
             My drafts
