@@ -82,7 +82,7 @@
                         });
                     </script>
                     <button onclick="location.href='<c:url value='/reports/new' />'"
-                        class="ui positive button">Add new</button>
+                        class="ui positive button">Add swatch</button>
                 </div>
             </c:if>
         </div>
