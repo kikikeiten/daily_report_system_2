@@ -55,8 +55,6 @@
                         </c:forEach>
                     </div>
 
-
-                <div class="ui label">差し戻し件数 ${getManagerRemandReportsCount}</div>&nbsp;
                 <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
                         end="${((getManagerRemandReportsCount - 1) / 10) + 1}" step="1">
@@ -79,17 +77,5 @@
 
         </div>
 
-        <br>
-        <br>
-        <button onclick="location.href='<c:url value='/reports/new' />'"
-            class="ui positive button">新規日報</button>
-        <br>
-        <br>
-        <p>
-            <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
-        </p>
-        <p>
-            <a href="<c:url value='/remand/director' />">部長差し戻しの日報一覧（${getDirectorRemandReportsCount}）</a>
-        </p>
     </c:param>
 </c:import>
