@@ -82,6 +82,9 @@
             </div>
         </div>
         <h2>TipSwatchへようこそ</h2>
+
+        <div class="ui raised very padded container segment">
+
         <c:choose>
             <c:when test="${reports_count == 0}">
                 <h3>
@@ -350,6 +353,9 @@
                 </div>
             </c:otherwise>
         </c:choose>
+
+        </div>
+
         <br>
         <br>
         <p>
