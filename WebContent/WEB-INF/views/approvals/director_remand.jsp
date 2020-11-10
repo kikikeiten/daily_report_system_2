@@ -54,7 +54,6 @@
                         </c:forEach>
                     </div>
 
-                    <div class="ui label">差し戻し件数 ${getDirectorRemandReportsCount}</div>&nbsp;
                 <div class="ui mini pagination menu">
                         <c:forEach var="i" begin="1" end="${((getDirectorRemandReportsCount - 1) / 10) + 1}" step="1">
                             <c:choose>
