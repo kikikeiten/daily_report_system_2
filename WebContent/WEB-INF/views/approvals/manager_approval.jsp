@@ -41,18 +41,18 @@
 
                                     <div class="ui icon buttons">
                                         <c:if test="${sessionScope.login_employee.id != report.employee.id}">
-                                            <form method="POST" action="<c:url value='/director/approval/create' />">
+                                            <form method="POST" action="<c:url value='/manager/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${6}" class="circular ui mini icon positive button">
+                                                <button type="submit" name="submit" value="${4}" class="circular ui mini icon positive button">
                                                     <i class="fas fa-thumbs-up"></i>
                                                 </button>
                                             </form>
                                         </c:if>
-                                        <c:if test="${sessionScope.login_employee.id != report.employee.id && report.employee.admin_flag != 3}">
+                                        <c:if test="${sessionScope.login_employee.id != report.employee.id && report.employee.admin_flag != 2}">
                                             &nbsp;
-                                            <form method="POST" action="<c:url value='/director/approval/create' />">
+                                            <form method="POST" action="<c:url value='/manager/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${3}" class="circular ui mini icon negative button">
+                                                <button type="submit" name="submit" value="${1}" class="circular ui mini icon negative button">
                                                     <i class="far fa-thumbs-down"></i>
                                                 </button>
                                             </form>
