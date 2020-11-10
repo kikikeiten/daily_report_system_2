@@ -14,6 +14,7 @@
     href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
 <script
     src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+<link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
 </head>
 <body>
     <div id="wrapper">
