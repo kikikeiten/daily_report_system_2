@@ -21,6 +21,16 @@
         </c:if>
         <h2>Manager approval</h2>
 
+        <div class="circular ui icon green mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.green.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Waiting for manager approval'
+        })
+        ;
+        </script>
+
         <div class="ui raised very padded container segment">
 
         <c:choose>
@@ -33,7 +43,7 @@
             <div class="ui three stackable raised link cards">
                         <c:forEach var="report" items="${getAllManagerApprovalReports}" varStatus="status">
 
-                            <div class="ui blue card">
+                            <div class="ui green card">
                                 <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
                                 </a>
 
