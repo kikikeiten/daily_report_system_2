@@ -166,6 +166,75 @@
                     </div>
                 </c:if>
                 <h3>My Swatches</h3>
+
+                <div class="ui three stackable raised link cards">
+                        <c:forEach var="report" items="${reports}" varStatus="status">
+                            <c:choose>
+
+                                <c:when test="${report.approval == 1}">
+                                    <div class="ui olive card">
+                                        <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
+                                        </a>
+                                        <div class="extra content">
+                                            <a class="left floated like" href="<c:url value='/likes?report_id=${report.id}' />"> <i class="far fa-heart"></i> <c:out value="${report.likes}" />
+                                            </a> <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </c:when>
+
+                                <c:when test="${report.approval == 2}">
+                                    <div class="ui green card">
+                                        <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
+                                        </a>
+                                        <div class="extra content">
+                                            <a class="left floated like" href="<c:url value='/likes?report_id=${report.id}' />"> <i class="far fa-heart"></i> <c:out value="${report.likes}" />
+                                            </a> <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </c:when>
+
+                                <c:when test="${report.approval == 3}">
+                                    <div class="ui teal card">
+                                        <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
+                                        </a>
+                                        <div class="extra content">
+                                            <a class="left floated like" href="<c:url value='/likes?report_id=${report.id}' />"> <i class="far fa-heart"></i> <c:out value="${report.likes}" />
+                                            </a> <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </c:when>
+
+                                <c:when test="${report.approval == 4}">
+                                    <div class="ui blue card">
+                                        <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
+                                        </a>
+                                        <div class="extra content">
+                                            <a class="left floated like" href="<c:url value='/likes?report_id=${report.id}' />"> <i class="far fa-heart"></i> <c:out value="${report.likes}" />
+                                            </a> <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </c:when>
+
+                                <c:when test="${report.approval == 6}">
+                                    <div class="ui violet card">
+                                        <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
+                                        </a>
+                                        <div class="extra content">
+                                            <a class="left floated like" href="<c:url value='/likes?report_id=${report.id}' />"> <i class="far fa-heart"></i> <c:out value="${report.likes}" />
+                                            </a> <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </c:when>
+
+                            </c:choose>
+                        </c:forEach>
+                    </div>
+
                 <table id="tp_report_list" class="ui celled striped table">
                     <tbody>
                         <tr>
