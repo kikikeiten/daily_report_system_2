@@ -36,13 +36,13 @@
                                 <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
                                 </a>
                                 <div class="extra content">
-                                    <div class="ui buttons">
 
+                                        <div class="ui icon buttons">
                                         <c:if test="${sessionScope.login_employee.id != report.employee.id}">
                                             <form method="POST" action="<c:url value='/director/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${6}" class="circular ui mini icon button">
-                                                    <i class="icon settings"></i>
+                                                <button type="submit" name="submit" value="${6}" class="circular ui mini icon positive button">
+                                                    <i class="fas fa-thumbs-up"></i>
                                                 </button>
                                             </form>
                                         </c:if>
@@ -50,12 +50,13 @@
                                             &nbsp;
                                             <form method="POST" action="<c:url value='/director/approval/create' />">
                                                 <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${3}" class="circular ui mini icon button">
-                                                    <i class="icon settings"></i>
+                                                <button type="submit" name="submit" value="${3}" class="circular ui mini icon negative button">
+                                                    <i class="far fa-thumbs-down"></i>
                                                 </button>
                                             </form>
                                         </c:if>
-                                    </div>
+                                        </div>
+
                                     <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
                                     </a>
                                 </div>
