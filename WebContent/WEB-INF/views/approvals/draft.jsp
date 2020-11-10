@@ -19,7 +19,18 @@
           ;
             </script>
         </c:if>
-        <h2>下書きの日報一覧</h2>
+        <h2>My drafts</h2>
+
+        <div class="circular ui icon yellow mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.yellow.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Unsubmitted draft'
+        })
+        ;
+        </script>
+
         <c:choose>
             <c:when test="${getMyDraftsCount == 0}">
                 <h3>
