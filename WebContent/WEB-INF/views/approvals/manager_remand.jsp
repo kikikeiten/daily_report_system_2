@@ -52,49 +52,7 @@
                         </c:forEach>
                     </div>
 
-                <table id="mr_report_list" class="ui celled striped table">
-                    <tbody>
-                        <tr>
-                            <th class="mr_report_name">氏名</th>
-                            <th class="mr_report_date">日付</th>
-                            <th class="mr_report_title">タイトル</th>
-                            <th class="mr_report_action">操作</th>
-                            <th class="mr_report_like">いいね数</th>
-                            <th class="mr_report_approval">承認</th>
-                        </tr>
-                        <c:forEach var="report" items="${getAllManagerRemandReports}"
-                            varStatus="status">
-                            <tr class="row${status.count % 2}">
-                                <td class="mr_report_name"><c:out
-                                        value="${report.employee.name}" /></td>
-                                <td class="mr_report_date"><fmt:formatDate
-                                        value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
-                                <td class="mr_report_title">${report.title}</td>
-                                <td class="mr_report_action"><a
-                                    href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
-                                <c:choose>
-                                    <c:when test="${report.likes == 0}">
-                                        <td class="mr_report_likes"><c:out
-                                                value="${report.likes}" /></td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td class="mr_report_likes"><a
-                                            href="<c:url value='/likes?report_id=${report.id}' />"><c:out
-                                                    value="${report.likes}" /></a></td>
-                                    </c:otherwise>
-                                </c:choose>
-                                <td class="mr_report_approval">
-                                    <form method="POST"
-                                        action="<c:url value='/manager/remand/create' />">
-                                        <input type="hidden" name="report_id" value="${report.id}" />
-                                        <button type="submit" name="submit" value="${2}"
-                                            class="ui positive button">再提出</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+
                 <div class="ui label">差し戻し件数 ${getManagerRemandReportsCount}</div>&nbsp;
                 <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
