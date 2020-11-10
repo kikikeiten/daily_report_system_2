@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
+
     <c:param name="content">
+
         <c:if test="${flush != null}">
             <script>
             $('body')
@@ -14,10 +16,10 @@
               className: {
                   toast: 'ui message'
               }
-            })
-          ;
+              });
             </script>
         </c:if>
+
         <h2>My drafts</h2>
 
         <div class="circular ui icon yellow mini button" data-variation="inverted"></div>
@@ -31,6 +33,7 @@
         </script>
 
         <div class="ui raised very padded container segment">
+
             <c:choose>
                 <c:when test="${getMyDraftsCount == 0}">
                     <h3>
@@ -69,8 +72,6 @@
                                 </div>
                             </div>
 
-
-
                         </c:forEach>
                     </div>
 
@@ -86,13 +87,14 @@
                                 </c:when>
                                 <c:otherwise>
                                     <a class="item" href="<c:url value='/draft?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
-                    </c:otherwise>
+                                </c:otherwise>
                             </c:choose>
                         </c:forEach>
                     </div>
 
                 </c:otherwise>
             </c:choose>
+
         </div>
 
         <div class="ui image label">
