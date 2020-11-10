@@ -55,6 +55,8 @@
                         </c:forEach>
                     </div>
 
+                    <div class="ui hidden divider"></div>
+
                 <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1"
                         end="${((getManagerRemandReportsCount - 1) / 10) + 1}" step="1">
