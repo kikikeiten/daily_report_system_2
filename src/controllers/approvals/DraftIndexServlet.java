@@ -49,8 +49,8 @@ public class DraftIndexServlet extends HttpServlet {
         }
         List<Report> getMyAllDrafts = em.createNamedQuery("getMyAllDrafts", Report.class)
                 .setParameter("employee", login_employee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
         long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
