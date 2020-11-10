@@ -26,6 +26,45 @@
                 <p>提出した日報が部長に差し戻されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
+
+            <div class="ui three stackable raised link cards">
+                        <c:forEach var="report" items="${getAllDirectorRemandReports}" varStatus="status">
+
+                            <div class="ui green card">
+                                <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
+                                </a>
+
+                                <div class="extra content">
+
+                                    <div class="ui icon buttons">
+                                        <c:if test="${sessionScope.login_employee.id != report.employee.id}">
+                                            <form method="POST" action="<c:url value='/manager/approval/create' />">
+                                                <input type="hidden" name="report_id" value="${report.id}" />
+                                                <button type="submit" name="submit" value="${4}" class="circular ui mini icon positive button">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </button>
+                                            </form>
+                                        </c:if>
+                                        <c:if test="${sessionScope.login_employee.id != report.employee.id && report.employee.admin_flag != 2}">
+                                            &nbsp;
+                                            <form method="POST" action="<c:url value='/manager/approval/create' />">
+                                                <input type="hidden" name="report_id" value="${report.id}" />
+                                                <button type="submit" name="submit" value="${1}" class="circular ui mini icon negative button">
+                                                    <i class="far fa-thumbs-down"></i>
+                                                </button>
+                                            </form>
+                                        </c:if>
+                                    </div>
+
+                                    <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </c:forEach>
+                    </div>
+
                 <table id="dr_report_list" class="ui celled striped table">
                     <tbody>
                         <tr>
