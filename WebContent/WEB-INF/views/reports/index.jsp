@@ -25,14 +25,46 @@
         $('.olive.button')
         .popup({
             position : 'bottom center',
-            content  : 'Waiting for manager approval'
+            content  : 'Remanded to the manager'
         })
         ;
         </script>
         <div class="circular ui icon green mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.green.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Waiting for manager approval'
+        })
+        ;
+        </script>
         <div class="circular ui icon teal mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.teal.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Remanded to the director'
+        })
+        ;
+        </script>
         <div class="circular ui icon blue mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.blue.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Waiting for director approval'
+        })
+        ;
+        </script>
         <div class="circular ui icon violet mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.violet.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Approved'
+        })
+        ;
+        </script>
         <div class="ui raised very padded container segment">
             <c:choose>
                 <c:when test="${getReportsCountButDrafts == 0}">
