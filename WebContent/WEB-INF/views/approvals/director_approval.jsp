@@ -96,13 +96,24 @@
 
         </div>
 
-        <br>
-        <br>
-        <button onclick="location.href='<c:url value='/reports/new' />'" class="ui positive button">新規日報</button>
-        <br>
-        <br>
-        <p>
-            <a href="<c:url value='/drafts' />">下書きの日報一覧（${getMyDraftsCount}）</a>
-        </p>
+        <div class="ui image label">
+            All swatches
+            <div class="detail">
+                <a href="<c:url value='/reports' />"> ${getReportsCountButDrafts} </a>
+            </div>
+        </div>
+
+        <div class="ui image label">
+            My drafts
+            <div class="detail">
+                <a href="<c:url value='/drafts' />"> ${getMyDraftsCount} </a>
+            </div>
+        </div>
+
+        <div class="ui image teal label">
+            Director approval
+            <div class="detail">${getDirectorApprovalReportsCount}</div>
+        </div>
+
     </c:param>
 </c:import>
