@@ -47,6 +47,10 @@ public class DraftIndexServlet extends HttpServlet {
         } catch (Exception e) {
             page = 1;
         }
+
+        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
+                .getSingleResult();
+
         List<Report> getMyAllDrafts = em.createNamedQuery("getMyAllDrafts", Report.class)
                 .setParameter("employee", login_employee)
                 .setFirstResult(12 * (page - 1))
@@ -67,6 +71,7 @@ public class DraftIndexServlet extends HttpServlet {
 
         em.close();
 
+        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
         request.setAttribute("getMyAllDrafts", getMyAllDrafts);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
         request.setAttribute("page", page);
