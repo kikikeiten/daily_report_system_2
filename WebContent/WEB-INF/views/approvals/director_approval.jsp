@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
+
     <c:param name="content">
+
         <c:if test="${flush != null}">
             <script>
             $('body')
@@ -14,10 +16,10 @@
               className: {
                   toast: 'ui message'
               }
-            })
-          ;
+              });
             </script>
         </c:if>
+
         <h2>Director approval</h2>
 
         <div class="circular ui icon blue mini button" data-variation="inverted"></div>
@@ -45,6 +47,7 @@
                             <div class="ui blue card">
                                 <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
                                 </a>
+
                                 <div class="extra content">
 
                                     <div class="ui icon buttons">
@@ -69,6 +72,7 @@
 
                                     <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
                                     </a>
+
                                 </div>
                             </div>
 
@@ -91,6 +95,7 @@
                             </c:choose>
                         </c:forEach>
                     </div>
+
                 </c:otherwise>
             </c:choose>
 
