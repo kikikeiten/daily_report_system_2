@@ -56,7 +56,7 @@
 
                     <div class="ui hidden divider"></div>
 
-                <div class="ui mini pagination menu">
+                    <div class="ui mini pagination menu">
                         <c:forEach var="i" begin="1" end="${((getDirectorRemandReportsCount - 1) / 10) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
@@ -74,6 +74,57 @@
             </c:choose>
 
         </div>
+
+        <div class="ui image label">
+            All swatches
+            <div class="detail">
+                <a href="<c:url value='/reports' />"> ${getReportsCountButDrafts} </a>
+            </div>
+        </div>
+
+
+        <div class="ui image label">
+            My drafts
+            <div class="detail">
+            <a href="<c:url value='/drafts' />">
+            ${getMyDraftsCount}
+            </a>
+            </div>
+        </div>
+
+        <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
+            <div class="ui image label">
+                Manager remand
+                <div class="detail">
+                    <a href="<c:url value='/remand/manager' />">${getManagerRemandReportsCount}</a>
+                </div>
+            </div>
+        </c:if>
+
+        <c:if test="${sessionScope.login_employee.admin_flag == 2}">
+            <div class="ui image label">
+                Manager approval
+                <div class="detail">
+                    <a href="<c:url value='/approval/manager' />">${getManagerApprovalReportsCount}</a>
+                </div>
+            </div>
+        </c:if>
+
+        <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
+            <div class="ui teal image label">
+                Director remand
+                <div class="detail">${getDirectorRemandReportsCount}</div>
+            </div>
+        </c:if>
+
+        <c:if test="${sessionScope.login_employee.admin_flag == 3}">
+            <div class="ui image label">
+                Director approval
+                <div class="detail">
+                    <a href="<c:url value='/approval/director' />">${getDirectorApprovalReportsCount}</a>
+                </div>
+            </div>
+        </c:if>
 
     </c:param>
 </c:import>

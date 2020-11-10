@@ -66,6 +66,9 @@ public class DirectorRemandIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
+        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
+                .getSingleResult();
+
         em.close();
 
         request.setAttribute("getAllDirectorRemandReports", getAllDirectorRemandReports);
@@ -73,6 +76,7 @@ public class DirectorRemandIndexServlet extends HttpServlet {
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
         request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
+        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
