@@ -75,8 +75,9 @@
                         </c:forEach>
                     </div>
 
-                    <div class="ui label">承認待ち件数 ${getDirectorApprovalReportsCount}</div>&nbsp;
-                <div class="ui mini pagination menu">
+                    <div class="ui hidden divider"></div>
+
+                    <div class="ui mini pagination menu">
                         <c:forEach var="i" begin="1" end="${((getDirectorApprovalReportsCount - 1) / 10) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
