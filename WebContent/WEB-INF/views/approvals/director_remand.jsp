@@ -20,6 +20,9 @@
             </script>
         </c:if>
         <h2>Director remand</h2>
+
+        <div class="ui raised very padded container segment">
+
         <c:choose>
             <c:when test="${getDirectorRemandReportsCount == 0}">
                 <h3>部長差し戻しの日報はありません。</h3>
@@ -128,6 +131,9 @@
                 </div>
             </c:otherwise>
         </c:choose>
+
+        </div>
+
         <br>
         <br>
         <button onclick="location.href='<c:url value='/reports/new' />'"
