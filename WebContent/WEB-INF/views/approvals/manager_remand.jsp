@@ -19,7 +19,7 @@
           ;
             </script>
         </c:if>
-        <h2>課長差し戻しの日報一覧</h2>
+        <h2>Manager remand</h2>
         <c:choose>
             <c:when test="${getManagerRemandReportsCount == 0}">
                 <h3>課長差し戻しの日報はありません。</h3>
