@@ -47,8 +47,8 @@ public class ReportsIndexServlet extends HttpServlet {
             page = 1;
         }
         List<Report> getAllReportsButDrafts = em.createNamedQuery("getAllReportsButDrafts", Report.class)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
         //フォロー判定
