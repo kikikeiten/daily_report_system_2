@@ -152,64 +152,64 @@
                 <h3>My Swatches</h3>
 
                 <div class="circular ui icon yellow mini button" data-variation="inverted"></div>
-        <script type="text/javascript">
-        $('.yellow.button')
-        .popup({
-            position : 'bottom center',
-            content  : 'Unsubmitted draft'
-        })
-        ;
-        </script>
+                <script type="text/javascript">
+                $('.yellow.button')
+                .popup({
+                    position : 'bottom center',
+                    content  : 'Unsubmitted draft'
+                });
+                </script>
 
+                <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
                 <div class="circular ui icon olive mini button" data-variation="inverted"></div>
-        <script type="text/javascript">
-        $('.olive.button')
-        .popup({
-            position : 'bottom center',
-            content  : 'Remanded to the manager'
-        })
-        ;
-        </script>
+                <script type="text/javascript">
+                $('.olive.button')
+                .popup({
+                    position : 'bottom center',
+                    content  : 'Remanded to the manager'
+                 });
+                </script>
+                </c:if>
 
-        <div class="circular ui icon green mini button" data-variation="inverted"></div>
-        <script type="text/javascript">
-        $('.green.button')
-        .popup({
-            position : 'bottom center',
-            content  : 'Waiting for manager approval'
-        })
-        ;
-        </script>
+                <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
+                <div class="circular ui icon green mini button" data-variation="inverted"></div>
+                <script type="text/javascript">
+                $('.green.button')
+                .popup({
+                    position : 'bottom center',
+                    content  : 'Waiting for manager approval'
+                });
+                </script>
+                </c:if>
 
-        <div class="circular ui icon teal mini button" data-variation="inverted"></div>
-        <script type="text/javascript">
-        $('.teal.button')
-        .popup({
-            position : 'bottom center',
-            content  : 'Remanded to the director'
-        })
-        ;
-        </script>
+                <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
+                <div class="circular ui icon teal mini button" data-variation="inverted"></div>
+                <script type="text/javascript">
+                $('.teal.button')
+                .popup({
+                    position : 'bottom center',
+                    content  : 'Remanded to the director'
+                });
+                </script>
+                </c:if>
 
-        <div class="circular ui icon blue mini button" data-variation="inverted"></div>
-        <script type="text/javascript">
-        $('.blue.button')
-        .popup({
-            position : 'bottom center',
-            content  : 'Waiting for director approval'
-        })
-        ;
-        </script>
+                <div class="circular ui icon blue mini button" data-variation="inverted"></div>
+                <script type="text/javascript">
+                $('.blue.button')
+                .popup({
+                    position : 'bottom center',
+                    content  : 'Waiting for director approval'
+                });
+                </script>
 
-        <div class="circular ui icon violet mini button" data-variation="inverted"></div>
-        <script type="text/javascript">
-        $('.violet.button')
-        .popup({
-            position : 'bottom center',
-            content  : 'Approved'
-        })
-        ;
-        </script>
+                <div class="circular ui icon violet mini button" data-variation="inverted"></div>
+                <script type="text/javascript">
+                $('.violet.button')
+                .popup({
+                    position : 'bottom center',
+                    content  : 'Approved'
+                });
+                </script>
 
                 <div class="ui raised very padded container segment">
 
@@ -249,12 +249,12 @@
                                         <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
                                         </a>
                                         <div class="extra content">
-                                        <form method="POST" action="<c:url value='/manager/remand/create' />" class="left floated">
-                                        <input type="hidden" name="report_id" value="${report.id}" />
-                                        <button type="submit" name="submit" value="${2}" class="circular ui mini icon button">
-                                            <i class="fas fa-paper-plane"></i>
-                                        </button>
-                                    </form>
+                                            <form method="POST" action="<c:url value='/manager/remand/create' />" class="left floated">
+                                                <input type="hidden" name="report_id" value="${report.id}" />
+                                                <button type="submit" name="submit" value="${2}" class="circular ui mini icon button">
+                                                    <i class="fas fa-paper-plane"></i>
+                                                </button>
+                                            </form>
                                             <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
                                             </a>
                                         </div>
@@ -278,12 +278,12 @@
                                         <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
                                         </a>
                                         <div class="extra content">
-                                        <form method="POST" action="<c:url value='/director/remand/create' />" class="left floated">
-                                        <input type="hidden" name="report_id" value="${report.id}" />
-                                        <button type="submit" name="submit" value="${4}" class="circular ui mini icon button">
-                                            <i class="fas fa-paper-plane"></i>
-                                        </button>
-                                    </form>
+                                            <form method="POST" action="<c:url value='/director/remand/create' />" class="left floated">
+                                                <input type="hidden" name="report_id" value="${report.id}" />
+                                                <button type="submit" name="submit" value="${4}" class="circular ui mini icon button">
+                                                    <i class="fas fa-paper-plane"></i>
+                                                </button>
+                                            </form>
                                             <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
                                             </a>
                                         </div>
@@ -347,9 +347,7 @@
         <div class="ui image label">
             All swatches
             <div class="detail">
-            <a href="<c:url value='/reports' />">
-            ${getReportsCountButDrafts}
-            </a>
+                <a href="<c:url value='/reports' />"> ${getReportsCountButDrafts} </a>
             </div>
         </div>
 
