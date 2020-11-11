@@ -85,45 +85,23 @@
 
         </div>
 
-        <div class="ui image label">
-            My swatches
-            <div class="detail">
-                <a href="<c:url value='/' />"> ${reports_count} </a>
-            </div>
-        </div>
+        <a href="<c:url value='/' />" class="ui image label"> My swatches <span class="detail"> ${reports_count} </span>
+        </a>
 
-        <div class="ui image label">
-            All swatches
-            <div class="detail">
-                <a href="<c:url value='/reports' />"> ${getReportsCountButDrafts} </a>
-            </div>
-        </div>
+        <a href="<c:url value='/reports' />" class="ui image label"> All swatches <span class="detail"> ${getReportsCountButDrafts} </span>
+        </a>
 
-        <div class="ui image label">
-            My drafts
-            <div class="detail">
-            <a href="<c:url value='/drafts' />">
-            ${getMyDraftsCount}
-            </a>
-            </div>
-        </div>
+        <a href="<c:url value='/drafts' />" class="ui image label"> My drafts <span class="detail"> ${getMyDraftsCount} </span>
+        </a>
 
         <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
-            <div class="ui image label">
-                Manager remand
-                <div class="detail">
-                    <a href="<c:url value='/remand/manager' />">${getManagerRemandReportsCount}</a>
-                </div>
-            </div>
+            <a href="<c:url value='/remand/manager' />" class="ui image label"> Manager remand <span class="detail"> ${getManagerRemandReportsCount} </span>
+            </a>
         </c:if>
 
         <c:if test="${sessionScope.login_employee.admin_flag == 2}">
-            <div class="ui image label">
-                Manager approval
-                <div class="detail">
-                    <a href="<c:url value='/approval/manager' />">${getManagerApprovalReportsCount}</a>
-                </div>
-            </div>
+            <a href="<c:url value='/approval/manager' />" class="ui image label"> Manager approval <span class="detail"> ${getManagerApprovalReportsCount} </span>
+            </a>
         </c:if>
 
         <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
@@ -134,12 +112,8 @@
         </c:if>
 
         <c:if test="${sessionScope.login_employee.admin_flag == 3}">
-            <div class="ui image label">
-                Director approval
-                <div class="detail">
-                    <a href="<c:url value='/approval/director' />">${getDirectorApprovalReportsCount}</a>
-                </div>
-            </div>
+            <a href="<c:url value='/approval/director' />" class="ui image label"> Director approval <span class="detail"> ${getDirectorApprovalReportsCount} </span>
+            </a>
         </c:if>
 
     </c:param>

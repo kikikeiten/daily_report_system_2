@@ -27,7 +27,7 @@
             <c:if test="${sessionScope.login_employee != null}">
                 <div class="item right">
                     <button class="circular ui icon button custom">
-                        <i class="dropdown icon"></i>
+                        <i class="far fa-smile"></i>
                     </button>
                     &nbsp;&nbsp;&nbsp;
                     <div class="ui fluid custom popup bottom left transition hidden">
@@ -82,7 +82,7 @@
                         });
                     </script>
                     <button onclick="location.href='<c:url value='/reports/new' />'"
-                        class="ui positive button">Add swatch</button>
+                        class="ui positive button"><i class="fas fa-feather-alt"></i></button>
                 </div>
             </c:if>
         </div>

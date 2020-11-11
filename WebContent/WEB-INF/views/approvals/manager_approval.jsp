@@ -102,38 +102,22 @@
 
         </div>
 
-        <div class="ui image label">
-            My swatches
-            <div class="detail">
-                <a href="<c:url value='/' />"> ${reports_count} </a>
-            </div>
-        </div>
+        <a href="<c:url value='/' />" class="ui image label"> My swatches <span class="detail"> ${reports_count} </span>
+        </a>
 
-        <div class="ui image label">
-            All swatches
-            <div class="detail">
-                <a href="<c:url value='/reports' />"> ${getReportsCountButDrafts} </a>
-            </div>
-        </div>
+        <a href="<c:url value='/reports' />" class="ui image label"> All swatches <span class="detail"> ${getReportsCountButDrafts} </span>
+        </a>
 
-        <div class="ui image label">
-            My drafts
-            <div class="detail">
-                <a href="<c:url value='/drafts' />">${getMyDraftsCount}</a>
-            </div>
-        </div>
+        <a href="<c:url value='/drafts' />" class="ui image label"> My drafts <span class="detail"> ${getMyDraftsCount} </span>
+        </a>
 
         <div class="ui teal image label">
             Manager approval
             <div class="detail">${getManagerApprovalReportsCount}</div>
         </div>
 
-        <div class="ui image label">
-            Director remand
-            <div class="detail">
-                <a href="<c:url value='/remand/director' />">${getDirectorRemandReportsCount}</a>
-            </div>
-        </div>
+        <a href="<c:url value='/remand/director' />" class="ui image label"> Director remand <span class="detail"> ${getDirectorRemandReportsCount} </span>
+        </a>
 
     </c:param>
 </c:import>

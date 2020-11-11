@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -33,14 +32,14 @@
 
         <div class="ui raised very padded container segment">
 
-        <c:choose>
-            <c:when test="${getManagerRemandReportsCount == 0}">
-                <h3>課長差し戻しの日報はありません。</h3>
-                <p>提出した日報が課長に差し戻されるとここに表示されます。</p>
-            </c:when>
-            <c:otherwise>
+            <c:choose>
+                <c:when test="${getManagerRemandReportsCount == 0}">
+                    <h3>課長差し戻しの日報はありません。</h3>
+                    <p>提出した日報が課長に差し戻されるとここに表示されます。</p>
+                </c:when>
+                <c:otherwise>
 
-            <div class="ui three stackable raised link cards">
+                    <div class="ui three stackable raised link cards">
                         <c:forEach var="report" items="${getAllManagerRemandReports}" varStatus="status">
 
                             <div class="ui olive card">
@@ -67,65 +66,41 @@
 
                     <div class="ui hidden divider"></div>
 
-                <div class="ui mini pagination menu">
-                    <c:forEach var="i" begin="1"
-                        end="${((getManagerRemandReportsCount - 1) / 10) + 1}" step="1">
-                        <c:choose>
-                            <c:when test="${i == page}">
-                                <div class="item active">
-                                    <c:out value="${i}" />
-                                </div>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="item"
-                                    href="<c:url value='/remand/manager?page=${i}' />"><c:out
-                                        value="${i}" /></a>&nbsp;
+                    <div class="ui mini pagination menu">
+                        <c:forEach var="i" begin="1" end="${((getManagerRemandReportsCount - 1) / 10) + 1}" step="1">
+                            <c:choose>
+                                <c:when test="${i == page}">
+                                    <div class="item active">
+                                        <c:out value="${i}" />
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="item" href="<c:url value='/remand/manager?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
                             </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </div>
-            </c:otherwise>
-        </c:choose>
+                            </c:choose>
+                        </c:forEach>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
         </div>
 
-        <div class="ui image label">
-            My swatches
-            <div class="detail">
-                <a href="<c:url value='/' />"> ${reports_count} </a>
-            </div>
+        <a href="<c:url value='/' />" class="ui image label"> My swatches <span class="detail"> ${reports_count} </span>
+        </a>
+
+        <a class="ui image label"> All swatches <span class="detail"> ${getReportsCountButDrafts} </span>
+        </a>
+
+        <a href="<c:url value='/drafts' />" class="ui image label"> My drafts <span class="detail"> ${getMyDraftsCount} </span>
+        </a>
+
+        <div class="ui teal image label">
+            Manager remand
+            <div class="detail">${getManagerRemandReportsCount}</div>
         </div>
 
-        <div class="ui image label">
-            All swatches
-            <div class="detail">
-                <a href="<c:url value='/reports' />"> ${getReportsCountButDrafts} </a>
-            </div>
-        </div>
-
-
-        <div class="ui image label">
-            My drafts
-            <div class="detail">
-            <a href="<c:url value='/drafts' />">
-            ${getMyDraftsCount}
-            </a>
-            </div>
-        </div>
-
-            <div class="ui teal image label">
-                Manager remand
-                <div class="detail">
-                    ${getManagerRemandReportsCount}
-                </div>
-            </div>
-
-            <div class="ui image label">
-                Director remand
-                <div class="detail">
-                    <a href="<c:url value='/remand/director' />">${getDirectorRemandReportsCount}</a>
-                </div>
-            </div>
+        <a href="<c:url value='/remand/director' />" class="ui image label"> Director remand <span class="detail"> ${getDirectorRemandReportsCount} </span>
+        </a>
 
     </c:param>
 </c:import>
