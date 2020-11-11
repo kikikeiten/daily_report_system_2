@@ -164,7 +164,7 @@
 
                 <h2>My Swatches</h2>
 
-                <div class="circular ui icon yellow mini button" data-variation="inverted"></div>
+                <a href="<c:url value='/drafts' />" class="circular ui icon yellow mini button" data-variation="inverted"></a>
                 <script type="text/javascript">
                 $('.yellow.button')
                 .popup({
@@ -174,7 +174,7 @@
                 </script>
 
                 <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
-                    <div class="circular ui icon olive mini button" data-variation="inverted"></div>
+                    <a href="<c:url value='/remand/manager' />" class="circular ui icon olive mini button" data-variation="inverted"></a>
                     <script type="text/javascript">
                 $('.olive.button')
                 .popup({
@@ -196,7 +196,7 @@
                 </c:if>
 
                 <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
-                    <div class="circular ui icon teal mini button" data-variation="inverted"></div>
+                    <a href="<c:url value='/remand/director' />" class="circular ui icon teal mini button" data-variation="inverted"></a>
                     <script type="text/javascript">
                 $('.teal.button')
                 .popup({

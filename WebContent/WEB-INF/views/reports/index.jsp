@@ -24,7 +24,7 @@
 
         <h2>Swatch list</h2>
 
-        <div class="circular ui icon olive mini button" data-variation="inverted"></div>
+        <a href="<c:url value='/remand/manager' />" class="circular ui icon olive mini button" data-variation="inverted"></a>
         <script type="text/javascript">
         $('.olive.button')
         .popup({
@@ -44,7 +44,7 @@
         ;
         </script>
 
-        <div class="circular ui icon teal mini button" data-variation="inverted"></div>
+        <a href="<c:url value='/remand/director' />" class="circular ui icon teal mini button" data-variation="inverted"></a>
         <script type="text/javascript">
         $('.teal.button')
         .popup({
