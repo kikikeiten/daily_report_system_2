@@ -249,8 +249,13 @@
                                         <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
                                         </a>
                                         <div class="extra content">
-                                            <a class="left floated like" href="<c:url value='/likes?report_id=${report.id}' />"> <i class="far fa-heart"></i> <c:out value="${report.likes}" />
-                                            </a> <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
+                                        <form method="POST" action="<c:url value='/manager/remand/create' />" class="left floated">
+                                        <input type="hidden" name="report_id" value="${report.id}" />
+                                        <button type="submit" name="submit" value="${2}" class="circular ui mini icon button">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </form>
+                                            <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
                                             </a>
                                         </div>
                                     </div>
@@ -273,8 +278,13 @@
                                         <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
                                         </a>
                                         <div class="extra content">
-                                            <a class="left floated like" href="<c:url value='/likes?report_id=${report.id}' />"> <i class="far fa-heart"></i> <c:out value="${report.likes}" />
-                                            </a> <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
+                                        <form method="POST" action="<c:url value='/director/remand/create' />" class="left floated">
+                                        <input type="hidden" name="report_id" value="${report.id}" />
+                                        <button type="submit" name="submit" value="${4}" class="circular ui mini icon button">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </form>
+                                            <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
                                             </a>
                                         </div>
                                     </div>
