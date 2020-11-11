@@ -321,7 +321,7 @@
                     <div class="ui hidden divider"></div>
 
                     <div class="ui mini pagination menu">
-                        <c:forEach var="i" begin="1" end="${((reports_count - 1) / 10) + 1}" step="1">
+                        <c:forEach var="i" begin="1" end="${((reports_count - 1) / 12) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
                                     <div class="item active">
