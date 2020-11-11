@@ -75,11 +75,13 @@
         </script>
 
         <div class="ui raised very padded container segment">
+
             <c:choose>
                 <c:when test="${getReportsCountButDrafts == 0}">
                     <h3>日報はまだありません。</h3>
                     <p>作成されるとここに表示されます。</p>
                 </c:when>
+
                 <c:otherwise>
 
                     <div class="ui three stackable raised link cards">
@@ -166,10 +168,11 @@
                             </c:choose>
                         </c:forEach>
                     </div>
-        </div>
 
         </c:otherwise>
         </c:choose>
+
+        </div>
 
         <a href="<c:url value='/' />" class="ui image label"> My swatches <span class="detail"> ${reports_count} </span>
         </a>

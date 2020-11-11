@@ -85,87 +85,79 @@
             </div>
         </div>
 
-        <c:choose>
-            <c:when test="${reports_count == 0}">
-                <h3>
-                    <c:out value="${sessionScope.login_employee.name}" />
-                    さんのメモはまだありません。
-                </h3>
-                <p>作成されるとここに表示されます。</p>
-            </c:when>
-
-            <c:otherwise>
-                <c:if test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount != 0}">
-                    <div class="ui error message">
-                        <i class="close icon"></i>
-                        <script>
+        <c:if test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount != 0}">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
                         $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
                         });
                         </script>
-                        <a href="<c:url value='/drafts' />">下書きのメモが<c:out value="${getYesterdayDraftsCount}" />件あります。
-                        </a><br> <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out value="${getYesterdayManagerApprovalsCount}" />件あります。
-                        </a>
-                    </div>
-                </c:if>
+                <a href="<c:url value='/drafts' />">下書きのメモが<c:out value="${getYesterdayDraftsCount}" />件あります。
+                </a><br> <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out value="${getYesterdayManagerApprovalsCount}" />件あります。
+                </a>
+            </div>
+        </c:if>
 
-                <c:if test="${getYesterdayDraftsCount != 0 && getYesterdayDirectorApprovalsCount != 0}">
-                    <div class="ui error message">
-                        <i class="close icon"></i>
-                        <script>
+        <c:if test="${getYesterdayDraftsCount != 0 && getYesterdayDirectorApprovalsCount != 0}">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
                         $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
                         });
                         </script>
-                        <a href="<c:url value='/drafts' />">下書きのメモが<c:out value="${getYesterdayDraftsCount}" />件あります。
-                        </a><br> <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out value="${getYesterdayDirectorApprovalsCount}" />件あります。
-                        </a>
-                    </div>
-                </c:if>
+                <a href="<c:url value='/drafts' />">下書きのメモが<c:out value="${getYesterdayDraftsCount}" />件あります。
+                </a><br> <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out value="${getYesterdayDirectorApprovalsCount}" />件あります。
+                </a>
+            </div>
+        </c:if>
 
-                <c:if test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount == 0 && getYesterdayDirectorApprovalsCount == 0}">
-                    <div class="ui error message">
-                        <i class="close icon"></i>
-                        <script>
+        <c:if test="${getYesterdayDraftsCount != 0 && getYesterdayManagerApprovalsCount == 0 && getYesterdayDirectorApprovalsCount == 0}">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
                         $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
                         });
                 </script>
-                        <a href="<c:url value='/drafts' />">下書きのメモが<c:out value="${getYesterdayDraftsCount}" />件あります。
-                        </a>
-                    </div>
-                </c:if>
+                <a href="<c:url value='/drafts' />">下書きのメモが<c:out value="${getYesterdayDraftsCount}" />件あります。
+                </a>
+            </div>
+        </c:if>
 
-                <c:if test="${getYesterdayManagerApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
-                    <div class="ui error message">
-                        <i class="close icon"></i>
-                        <script>
+        <c:if test="${getYesterdayManagerApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
                         $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
                         });
                         </script>
-                        <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out value="${getYesterdayManagerApprovalsCount}" />件あります。
-                        </a>
-                    </div>
-                </c:if>
+                <a href="<c:url value='/approval/manager' />">課長承認待ちの日報が<c:out value="${getYesterdayManagerApprovalsCount}" />件あります。
+                </a>
+            </div>
+        </c:if>
 
-                <c:if test="${getYesterdayDirectorApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
-                    <div class="ui error message">
-                        <i class="close icon"></i>
-                        <script>
+        <c:if test="${getYesterdayDirectorApprovalsCount != 0 && getYesterdayDraftsCount == 0}">
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <script>
                         $('.message .close').on('click', function() {
                         $(this).closest('.message').transition('fade');
                         });
                         </script>
-                        <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out value="${getYesterdayDirectorApprovalsCount}" />件あります。
-                        </a>
-                    </div>
-                </c:if>
+                <a href="<c:url value='/approval/director' />">部長承認待ちの日報が<c:out value="${getYesterdayDirectorApprovalsCount}" />件あります。
+                </a>
+            </div>
+        </c:if>
 
-                <h2>My Swatches</h2>
 
-                <a href="<c:url value='/drafts' />" class="circular ui icon yellow mini button" data-variation="inverted"></a>
-                <script type="text/javascript">
+
+        <h2>My Swatches</h2>
+
+        <a href="<c:url value='/drafts' />" class="circular ui icon yellow mini button" data-variation="inverted"></a>
+        <script type="text/javascript">
                 $('.yellow.button')
                 .popup({
                     position : 'bottom center',
@@ -173,41 +165,41 @@
                 });
                 </script>
 
-                <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
-                    <a href="<c:url value='/remand/manager' />" class="circular ui icon olive mini button" data-variation="inverted"></a>
-                    <script type="text/javascript">
+        <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
+            <a href="<c:url value='/remand/manager' />" class="circular ui icon olive mini button" data-variation="inverted"></a>
+            <script type="text/javascript">
                 $('.olive.button')
                 .popup({
                     position : 'bottom center',
                     content  : 'Remanded to the manager'
                  });
                 </script>
-                </c:if>
+        </c:if>
 
-                <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
-                    <div class="circular ui icon green mini button" data-variation="inverted"></div>
-                    <script type="text/javascript">
+        <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
+            <div class="circular ui icon green mini button" data-variation="inverted"></div>
+            <script type="text/javascript">
                 $('.green.button')
                 .popup({
                     position : 'bottom center',
                     content  : 'Waiting for manager approval'
                 });
                 </script>
-                </c:if>
+        </c:if>
 
-                <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
-                    <a href="<c:url value='/remand/director' />" class="circular ui icon teal mini button" data-variation="inverted"></a>
-                    <script type="text/javascript">
+        <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2}">
+            <a href="<c:url value='/remand/director' />" class="circular ui icon teal mini button" data-variation="inverted"></a>
+            <script type="text/javascript">
                 $('.teal.button')
                 .popup({
                     position : 'bottom center',
                     content  : 'Remanded to the director'
                 });
                 </script>
-                </c:if>
+        </c:if>
 
-                <div class="circular ui icon blue mini button" data-variation="inverted"></div>
-                <script type="text/javascript">
+        <div class="circular ui icon blue mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
                 $('.blue.button')
                 .popup({
                     position : 'bottom center',
@@ -215,8 +207,8 @@
                 });
                 </script>
 
-                <div class="circular ui icon violet mini button" data-variation="inverted"></div>
-                <script type="text/javascript">
+        <div class="circular ui icon violet mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
                 $('.violet.button')
                 .popup({
                     position : 'bottom center',
@@ -224,7 +216,18 @@
                 });
                 </script>
 
-                <div class="ui raised very padded container segment">
+        <div class="ui raised very padded container segment">
+
+            <c:choose>
+                <c:when test="${reports_count == 0}">
+                    <h3>
+                        <c:out value="${sessionScope.login_employee.name}" />
+                        さんのメモはまだありません。
+                    </h3>
+                    <p>作成されるとここに表示されます。</p>
+                </c:when>
+
+                <c:otherwise>
 
                     <div class="ui three stackable raised link cards">
                         <c:forEach var="report" items="${reports}" varStatus="status">
@@ -351,8 +354,8 @@
                             </c:choose>
                         </c:forEach>
                     </div>
-            </c:otherwise>
-        </c:choose>
+                </c:otherwise>
+            </c:choose>
 
         </div>
 
