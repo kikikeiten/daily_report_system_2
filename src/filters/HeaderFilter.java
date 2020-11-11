@@ -77,12 +77,17 @@ public class HeaderFilter implements Filter {
             e.printStackTrace();
         }
 
+        long reports_count = (long) em.createNamedQuery("getMyReportsCount", Long.class)
+                .setParameter("employee", login_employee)
+                .getSingleResult();
+
         em.close();
 
         request.setAttribute("getMyFollowingCount", getMyFollowingCount);
         request.setAttribute("getMyFollowerCount", getMyFollowerCount);
         request.setAttribute("getManagerApprovalReportsCount", getManagerApprovalReportsCount);
         request.setAttribute("getDirectorApprovalReportsCount", getDirectorApprovalReportsCount);
+        request.setAttribute("reports_count", reports_count);
 
         chain.doFilter(request, response);
     }

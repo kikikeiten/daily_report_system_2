@@ -86,12 +86,18 @@
         </div>
 
         <div class="ui image label">
+            My swatches
+            <div class="detail">
+                <a href="<c:url value='/' />"> ${reports_count} </a>
+            </div>
+        </div>
+
+        <div class="ui image label">
             All swatches
             <div class="detail">
                 <a href="<c:url value='/reports' />"> ${getReportsCountButDrafts} </a>
             </div>
         </div>
-
 
         <div class="ui image label">
             My drafts

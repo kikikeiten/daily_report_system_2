@@ -168,13 +168,20 @@
                     </div>
         </div>
 
+        </c:otherwise>
+        </c:choose>
+
+        <div class="ui image label">
+            My swatches
+            <div class="detail">
+                <a href="<c:url value='/' />"> ${reports_count} </a>
+            </div>
+        </div>
+
         <div class="ui teal image label">
             All swatches
             <div class="detail">${getReportsCountButDrafts}</div>
         </div>
-
-        </c:otherwise>
-        </c:choose>
 
         <div class="ui image label">
             My drafts
