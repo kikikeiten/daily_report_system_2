@@ -77,9 +77,6 @@
                 </c:if>
             </div>
         </div>
-        <h2>TipSwatchへようこそ</h2>
-
-
 
         <c:choose>
             <c:when test="${reports_count == 0}">
@@ -153,6 +150,66 @@
                     </div>
                 </c:if>
                 <h3>My Swatches</h3>
+
+                <div class="circular ui icon yellow mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.yellow.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Unsubmitted draft'
+        })
+        ;
+        </script>
+
+                <div class="circular ui icon olive mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.olive.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Remanded to the manager'
+        })
+        ;
+        </script>
+
+        <div class="circular ui icon green mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.green.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Waiting for manager approval'
+        })
+        ;
+        </script>
+
+        <div class="circular ui icon teal mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.teal.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Remanded to the director'
+        })
+        ;
+        </script>
+
+        <div class="circular ui icon blue mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.blue.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Waiting for director approval'
+        })
+        ;
+        </script>
+
+        <div class="circular ui icon violet mini button" data-variation="inverted"></div>
+        <script type="text/javascript">
+        $('.violet.button')
+        .popup({
+            position : 'bottom center',
+            content  : 'Approved'
+        })
+        ;
+        </script>
 
                 <div class="ui raised very padded container segment">
 
