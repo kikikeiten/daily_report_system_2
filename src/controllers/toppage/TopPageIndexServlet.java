@@ -88,6 +88,9 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setParameter("admin_flag", login_employee.getAdmin_flag())
                 .getSingleResult();
 
+        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
+                .getSingleResult();
+
         try {
             Attendance getMyLatestAttendance = (Attendance) em
                     .createNamedQuery("getMyLatestAttendance", Attendance.class)
@@ -130,6 +133,7 @@ public class TopPageIndexServlet extends HttpServlet {
         request.setAttribute("getYesterdayDraftsCount", getYesterdayDraftsCount);
         request.setAttribute("getYesterdayManagerApprovalsCount", getYesterdayManagerApprovalsCount);
         request.setAttribute("getYesterdayDirectorApprovalsCount", getYesterdayDirectorApprovalsCount);
+        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
 
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
