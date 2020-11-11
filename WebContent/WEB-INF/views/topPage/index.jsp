@@ -149,7 +149,7 @@
                         </a>
                     </div>
                 </c:if>
-                <h3>My Swatches</h3>
+                <h2>My Swatches</h2>
 
                 <div class="circular ui icon yellow mini button" data-variation="inverted"></div>
                 <script type="text/javascript">
