@@ -34,8 +34,28 @@
 
             <c:choose>
                 <c:when test="${getManagerRemandReportsCount == 0}">
-                    <h3>課長差し戻しの日報はありません。</h3>
-                    <p>提出した日報が課長に差し戻されるとここに表示されます。</p>
+
+                    <div class="ui active dimmer">
+                        <div class="content">
+                            <h3>課長差し戻しの日報はありません。</h3>
+                            <p>提出した日報が課長に差し戻されるとここに表示されます。</p>
+                        </div>
+                    </div>
+                    <div class="ui three stackable raised link cards">
+
+                        <c:forEach begin="0" end="5" step="1">
+                            <div class="ui card">
+                                <a class="content" href=""> <span class="right floated"></span> <span class="header"></span> <span class="description"> </span>
+                                </a>
+                                <div class="extra content">
+                                    <button class="circular ui mini icon button">
+                                        <i class="far fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </c:forEach>
+
+                    </div>
                 </c:when>
                 <c:otherwise>
 
@@ -88,7 +108,7 @@
         <a href="<c:url value='/' />" class="ui image label"> My swatches <span class="detail"> ${reports_count} </span>
         </a>
 
-        <a class="ui image label"> All swatches <span class="detail"> ${getReportsCountButDrafts} </span>
+        <a href="<c:url value='/reports' />" class="ui image label"> All swatches <span class="detail"> ${getReportsCountButDrafts} </span>
         </a>
 
         <a href="<c:url value='/drafts' />" class="ui image label"> My drafts <span class="detail"> ${getMyDraftsCount} </span>

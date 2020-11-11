@@ -36,11 +36,31 @@
 
             <c:choose>
                 <c:when test="${getMyDraftsCount == 0}">
-                    <h3>
-                        <c:out value="${sessionScope.login_employee.name}" />
-                        さんの下書きの日報はありません。
-                    </h3>
-                    <p>下書きを作成するとここに表示されます。</p>
+
+                    <div class="ui active dimmer">
+                        <div class="content">
+                            <h3>
+                                <c:out value="${sessionScope.login_employee.name}" />
+                                さんの下書きの日報はありません。
+                            </h3>
+                            <p>下書きを作成するとここに表示されます。</p>
+                        </div>
+                    </div>
+                    <div class="ui three stackable raised link cards">
+
+                        <c:forEach begin="0" end="5" step="1">
+                            <div class="ui card">
+                                <a class="content" href=""> <span class="right floated"></span> <span class="header"></span> <span class="description"> </span>
+                                </a>
+                                <div class="extra content">
+                                    <button class="circular ui mini icon button">
+                                        <i class="far fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </c:forEach>
+
+                    </div>
                 </c:when>
                 <c:otherwise>
 
