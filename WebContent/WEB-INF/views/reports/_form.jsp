@@ -34,18 +34,25 @@
     <c:choose>
         <c:when test="${approval == null || approval == 0}">
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${0}" class="ui primary button"><i class="fas fa-save"></i></button>
-    &nbsp;
-    <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${2}" class="ui positive button"><i class="far fa-paper-plane"></i></button>
+            <button type="submit" name="submit" value="${0}" class="circular ui icon yellow button">
+                <i class="fas fa-save"></i>
+            </button>
+            <input type="hidden" name="_token" value="${_token}" />
+            <button type="submit" name="submit" value="${2}" class="circular ui icon green button">
+                <i class="far fa-paper-plane"></i>
+            </button>
         </c:when>
         <c:when test="${approval == 1}">
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${2}" class="ui positive button"><i class="far fa-paper-plane"></i></button>
+            <button type="submit" name="submit" value="${2}" class="circular ui icon green button">
+                <i class="far fa-paper-plane"></i>
+            </button>
         </c:when>
         <c:when test="${approval == 3}">
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${4}" class="ui positive button"><i class="far fa-paper-plane"></i></button>
+            <button type="submit" name="submit" value="${4}" class="circular ui icon blue button">
+                <i class="far fa-paper-plane"></i>
+            </button>
         </c:when>
     </c:choose>
 </c:if>
@@ -54,14 +61,19 @@
     <c:choose>
         <c:when test="${approval == null || approval == 0}">
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${0}" class="ui primary button"><i class="fas fa-save"></i></button>
-            &nbsp;
+            <button type="submit" name="submit" value="${0}" class="circular ui icon yellow button">
+                <i class="fas fa-save"></i>
+            </button>
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${2}" class="ui positive button"><i class="far fa-paper-plane"></i></button>
+            <button type="submit" name="submit" value="${2}" class="circular ui icon green button">
+                <i class="far fa-paper-plane"></i>
+            </button>
         </c:when>
         <c:when test="${approval == 3}">
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${4}" class="ui positive button"><i class="far fa-paper-plane"></i></button>
+            <button type="submit" name="submit" value="${4}" class="circular ui icon blue button">
+                <i class="far fa-paper-plane"></i>
+            </button>
         </c:when>
     </c:choose>
 </c:if>
@@ -70,14 +82,19 @@
     <c:choose>
         <c:when test="${approval == null || approval == 0}">
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${0}" class="ui primary button"><i class="fas fa-save"></i></button>
-            &nbsp;
+            <button type="submit" name="submit" value="${0}" class="circular ui icon yellow button">
+                <i class="fas fa-save"></i>
+            </button>
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${4}" class="ui positive button"><i class="far fa-paper-plane"></i></button>
+            <button type="submit" name="submit" value="${4}" class="circular ui icon blue button">
+                <i class="far fa-paper-plane"></i>
+            </button>
         </c:when>
         <c:when test="${approval == 3}">
             <input type="hidden" name="_token" value="${_token}" />
-            <button type="submit" name="submit" value="${4}" class="ui positive button"><i class="far fa-paper-plane"></i></button>
+            <button type="submit" name="submit" value="${4}" class="circular ui icon blue button">
+                <i class="far fa-paper-plane"></i>
+            </button>
         </c:when>
     </c:choose>
 </c:if>
