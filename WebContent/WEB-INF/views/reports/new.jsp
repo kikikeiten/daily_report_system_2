@@ -10,9 +10,7 @@
                 <form method="POST" action="<c:url value='/reports/create' />" class="ui fluid form">
                     <c:import url="_form.jsp" />
                 </form>
-                <p>
-                    <a href="<c:url value='/reports' />">一覧に戻る</a>
-                </p>
+
             </div>
         </div>
     </c:param>
