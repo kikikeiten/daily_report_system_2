@@ -10,26 +10,20 @@
         </c:forEach>
     </div>
 </c:if>
-<label for="report_date">Date</label>
-<br />
-<input type="date" name="report_date" value="<fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' />" />
-<br />
-<br />
-<label for="name">Name</label>
-<br />
-<c:out value="${sessionScope.login_employee.name}" />
-<br />
-<br />
-<label for="title">Title</label>
-<br />
-<input type="text" name="title" value="${report.title}" />
-<br />
-<br />
-<label for="content">Content</label>
-<br />
-<textarea name="content" rows="10" cols="50">${report.content}</textarea>
-<br />
-<br />
+<div class="field">
+    <label for="report_date">Date</label> <input type="date" name="report_date" value="<fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' />" />
+</div>
+<div class="field">
+    <label for="name">Name</label>
+    <c:out value="${sessionScope.login_employee.name}" />
+</div>
+<div class="field">
+    <label for="title">Title</label> <input type="text" name="title" value="${report.title}" />
+</div>
+<div class="field">
+    <label for="content">Content</label>
+    <textarea name="content" rows="10" cols="50">${report.content}</textarea>
+</div>
 <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
     <c:choose>
         <c:when test="${approval == null || approval == 0}">
