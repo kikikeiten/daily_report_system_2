@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <c:if test="${errors != null}">
     <div class="ui message">
         入力内容にエラーがあります。<br />
@@ -10,20 +11,25 @@
         </c:forEach>
     </div>
 </c:if>
+
 <div class="field">
     <label for="report_date">Date</label> <input type="date" name="report_date" value="<fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' />" />
 </div>
+
 <div class="field">
     <label for="name">Name</label>
     <c:out value="${sessionScope.login_employee.name}" />
 </div>
+
 <div class="field">
     <label for="title">Title</label> <input type="text" name="title" value="${report.title}" />
 </div>
+
 <div class="field">
     <label for="content">Content</label>
     <textarea name="content" rows="10" cols="50">${report.content}</textarea>
 </div>
+
 <c:if test="${sessionScope.login_employee.admin_flag == 0 || sessionScope.login_employee.admin_flag == 1}">
     <c:choose>
         <c:when test="${approval == null || approval == 0}">
