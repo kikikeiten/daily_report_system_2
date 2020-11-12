@@ -3,7 +3,7 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <div class="ui text container">
-            <h2>日報 新規登録ページ</h2>
+            <h2>New swatch</h2>
 
             <div class="ui raised very padded container segment">
 
