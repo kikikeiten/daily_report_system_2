@@ -70,7 +70,7 @@
 
                                     <form method="POST" action="<c:url value='/director/remand/create' />" class="left floated">
                                         <input type="hidden" name="report_id" value="${report.id}" />
-                                        <button type="submit" name="submit" value="${4}" class="circular ui mini icon button">
+                                        <button type="submit" name="submit" value="${4}" class="circular ui mini icon blue button">
                                             <i class="fas fa-paper-plane"></i>
                                         </button>
                                     </form>

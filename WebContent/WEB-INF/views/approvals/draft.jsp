@@ -74,13 +74,13 @@
                                     <form method="POST" action="<c:url value='/submission/update' />" class="left floated">
                                         <c:choose>
                                             <c:when test="${sessionScope.login_employee.admin_flag != 3}">
-                                                <button type="submit" name="submit" value="${2}" class="circular ui mini icon button">
+                                                <button type="submit" name="submit" value="${2}" class="circular ui mini icon green button">
                                                     <i class="far fa-paper-plane"></i>
                                                 </button>
                                                 <input type="hidden" name="report_id" value="${report.id}" />
                                             </c:when>
                                             <c:otherwise>
-                                                <button type="submit" name="submit" value="${4}" class="circular ui mini icon button">
+                                                <button type="submit" name="submit" value="${4}" class="circular ui mini icon blue button">
                                                     <i class="far fa-paper-plane"></i>
                                                 </button>
                                                 <input type="hidden" name="report_id" value="${report.id}" />

@@ -71,25 +71,24 @@
 
                                 <div class="extra content">
 
-                                    <div class="ui icon buttons">
-                                        <c:if test="${sessionScope.login_employee.id != report.employee.id}">
-                                            <form method="POST" action="<c:url value='/manager/approval/create' />">
-                                                <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${4}" class="circular ui mini icon positive button">
-                                                    <i class="fas fa-thumbs-up"></i>
-                                                </button>
-                                            </form>
-                                        </c:if>
-                                        <c:if test="${sessionScope.login_employee.id != report.employee.id && report.employee.admin_flag != 2}">
+                                    <c:if test="${sessionScope.login_employee.id != report.employee.id && report.employee.admin_flag != 2}">
                                             &nbsp;
-                                            <form method="POST" action="<c:url value='/manager/approval/create' />">
-                                                <input type="hidden" name="report_id" value="${report.id}" />
-                                                <button type="submit" name="submit" value="${1}" class="circular ui mini icon negative button">
-                                                    <i class="far fa-thumbs-down"></i>
-                                                </button>
-                                            </form>
-                                        </c:if>
-                                    </div>
+                                            <form method="POST" action="<c:url value='/manager/approval/create' />" class="left floated">
+                                            <input type="hidden" name="report_id" value="${report.id}" />
+                                            <button type="submit" name="submit" value="${1}" class="circular ui mini icon olive button">
+                                                <i class="fas fa-comment-medical"></i>
+                                            </button>
+                                        </form>
+                                    </c:if>
+
+                                    <c:if test="${sessionScope.login_employee.id != report.employee.id}">
+                                        <form method="POST" action="<c:url value='/manager/approval/create' />" class="left floated">
+                                            <input type="hidden" name="report_id" value="${report.id}" />
+                                            <button type="submit" name="submit" value="${4}" class="circular ui mini icon blue button">
+                                                <i class="far fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </c:if>
 
                                     <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
                                     </a>
