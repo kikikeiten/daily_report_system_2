@@ -42,11 +42,24 @@
 
                                     <c:choose>
                                         <c:when test="${sessionScope.login_employee.id != employee.id}">
-                                            <form method="POST" action="<c:url value='/follow/create/2' />" class="left floated">
-                                                <button class="circular ui mini icon green button" type="submit" name="following" value="${employee.id}">
-                                                    <i class="user icon"></i>
-                                                </button>
-                                            </form>
+                                            <c:choose>
+                                                <c:when test="${!fn:contains(list_report_id, employee.id)}">
+                                                    <form method="POST" action="<c:url value='/follow/create/2' />" class="left floated">
+                                                        <button class="circular ui mini icon green button" type="submit" name="following" value="${employee.id}">
+                                                            <i class="user icon"></i>
+                                                        </button>
+                                                    </form>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <form method="POST" action="<c:url value='/follow/destroy' />" class="left floated">
+                                                        <button class="circular ui mini icon green button" type="submit" name="employee_id" value="${employee.id}">
+                                                            <i class="user red icon"></i>
+                                                        </button>
+
+
+                                                    </form>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </c:when>
                                     </c:choose>
 
