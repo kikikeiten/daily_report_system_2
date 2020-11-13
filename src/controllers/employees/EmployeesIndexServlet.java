@@ -1,6 +1,7 @@
 package controllers.employees;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -36,6 +37,8 @@ public class EmployeesIndexServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+
         int page = 1;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -49,6 +52,22 @@ public class EmployeesIndexServlet extends HttpServlet {
 
         long employees_count = (long) em.createNamedQuery("getEmployeesCount", Long.class)
                 .getSingleResult();
+
+      //フォロー判定
+        List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
+                .setParameter("employee", login_employee)
+                .getResultList();
+
+        List<Integer> list_report_id = new ArrayList<Integer>();
+
+        for (Employee report_id : checkMyFollow) {
+            Integer int_report_id = report_id.getId();
+            list_report_id.add(int_report_id);
+            System.out.println("ログイン中の従業員がフォローしている従業員id一覧は" + list_report_id + "です。");
+            request.setAttribute("list_report_id", list_report_id);
+        }
+
+        //フォロー判定ここまで
 
         em.close();
 

@@ -45,6 +45,12 @@
                                     <span class="description"></span>
                                 </a>
                                 <div class="extra content">
+
+                                <c:choose>
+                                <c:when test="${sessionScope.login_employee.id != employee.id}">
+                                </c:when>
+                                </c:choose>
+
                                     <span class="right floated">
                                         <button onclick="location.href='<c:url value='/management/unfollow?id=${employee.id}' />'" class="circular ui mini icon blue button">
                                             <i class="far fa-paper-plane"></i>
