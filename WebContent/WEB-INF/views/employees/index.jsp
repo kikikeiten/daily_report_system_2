@@ -45,15 +45,15 @@
                                             <c:choose>
                                                 <c:when test="${!fn:contains(list_report_id, employee.id)}">
                                                     <form method="POST" action="<c:url value='/follow/create/2' />" class="left floated">
-                                                        <button class="circular ui mini icon green button" type="submit" name="following" value="${employee.id}">
-                                                            <i class="user icon"></i>
+                                                        <button class="circular ui mini icon green basic button" type="submit" name="following" value="${employee.id}">
+                                                            <i class="fas fa-user-plus"></i>
                                                         </button>
                                                     </form>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <form method="POST" action="<c:url value='/follow/destroy/2' />" class="left floated">
                                                         <button class="circular ui mini icon green button" type="submit" name="employee_id" value="${employee.id}">
-                                                            <i class="user red icon"></i>
+                                                            <i class="fas fa-user-minus"></i>
                                                         </button>
                                                     </form>
                                                 </c:otherwise>
