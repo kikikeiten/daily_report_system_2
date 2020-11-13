@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
+
         <c:if test="${flush != null}">
             <script>
             $('body')
@@ -14,11 +15,11 @@
               className: {
                   toast: 'ui message'
               }
-            })
-          ;
+              });
             </script>
         </c:if>
-        <h2>Menbers</h2>
+
+        <h2>All menbers</h2>
 
         <div class="ui raised very padded container segment">
 
@@ -27,12 +28,11 @@
                     <h3>従業員は未登録です。</h3>
                     <p>登録されるとここに表示されます。</p>
                 </c:when>
-                <c:otherwise>
 
+                <c:otherwise>
                     <div class="ui three stackable cards">
 
                         <c:forEach var="employee" items="${employees}">
-
                             <div class="card">
                                 <a class="content" href="<c:url value='/employees/show?id=${employee.id}' />"> <span class="header"> <c:out value="${employee.name}" />
                                 </span> <span class="meta"> @ <c:out value="${employee.code}" />
@@ -78,6 +78,7 @@
                     <div class="ui hidden divider"></div>
 
                     <div class="ui mini pagination menu">
+
                         <c:forEach var="i" begin="1" end="${((employees_count - 1) / 10) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
@@ -87,9 +88,10 @@
                                 </c:when>
                                 <c:otherwise>
                                     <a class="item" href="<c:url value='/employees?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
-                    </c:otherwise>
+                                </c:otherwise>
                             </c:choose>
                         </c:forEach>
+
                     </div>
                 </c:otherwise>
             </c:choose>
