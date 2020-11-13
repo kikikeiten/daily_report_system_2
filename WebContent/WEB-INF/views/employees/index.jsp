@@ -34,22 +34,21 @@
                         <c:forEach var="employee" items="${employees}">
 
                             <div class="card">
-                                <a class="content" href="<c:url value='/employees/show?id=${employee.id}' />">
-                                    <span class="header">
-                                        <c:out value="${employee.name}" />
-                                    </span>
-                                    <span class="meta">
-                                        @
-                                        <c:out value="${employee.code}" />
-                                    </span>
-                                    <span class="description"></span>
+                                <a class="content" href="<c:url value='/employees/show?id=${employee.id}' />"> <span class="header"> <c:out value="${employee.name}" />
+                                </span> <span class="meta"> @ <c:out value="${employee.code}" />
+                                </span> <span class="description"></span>
                                 </a>
                                 <div class="extra content">
 
-                                <c:choose>
-                                <c:when test="${sessionScope.login_employee.id != employee.id}">
-                                </c:when>
-                                </c:choose>
+                                    <c:choose>
+                                        <c:when test="${sessionScope.login_employee.id != employee.id}">
+                                            <form method="POST" action="<c:url value='/follow/create/2' />" class="left floated">
+                                                <button class="circular ui mini icon green button" type="submit" name="following" value="${employee.id}">
+                                                    <i class="user icon"></i>
+                                                </button>
+                                            </form>
+                                        </c:when>
+                                    </c:choose>
 
                                     <span class="right floated">
                                         <button onclick="location.href='<c:url value='/management/unfollow?id=${employee.id}' />'" class="circular ui mini icon blue button">
