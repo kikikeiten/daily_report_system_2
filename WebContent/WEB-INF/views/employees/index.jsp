@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
@@ -25,6 +24,37 @@
                 <p>登録されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
+
+                <div class="ui cards">
+                    <div class="card">
+                        <div class="content">
+                            <div class="header">Elliot Fu</div>
+                            <div class="description">Elliot Fu is a film-maker from New York.</div>
+                        </div>
+                        <div class="ui bottom attached button">
+                            <i class="add icon"></i> Add Friend
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="content">
+                            <div class="header">Veronika Ossi</div>
+                            <div class="description">Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying.</div>
+                        </div>
+                        <div class="ui bottom attached button">
+                            <i class="add icon"></i> Add Friend
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="content">
+                            <div class="header">Jenny Hess</div>
+                            <div class="description">Jenny is a student studying Media Management at the New School</div>
+                        </div>
+                        <div class="ui bottom attached button">
+                            <i class="add icon"></i> Add Friend
+                        </div>
+                    </div>
+                </div>
+
                 <table id="employee_list" class="ui celled striped table">
                     <tbody>
                         <tr>
@@ -46,18 +76,15 @@
                                             <a href="<c:url value='/employees/show?id=${employee.id}' />">詳細を表示</a>
                                         </c:otherwise>
                                     </c:choose></td>
-                                <td><a
-                                    href="<c:url value='/management/unfollow?id=${employee.id}' />">詳細を表示</a></td>
-                                <td><a
-                                    href="<c:url value='/management/follow?id=${employee.id}' />">詳細を表示</a></td>
+                                <td><a href="<c:url value='/management/unfollow?id=${employee.id}' />">詳細を表示</a></td>
+                                <td><a href="<c:url value='/management/follow?id=${employee.id}' />">詳細を表示</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
                 <div class="ui label">従業員数 ${employees_count}</div>&nbsp;
         <div class="ui mini pagination menu">
-                    <c:forEach var="i" begin="1"
-                        end="${((employees_count - 1) / 10) + 1}" step="1">
+                    <c:forEach var="i" begin="1" end="${((employees_count - 1) / 10) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
                                 <div class="item active">
@@ -65,8 +92,7 @@
                                 </div>
                             </c:when>
                             <c:otherwise>
-                                <a class="item" href="<c:url value='/employees?page=${i}' />"><c:out
-                                        value="${i}" /></a>&nbsp;
+                                <a class="item" href="<c:url value='/employees?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
                     </c:otherwise>
                         </c:choose>
                     </c:forEach>
@@ -75,7 +101,6 @@
         </c:choose>
         <br>
         <br>
-        <button onclick="location.href='<c:url value='/employees/new' />'"
-            class="ui positive button">新規従業員</button>
+        <button onclick="location.href='<c:url value='/employees/new' />'" class="ui positive button">新規従業員</button>
     </c:param>
 </c:import>
