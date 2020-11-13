@@ -34,25 +34,25 @@
                         <c:forEach var="employee" items="${employees}">
 
                             <div class="card">
-                                <div class="content">
-                                    <div class="header">
+                                <a class="content" href="<c:url value='/employees/show?id=${employee.id}' />">
+                                    <span class="header">
                                         <c:out value="${employee.name}" />
-                                    </div>
-                                    <div class="meta">
+                                    </span>
+                                    <span class="meta">
                                         @
                                         <c:out value="${employee.code}" />
-                                    </div>
-                                    <div class="description"></div>
-                                </div>
+                                    </span>
+                                    <span class="description"></span>
+                                </a>
                                 <div class="extra content">
-                                <span class="right floated">
-                                <button onclick="location.href='<c:url value='/management/unfollow?id=${employee.id}' />'" class="circular ui mini icon blue button">
-                                    <i class="far fa-paper-plane"></i>
-                                </button>
-                                <button onclick="location.href='<c:url value='/management/follow?id=${employee.id}' />'" class="circular ui mini icon blue button">
-                                    <i class="far fa-paper-plane"></i>
-                                </button>
-                                </span>
+                                    <span class="right floated">
+                                        <button onclick="location.href='<c:url value='/management/unfollow?id=${employee.id}' />'" class="circular ui mini icon blue button">
+                                            <i class="far fa-paper-plane"></i>
+                                        </button>
+                                        <button onclick="location.href='<c:url value='/management/follow?id=${employee.id}' />'" class="circular ui mini icon blue button">
+                                            <i class="far fa-paper-plane"></i>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </c:forEach>
