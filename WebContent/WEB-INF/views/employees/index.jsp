@@ -75,8 +75,7 @@
 
                     </div>
 
-                    <div class="ui label">従業員数 ${employees_count}</div>&nbsp;
-        <div class="ui mini pagination menu">
+                    <div class="ui mini pagination menu">
                         <c:forEach var="i" begin="1" end="${((employees_count - 1) / 10) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
@@ -94,8 +93,12 @@
             </c:choose>
 
         </div>
-        <br>
-        <br>
+
+        <div class="ui teal image label">
+            All menbers
+            <div class="detail">${employees_count}</div>
+        </div>
+
         <button onclick="location.href='<c:url value='/employees/new' />'" class="ui positive button">新規従業員</button>
     </c:param>
 </c:import>
