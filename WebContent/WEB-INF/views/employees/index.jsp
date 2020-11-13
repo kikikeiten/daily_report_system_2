@@ -51,12 +51,10 @@
                                                     </form>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <form method="POST" action="<c:url value='/follow/destroy' />" class="left floated">
+                                                    <form method="POST" action="<c:url value='/follow/destroy/2' />" class="left floated">
                                                         <button class="circular ui mini icon green button" type="submit" name="employee_id" value="${employee.id}">
                                                             <i class="user red icon"></i>
                                                         </button>
-
-
                                                     </form>
                                                 </c:otherwise>
                                             </c:choose>
