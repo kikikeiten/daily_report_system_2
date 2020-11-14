@@ -25,46 +25,59 @@
 
         <div class="ui borderless container menu">
             <a href="<c:url value='/' />" class="item"><b>TipSwatch</b></a>
+
             <c:if test="${sessionScope.login_employee != null}">
                 <div class="item right">
+
                     <button class="circular ui icon button custom">
                         <i class="far fa-smile"></i>
                     </button>
-                    &nbsp;&nbsp;&nbsp;
+
                     <div class="ui fluid custom popup bottom left transition hidden">
                         <h4 class="ui header">
                             <c:out value="${sessionScope.login_employee.name}"></c:out>
                         </h4>
+
                         <p class="ui right">
                             @
                             <c:out value="${sessionScope.login_employee.code}"></c:out>
                         </p>
+
                         <c:if test="${sessionScope.login_employee.admin_flag == 0}">
                             <div class="ui large label">Associate</div>
                         </c:if>
+
                         <c:if test="${sessionScope.login_employee.admin_flag == 1}">
                             <div class="ui large label">Administrator</div>
                         </c:if>
+
                         <c:if test="${sessionScope.login_employee.admin_flag == 2}">
                             <div class="ui large label">Manager</div>
                         </c:if>
+
                         <c:if test="${sessionScope.login_employee.admin_flag == 3}">
                             <div class="ui large label">Director</div>
                         </c:if>
+                        Ï
                         <div class="ui link list">
                             <c:if test="${sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
                                 <a href="<c:url value='/employees' />" class="item">メンバー管理</a>
                             </c:if>
+
                             <a href="<c:url value='/reports' />" class="item">メモ管理</a> <a href="<c:url value='/timeline' />" class="item">タイムライン</a> <a href="<c:url value='/following' />" class="item"><b><c:out value="${getMyFollowingCount}" /></b>フォロー中</a> <a href="<c:url value='/follower' />" class="item"><b><c:out value="${getMyFollowerCount}" /></b>フォロワー</a>
+
                             <c:if test="${sessionScope.login_employee.admin_flag == 2}">
                                 <a href="<c:url value='/approval/manager' />" class="item">承認待ち<b><c:out value="${getManagerApprovalReportsCount}" />件</b></a>
                             </c:if>
+
                             <c:if test="${sessionScope.login_employee.admin_flag == 3}">
                                 <a href="<c:url value='/approval/director' />" class="item">承認待ち<b><c:out value="${getDirectorApprovalReportsCount}" />件</b></a>
                             </c:if>
+
                             <a class="item" href="<c:url value='/logout' />">ログアウト</a>
                         </div>
                     </div>
+
                     <script type="text/javascript">
                         $('.custom.button')
                         .popup({
@@ -72,9 +85,11 @@
                         on    : 'click'
                         });
                     </script>
+
                     <button onclick="location.href='<c:url value='/reports/new' />'" class="ui positive button">
                         <i class="fas fa-feather-alt"></i>
                     </button>
+
                 </div>
             </c:if>
         </div>
