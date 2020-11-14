@@ -1,44 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:choose>
             <c:when test="${employee != null}">
-                <h2>${employee.name}さんの従業員情報 詳細ページ</h2>
+                <div class="ui header">
+                    <i class="far fa-smile"></i>
+                    <div class="content">
+                        <c:out value="${employee.name}" />
+                    </div>
+                    <div class="ui label">
+                        <c:choose>
+                            <c:when test="${employee.admin_flag == 0}">Associate</c:when>
+                            <c:when test="${employee.admin_flag == 1}">Administrator</c:when>
+                            <c:when test="${employee.admin_flag == 2}">Manager</c:when>
+                            <c:when test="${employee.admin_flag == 3}">Director</c:when>
+                        </c:choose>
+                    </div>
+                    <div class="ui sub header">@<c:out value="${employee.code}" /></div>
+                </div>
 
                 <div class="ui raised very padded container segment">
 
-                <table class="ui celled striped table">
-                    <tbody>
-                        <tr>
-                            <th>社員番号</th>
-                            <td><c:out value="${employee.code}" /></td>
-                        </tr>
-                        <tr>
-                            <th>氏名</th>
-                            <td><c:out value="${employee.name}" /></td>
-                        </tr>
-                        <tr>
-                            <th>権限</th>
-                            <td><c:choose>
-                                    <c:when test="${employee.admin_flag == 1}">管理者</c:when>
-                                    <c:otherwise>一般</c:otherwise>
-                                </c:choose></td>
-                        </tr>
-                        <tr>
-                            <th>登録日時</th>
-                            <td><fmt:formatDate value="${employee.created_at}"
-                                    pattern="yyyy-MM-dd HH:mm" /></td>
-                        </tr>
-                        <tr>
-                            <th>更新日時</th>
-                            <td><fmt:formatDate value="${employee.updated_at}"
-                                    pattern="yyyy-MM-dd HH:mm" /></td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table class="ui celled striped table">
+                        <tbody>
+                            <tr>
+                                <th>社員番号</th>
+                                <td><c:out value="${employee.code}" /></td>
+                            </tr>
+                            <tr>
+                                <th>氏名</th>
+                                <td><c:out value="${employee.name}" /></td>
+                            </tr>
+                            <tr>
+                                <th>権限</th>
+                                <td><c:choose>
+                                        <c:when test="${employee.admin_flag == 1}">管理者</c:when>
+                                        <c:otherwise>一般</c:otherwise>
+                                    </c:choose></td>
+                            </tr>
+                            <tr>
+                                <th>登録日時</th>
+                                <td><fmt:formatDate value="${employee.created_at}" pattern="yyyy-MM-dd HH:mm" /></td>
+                            </tr>
+                            <tr>
+                                <th>更新日時</th>
+                                <td><fmt:formatDate value="${employee.updated_at}" pattern="yyyy-MM-dd HH:mm" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                 </div>
 
