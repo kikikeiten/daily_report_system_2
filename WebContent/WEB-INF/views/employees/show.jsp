@@ -7,6 +7,9 @@
         <c:choose>
             <c:when test="${employee != null}">
                 <h2>${employee.name}さんの従業員情報 詳細ページ</h2>
+
+                <div class="ui raised very padded container segment">
+
                 <table class="ui celled striped table">
                     <tbody>
                         <tr>
@@ -36,6 +39,9 @@
                         </tr>
                     </tbody>
                 </table>
+
+                </div>
+
                 <p>
                     <a href="<c:url value='/employees/edit?id=${employee.id}' />">この従業員情報を編集する</a>
                 </p>
