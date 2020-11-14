@@ -94,7 +94,9 @@
             </c:if>
         </div>
     </div>
-    <br>
+
+    <div class="ui hidden divider"></div>
+
     <div id="content">
         <div class="ui container">${param.content}</div>
     </div>
