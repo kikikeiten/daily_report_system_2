@@ -34,9 +34,9 @@
                     </button>
 
                     <div class="ui fluid custom popup bottom left transition hidden">
-                        <h4 class="ui header">
+                        <div class="ui header">
                             <c:out value="${sessionScope.login_employee.name}"></c:out>
-                        </h4>
+                        </div>
 
                         <p class="ui right">
                             @
@@ -58,23 +58,23 @@
                         <c:if test="${sessionScope.login_employee.admin_flag == 3}">
                             <div class="ui large label">Director</div>
                         </c:if>
-                        Ï
+
                         <div class="ui link list">
                             <c:if test="${sessionScope.login_employee.admin_flag == 1 || sessionScope.login_employee.admin_flag == 2 || sessionScope.login_employee.admin_flag == 3}">
-                                <a href="<c:url value='/employees' />" class="item">メンバー管理</a>
+                                <a href="<c:url value='/employees' />" class="item">All members</a>
                             </c:if>
 
-                            <a href="<c:url value='/reports' />" class="item">メモ管理</a> <a href="<c:url value='/timeline' />" class="item">タイムライン</a> <a href="<c:url value='/following' />" class="item"><b><c:out value="${getMyFollowingCount}" /></b>フォロー中</a> <a href="<c:url value='/follower' />" class="item"><b><c:out value="${getMyFollowerCount}" /></b>フォロワー</a>
+                            <a href="<c:url value='/reports' />" class="item">All swatches</a> <a href="<c:url value='/timeline' />" class="item">Timeline</a> <a href="<c:url value='/following' />" class="item"><b><c:out value="${getMyFollowingCount}" /></b>Following</a> <a href="<c:url value='/follower' />" class="item"><b><c:out value="${getMyFollowerCount}" /></b>Follower</a>
 
                             <c:if test="${sessionScope.login_employee.admin_flag == 2}">
-                                <a href="<c:url value='/approval/manager' />" class="item">承認待ち<b><c:out value="${getManagerApprovalReportsCount}" />件</b></a>
+                                <a href="<c:url value='/approval/manager' />" class="item">Waiting<b><c:out value="${getManagerApprovalReportsCount}" />件</b></a>
                             </c:if>
 
                             <c:if test="${sessionScope.login_employee.admin_flag == 3}">
-                                <a href="<c:url value='/approval/director' />" class="item">承認待ち<b><c:out value="${getDirectorApprovalReportsCount}" />件</b></a>
+                                <a href="<c:url value='/approval/director' />" class="item">Waiting<b><c:out value="${getDirectorApprovalReportsCount}" />件</b></a>
                             </c:if>
 
-                            <a class="item" href="<c:url value='/logout' />">ログアウト</a>
+                            <a class="item" href="<c:url value='/logout' />">Logout</a>
                         </div>
                     </div>
 
