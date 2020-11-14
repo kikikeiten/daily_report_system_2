@@ -39,16 +39,16 @@
                             <c:out value="${sessionScope.login_employee.code}"></c:out>
                         </p>
                         <c:if test="${sessionScope.login_employee.admin_flag == 0}">
-                        <div class="ui large label">社員</div>
+                        <div class="ui large label">Associate</div>
                     </c:if>
                     <c:if test="${sessionScope.login_employee.admin_flag == 1}">
-                        <div class="ui large label">管理者</div>
+                        <div class="ui large label">Administrator</div>
                     </c:if>
                     <c:if test="${sessionScope.login_employee.admin_flag == 2}">
-                        <div class="ui large label">課長</div>
+                        <div class="ui large label">Manager</div>
                     </c:if>
                     <c:if test="${sessionScope.login_employee.admin_flag == 3}">
-                        <div class="ui large label">部長</div>
+                        <div class="ui large label">Director</div>
                     </c:if>
                         <div class="ui link list">
                             <c:if
