@@ -16,9 +16,14 @@ import lombok.Setter;
 
 @Table(name = "members")
 @NamedQueries({
+        // 全てのメンバーを取得
         @NamedQuery(name = "getMembers", query = "SELECT m FROM Member m ORDER BY m.created_at DESC"),
+        // カウント
         @NamedQuery(name = "getMembersCnt", query = "SELECT COUNT(m) FROM Member m"),
+
+        // 登録されたコードを確認
         @NamedQuery(name = "checkRegisteredCode", query = "SELECT COUNT(m) FROM Member m WHERE m.code = :code"),
+        // コードとパスワードを確認（ログイン時）
         @NamedQuery(name = "checkLoginCodeAndPassword", query = "SELECT m FROM Member m WHERE m.delete_flag = 0 AND m.code = :code AND m.password = :pass")
 })
 
@@ -40,9 +45,19 @@ public class Member {
     @Column(name = "password", length = 64, nullable = false)
     private String password;
 
+    /*
+     * 0 : Associate
+     * 1 : Administrator
+     * 2 : Manager
+     * 3 : Director
+     * */
     @Column(name = "role_flag", nullable = false)
     private Integer role_flag;
 
+    /*
+     * 0 : 存在（初期値）
+     * 1 : 論理削除
+     * */
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
