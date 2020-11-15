@@ -39,7 +39,7 @@
 
                     <div class="ui active dimmer">
                         <div class="content">
-                            <h3>There is no ideas waiting for the manager's review.</h3>
+                            <h3>There is no idea waiting for the manager's review.</h3>
                             <p>If another member submits an idea to the manager, it will be displayed here.</p>
                         </div>
                     </div>
@@ -62,17 +62,17 @@
 
                 <c:otherwise>
                     <div class="ui three stackable raised link cards">
-                        <c:forEach var="idea" items="${getAllManagerReviews}">
+                        <c:forEach var="review" items="${getAllManagerReviews}">
 
                             <div class="ui green card">
-                                <a class="content" href="<c:url value='/ideas/?id=${idea.id}' />"> <span class="right floated"><fmt:formatDate value='${idea.idea_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${idea.title}" /></span> <span class="description"> </span>
+                                <a class="content" href="<c:url value='/ideas/?id=${review.id}' />"> <span class="right floated"><fmt:formatDate value='${review.idea_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${review.title}" /></span> <span class="description"> </span>
                                 </a>
 
                                 <div class="extra content">
 
-                                    <c:if test="${sessionScope.login_member.id != idea.member.id && idea.member.role_flag != 2}">
+                                    <c:if test="${sessionScope.login_member.id != review.member.id && review.member.role_flag != 2}">
                                         <form method="POST" action="<c:url value='/reviews/manager/create' />" class="left floated">
-                                            <input type="hidden" name="idea_id" value="${idea.id}" />
+                                            <input type="hidden" name="idea_id" value="${review.id}" />
                                             <button type="submit" name="submit" value="${1}" class="circular ui mini icon olive button">
                                                 <i class="fas fa-comment-medical"></i>
                                             </button>
@@ -81,14 +81,14 @@
 
                                     <c:if test="${sessionScope.login_member.id != idea.member.id}">
                                         <form method="POST" action="<c:url value='/reviews/manager/create' />" class="left floated">
-                                            <input type="hidden" name="idea_id" value="${idea.id}" />
+                                            <input type="hidden" name="idea_id" value="${review.id}" />
                                             <button type="submit" name="submit" value="${4}" class="circular ui mini icon blue button">
                                                 <i class="far fa-paper-plane"></i>
                                             </button>
                                         </form>
                                     </c:if>
 
-                                    <a class="right floated date" href="<c:url value='/members/?id=${idea.member.id}' />"> <c:out value="${idea.member.name}" />
+                                    <a class="right floated date" href="<c:url value='/members/?id=${review.member.id}' />"> <c:out value="${review.member.name}" />
                                     </a>
 
                                 </div>
