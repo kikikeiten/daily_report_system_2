@@ -16,7 +16,8 @@
               progressUp: true,
               className: {
                   toast: 'ui message'
-              }});
+              }
+              });
             </script>
         </c:if>
 
@@ -42,6 +43,7 @@
                             <p>Any advice from the director for ideas will be displayed here.</p>
                         </div>
                     </div>
+
                     <div class="ui three stackable raised link cards">
 
                         <c:forEach begin="0" end="5" step="1">
