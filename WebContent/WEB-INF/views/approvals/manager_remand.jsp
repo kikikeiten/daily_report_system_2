@@ -9,6 +9,7 @@
             .toast({
               class: 'success',
               message: "${flush}",
+              position: 'bottom right',
               showProgress: 'top',
               progressUp: true,
               className: {
