@@ -16,27 +16,27 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "likes")
+@Table(name = "agreements")
 @NamedQueries({
-        @NamedQuery(name = "getMyLikesCount", query = "SELECT COUNT(l) FROM Like AS l WHERE l.report = :report "),
-        @NamedQuery(name = "getMyAllLikes", query = "SELECT l FROM Like AS l WHERE l.report = :report ORDER BY l.created_at DESC")
+        @NamedQuery(name = "getAgreements", query = "SELECT a FROM Agreement a WHERE a.idea = :idea ORDER BY a.created_at DESC"),
+        @NamedQuery(name = "getAgreementsCnt", query = "SELECT COUNT(a) FROM Agreement a WHERE a.idea = :idea "),
 })
 
 @Getter
 @Setter
 @Entity
-public class Like {
+public class Agreement {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "report_id", nullable = false)
+    @JoinColumn(name = "idea_id", nullable = false)
     private Idea idea;
 
     @Column(name = "created_at", nullable = false)

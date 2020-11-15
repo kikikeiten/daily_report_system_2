@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Member;
-import models.Like;
+import models.Agreement;
 import models.Idea;
 import utils.DBUtil;
 
@@ -41,7 +41,7 @@ public class LikesCreateServlet extends HttpServlet {
 
         Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
 
-        Like l = new Like();
+        Agreement l = new Agreement();
 
         l.setEmployee((Member) request.getSession().getAttribute("login_employee"));
         l.setReport(r);
