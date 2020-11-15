@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Approval;
-import models.Employee;
+import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
@@ -39,7 +39,7 @@ public class DirecorApprovalCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee e = (Employee) request.getSession().getAttribute("login_employee");
+        Member e = (Member) request.getSession().getAttribute("login_employee");
         Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
         Integer submit = Integer.parseInt(request.getParameter("submit"));
 
@@ -60,7 +60,7 @@ public class DirecorApprovalCreateServlet extends HttpServlet {
         em.getTransaction().commit();
         em.close();
 
-        Employee report_employee = r.getEmployee();
+        Member report_employee = r.getEmployee();
         Integer admin_flag = report_employee.getAdmin_flag();
         String report_name = report_employee.getName();
 

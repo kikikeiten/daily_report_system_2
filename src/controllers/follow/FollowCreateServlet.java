@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import models.Idea;
 import utils.DBUtil;
@@ -43,12 +43,12 @@ public class FollowCreateServlet extends HttpServlet {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("following")));
 
-        f.setEmployee((Employee) request.getSession().getAttribute("login_employee"));
+        f.setEmployee((Member) request.getSession().getAttribute("login_employee"));
         f.setFollow(r.getEmployee());
         f.setCreated_at(currentTime);
         f.setUpdated_at(currentTime);
 
-        Employee unfollow = r.getEmployee();
+        Member unfollow = r.getEmployee();
         String unfollow_name = unfollow.getName();
 
         em.getTransaction().begin();

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import utils.DBUtil;
 
@@ -38,13 +38,13 @@ public class ManagementFollowDestroy extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
         Follow f = em.find(Follow.class, Integer.parseInt(request.getParameter("follow_id")));
 
-        Employee employee = f.getEmployee();
-        String employee_name = employee.getName();
+        Member member = f.getEmployee();
+        String employee_name = member.getName();
 
-        Employee unfollow = f.getFollow();
+        Member unfollow = f.getFollow();
         String unfollow_name = unfollow.getName();
 
-        Employee following_id = f.getEmployee();
+        Member following_id = f.getEmployee();
         Integer employee_id = following_id.getId();
 
         em.getTransaction().begin();

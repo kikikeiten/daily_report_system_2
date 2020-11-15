@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Idea;
 import models.validators.ReportValidator;
 import utils.DBUtil;
@@ -44,7 +44,7 @@ public class ReportsUpdateServlet extends HttpServlet {
 
             Idea r = em.find(Idea.class, (Integer) (request.getSession().getAttribute("report_id")));
             Integer submit = Integer.parseInt(request.getParameter("submit"));
-            Employee e = (Employee) request.getSession().getAttribute("login_employee");
+            Member e = (Member) request.getSession().getAttribute("login_employee");
 
             r.setReport_date(Date.valueOf(request.getParameter("report_date")));
             r.setTitle(request.getParameter("title"));

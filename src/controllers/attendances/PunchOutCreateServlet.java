@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Attendance;
-import models.Employee;
+import models.Member;
 import utils.DBUtil;
 
 /**
@@ -41,7 +41,7 @@ public class PunchOutCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee e = (Employee) request.getSession().getAttribute("login_employee");
+        Member e = (Member) request.getSession().getAttribute("login_employee");
 
         Integer getMyLatestAttendanceId = em.createNamedQuery("getMyLatestAttendanceId", Integer.class)
                 .setParameter("employee", e)

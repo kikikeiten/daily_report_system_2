@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.validators.EmployeeValidator;
 import utils.DBUtil;
 import utils.EncryptUtil;
@@ -41,7 +41,7 @@ public class EmployeesCreateServlet extends HttpServlet {
         if (_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            Employee e = new Employee();
+            Member e = new Member();
 
             e.setCode(request.getParameter("code"));
             e.setName(request.getParameter("name"));

@@ -33,7 +33,7 @@ public class Like {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
+    private Member member;
 
     @ManyToOne
     @JoinColumn(name = "report_id", nullable = false)

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import models.Employee;
+import models.Member;
 
 /**
  * Servlet Filter implementation class LoginFilter
@@ -47,7 +47,7 @@ public class LoginFilter implements Filter {
             HttpSession session = ((HttpServletRequest) request).getSession();
 
             // セッションスコープに保存された従業員（ログインユーザ）情報を取得
-            Employee e = (Employee) session.getAttribute("login_employee");
+            Member e = (Member) session.getAttribute("login_employee");
 
             if (!servlet_path.equals("/login")) { // ログイン画面以外について
                 // ログアウトしている状態であれば

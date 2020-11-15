@@ -38,7 +38,7 @@ public class Approval {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
+    private Member member;
 
     @Column(name = "approval", nullable = false)
     private Integer approval;

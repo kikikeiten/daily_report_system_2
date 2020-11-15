@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
@@ -43,7 +43,7 @@ public class ReportsEditServlet extends HttpServlet {
 
         em.close();
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
         if (r != null && login_employee.getId() == r.getEmployee().getId()) {
             request.setAttribute("report", r);
             request.setAttribute("_token", request.getSession().getId());

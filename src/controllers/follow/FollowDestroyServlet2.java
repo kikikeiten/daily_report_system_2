@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import utils.DBUtil;
 
@@ -37,8 +37,8 @@ public class FollowDestroyServlet2 extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
-        Employee e = em.find(Employee.class, Integer.parseInt(request.getParameter("employee_id")));
+        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
+        Member e = em.find(Member.class, Integer.parseInt(request.getParameter("employee_id")));
 
         Integer ei = 0;
         ei = em.createNamedQuery("followDestroy", Integer.class)

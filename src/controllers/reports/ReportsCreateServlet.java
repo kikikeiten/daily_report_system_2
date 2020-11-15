@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Idea;
 import models.validators.ReportValidator;
 import utils.DBUtil;
@@ -42,11 +42,11 @@ public class ReportsCreateServlet extends HttpServlet {
         if (_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            Employee e = (Employee) request.getSession().getAttribute("login_employee");
+            Member e = (Member) request.getSession().getAttribute("login_employee");
             Integer sudmit = Integer.parseInt(request.getParameter("submit"));
             Idea r = new Idea();
 
-            r.setEmployee((Employee) request.getSession().getAttribute("login_employee"));
+            r.setEmployee((Member) request.getSession().getAttribute("login_employee"));
 
             Date report_date = new Date(System.currentTimeMillis());
             String rd_str = request.getParameter("report_date");

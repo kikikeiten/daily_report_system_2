@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Attendance;
-import models.Employee;
+import models.Member;
 import utils.DBUtil;
 
 /**
@@ -38,7 +38,7 @@ public class PunchInCreateServlet extends HttpServlet {
         // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
-        Employee e = (Employee) request.getSession().getAttribute("login_employee");
+        Member e = (Member) request.getSession().getAttribute("login_employee");
 
         Attendance a = new Attendance();
 

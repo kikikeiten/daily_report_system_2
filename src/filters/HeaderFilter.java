@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import models.Attendance;
-import models.Employee;
+import models.Member;
 import utils.DBUtil;
 
 /**
@@ -48,7 +48,7 @@ public class HeaderFilter implements Filter {
 
         HttpSession session = ((HttpServletRequest) request).getSession();
 
-        Employee login_employee = (Employee) session.getAttribute("login_employee");
+        Member login_employee = (Member) session.getAttribute("login_employee");
 
         long getMyFollowingCount = (long) em.createNamedQuery("getMyFollowingCount", Long.class)
                 .setParameter("employee", login_employee)

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
@@ -39,7 +39,7 @@ public class DraftIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
 
         int page;
         try {

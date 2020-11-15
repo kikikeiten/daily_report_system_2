@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
@@ -37,7 +37,7 @@ public class SubmissionUpdateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee e = (Employee) request.getSession().getAttribute("login_employee");
+        Member e = (Member) request.getSession().getAttribute("login_employee");
         Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
 
         r.setApproval(Integer.parseInt(request.getParameter("submit")));

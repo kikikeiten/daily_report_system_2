@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Like;
 import models.Idea;
 import utils.DBUtil;
@@ -43,7 +43,7 @@ public class LikesCreateServlet extends HttpServlet {
 
         Like l = new Like();
 
-        l.setEmployee((Employee) request.getSession().getAttribute("login_employee"));
+        l.setEmployee((Member) request.getSession().getAttribute("login_employee"));
         l.setReport(r);
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         l.setCreated_at(currentTime);
@@ -51,8 +51,8 @@ public class LikesCreateServlet extends HttpServlet {
 
         r.setLikes(Integer.parseInt(request.getParameter("likes")) + r.getLikes());
 
-        Employee employee = r.getEmployee();
-        String employee_name = employee.getName();
+        Member member = r.getEmployee();
+        String employee_name = member.getName();
 
         String report_title = r.getTitle();
 

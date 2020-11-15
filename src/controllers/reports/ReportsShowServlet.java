@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Approval;
-import models.Employee;
+import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
@@ -41,18 +41,18 @@ public class ReportsShowServlet extends HttpServlet {
 
         Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
 
         Integer approval = r.getApproval();
 
         //フォロー判定
-        List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
+        List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
                 .setParameter("employee", login_employee)
                 .getResultList();
 
         List<Integer> list_report_id = new ArrayList<Integer>();
 
-        for (Employee report_id : checkMyFollow) {
+        for (Member report_id : checkMyFollow) {
             Integer int_report_id = report_id.getId();
             list_report_id.add(int_report_id);
             System.out.println("ログイン中の従業員がフォローしている従業員id一覧は" + list_report_id + "です。");
@@ -67,7 +67,7 @@ public class ReportsShowServlet extends HttpServlet {
                     .setMaxResults(1)
                     .getSingleResult();
             String comment = getReportApprovals.getComment();
-            Employee e = getReportApprovals.getEmployee();
+            Member e = getReportApprovals.getEmployee();
             String name = e.getName();
             Integer int_admin_flag = e.getAdmin_flag();
             request.setAttribute("comment", comment);

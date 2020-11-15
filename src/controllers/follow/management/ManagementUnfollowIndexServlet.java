@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import utils.DBUtil;
 
@@ -39,7 +39,7 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee ee = em.find(Employee.class, Integer.parseInt(request.getParameter("id")));
+        Member ee = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
 
         int page;
         try {

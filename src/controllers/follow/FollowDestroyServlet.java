@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import models.Idea;
 import utils.DBUtil;
@@ -38,7 +38,7 @@ public class FollowDestroyServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
         Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("employee_id")));
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
 
         Integer ei = 0;
         ei = em.createNamedQuery("followDestroy", Integer.class)
@@ -48,7 +48,7 @@ public class FollowDestroyServlet extends HttpServlet {
 
         Follow f = em.find(Follow.class, ei);
 
-        Employee unfollow = r.getEmployee();
+        Member unfollow = r.getEmployee();
         String unfollow_name = unfollow.getName();
 
         em.getTransaction().begin();

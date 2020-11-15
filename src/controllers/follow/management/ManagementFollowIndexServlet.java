@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import utils.DBUtil;
 
 /**
@@ -38,7 +38,7 @@ public class ManagementFollowIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee ee = em.find(Employee.class, Integer.parseInt(request.getParameter("id")));
+        Member ee = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
 
         System.out.println("リストの従業員idは" + ee + "です。");
 
@@ -49,7 +49,7 @@ public class ManagementFollowIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Employee> getEmployeeNotFollowing = em.createNamedQuery("getEmployeeNotFollowing", Employee.class)
+        List<Member> getEmployeeNotFollowing = em.createNamedQuery("getEmployeeNotFollowing", Member.class)
                 .setParameter("employee", ee)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)

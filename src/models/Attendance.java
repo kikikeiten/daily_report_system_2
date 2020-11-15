@@ -40,7 +40,7 @@ public class Attendance {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
+    private Member member;
 
     @Column(name = "attendance_date", nullable = false)
     private Date attendance_date;
