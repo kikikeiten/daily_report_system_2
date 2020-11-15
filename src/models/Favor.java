@@ -16,16 +16,16 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "agreements")
+@Table(name = "favors")
 @NamedQueries({
-        @NamedQuery(name = "getAgreements", query = "SELECT a FROM Agreement a WHERE a.idea = :idea ORDER BY a.created_at DESC"),
-        @NamedQuery(name = "getAgreementsCnt", query = "SELECT COUNT(a) FROM Agreement a WHERE a.idea = :idea "),
+        @NamedQuery(name = "getIdeaFavors", query = "SELECT f FROM Favor f WHERE f.idea = :idea ORDER BY f.created_at DESC"),
+        @NamedQuery(name = "getIdeaFavorsCnt", query = "SELECT COUNT(f) FROM Favor f WHERE f.idea = :idea "),
 })
 
 @Getter
 @Setter
 @Entity
-public class Agreement {
+public class Favor {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

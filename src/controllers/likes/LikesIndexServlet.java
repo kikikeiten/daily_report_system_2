@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Agreement;
+import models.Favor;
 import models.Idea;
 import utils.DBUtil;
 
@@ -46,7 +46,7 @@ public class LikesIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Agreement> agreements = em.createNamedQuery("getMyAllLikes", Agreement.class)
+        List<Favor> favors = em.createNamedQuery("getMyAllLikes", Favor.class)
                 .setParameter("report", r)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)
@@ -60,7 +60,7 @@ public class LikesIndexServlet extends HttpServlet {
 
         em.close();
 
-        request.setAttribute("likes", agreements);
+        request.setAttribute("likes", favors);
         request.setAttribute("likes_count", likes_count);
         request.setAttribute("page", page);
         request.setAttribute("report_id", r);
