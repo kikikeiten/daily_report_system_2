@@ -14,20 +14,17 @@
 # 💬 :speech_balloon: テキストとリテラルの追加または更新
 # 🚸 :children_crossing: UX / ユーザビリティの改善
 # 📝 :memo: ドキュメンテーションの追加または更新
-# 🍱 :bento: アセットの追加または更新
+# 🗃 :card_file_box: データベース関連の変更
 
 # ==== Prefixes that are rarely used but occasionally used ====
-# ⏪ :rewind: 変更の復元
-# 🔀 :twisted_rightwards_arrows: ブランチのマージ
+# 🍱 :bento: アセットの追加または更新
 # 🔧 :wrench: 構成ファイルの追加または更新
 # 🔨 :hammer: スクリプト開発の追加または更新
 # 💩 :poop: 改善が必要な低品質なコード
 # 🔒 :lock: セキュリティの問題を修正
 # 🚑 :ambulance: ホットフィックス
-# 🚧 :construction: 進行中の作業
 # 📦 :package: コンパイルされたファイルまたはパッケージの追加または更新
 # ♿️ :wheelchair: 利便性の改善
-# 🗃 :card_file_box: データベース関連の変更
 # 🔊 :loud_sound: ログの追加または変更
 # 🔇 :mute: ログの削除
 # 🏗 :building_construction: アーキテクチャの変更
@@ -72,4 +69,4 @@
 # 🌱 :seedling: シードファイルの追加または更新
 # 🚩 :triangular_flag_on_post: フィーチャフラグの追加、更新または削除
 
-# Update date 2020-10-05
+# Update date 2020-11-15
