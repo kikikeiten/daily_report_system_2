@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Report;
+import models.Idea;
 
 /**
  * Servlet implementation class ReportsNewServlet
@@ -34,7 +34,7 @@ public class ReportsNewServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("_token", request.getSession().getId());
 
-        Report r = new Report();
+        Idea r = new Idea();
         r.setReport_date(new Date(System.currentTimeMillis()));
         request.setAttribute("report", r);
 

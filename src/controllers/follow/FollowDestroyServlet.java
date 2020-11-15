@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
 import models.Follow;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -37,7 +37,7 @@ public class FollowDestroyServlet extends HttpServlet {
         // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
-        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("employee_id")));
+        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("employee_id")));
         Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
 
         Integer ei = 0;

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -48,7 +48,7 @@ public class DirectorRemandIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Report> getAllDirectorRemandReports = em.createNamedQuery("getAllDirectorRemandReports", Report.class)
+        List<Idea> getAllDirectorRemandReports = em.createNamedQuery("getAllDirectorRemandReports", Idea.class)
                 .setParameter("employee", login_employee)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)

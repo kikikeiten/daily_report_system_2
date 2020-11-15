@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
-import models.Report;
+import models.Idea;
 import models.validators.ReportValidator;
 import utils.DBUtil;
 
@@ -44,7 +44,7 @@ public class ReportsCreateServlet extends HttpServlet {
 
             Employee e = (Employee) request.getSession().getAttribute("login_employee");
             Integer sudmit = Integer.parseInt(request.getParameter("submit"));
-            Report r = new Report();
+            Idea r = new Idea();
 
             r.setEmployee((Employee) request.getSession().getAttribute("login_employee"));
 

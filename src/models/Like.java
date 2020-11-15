@@ -37,7 +37,7 @@ public class Like {
 
     @ManyToOne
     @JoinColumn(name = "report_id", nullable = false)
-    private Report report;
+    private Idea idea;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;

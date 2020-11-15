@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Approval;
 import models.Employee;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -40,7 +40,7 @@ public class DirecorApprovalCreateServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Employee e = (Employee) request.getSession().getAttribute("login_employee");
-        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("report_id")));
+        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
         Integer submit = Integer.parseInt(request.getParameter("submit"));
 
         r.setApproval(submit);

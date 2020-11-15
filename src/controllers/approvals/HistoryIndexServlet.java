@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Approval;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -39,7 +39,7 @@ public class HistoryIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
+        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
 
         int page;
         try {

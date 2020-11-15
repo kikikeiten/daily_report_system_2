@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Like;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -37,7 +37,7 @@ public class LikesIndexServlet extends HttpServlet {
             throws ServletException, IOException {
         // TODO Auto-generated method stub
         EntityManager em = DBUtil.createEntityManager();
-        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("report_id")));
+        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
 
         int page;
         try {

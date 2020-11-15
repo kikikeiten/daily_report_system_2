@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -49,7 +49,7 @@ public class TimelineIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Report> getMyFollowAllReports = em.createNamedQuery("getMyFollowAllReports", Report.class)
+        List<Idea> getMyFollowAllReports = em.createNamedQuery("getMyFollowAllReports", Idea.class)
                 .setParameter("employee", login_employee)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)

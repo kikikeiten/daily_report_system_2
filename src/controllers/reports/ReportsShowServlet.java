@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Approval;
 import models.Employee;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -39,7 +39,7 @@ public class ReportsShowServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
+        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
 
         Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
 

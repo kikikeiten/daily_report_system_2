@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
-import models.Report;
+import models.Idea;
 import models.validators.ReportValidator;
 import utils.DBUtil;
 
@@ -42,7 +42,7 @@ public class ReportsUpdateServlet extends HttpServlet {
         if (_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            Report r = em.find(Report.class, (Integer) (request.getSession().getAttribute("report_id")));
+            Idea r = em.find(Idea.class, (Integer) (request.getSession().getAttribute("report_id")));
             Integer submit = Integer.parseInt(request.getParameter("submit"));
             Employee e = (Employee) request.getSession().getAttribute("login_employee");
 

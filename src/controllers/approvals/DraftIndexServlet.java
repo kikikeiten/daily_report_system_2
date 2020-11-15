@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -51,7 +51,7 @@ public class DraftIndexServlet extends HttpServlet {
         long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
                 .getSingleResult();
 
-        List<Report> getMyAllDrafts = em.createNamedQuery("getMyAllDrafts", Report.class)
+        List<Idea> getMyAllDrafts = em.createNamedQuery("getMyAllDrafts", Idea.class)
                 .setParameter("employee", login_employee)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -48,7 +48,7 @@ public class ManagerApprovalIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Report> getAllManagerApprovalReports = em.createNamedQuery("getAllManagerApprovalReports", Report.class)
+        List<Idea> getAllManagerApprovalReports = em.createNamedQuery("getAllManagerApprovalReports", Idea.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();

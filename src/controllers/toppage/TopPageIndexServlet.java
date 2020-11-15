@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Attendance;
 import models.Employee;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -48,7 +48,7 @@ public class TopPageIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Report> reports = em.createNamedQuery("getMyAllReports", Report.class)
+        List<Idea> ideas = em.createNamedQuery("getMyAllReports", Idea.class)
                 .setParameter("employee", login_employee)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
@@ -124,7 +124,7 @@ public class TopPageIndexServlet extends HttpServlet {
 
         em.close();
 
-        request.setAttribute("reports", reports);
+        request.setAttribute("reports", ideas);
         request.setAttribute("reports_count", reports_count);
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -35,7 +35,7 @@ public class ManagerRemandCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("report_id")));
+        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
 
         r.setApproval(Integer.parseInt(request.getParameter("submit")));
 

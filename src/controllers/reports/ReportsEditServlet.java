@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
-import models.Report;
+import models.Idea;
 import utils.DBUtil;
 
 /**
@@ -36,7 +36,7 @@ public class ReportsEditServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
+        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
 
         Integer approval = r.getApproval();
         System.out.println("日報の承認IDは" + approval + "です。");

@@ -34,7 +34,7 @@ public class Approval {
 
     @ManyToOne
     @JoinColumn(name = "report_id", nullable = false)
-    private Report report;
+    private Idea idea;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
