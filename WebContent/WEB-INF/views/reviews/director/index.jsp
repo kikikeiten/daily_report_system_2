@@ -24,11 +24,11 @@
         <h2>Waiting for the director's review</h2>
 
         <div class="circular ui icon blue mini button" data-variation="inverted"></div>
-        <script type="text/javascript">
+        <script>
         $('.blue.button')
         .popup({
             position : 'bottom center',
-            content  : 'Waiting for director approval'
+            content  : 'Waiting for the director\'s review'
         })
         ;
         </script>
@@ -36,7 +36,7 @@
         <div class="ui raised very padded container segment">
 
             <c:choose>
-                <c:when test="${getAllDirectorReviewIdeasCount == 0}">
+                <c:when test="${getAllDirectorReviewsCount == 0}">
 
                     <div class="ui active dimmer">
                         <div class="content">
@@ -71,8 +71,8 @@
 
                                 <div class="extra content">
 
-                                    <c:if test="${sessionScope.login_member.id != idea.member.id && idea.member.admin_flag != 3}">
-                                        <form method="POST" action="<c:url value='/review/director/create' />" class="left floated">
+                                    <c:if test="${sessionScope.login_member.id != idea.member.id && idea.member.admin_role != 3}">
+                                        <form method="POST" action="<c:url value='/reviews/director/create' />" class="left floated">
                                             <input type="hidden" name="idea_id" value="${idea.id}" />
                                             <button type="submit" name="submit" value="${3}" class="circular ui mini icon teal button">
                                                 <i class="fas fa-comment-medical"></i>
@@ -81,7 +81,7 @@
                                     </c:if>
 
                                     <c:if test="${sessionScope.login_member.id != idea.member.id}">
-                                        <form method="POST" action="<c:url value='/review/director/create' />" class="left floated">
+                                        <form method="POST" action="<c:url value='/reviews/director/create' />" class="left floated">
                                             <input type="hidden" name="idea_id" value="${idea.id}" />
                                             <button type="submit" name="submit" value="${6}" class="circular ui mini icon purple button">
                                                 <i class="far fa-paper-plane"></i>
@@ -101,7 +101,7 @@
                     <div class="ui hidden divider"></div>
 
                     <div class="ui mini pagination menu">
-                        <c:forEach var="i" begin="1" end="${((getAllDirectorReviewIdeasCount - 1) / 12) + 1}" step="1">
+                        <c:forEach var="i" begin="1" end="${((getAllDirectorReviewsCount - 1) / 12) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
                                     <div class="item active">
@@ -109,7 +109,7 @@
                                     </div>
                                 </c:when>
                                 <c:otherwise>
-                                    <a class="item" href="<c:url value='/review/director?page=${i}' />"><c:out value="${i}" /></a>
+                                    <a class="item" href="<c:url value='/reviews/director?page=${i}' />"><c:out value="${i}" /></a>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -130,8 +130,8 @@
         </a>
 
         <div class="ui image teal label">
-            Director review
-            <div class="detail">${getAllDirectorReviewIdeasCount}</div>
+            Director's review
+            <div class="detail">${getAllDirectorReviewsCount}</div>
         </div>
 
     </c:param>

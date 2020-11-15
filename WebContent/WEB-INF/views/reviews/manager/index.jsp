@@ -17,32 +17,30 @@
               className: {
                   toast: 'ui message'
               }
-            })
-            ;
+              });
             </script>
         </c:if>
 
-        <h2>Manager approval</h2>
+        <h2>Waiting for the manager's review</h2>
 
         <div class="circular ui icon green mini button" data-variation="inverted"></div>
-        <script type="text/javascript">
+        <script>
         $('.green.button')
         .popup({
             position : 'bottom center',
-            content  : 'Waiting for manager approval'
-        })
-        ;
+            content  : 'Waiting for the manager\'s review'
+        });
         </script>
 
         <div class="ui raised very padded container segment">
 
             <c:choose>
-                <c:when test="${getManagerApprovalReportsCount == 0}">
+                <c:when test="${getAllManagerReviewsCount == 0}">
 
                     <div class="ui active dimmer">
                         <div class="content">
-                            <h3>課長承認待ちの日報はありません。</h3>
-                            <p>他の社員が課長に提出するとここに表示されます。</p>
+                            <h3>There is no ideas waiting for the manager's review.</h3>
+                            <p>If another member submits an idea to the manager, it will be displayed here.</p>
                         </div>
                     </div>
                     <div class="ui three stackable raised link cards">
@@ -64,46 +62,44 @@
 
                 <c:otherwise>
                     <div class="ui three stackable raised link cards">
-                        <c:forEach var="report" items="${getAllManagerApprovalReports}" varStatus="status">
+                        <c:forEach var="idea" items="${getAllManagerReviews}">
 
                             <div class="ui green card">
-                                <a class="content" href="<c:url value='/reports/show?id=${report.id}' />"> <span class="right floated"><fmt:formatDate value='${report.report_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${report.title}" /></span> <span class="description"> </span>
+                                <a class="content" href="<c:url value='/ideas/?id=${idea.id}' />"> <span class="right floated"><fmt:formatDate value='${idea.idea_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${idea.title}" /></span> <span class="description"> </span>
                                 </a>
 
                                 <div class="extra content">
 
-                                    <c:if test="${sessionScope.login_employee.id != report.employee.id && report.employee.admin_flag != 2}">
-                                            &nbsp;
-                                            <form method="POST" action="<c:url value='/manager/approval/create' />" class="left floated">
-                                            <input type="hidden" name="report_id" value="${report.id}" />
+                                    <c:if test="${sessionScope.login_member.id != idea.member.id && idea.member.role_flag != 2}">
+                                        <form method="POST" action="<c:url value='/reviews/manager/create' />" class="left floated">
+                                            <input type="hidden" name="idea_id" value="${idea.id}" />
                                             <button type="submit" name="submit" value="${1}" class="circular ui mini icon olive button">
                                                 <i class="fas fa-comment-medical"></i>
                                             </button>
                                         </form>
                                     </c:if>
 
-                                    <c:if test="${sessionScope.login_employee.id != report.employee.id}">
-                                        <form method="POST" action="<c:url value='/manager/approval/create' />" class="left floated">
-                                            <input type="hidden" name="report_id" value="${report.id}" />
+                                    <c:if test="${sessionScope.login_member.id != idea.member.id}">
+                                        <form method="POST" action="<c:url value='/reviews/manager/create' />" class="left floated">
+                                            <input type="hidden" name="idea_id" value="${idea.id}" />
                                             <button type="submit" name="submit" value="${4}" class="circular ui mini icon blue button">
                                                 <i class="far fa-paper-plane"></i>
                                             </button>
                                         </form>
                                     </c:if>
 
-                                    <a class="right floated date" href="<c:url value='/employees/show?id=${report.employee.id}' />"> <c:out value="${report.employee.name}" />
+                                    <a class="right floated date" href="<c:url value='/members/?id=${idea.member.id}' />"> <c:out value="${idea.member.name}" />
                                     </a>
 
                                 </div>
                             </div>
-
                         </c:forEach>
                     </div>
 
                     <div class="ui hidden divider"></div>
 
                     <div class="ui mini pagination menu">
-                        <c:forEach var="i" begin="1" end="${((getManagerApprovalReportsCount - 1) / 12) + 1}" step="1">
+                        <c:forEach var="i" begin="1" end="${((getAllManagerReviewsCount - 1) / 12) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
                                     <div class="item active">
@@ -111,7 +107,7 @@
                                     </div>
                                 </c:when>
                                 <c:otherwise>
-                                    <a class="item" href="<c:url value='/approval/manager?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                                    <a class="item" href="<c:url value='/reviews/manager?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
                             </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -122,21 +118,21 @@
 
         </div>
 
-        <a href="<c:url value='/' />" class="ui image label"> My swatches <span class="detail"> ${reports_count} </span>
+        <a href="<c:url value='/' />" class="ui image label"> My ideas <span class="detail"> ${getMyIdeasCount} </span>
         </a>
 
-        <a href="<c:url value='/reports' />" class="ui image label"> All swatches <span class="detail"> ${getReportsCountButDrafts} </span>
+        <a href="<c:url value='/ideas' />" class="ui image label"> All ideas <span class="detail"> ${getAllIdeasCountButDrafts} </span>
         </a>
 
         <a href="<c:url value='/drafts' />" class="ui image label"> My drafts <span class="detail"> ${getMyDraftsCount} </span>
         </a>
 
         <div class="ui teal image label">
-            Manager approval
-            <div class="detail">${getManagerApprovalReportsCount}</div>
+            Manager's reviews
+            <div class="detail">${getAllManagerReviewsCount}</div>
         </div>
 
-        <a href="<c:url value='/remand/director' />" class="ui image label"> Director remand <span class="detail"> ${getDirectorRemandReportsCount} </span>
+        <a href="<c:url value='/advice/director' />" class="ui image label"> Director's advice <span class="detail"> ${getAllDirectorAdviceCount} </span>
         </a>
 
     </c:param>
