@@ -23,7 +23,7 @@ import lombok.Setter;
         // ログイン中メンバーの全join履歴を取得
         @NamedQuery(name = "getMyJoins", query = "SELECT j FROM Join j WHERE j.member = :login_member_id ORDER BY j.updated_at DESC"),
         // カウント
-        @NamedQuery(name = "getMyJoinCnt", query = "SELECT COUNT(j) FROM Join j WHERE j.member = :login_member_id"),
+        @NamedQuery(name = "getMyJoinCnt", query = "SELECT COUNT(j) FROM Join j WHERE j.member = :login_member"),
 
         // 全てのjoin履歴を取得
         @NamedQuery(name = "getJoins", query = "SELECT j FROM Join j ORDER BY j.updated_at DESC"),
@@ -31,9 +31,9 @@ import lombok.Setter;
         @NamedQuery(name = "getJoinsCnt", query = "SELECT COUNT(j) FROM Join j"),
 
         // ログイン中メンバーの最新join履歴を取得
-        @NamedQuery(name = "getMyLatestJoin", query = "SELECT j FROM Join j WHERE j.member = :login_member_id ORDER BY j.updated_at DESC"),
+        @NamedQuery(name = "getMyLatestJoin", query = "SELECT j FROM Join j WHERE j.member = :login_member ORDER BY j.updated_at DESC"),
         // ログイン中メンバーの最新join履歴idを取得（削除予定）
-        @NamedQuery(name = "getMyLatestJoinId", query = "SELECT j.id FROM Join j WHERE j.member = :login_member_id ORDER BY j.updated_at DESC"),
+        @NamedQuery(name = "getMyLatestJoinId", query = "SELECT j.id FROM Join j WHERE j.member = :login_member ORDER BY j.updated_at DESC"),
 
         // punch_out忘れを取得
         @NamedQuery(name = "getForgetJoins", query = "SELECT j FROM Join j WHERE j.join_flag = 1 AND j.join_date <> :today")

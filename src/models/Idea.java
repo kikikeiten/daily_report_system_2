@@ -31,14 +31,14 @@ import lombok.Setter;
         @NamedQuery(name = "getIdeasCntButDrafts", query = "SELECT COUNT(i) FROM Idea i WHERE i.review_flag <> 0"),
 
         // ログイン中メンバーのideaを取得
-        @NamedQuery(name = "getMyIdeas", query = "SELECT i FROM Idea i WHERE i.member = :login_member_id ORDER BY i.updated_at DESC"),
+        @NamedQuery(name = "getMyIdeas", query = "SELECT i FROM Idea i WHERE i.member = :login_member ORDER BY i.updated_at DESC"),
         // カウント
-        @NamedQuery(name = "getMyIdeasCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member_id"),
+        @NamedQuery(name = "getMyIdeasCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member"),
 
         // ログイン中メンバーの下書きを取得
-        @NamedQuery(name = "getMyDrafts", query = "SELECT i FROM Idea i WHERE i.member = :login_member_id AND i.review_flag = 0 ORDER BY i.updated_at DESC"),
+        @NamedQuery(name = "getMyDrafts", query = "SELECT i FROM Idea i WHERE i.member = :login_member AND i.review_flag = 0 ORDER BY i.updated_at DESC"),
         // カウント
-        @NamedQuery(name = "getMyDraftsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member_id AND i.review_flag = 0"),
+        @NamedQuery(name = "getMyDraftsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member AND i.review_flag = 0"),
 
         // マネージャーのレビュー待ちideaを取得
         @NamedQuery(name = "getManagerReviews", query = "SELECT i FROM Idea i WHERE i.review_flag = 2 ORDER BY i.updated_at DESC"),
@@ -51,21 +51,21 @@ import lombok.Setter;
         @NamedQuery(name = "getDirectorReviewsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.review_flag = 4"),
 
         // マネージャーのアドバイス有ideaを取得（再ポストの必要あり）
-        @NamedQuery(name = "getManagerAdvice", query = "SELECT i FROM Idea i WHERE i.member = :login_member_id AND i.review_flag = 1 ORDER BY i.updated_at DESC"),
+        @NamedQuery(name = "getManagerAdvice", query = "SELECT i FROM Idea i WHERE i.member = :login_member AND i.review_flag = 1 ORDER BY i.updated_at DESC"),
         // カウント
-        @NamedQuery(name = "getManagerAdviceCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member_id AND i.review_flag = 1"),
+        @NamedQuery(name = "getManagerAdviceCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member AND i.review_flag = 1"),
 
         // ディレクターのアドバイス有ideaを取得（再ポストの必要あり）
-        @NamedQuery(name = "getDirectorAdvice", query = "SELECT i FROM Idea i WHERE i.member = :login_member_id AND i.review_flag = 3 ORDER BY i.updated_at DESC"),
+        @NamedQuery(name = "getDirectorAdvice", query = "SELECT i FROM Idea i WHERE i.member = :login_member AND i.review_flag = 3 ORDER BY i.updated_at DESC"),
         // カウント
-        @NamedQuery(name = "getDirectorAdviceCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member_id AND i.review_flag = 3"),
+        @NamedQuery(name = "getDirectorAdviceCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member AND i.review_flag = 3"),
 
         // マネージャーのレビュー忘れideaを取得（前日以前）
         @NamedQuery(name = "get4getManagerReviewsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.review_flag = 2 AND :role_flag = 2 AND i.created_date < :today"),
         // ディレクターのレビュー忘れideaを取得（前日以前）
         @NamedQuery(name = "get4getDirectorReviewsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.review_flag = 4 AND :role_flag = 3 AND i.created_date < :today"),
         // 下書きのポスト忘れを取得（前日以前）
-        @NamedQuery(name = "get4getMyDraftsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member_id AND i.review_flag = 0 AND i.created_date < :today")
+        @NamedQuery(name = "get4getMyDraftsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :login_member AND i.review_flag = 0 AND i.created_date < :today")
 })
 
 @Getter
