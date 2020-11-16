@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Member;
 import models.Idea;
-import models.validators.ReportValidator;
+import models.validators.IdeaValidator;
 import utils.DBUtil;
 
 /**
@@ -52,7 +52,7 @@ public class ReportsUpdateServlet extends HttpServlet {
             r.setUpdated_at(new Timestamp(System.currentTimeMillis()));
             r.setApproval(submit);
 
-            List<String> errors = ReportValidator.validate(r);
+            List<String> errors = IdeaValidator.validate(r);
             if (errors.size() > 0) {
                 em.close();
 

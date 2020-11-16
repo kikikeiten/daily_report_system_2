@@ -5,16 +5,16 @@ import java.util.List;
 
 import models.Idea;
 
-public class ReportValidator {
-    public static List<String> validate(Idea r) {
+public class IdeaValidator {
+    public static List<String> validate(Idea i) {
         List<String> errors = new ArrayList<String>();
 
-        String title_error = _validateTitle(r.getTitle());
+        String title_error = _validateTitle(i.getTitle());
         if (!title_error.equals("")) {
             errors.add(title_error);
         }
 
-        String content_error = _validateContent(r.getContent());
+        String content_error = _validateContent(i.getContent());
         if (!content_error.equals("")) {
             errors.add(content_error);
         }
