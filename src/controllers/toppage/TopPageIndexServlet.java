@@ -96,21 +96,6 @@ public class TopPageIndexServlet extends HttpServlet {
                 .getSingleResult();
 
         try {
-            // ログイン中メンバーの最新join履歴を取得（履歴がない場合もあるのでtry-catch）
-            Join getMyLatestJoin = (Join) em
-                    .createNamedQuery("getMyLatestJoin", Join.class)
-                    .setParameter("login_member", login_member)
-                    .setMaxResults(1) // 一件だけ取得
-                    .getSingleResult();
-
-            Integer latest_join = getMyLatestJoin.getJoin_flag(); // Join型からInteger型に変換
-            request.setAttribute("latest_join", latest_join);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
             // punch_out忘れを取得（履歴がない場合もあるのでtry-catch）
             List<Join> get4getJoins = em.createNamedQuery("get4getJoins", Join.class)
                     .setParameter("today", today)
