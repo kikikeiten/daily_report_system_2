@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Attendance;
+import models.Join;
 import utils.DBUtil;
 
 /**
@@ -37,7 +37,7 @@ public class LeaveEditServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Attendance a = em.find(Attendance.class, Integer.parseInt(request.getParameter("id")));
+        Join a = em.find(Join.class, Integer.parseInt(request.getParameter("id")));
 
         request.setAttribute("attendance", a);
 

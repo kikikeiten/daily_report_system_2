@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Attendance;
+import models.Join;
 import models.Member;
 import utils.DBUtil;
 
@@ -40,7 +40,7 @@ public class PunchInCreateServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
         Member e = (Member) request.getSession().getAttribute("login_employee");
 
-        Attendance a = new Attendance();
+        Join a = new Join();
 
         a.setEmployee(e);
 

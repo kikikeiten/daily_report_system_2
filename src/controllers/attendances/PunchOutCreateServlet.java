@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Attendance;
+import models.Join;
 import models.Member;
 import utils.DBUtil;
 
@@ -48,7 +48,7 @@ public class PunchOutCreateServlet extends HttpServlet {
                 .setMaxResults(1)
                 .getSingleResult();
 
-        Attendance a = em.find(Attendance.class, getMyLatestAttendanceId);
+        Join a = em.find(Join.class, getMyLatestAttendanceId);
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         Time currentTime2 = new Time(System.currentTimeMillis());

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Attendance;
+import models.Join;
 import utils.DBUtil;
 
 /**
@@ -39,7 +39,7 @@ public class LeaveUpdateServlet extends HttpServlet {
         // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
-        Attendance a = em.find(Attendance.class, Integer.parseInt(request.getParameter("id")));
+        Join a = em.find(Join.class, Integer.parseInt(request.getParameter("id")));
 
         String leave_time = Integer.parseInt(request.getParameter("leave_hour")) + ":"
                 + Integer.parseInt(request.getParameter("leave_minute")) + ":00";

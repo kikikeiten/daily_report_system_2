@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Attendance;
+import models.Join;
 import models.Member;
 import utils.DBUtil;
 
@@ -48,7 +48,7 @@ public class MyAttendanceIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Attendance> getMyAllAttendances = em.createNamedQuery("getMyAllAttendances", Attendance.class)
+        List<Join> getMyAllAttendances = em.createNamedQuery("getMyAllAttendances", Join.class)
                 .setParameter("employee", login_employee)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)

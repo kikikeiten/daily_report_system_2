@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Attendance;
+import models.Join;
 import models.Member;
 import models.Idea;
 import utils.DBUtil;
@@ -92,8 +92,8 @@ public class TopPageIndexServlet extends HttpServlet {
                 .getSingleResult();
 
         try {
-            Attendance getMyLatestAttendance = (Attendance) em
-                    .createNamedQuery("getMyLatestAttendance", Attendance.class)
+            Join getMyLatestAttendance = (Join) em
+                    .createNamedQuery("getMyLatestAttendance", Join.class)
                     .setParameter("employee", login_employee)
                     .setMaxResults(1)
                     .getSingleResult();
@@ -106,11 +106,11 @@ public class TopPageIndexServlet extends HttpServlet {
         }
 
         try {
-            List<Attendance> getAllForgetAttendances = em.createNamedQuery("getAllForgetAttendances", Attendance.class)
+            List<Join> getAllForgetAttendances = em.createNamedQuery("getAllForgetAttendances", Join.class)
                     .setParameter("today", now)
                     .getResultList();
 
-            for (Attendance set_forget : getAllForgetAttendances) {
+            for (Join set_forget : getAllForgetAttendances) {
                 set_forget.setAttendance_flag(2);
                 System.out.println("setAttendance_flagの値は" + set_forget.getAttendance_flag() + "です。");
 

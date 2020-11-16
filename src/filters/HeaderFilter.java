@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import models.Attendance;
+import models.Join;
 import models.Member;
 import utils.DBUtil;
 
@@ -65,7 +65,7 @@ public class HeaderFilter implements Filter {
                 .getSingleResult();
 
         try {
-            Attendance getMyLatestAttendance = (Attendance) em.createNamedQuery("getMyLatestAttendance", Attendance.class)
+            Join getMyLatestAttendance = (Join) em.createNamedQuery("getMyLatestAttendance", Join.class)
                     .setParameter("employee", login_employee)
                     .setMaxResults(1)
                     .getSingleResult();
