@@ -19,7 +19,9 @@ import lombok.Setter;
 
 @Table(name = "reviews")
 @NamedQueries({
+        // ideaから全てのレビューを取得
         @NamedQuery(name = "getReviews", query = "SELECT r FROM Review r WHERE r.idea = :idea ORDER BY r.updated_at DESC"),
+        // カウント
         @NamedQuery(name = "getReviewsCnt", query = "SELECT COUNT(r) FROM Review r WHERE r.idea = :idea")
 })
 
@@ -40,6 +42,14 @@ public class Review {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
+    /*
+     * 0 : 下書き
+     * 1 : マネージャーのアドバイス有（再ポストの必要）
+     * 2 : マネージャーのレビュー待ち
+     * 3 : ディレクターのアドバイス有（再ポストの必要）
+     * 4 : ディレクターのレビュー待ち
+     * 6 : 採用
+     * */
     @Column(name = "review_flag", nullable = false)
     private Integer review_flag;
 
