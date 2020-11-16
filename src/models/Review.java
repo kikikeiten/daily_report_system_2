@@ -17,35 +17,35 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "approvals")
+@Table(name = "reviews")
 @NamedQueries({
-        @NamedQuery(name = "getReportApprovals", query = "SELECT a FROM Approval AS a WHERE a.report = :report ORDER BY a.id DESC"),
-        @NamedQuery(name = "getReportApprovalsCount", query = "SELECT COUNT(a) FROM Approval AS a WHERE a.report = :report")
+        @NamedQuery(name = "getReviews", query = "SELECT r FROM Review r WHERE r.idea = :idea ORDER BY r.updated_at DESC"),
+        @NamedQuery(name = "getReviewsCnt", query = "SELECT COUNT(r) FROM Review r WHERE r.idea = :idea")
 })
 
 @Getter
 @Setter
 @Entity
-public class Approval {
+public class Review {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "report_id", nullable = false)
+    @JoinColumn(name = "idea_id", nullable = false)
     private Idea idea;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @Column(name = "approval", nullable = false)
-    private Integer approval;
+    @Column(name = "review_flag", nullable = false)
+    private Integer review_flag;
 
     @Lob
-    @Column(name = "comment", nullable = true)
-    private String comment;
+    @Column(name = "advice", nullable = true)
+    private String advice;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;

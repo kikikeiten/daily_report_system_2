@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Approval;
+import models.Review;
 import models.Idea;
 import utils.DBUtil;
 
@@ -48,7 +48,7 @@ public class HistoryIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Approval> getReportApprovals = em.createNamedQuery("getReportApprovals", Approval.class)
+        List<Review> getReportApprovals = em.createNamedQuery("getReportApprovals", Review.class)
                 .setParameter("report", r)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)

@@ -29,24 +29,24 @@ import lombok.Setter;
         @NamedQuery(name = "getMyFollowingIdeasCnt", query = "SELECT COUNT(i) FROM Idea i, Follow f WHERE f.followed_id = :login_member_id AND i.member.id = f.followed_id.id"),
 
         // フォロー一覧を取得
-        @NamedQuery(name = "getMyFollowing", query = "SELECT f FROM Follow f, Member m WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id ORDER BY f.created_at DESC"),
+        @NamedQuery(name = "getMyFollowing", query = "SELECT f FROM Follow f, Member m WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id ORDER BY f.updated_at DESC"),
         // カウント
         @NamedQuery(name = "getMyFollowingCnt", query = "SELECT COUNT(f) FROM Follow f, Member m WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id"),
         // フォローしているメンバーidを取得（削除予定）
         @NamedQuery(name = "checkMyFollow", query = "SELECT f.followed_id FROM Follow f WHERE f.following_id = :login_member_id"),
 
         // フォロワー一覧を取得
-        @NamedQuery(name = "getMyFollower", query = "SELECT f FROM Follow f, Member m WHERE f.followed_id = :login_member_id AND m.id = f.following_id.id ORDER BY f.created_at DESC"),
+        @NamedQuery(name = "getMyFollower", query = "SELECT f FROM Follow f, Member m WHERE f.followed_id = :login_member_id AND m.id = f.following_id.id ORDER BY f.updated_at DESC"),
         // カウント
         @NamedQuery(name = "getMyFollowerCnt", query = "SELECT COUNT(f) FROM  Follow f, Member m WHERE f.followed_id = :login_member_id AND m.id = f.following_id.id"),
 
         // 他のメンバーのフォロー一覧を表示
-        @NamedQuery(name = "getMemberFollowing", query = "SELECT f FROM Follow f WHERE f.following_id = :login_member_id ORDER BY f.created_at DESC"),
+        @NamedQuery(name = "getMemberFollowing", query = "SELECT f FROM Follow f WHERE f.following_id = :login_member_id ORDER BY f.updated_at DESC"),
         // カウント
         @NamedQuery(name = "getMemberFollowingCnt", query = "SELECT COUNT(f) FROM Follow f WHERE f.following_id = :login_member_id"),
 
         // 他のメンバーのフォローしていない一覧を表示
-        @NamedQuery(name = "getMemberNotFollowing", query = "SELECT m FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id) AND m.id <> :login_member_id ORDER BY m.created_at DESC"),
+        @NamedQuery(name = "getMemberNotFollowing", query = "SELECT m FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id) AND m.id <> :login_member_id ORDER BY m.updated_at DESC"),
         // カウント
         @NamedQuery(name = "getMemberNotFollowingCnt", query = "SELECT COUNT(m) FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id) AND m.id <> :login_member_id")
 })

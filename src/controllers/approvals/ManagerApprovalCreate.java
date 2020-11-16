@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Approval;
+import models.Review;
 import models.Member;
 import models.Idea;
 import utils.DBUtil;
@@ -45,7 +45,7 @@ public class ManagerApprovalCreate extends HttpServlet {
 
         r.setApproval(Integer.parseInt(request.getParameter("submit")));
 
-        Approval a = new Approval();
+        Review a = new Review();
 
         a.setReport(r);
         a.setEmployee(e);

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Approval;
+import models.Review;
 import models.Member;
 import models.Idea;
 import utils.DBUtil;
@@ -62,7 +62,7 @@ public class ReportsShowServlet extends HttpServlet {
         //フォロー判定ここまで
 
         try {
-            Approval getReportApprovals = em.createNamedQuery("getReportApprovals", Approval.class)
+            Review getReportApprovals = em.createNamedQuery("getReportApprovals", Review.class)
                     .setParameter("report", r)
                     .setMaxResults(1)
                     .getSingleResult();
