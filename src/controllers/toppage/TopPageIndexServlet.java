@@ -115,16 +115,16 @@ public class TopPageIndexServlet extends HttpServlet {
 
         em.close();
 
-        request.setAttribute("reports", getMyIdeas);
-        request.setAttribute("reports_count", getMyIdeasCnt);
         request.setAttribute("page", page);
+        request.setAttribute("getMyIdeas", getMyIdeas);
+        request.setAttribute("getMyIdeasCnt", getMyIdeasCnt);
         request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
-        request.setAttribute("getManagerRemandReportsCount", getManagerAdviceCnt);
-        request.setAttribute("getDirectorRemandReportsCount", getDirectorAdviceCnt);
+        request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
+        request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
         request.setAttribute("get4getMyDraftsCnt", get4getMyDraftsCnt);
-        request.setAttribute("getYesterdayManagerApprovalsCount", get4getManagerReviewsCnt);
-        request.setAttribute("getYesterdayDirectorApprovalsCount", get4getDirectorReviewsCnt);
-        request.setAttribute("getReportsCountButDrafts", getIdeasCntButDrafts);
+        request.setAttribute("get4getManagerReviewsCnt", get4getManagerReviewsCnt);
+        request.setAttribute("get4getDirectorReviewsCnt", get4getDirectorReviewsCnt);
+        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
 
         // トーストメッセージがある場合はセッションとして保存
         if (request.getSession().getAttribute("toast") != null) {
