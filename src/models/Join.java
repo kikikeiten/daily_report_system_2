@@ -36,7 +36,7 @@ import lombok.Setter;
         @NamedQuery(name = "getMyLatestJoinId", query = "SELECT j.id FROM Join j WHERE j.member = :login_member ORDER BY j.updated_at DESC"),
 
         // punch_out忘れを取得
-        @NamedQuery(name = "getForgetJoins", query = "SELECT j FROM Join j WHERE j.join_flag = 1 AND j.join_date <> :today")
+        @NamedQuery(name = "get4getJoins", query = "SELECT j FROM Join j WHERE j.join_flag = 1 AND j.join_date <> :today")
 })
 
 @Getter

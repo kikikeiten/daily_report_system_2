@@ -17,29 +17,20 @@ import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class TopPageIndexServlet
- */
 @WebServlet("/index.html")
 public class TopPageIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public TopPageIndexServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         EntityManager em = DBUtil.createEntityManager();
 
-        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
+        Member login_member = (Member) request.getSession().getAttribute("login_member");
 
         int page;
         try {
@@ -48,71 +39,71 @@ public class TopPageIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Idea> ideas = em.createNamedQuery("getMyAllReports", Idea.class)
-                .setParameter("employee", login_employee)
+        List<Idea> getMyIdeas = em.createNamedQuery("getMyIdeas", Idea.class)
+                .setParameter("login_member", login_member)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        long reports_count = (long) em.createNamedQuery("getMyReportsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getMyIdeasCnt = (long) em.createNamedQuery("getMyIdeasCnt", Long.class)
+                .setParameter("login_member", login_member)
                 .getSingleResult();
 
-        long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
+                .setParameter("login_member", login_member)
                 .getSingleResult();
 
-        long getManagerRemandReportsCount = (long) em.createNamedQuery("getManagerRemandReportsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
+                .setParameter("login_member", login_member)
                 .getSingleResult();
 
-        long getDirectorRemandReportsCount = (long) em.createNamedQuery("getDirectorRemandReportsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
+                .setParameter("login_member", login_member)
                 .getSingleResult();
 
-        Date now = new Date(System.currentTimeMillis());
-        long getYesterdayDraftsCount = (long) em.createNamedQuery("getYesterdayDraftsCount", Long.class)
-                .setParameter("now", now)
-                .setParameter("employee", login_employee)
+        Date today = new Date(System.currentTimeMillis());
+
+        long get4getMyDraftsCnt = (long) em.createNamedQuery("get4getMyDraftsCnt", Long.class)
+                .setParameter("today", today)
+                .setParameter("login_member", login_member)
                 .getSingleResult();
 
-        long getYesterdayManagerApprovalsCount = (long) em
-                .createNamedQuery("getYesterdayManagerApprovalsCount", Long.class)
-                .setParameter("now", now)
-                .setParameter("admin_flag", login_employee.getAdmin_flag())
+        long get4getManagerReviewsCnt = (long) em
+                .createNamedQuery("get4getManagerReviewsCnt", Long.class)
+                .setParameter("today", today)
+                .setParameter("role_flag", login_member.getRole_flag())
                 .getSingleResult();
 
-        long getYesterdayDirectorApprovalsCount = (long) em
-                .createNamedQuery("getYesterdayDirectorApprovalsCount", Long.class)
-                .setParameter("now", now)
-                .setParameter("admin_flag", login_employee.getAdmin_flag())
+        long get4getDirectorReviewsCnt = (long) em
+                .createNamedQuery("get4getDirectorReviewsCnt", Long.class)
+                .setParameter("today", today)
+                .setParameter("role_flag", login_member.getRole_flag())
                 .getSingleResult();
 
-        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
+        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 
         try {
-            Join getMyLatestAttendance = (Join) em
-                    .createNamedQuery("getMyLatestAttendance", Join.class)
-                    .setParameter("employee", login_employee)
+            Join getMyLatestJoin = (Join) em
+                    .createNamedQuery("getMyLatestJoin", Join.class)
+                    .setParameter("login_member", login_member)
                     .setMaxResults(1)
                     .getSingleResult();
 
-            Integer attendance_flag = getMyLatestAttendance.getAttendance_flag();
-            request.setAttribute("attendance_flag", attendance_flag);
+            Integer join_flag = getMyLatestJoin.getJoin_flag();
+            request.setAttribute("join_flag", join_flag);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         try {
-            List<Join> getAllForgetAttendances = em.createNamedQuery("getAllForgetAttendances", Join.class)
-                    .setParameter("today", now)
+            List<Join> get4getJoins = em.createNamedQuery("get4getJoins", Join.class)
+                    .setParameter("today", today)
                     .getResultList();
 
-            for (Join set_forget : getAllForgetAttendances) {
-                set_forget.setAttendance_flag(2);
-                System.out.println("setAttendance_flagの値は" + set_forget.getAttendance_flag() + "です。");
+            for (Join set_forget : get4getJoins) {
+                set_forget.setJoin_flag(2);
 
                 em.getTransaction().begin();
                 em.getTransaction().commit();
@@ -124,24 +115,23 @@ public class TopPageIndexServlet extends HttpServlet {
 
         em.close();
 
-        request.setAttribute("reports", ideas);
-        request.setAttribute("reports_count", reports_count);
+        request.setAttribute("reports", getMyIdeas);
+        request.setAttribute("reports_count", getMyIdeasCnt);
         request.setAttribute("page", page);
-        request.setAttribute("getMyDraftsCount", getMyDraftsCount);
-        request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
-        request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);
-        request.setAttribute("getYesterdayDraftsCount", getYesterdayDraftsCount);
-        request.setAttribute("getYesterdayManagerApprovalsCount", getYesterdayManagerApprovalsCount);
-        request.setAttribute("getYesterdayDirectorApprovalsCount", getYesterdayDirectorApprovalsCount);
-        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
+        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
+        request.setAttribute("getManagerRemandReportsCount", getManagerAdviceCnt);
+        request.setAttribute("getDirectorRemandReportsCount", getDirectorAdviceCnt);
+        request.setAttribute("get4getMyDraftsCnt", get4getMyDraftsCnt);
+        request.setAttribute("getYesterdayManagerApprovalsCount", get4getManagerReviewsCnt);
+        request.setAttribute("getYesterdayDirectorApprovalsCount", get4getDirectorReviewsCnt);
+        request.setAttribute("getReportsCountButDrafts", getIdeasCntButDrafts);
 
-        if (request.getSession().getAttribute("flush") != null) {
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
+        if (request.getSession().getAttribute("toast") != null) {
+            request.setAttribute("toast", request.getSession().getAttribute("toast"));
+            request.getSession().removeAttribute("toast");
         }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/index.jsp");
         rd.forward(request, response);
     }
-
 }
