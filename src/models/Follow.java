@@ -18,25 +18,24 @@ import lombok.Setter;
 
 @Table(name = "follows")
 @NamedQueries({
-        @NamedQuery(name = "followDestroy", query = "SELECT f.id FROM Follow f WHERE f.followed_id  = :followed_id AND f.following_id = :login_member_id"),
-        @NamedQuery(name = "followerDestroy", query = "SELECT f.id FROM Follow f WHERE f.followed_id  = :login_member_id AND f.following_id = :following_id"),
+        @NamedQuery(name = "getDestroyFollow", query = "SELECT f.id FROM Follow f WHERE f.followed_id  = :followed_id AND f.following_id = :login_member_id"),
+        @NamedQuery(name = "getDestroyFollower", query = "SELECT f.id FROM Follow f WHERE f.followed_id  = :login_member_id AND f.following_id = :following_id"),
 
-        @NamedQuery(name = "getMyFollowAllReports", query = "SELECT i FROM Idea i, Follow f WHERE f.following_id = :login_member_id AND i.member.id = f.followed_id.id ORDER BY i.updated_at DESC"),
-        @NamedQuery(name = "getMyFollowReportsCount", query = "SELECT COUNT(a) FROM Idea a, Follow f WHERE f.followed_id = :employee AND r.employee.id = f.follow.id"),
+        @NamedQuery(name = "getMyFollowingIdeas", query = "SELECT i FROM Idea i, Follow f WHERE f.following_id = :login_member_id AND i.member.id = f.followed_id.id ORDER BY i.updated_at DESC"),
+        @NamedQuery(name = "getMyFollowingIdeasCnt", query = "SELECT COUNT(i) FROM Idea i, Follow f WHERE f.followed_id = :login_member_id AND i.member.id = f.followed_id.id"),
 
-        @NamedQuery(name = "getMyAllFollowing", query = "SELECT f FROM Member m, Follow f WHERE f.employee = :employee AND e.id = f.follow.id ORDER BY f.id DESC"),
-        @NamedQuery(name = "getMyFollowingCount", query = "SELECT COUNT(f) FROM Member m, Follow f WHERE f.employee = :employee AND e.id = f.follow.id"),
+        @NamedQuery(name = "getMyFollowing", query = "SELECT f FROM Follow f, Member m WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id ORDER BY f.created_at DESC"),
+        @NamedQuery(name = "getMyFollowingCnt", query = "SELECT COUNT(f) FROM Follow f, Member m WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id"),
+        @NamedQuery(name = "checkMyFollow", query = "SELECT f.followed_id FROM Follow f WHERE f.following_id = :login_member_id"),
 
-        @NamedQuery(name = "getMyAllFollower", query = "SELECT f FROM Member m, Follow f WHERE f.follow = :employee AND e.id = f.employee.id ORDER BY f.id DESC"),
-        @NamedQuery(name = "getMyFollowerCount", query = "SELECT COUNT(f) FROM Member m, Follow f WHERE f.follow = :employee AND e.id = f.employee.id"),
+        @NamedQuery(name = "getMyFollower", query = "SELECT f FROM Follow f, Member m WHERE f.followed_id = :login_member_id AND m.id = f.following_id.id ORDER BY f.created_at DESC"),
+        @NamedQuery(name = "getMyFollowerCnt", query = "SELECT COUNT(f) FROM  Follow f, Member m WHERE f.followed_id = :login_member_id AND m.id = f.following_id.id"),
 
-        @NamedQuery(name = "checkMyFollow", query = "SELECT f.follow FROM Follow f WHERE f.employee = :employee"),
+        @NamedQuery(name = "getMemberFollowing", query = "SELECT f FROM Follow f WHERE f.following_id = :login_member_id ORDER BY f.created_at DESC"),
+        @NamedQuery(name = "getMemberFollowingCnt", query = "SELECT COUNT(f) FROM Follow f WHERE f.following_id = :login_member_id"),
 
-        @NamedQuery(name = "getEmployeeFollowing", query = "SELECT f FROM Follow f WHERE f.employee = :employee ORDER BY f.id DESC"),
-        @NamedQuery(name = "getEmployeeFollowingCount", query = "SELECT COUNT(f) FROM Follow f WHERE f.employee = :employee"),
-
-        @NamedQuery(name = "getEmployeeNotFollowing", query = "SELECT e FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id) AND e.id <> :employee ORDER BY e.id DESC"),
-        @NamedQuery(name = "getEmployeeNotFollowingCount", query = "SELECT COUNT(e) FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id) AND e.id <> :employee")
+        @NamedQuery(name = "getMemberNotFollowing", query = "SELECT m FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id) AND m.id <> :login_member_id ORDER BY m.created_at DESC"),
+        @NamedQuery(name = "getMemberNotFollowingCnt", query = "SELECT COUNT(m) FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.following_id = :login_member_id AND m.id = f.followed_id.id) AND m.id <> :login_member_id")
 })
 
 @Getter
@@ -50,11 +49,11 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name = "following_id", nullable = false)
-    private Member following_id; // 元employee
+    private Member following_id;
 
     @ManyToOne
     @JoinColumn(name = "followed_id", nullable = false)
-    private Member followed_id; // 元follow
+    private Member followed_id;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
