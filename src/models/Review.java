@@ -19,7 +19,7 @@ import lombok.Setter;
 
 @Table(name = "reviews")
 @NamedQueries({
-        // ideaから全てのレビューを取得
+        // ideaの全レビューを取得
         @NamedQuery(name = "getReviews", query = "SELECT r FROM Review r WHERE r.idea = :idea ORDER BY r.updated_at DESC"),
         // カウント
         @NamedQuery(name = "getReviewsCnt", query = "SELECT COUNT(r) FROM Review r WHERE r.idea = :idea")
