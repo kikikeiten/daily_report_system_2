@@ -35,16 +35,17 @@ public class MembersCreateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
 
             Member m = new Member();
+            // 現在の詳細な時刻を追加
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
             m.setCode(request.getParameter("code"));
             m.setName(request.getParameter("name"));
-            m.setPassword(
+            m.setPassword( // 暗号化してセットする
                     EncryptUtil.getPasswordEncrypt(
                             request.getParameter("password"),
                             (String) this.getServletContext().getAttribute("pepper")));
             m.setRole_flag(Integer.parseInt(request.getParameter("role_flag")));
-            m.setDelete_flag(0);
+            m.setDelete_flag(0); // 初期値
             m.setCreated_at(currentTime);
             m.setUpdated_at(currentTime);
 
