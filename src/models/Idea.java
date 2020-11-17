@@ -88,8 +88,8 @@ public class Idea {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "likes", nullable = false)
-    private Integer likes;
+    @Column(name = "favors", nullable = false)
+    private Integer favors;
 
     /*
      * 0 : 下書き
