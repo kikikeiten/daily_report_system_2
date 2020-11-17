@@ -29,8 +29,10 @@ public class IdeasIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ログイン中メンバーのidを取得
         Member login_member = (Member) request.getSession().getAttribute("login_member");
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -51,24 +53,27 @@ public class IdeasIndexServlet extends HttpServlet {
             request.setAttribute("follow_idea_id", follow_idea_id);
         }
 
-        //フォロー判定ここまで
-
+        // 下書きを除いたideaを取得
         List<Idea> getIdeasButDrafts = em.createNamedQuery("getIdeasButDrafts", Idea.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
+        // 下書きを除いたidea総数を取得
         long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 
+        // ログイン中メンバーの下書き総数を取得
         long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
                 .setParameter("login_member", login_member)
                 .getSingleResult();
 
+        // マネージャーのアドバイス有idea総数を取得
         long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
                 .setParameter("login_member", login_member)
                 .getSingleResult();
 
+        // ディレクターのアドバイス有ideas総数を取得
         long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
                 .setParameter("login_member", login_member)
                 .getSingleResult();
@@ -82,6 +87,7 @@ public class IdeasIndexServlet extends HttpServlet {
         request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
         request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
 
+        // トーストメッセージがある場合はセッションとして保存
         if (request.getSession().getAttribute("toast") != null) {
             request.setAttribute("toast", request.getSession().getAttribute("toast"));
             request.getSession().removeAttribute("toast");
