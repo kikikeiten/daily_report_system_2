@@ -13,37 +13,28 @@ import javax.servlet.http.HttpServletResponse;
 import models.Member;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class EmployeesEditServlet
- */
-@WebServlet("/employees/edit")
-public class EmployeesEditServlet extends HttpServlet {
+@WebServlet("/members/edit")
+public class MembersEditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeesEditServlet() {
+    public MembersEditServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         EntityManager em = DBUtil.createEntityManager();
 
-        Member e = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
+        Member m = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
 
         em.close();
 
-        request.setAttribute("employee", e);
+        request.setAttribute("member", m);
         request.setAttribute("_token", request.getSession().getId());
-        request.getSession().setAttribute("employee_id", e.getId());
+        request.getSession().setAttribute("member_id", m.getId());
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/edit.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/edit.jsp");
         rd.forward(request, response);
     }
 
