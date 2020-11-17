@@ -40,7 +40,7 @@ public class IdeasCreateServlet extends HttpServlet {
             Member login_member = (Member) request.getSession().getAttribute("login_member");
 
             // ideaのレビュー経過を取得
-            Integer review_flag = Integer.parseInt(request.getParameter("review_flag"));
+            Integer review_flag_int = Integer.parseInt(request.getParameter("review_flag"));
 
             // 本日の日付を取得
             Date created_date = new Date(System.currentTimeMillis());
@@ -58,7 +58,7 @@ public class IdeasCreateServlet extends HttpServlet {
             i.setTitle(request.getParameter("title"));
             i.setContent(request.getParameter("content"));
             i.setFavors(0); // 初期化
-            i.setReview_flag(review_flag);
+            i.setReview_flag(review_flag_int);
             i.setCreated_date(created_date);
             i.setCreated_at(currentTime);
             i.setUpdated_at(currentTime);
@@ -81,16 +81,16 @@ public class IdeasCreateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
 
-                if (review_flag == 0) { // 下書きとして保存した場合
+                if (review_flag_int == 0) { // 下書きとして保存した場合
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
 
-                } else if (review_flag == 2 && (e.getRole_flag() == 0 || e.getRole_flag() == 1)) { // associateがideaを提出した場合
+                } else if (review_flag_int == 2 && (login_member.getRole_flag() == 0 || login_member.getRole_flag() == 1)) { // associateまたはadministlatorがideaをpost
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を課長へ提出しました。");
 
-                } else if (review_flag == 2 && e.getRole_flag() == 2) { // managerがideaを提出した場合
+                } else if (review_flag_int == 2 && login_member.getRole_flag() == 2) { // managerがideaを提出したpost
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を他課長へ提出しました。");
 
-                } else if (review_flag == 4 && e.getRole_flag() == 3) { // directorがideaを提出した場合
+                } else if (review_flag_int == 4 && login_member.getRole_flag() == 3) { // directorがideaを提出したpost
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を他部長へ提出しました。");
                 }
 
