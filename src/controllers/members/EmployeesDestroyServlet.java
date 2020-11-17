@@ -1,4 +1,4 @@
-package controllers.employees;
+package controllers.members;
 
 import java.io.IOException;
 import java.sql.Timestamp;

@@ -1,4 +1,4 @@
-package controllers.employees;
+package controllers.members;
 
 import java.io.IOException;
 
@@ -14,16 +14,16 @@ import models.Member;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class EmployeesShowServlet
+ * Servlet implementation class EmployeesEditServlet
  */
-@WebServlet("/employees/show")
-public class EmployeesShowServlet extends HttpServlet {
+@WebServlet("/employees/edit")
+public class EmployeesEditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EmployeesShowServlet() {
+    public EmployeesEditServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,8 +40,10 @@ public class EmployeesShowServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("employee", e);
+        request.setAttribute("_token", request.getSession().getId());
+        request.getSession().setAttribute("employee_id", e.getId());
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/show.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/edit.jsp");
         rd.forward(request, response);
     }
 
