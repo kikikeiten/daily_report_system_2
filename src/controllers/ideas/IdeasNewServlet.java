@@ -23,10 +23,12 @@ public class IdeasNewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // トークンを取得しセット
         request.setAttribute("_token", request.getSession().getId());
 
         Idea i = new Idea();
 
+        // 本日の日付をセット
         i.setCreated_date(new Date(System.currentTimeMillis()));
 
         request.setAttribute("idea", i);
