@@ -30,8 +30,10 @@ public class IdeasShowServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ideas/show.jspからideaのidを取得
         Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("idea_id")));
 
+        // ログイン中メンバーのidを取得
         Member login_member = (Member) request.getSession().getAttribute("login_member");
 
         //フォロー判定
@@ -48,17 +50,21 @@ public class IdeasShowServlet extends HttpServlet {
         }
 
         try {
+            // ideaの全レビューを取得（存在しない場合もあるのでtry-catch）
             Review getReviews = em.createNamedQuery("getReviews", Review.class)
                     .setParameter("idea", i)
-                    .setMaxResults(1)
+                    .setMaxResults(1) // 一件だけ表示
                     .getSingleResult();
 
+            // アドバイスを取得しString型に変換
             String advice_str = getReviews.getAdvice();
 
-            Member m = getReviews.getMember();
-
-            String name_str = m.getName();
-            Integer role_flag_int = m.getRole_flag();
+            // レビューした人のメンバーidを取得
+            Member reviewer = getReviews.getMember();
+            // レビューした人の氏名を取得しString型に変換
+            String name_str = reviewer.getName();
+            // レビューした人の役割を取得しInteger型に変換
+            Integer role_flag_int = reviewer.getRole_flag();
 
             request.setAttribute("advice_str", advice_str);
             request.setAttribute("name_str", name_str);
@@ -72,19 +78,20 @@ public class IdeasShowServlet extends HttpServlet {
                     break;
             }
 
+        } catch (Exception e) {
+
+        } finally {
+
+            // レビューの経過を取得しInteger型に変換
             Integer review_flag_int = getReviews.getReview_flag();
 
             if (review_flag_int == 1 || review_flag_int == 3) {
-                request.setAttribute("approval_status", "差し戻し");
+                request.setAttribute("review_flag", "差し戻し");
 
             } else if (review_flag_int == 4 || review_flag_int == 6) {
-                request.setAttribute("approval_status", "承認");
-
+                request.setAttribute("review_flag", "承認");
             }
-        } catch (Exception e) {
         }
-
-        Integer review_flag_int = getReviews.getReview_flag();
 
         em.close();
 
