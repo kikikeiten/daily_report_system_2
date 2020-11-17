@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import models.Member;
 
-@WebFilter("/*")
+@WebFilter("/*") // 全てに適応
 public class LoginFilter implements Filter {
 
     public LoginFilter() {
@@ -32,10 +32,11 @@ public class LoginFilter implements Filter {
         if (!servlet_path.matches("/css.*")) { // CSSフォルダ内は認証処理から除外する
             HttpSession session = ((HttpServletRequest) request).getSession();
 
-            // セッションスコープに保存された従業員（ログインユーザ）情報を取得
+            // セッションスコープに保存されたメンバー（ログインメンバー）情報を取得
             Member m = (Member) session.getAttribute("login_member");
 
-            if (!servlet_path.equals("/login")) { // ログイン画面以外について
+            if (!servlet_path.equals("/login")) {
+                // ログイン画面以外について
                 // ログアウトしている状態であれば
                 // ログイン画面にリダイレクト
                 if (m == null) {
