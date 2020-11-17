@@ -132,6 +132,12 @@ public class TopPageIndexServlet extends HttpServlet {
             request.getSession().removeAttribute("toast");
         }
 
+        // フラッシュメッセージがある場合はセッションとして保存
+        if (request.getSession().getAttribute("flash") != null) {
+            request.setAttribute("flash", request.getSession().getAttribute("flash"));
+            request.getSession().removeAttribute("flash");
+        }
+
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/index.jsp");
         rd.forward(request, response);
     }

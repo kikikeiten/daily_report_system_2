@@ -31,6 +31,13 @@ public class IdeasIndexServlet extends HttpServlet {
 
         Member login_member = (Member) request.getSession().getAttribute("login_member");
 
+        int page;
+        try {
+            page = Integer.parseInt(request.getParameter("page"));
+        } catch (Exception e) {
+            page = 1;
+        }
+
         //フォロー判定
         List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
                 .setParameter("login_member", login_member)
@@ -66,21 +73,14 @@ public class IdeasIndexServlet extends HttpServlet {
                 .setParameter("login_member", login_member)
                 .getSingleResult();
 
-        int page;
-        try {
-            page = Integer.parseInt(request.getParameter("page"));
-        } catch (Exception e) {
-            page = 1;
-        }
-
         em.close();
 
+        request.setAttribute("page", page);
         request.setAttribute("getIdeasButDrafts", getIdeasButDrafts);
         request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
         request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
         request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
         request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
-        request.setAttribute("page", page);
 
         if (request.getSession().getAttribute("toast") != null) {
             request.setAttribute("toast", request.getSession().getAttribute("toast"));
