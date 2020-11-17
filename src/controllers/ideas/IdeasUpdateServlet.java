@@ -29,16 +29,20 @@ public class IdeasUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // トークンを取得しセット
         String _token = (String) request.getParameter("_token");
 
         if (_token != null && _token.equals(request.getSession().getId())) {
 
             EntityManager em = DBUtil.createEntityManager();
 
+            // ideas/edit.jspからideaのidを取得
             Idea i = em.find(Idea.class, (Integer) (request.getSession().getAttribute("idea_id")));
 
+            // ideas/edit.jspからレビュー経過のパラメータを取得
             Integer review_flag_int = Integer.parseInt(request.getParameter("review_flag"));
 
+            // ログイン中メンバーのidを取得
             Member login_member = (Member) request.getSession().getAttribute("login_member");
 
             i.setTitle(request.getParameter("title"));
@@ -64,50 +68,56 @@ public class IdeasUpdateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
 
+                // associateとadministlatorの場合
                 if (login_member.getRole_flag() == 0 || login_member.getRole_flag() == 1) {
+
                     switch (review_flag_int) {
-                    case 0:
-                        request.getSession().setAttribute("toast",
-                                "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
-                        break;
-                    case 2:
-                        request.getSession().setAttribute("toast",
-                                "日報「" + request.getParameter("title") + "」を課長に提出しました。");
-                        break;
-                    case 4:
-                        request.getSession().setAttribute("toast",
-                                "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
-                        break;
+                        case 0: // 下書きを再保存
+                            request.getSession().setAttribute("toast",
+                                    "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                            break;
+                        case 2: // 下書きまたはmanagerからのアドバイス付きideaをpost
+                            request.getSession().setAttribute("toast",
+                                    "日報「" + request.getParameter("title") + "」を課長に提出しました。");
+                            break;
+                        case 4: // directorからのアドバイス付きideaをpost
+                            request.getSession().setAttribute("toast",
+                                    "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
+                            break;
                     }
                 }
 
+                // managerの場合
                 if (login_member.getRole_flag() == 2) {
+
                     switch (review_flag_int) {
-                    case 0:
-                        request.getSession().setAttribute("toast",
-                                "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
-                        break;
-                    case 2:
-                        request.getSession().setAttribute("toast",
-                                "日報「" + request.getParameter("title") + "」を他課長に提出しました。");
-                        break;
-                    case 4:
-                        request.getSession().setAttribute("toast",
-                                "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
-                        break;
+                        case 0: // 下書きを再保存
+                            request.getSession().setAttribute("toast",
+                                    "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                            break;
+                        case 2: // 下書きのideaをpost
+                            request.getSession().setAttribute("toast",
+                                    "日報「" + request.getParameter("title") + "」を他課長に提出しました。");
+                            break;
+                        case 4: // directorからのアドバイス付きideaをpost
+                            request.getSession().setAttribute("toast",
+                                    "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
+                            break;
                     }
                 }
 
+                // directorの場合
                 if (login_member.getRole_flag() == 3) {
+
                     switch (review_flag_int) {
-                    case 0:
-                        request.getSession().setAttribute("toast",
-                                "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
-                        break;
-                    case 4:
-                        request.getSession().setAttribute("toast",
-                                "日報「" + request.getParameter("title") + "」を他部長に提出しました。");
-                        break;
+                        case 0: // 下書きを再保存
+                            request.getSession().setAttribute("toast",
+                                    "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                            break;
+                        case 4: // 下書きのideaをpost
+                            request.getSession().setAttribute("toast",
+                                    "日報「" + request.getParameter("title") + "」を他部長に提出しました。");
+                            break;
                     }
                 }
 
