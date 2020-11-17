@@ -27,12 +27,14 @@ public class IdeasEditServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ideas/edit.jspからideaのidを取得
         Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("idea_id")));
 
         Integer review_flag = i.getReview_flag();
 
         em.close();
 
+        // ログイン中メンバーのidを取得
         Member login_member = (Member) request.getSession().getAttribute("login_member");
 
         if (i != null && login_member.getId() == i.getMember().getId()) {
