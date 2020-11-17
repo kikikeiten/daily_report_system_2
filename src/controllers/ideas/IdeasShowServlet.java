@@ -42,8 +42,8 @@ public class IdeasShowServlet extends HttpServlet {
         List<Integer> follow_idea_id = new ArrayList<Integer>();
 
         for (Member idea_id : checkMyFollow) {
-            Integer int_idea_id = idea_id.getId();
-            follow_idea_id.add(int_idea_id);
+            Integer idea_id_int = idea_id.getId();
+            follow_idea_id.add(idea_id_int);
             request.setAttribute("follow_idea_id", follow_idea_id);
         }
 
