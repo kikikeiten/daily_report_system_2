@@ -96,7 +96,7 @@ public class LoginServlet extends HttpServlet {
             // 認証できたらログイン状態にしてトップページへリダイレクト
             request.getSession().setAttribute("login_member", m);
 
-            request.getSession().setAttribute("flush", "ログインしました。");
+            request.getSession().setAttribute("toast", "ログインしました。");
             response.sendRedirect(request.getContextPath() + "/");
         }
     }
