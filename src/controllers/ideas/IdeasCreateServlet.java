@@ -29,35 +29,37 @@ public class IdeasCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // トークンを取得
         String _token = (String) request.getParameter("_token");
 
         if (_token != null && _token.equals(request.getSession().getId())) {
 
             EntityManager em = DBUtil.createEntityManager();
 
+            // ログイン中メンバーのidを取得
             Member login_member = (Member) request.getSession().getAttribute("login_member");
 
-            Integer sudmit = Integer.parseInt(request.getParameter("submit"));
+            // ideaのレビュー経過を取得
+            Integer review_flag = Integer.parseInt(request.getParameter("review_flag"));
 
-            Idea i = new Idea();
-
-            i.setMember(login_member);
-
+            // 本日の日付を取得
             Date created_date = new Date(System.currentTimeMillis());
+            // 本日の詳細時刻を取得
+            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
             String cd_str = request.getParameter("created_date");
             if (cd_str != null && !cd_str.equals("")) {
                 created_date = Date.valueOf(request.getParameter("created_date"));
             }
 
-            i.setCreated_date(created_date);
+            Idea i = new Idea();
+
+            i.setMember(login_member);
             i.setTitle(request.getParameter("title"));
             i.setContent(request.getParameter("content"));
-            i.setFavors(0);
-            i.setReview_flag(sudmit);
-
-            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-
+            i.setFavors(0); // 初期化
+            i.setReview_flag(review_flag);
+            i.setCreated_date(created_date);
             i.setCreated_at(currentTime);
             i.setUpdated_at(currentTime);
 
@@ -79,16 +81,16 @@ public class IdeasCreateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
 
-                if (sudmit == 0) {
+                if (review_flag == 0) { // 下書きとして保存した場合
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
 
-                } else if (sudmit == 2 && (e.getRole_flag() == 0 || e.getRole_flag() == 1)) {
+                } else if (review_flag == 2 && (e.getRole_flag() == 0 || e.getRole_flag() == 1)) { // associateがideaを提出した場合
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を課長へ提出しました。");
 
-                } else if (sudmit == 2 && e.getRole_flag() == 2) {
+                } else if (review_flag == 2 && e.getRole_flag() == 2) { // managerがideaを提出した場合
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を他課長へ提出しました。");
 
-                } else {
+                } else if (review_flag == 4 && e.getRole_flag() == 3) { // directorがideaを提出した場合
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を他部長へ提出しました。");
                 }
 
