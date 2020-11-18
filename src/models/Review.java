@@ -53,7 +53,7 @@ public class Review {
     @Column(name = "review_flag", nullable = false)
     private Integer review_flag;
 
-    @Lob
+    @Lob // テキストエリアの指定（改行もデータベースに保存）
     @Column(name = "advice", nullable = true)
     private String advice;
 
