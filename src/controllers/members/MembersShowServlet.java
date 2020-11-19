@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.Member;
 import utils.DBUtil;
 
-@WebServlet("/employees/show")
+@WebServlet("/members/show")
 public class MembersShowServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -23,15 +23,16 @@ public class MembersShowServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         EntityManager em = DBUtil.createEntityManager();
 
-        Member e = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
+        Member m = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
 
         em.close();
 
-        request.setAttribute("employee", e);
+        request.setAttribute("member", m);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/show.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/show.jsp");
         rd.forward(request, response);
     }
 
