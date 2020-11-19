@@ -26,6 +26,7 @@ public class MembersShowServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // members/index.jspのmember_idからメンバーidを取得
         Member m = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
 
         em.close();
