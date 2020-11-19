@@ -53,6 +53,7 @@ public class MembersUpdateServlet extends HttpServlet {
 
             if (password == null || password.equals("")) {
                 password_check_flag = false;
+
             } else {
                 m.setPassword(
                         EncryptUtil.getPasswordEncrypt(
