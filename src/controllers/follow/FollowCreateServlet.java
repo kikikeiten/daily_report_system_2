@@ -36,11 +36,13 @@ public class FollowCreateServlet extends HttpServlet {
         // フォローボタンを押されたideaを書いたメンバーidを取得
         Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("following_id")));
 
-        i.setMember((Member) request.getSession().getAttribute("login_member"));
-        i.setFollowed(i.getMember());
-        i.setCreated_at(currentTime);
-        i.setUpdated_at(currentTime);
+        // Followテーブルに値をセット
+        f.setFollowing_id((Member) request.getSession().getAttribute("login_member"));
+        f.setFollowed_id(i.getMember());
+        f.setCreated_at(currentTime);
+        f.setUpdated_at(currentTime);
 
+        // フォローされた人の氏名を取得
         Member unfollow = i.getMember();
         String unfollow_name_str = unfollow.getName();
 
@@ -49,6 +51,7 @@ public class FollowCreateServlet extends HttpServlet {
         em.getTransaction().commit();
         em.close();
 
+        // トーストメッセージ
         request.getSession().setAttribute("toast", unfollow_name_str + "さんをフォローしました。");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
