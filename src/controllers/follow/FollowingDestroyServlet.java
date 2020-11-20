@@ -25,18 +25,20 @@ public class FollowingDestroyServlet extends HttpServlet {
             throws ServletException, IOException {
 
         EntityManager em = DBUtil.createEntityManager();
-        Follow f = em.find(Follow.class, Integer.parseInt(request.getParameter("follow_id")));
 
-        Member unfollow = f.getFollow();
-        String unfollow_name = unfollow.getName();
+        Follow followed = em.find(Follow.class, Integer.parseInt(request.getParameter("followed_id")));
+
+        Member unfollow = followed.getFollow();
+        String unfollow_name_str = unfollow.getName();
 
         em.getTransaction().begin();
-        em.remove(f);
+        em.remove(followed);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", unfollow_name + "さんのフォローを解除しました。");
 
-        response.sendRedirect(request.getContextPath() + "/reports");
+        request.getSession().setAttribute("toast", unfollow_name_str + "さんのフォローを解除しました。");
+
+        response.sendRedirect(request.getContextPath() + "/ideas");
     }
 
 }
