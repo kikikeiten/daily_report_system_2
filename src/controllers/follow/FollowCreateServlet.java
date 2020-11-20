@@ -30,12 +30,14 @@ public class FollowCreateServlet extends HttpServlet {
 
         Follow f = new Follow();
 
+        // 詳細な現在時刻を追加
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
+        // フォローボタンを押されたideaを書いたメンバーidを取得
         Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("following_id")));
 
         i.setMember((Member) request.getSession().getAttribute("login_member"));
-        i.setFollow(i.getEmployee());
+        i.setFollowed(i.getMember());
         i.setCreated_at(currentTime);
         i.setUpdated_at(currentTime);
 
