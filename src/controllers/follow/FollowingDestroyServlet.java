@@ -26,8 +26,10 @@ public class FollowingDestroyServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // フォロー解除ボタンを押した際にフォローしていたメンバーのIDを取得
         Follow followed = em.find(Follow.class, Integer.parseInt(request.getParameter("followed_id")));
 
+        // フォロー解除ボタンを押した際にフォローしていたメンバーの氏名を取得
         Member unfollow = followed.getFollow();
         String unfollow_name_str = unfollow.getName();
 
@@ -36,6 +38,7 @@ public class FollowingDestroyServlet extends HttpServlet {
         em.getTransaction().commit();
         em.close();
 
+        // トーストメッセージ
         request.getSession().setAttribute("toast", unfollow_name_str + "さんのフォローを解除しました。");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
