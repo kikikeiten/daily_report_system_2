@@ -26,27 +26,28 @@ public class FollowerDestroyServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
-        Follow ff = em.find(Follow.class, Integer.parseInt(request.getParameter("employee_id")));
+        Member login_member = (Member) request.getSession().getAttribute("login_member");
+        Follow following = em.find(Follow.class, Integer.parseInt(request.getParameter("following_id")));
 
         Integer ei = 0;
-        ei = em.createNamedQuery("followerDestroy", Integer.class)
-                .setParameter("follow", login_employee)
-                .setParameter("employee", ff.getEmployee())
+        ei = em.createNamedQuery("getDestroyFollower", Integer.class)
+                .setParameter("login_member", login_member)
+                .setParameter("following_id", following.getMember())
                 .getSingleResult();
 
-        Follow f = em.find(Follow.class, ei);
+        Follow follow = em.find(Follow.class, ei);
 
-        Member unfollow = ff.getEmployee();
-        String unfollow_name = unfollow.getName();
+        Member unfollow = following.getMember();
+        String unfollow_name_str = unfollow.getName();
 
         em.getTransaction().begin();
-        em.remove(f);
+        em.remove(follow);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", unfollow_name + "さんのフォローを解除しました。");
 
-        response.sendRedirect(request.getContextPath() + "/reports");
+        request.getSession().setAttribute("toast", unfollow_name_str + "さんのフォローを解除しました。");
+
+        response.sendRedirect(request.getContextPath() + "/ideas");
     }
 
 }
