@@ -19,13 +19,13 @@ import utils.DBUtil;
  * Servlet implementation class LikesIndexServlet
  */
 @WebServlet("/likes")
-public class LikesIndexServlet extends HttpServlet {
+public class FavorsIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LikesIndexServlet() {
+    public FavorsIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
