@@ -29,24 +29,27 @@ public class FollowCreateServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Follow f = new Follow();
+
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("following")));
 
-        f.setEmployee((Member) request.getSession().getAttribute("login_employee"));
-        f.setFollow(r.getEmployee());
-        f.setCreated_at(currentTime);
-        f.setUpdated_at(currentTime);
+        Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("following_id")));
 
-        Member unfollow = r.getEmployee();
-        String unfollow_name = unfollow.getName();
+        i.setMember((Member) request.getSession().getAttribute("login_member"));
+        i.setFollow(i.getEmployee());
+        i.setCreated_at(currentTime);
+        i.setUpdated_at(currentTime);
+
+        Member unfollow = i.getMember();
+        String unfollow_name_str = unfollow.getName();
 
         em.getTransaction().begin();
         em.persist(f);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", unfollow_name + "さんをフォローしました。");
 
-        response.sendRedirect(request.getContextPath() + "/reports");
+        request.getSession().setAttribute("toast", unfollow_name_str + "さんをフォローしました。");
+
+        response.sendRedirect(request.getContextPath() + "/ideas");
     }
 
 }
