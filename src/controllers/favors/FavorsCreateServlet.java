@@ -1,4 +1,4 @@
-package controllers.likes;
+package controllers.favors;
 
 import java.io.IOException;
 import java.sql.Timestamp;
