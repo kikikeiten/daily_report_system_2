@@ -29,7 +29,7 @@ public class FollowerIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
+        Member login_member = (Member) request.getSession().getAttribute("login_member");
 
         int page;
         try {
@@ -38,36 +38,32 @@ public class FollowerIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Follow> getMyAllFollower = em.createNamedQuery("getMyAllFollower", Follow.class)
-                .setParameter("employee", login_employee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        List<Follow> getMyFollower = em.createNamedQuery("getMyFollower", Follow.class)
+                .setParameter("login_member", login_member)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
         //フォロー判定
         List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
-                .setParameter("employee", login_employee)
+                .setParameter("login_member", login_member)
                 .getResultList();
 
-        List<Integer> list_report_id = new ArrayList<Integer>();
+        List<Integer> follow_idea_id = new ArrayList<Integer>();
 
-        for (Member report_id : checkMyFollow) {
-            Integer int_report_id = report_id.getId();
-            list_report_id.add(int_report_id);
-            System.out.println("ログイン中の従業員がフォローしている従業員id一覧は" + list_report_id + "です。");
-            request.setAttribute("list_report_id", list_report_id);
+        for (Member idea_id : checkMyFollow) {
+            Integer idea_id_int = idea_id.getId();
+            follow_idea_id.add(idea_id_int);
+            request.setAttribute("follow_idea_id", follow_idea_id);
         }
-
-        //フォロー判定ここまで
 
         em.close();
 
-        request.setAttribute("getMyAllFollower", getMyAllFollower);
+        request.setAttribute("getMyFollower", getMyFollower);
         request.setAttribute("page", page);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/follower.jsp");
         rd.forward(request, response);
-
     }
 
 }
