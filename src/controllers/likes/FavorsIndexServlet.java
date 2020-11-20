@@ -37,24 +37,27 @@ public class FavorsIndexServlet extends HttpServlet {
             page = 1;
         }
 
+        // 全てのideaに付いたfavorを取得
         List<Favor> getFavors = em.createNamedQuery("getFavors", Favor.class)
                 .setParameter("idea", i)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
+        // 全てのideaに付いたfavor総数を取得
         long getFavorsCnt = (long) em.createNamedQuery("getFavorsCnt", Long.class)
                 .setParameter("idea", i)
                 .getSingleResult();
 
+        // URLに付与するパラメータを送信
         Integer url_int = Integer.parseInt(request.getParameter("idea_id"));
 
         em.close();
 
+        request.setAttribute("idea_id", i);
+        request.setAttribute("page", page);
         request.setAttribute("getFavors", getFavors);
         request.setAttribute("getFavorsCnt", getFavorsCnt);
-        request.setAttribute("page", page);
-        request.setAttribute("idea_id", i);
         request.setAttribute("url_int", url_int);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/favors/index.jsp");
