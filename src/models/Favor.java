@@ -19,9 +19,9 @@ import lombok.Setter;
 @Table(name = "favors")
 @NamedQueries({
         // 全てのideaに付いたfavorを取得
-        @NamedQuery(name = "getIdeaFavors", query = "SELECT f FROM Favor f WHERE f.idea = :idea ORDER BY f.created_at DESC"),
+        @NamedQuery(name = "getFavors", query = "SELECT f FROM Favor f WHERE f.idea = :idea ORDER BY f.created_at DESC"),
         // カウント
-        @NamedQuery(name = "getIdeaFavorsCnt", query = "SELECT COUNT(f) FROM Favor f WHERE f.idea = :idea "),
+        @NamedQuery(name = "getFavorsCnt", query = "SELECT COUNT(f) FROM Favor f WHERE f.idea = :idea "),
 })
 
 @Getter

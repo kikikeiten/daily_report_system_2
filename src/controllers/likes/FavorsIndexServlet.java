@@ -15,7 +15,7 @@ import models.Favor;
 import models.Idea;
 import utils.DBUtil;
 
-@WebServlet("/likes")
+@WebServlet("/favors")
 public class FavorsIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -25,8 +25,10 @@ public class FavorsIndexServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         EntityManager em = DBUtil.createEntityManager();
-        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
+
+        Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("idea_id")));
 
         int page;
         try {
@@ -35,27 +37,27 @@ public class FavorsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Favor> favors = em.createNamedQuery("getMyAllLikes", Favor.class)
-                .setParameter("report", r)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        List<Favor> getFavors = em.createNamedQuery("getFavors", Favor.class)
+                .setParameter("idea", i)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
-        long likes_count = (long) em.createNamedQuery("getMyLikesCount", Long.class)
-                .setParameter("report", r)
+        long getFavorsCnt = (long) em.createNamedQuery("getFavorsCnt", Long.class)
+                .setParameter("idea", i)
                 .getSingleResult();
 
-        Integer reportUrl = Integer.parseInt(request.getParameter("report_id"));
+        Integer url_int = Integer.parseInt(request.getParameter("idea_id"));
 
         em.close();
 
-        request.setAttribute("likes", favors);
-        request.setAttribute("likes_count", likes_count);
+        request.setAttribute("getFavors", getFavors);
+        request.setAttribute("getFavorsCnt", getFavorsCnt);
         request.setAttribute("page", page);
-        request.setAttribute("report_id", r);
-        request.setAttribute("reportUrl", reportUrl);
+        request.setAttribute("idea_id", i);
+        request.setAttribute("url_int", url_int);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/likes/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/favors/index.jsp");
         rd.forward(request, response);
     }
 
