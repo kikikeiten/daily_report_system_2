@@ -15,7 +15,7 @@ import models.Favor;
 import models.Idea;
 import utils.DBUtil;
 
-@WebServlet("/likes/create")
+@WebServlet("/favors/create")
 public class FavorsCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -28,30 +28,31 @@ public class FavorsCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
+        Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("idea_id")));
 
-        Favor l = new Favor();
+        Favor f = new Favor();
 
-        l.setEmployee((Member) request.getSession().getAttribute("login_employee"));
-        l.setReport(r);
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        l.setCreated_at(currentTime);
-        l.setUpdated_at(currentTime);
 
-        r.setLikes(Integer.parseInt(request.getParameter("likes")) + r.getLikes());
+        f.setMember((Member) request.getSession().getAttribute("login_member"));
+        f.setIdea(i);
+        f.setCreated_at(currentTime);
+        f.setUpdated_at(currentTime);
 
-        Member member = r.getEmployee();
-        String employee_name = member.getName();
+        i.setFavors(Integer.parseInt(request.getParameter("favors")) + i.getFavors());
 
-        String report_title = r.getTitle();
+        Member member = i.getMember();
+        String member_name_str = member.getName();
+
+        String idea_title_str = i.getTitle();
 
         em.getTransaction().begin();
-        em.persist(l);
+        em.persist(f);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", employee_name + "さんの日報「" + report_title + "」にいいねしました。");
+        request.getSession().setAttribute("toast", member_name_str + "さんの日報「" + idea_title_str + "」にいいねしました。");
 
-        response.sendRedirect(request.getContextPath() + "/reports");
+        response.sendRedirect(request.getContextPath() + "/ideas");
 
     }
 }
