@@ -18,9 +18,9 @@ import lombok.Setter;
 
 @Table(name = "follows")
 @NamedQueries({
-        // フォロー解除するメンバーidを取得
+        // フォロー解除するメンバーIDを取得
         @NamedQuery(name = "getDestroyFollow", query = "SELECT f.id FROM Follow f WHERE f.followed_id  = :followed_id AND f.following_id = :login_member"),
-        // フォロワーのフォロー解除するメンバーidを取得
+        // フォロー解除するフォロワーのIDを取得
         @NamedQuery(name = "getDestroyFollower", query = "SELECT f.id FROM Follow f WHERE f.followed_id  = :login_member AND f.following_id = :following_id"),
 
         // ログイン中メンバーのフォローしているメンバーのideaを取得
@@ -32,7 +32,7 @@ import lombok.Setter;
         @NamedQuery(name = "getMyFollowing", query = "SELECT f FROM Follow f, Member m WHERE f.following_id = :login_member AND m.id = f.followed_id.id ORDER BY f.updated_at DESC"),
         // カウント
         @NamedQuery(name = "getMyFollowingCnt", query = "SELECT COUNT(f) FROM Follow f, Member m WHERE f.following_id = :login_member AND m.id = f.followed_id.id"),
-        // ログイン中メンバーのフォローしているメンバーidを取得（削除予定）
+        // ログイン中メンバーのフォローしているメンバーIDを取得（削除予定）
         @NamedQuery(name = "checkMyFollow", query = "SELECT f.followed_id FROM Follow f WHERE f.following_id = :login_member"),
 
         // ログイン中メンバーのフォロワー一覧を取得
