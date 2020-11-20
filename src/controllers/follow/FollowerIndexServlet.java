@@ -29,8 +29,10 @@ public class FollowerIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ログイン中のメンバーIDを取得
         Member login_member = (Member) request.getSession().getAttribute("login_member");
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -38,6 +40,7 @@ public class FollowerIndexServlet extends HttpServlet {
             page = 1;
         }
 
+        // ログイン中メンバーのフォロワー一覧を取得
         List<Follow> getMyFollower = em.createNamedQuery("getMyFollower", Follow.class)
                 .setParameter("login_member", login_member)
                 .setFirstResult(12 * (page - 1))
