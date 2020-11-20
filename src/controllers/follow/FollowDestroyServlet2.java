@@ -13,27 +13,16 @@ import models.Member;
 import models.Follow;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class FollowDestroyServlet2
- */
 @WebServlet("/follow/destroy/2")
 public class FollowDestroyServlet2 extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public FollowDestroyServlet2() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
