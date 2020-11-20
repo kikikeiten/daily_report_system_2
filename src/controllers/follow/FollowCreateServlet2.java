@@ -29,15 +29,19 @@ public class FollowCreateServlet2 extends HttpServlet {
 
         Follow f = new Follow();
 
+        // 詳細な現在時刻を取得
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
+        // フォローされたメンバーIDを取得
         Member m = em.find(Member.class, Integer.parseInt(request.getParameter("following_id")));
 
+        // Followテーブルに値をセット
         f.setFollowing_id((Member) request.getSession().getAttribute("login_member"));
         f.setFollowed_id(m);
         f.setCreated_at(currentTime);
         f.setUpdated_at(currentTime);
 
+        // フォローされたメンバーの氏名を取得
         String unfollow_name_str = m.getName();
 
         em.getTransaction().begin();
@@ -45,6 +49,7 @@ public class FollowCreateServlet2 extends HttpServlet {
         em.getTransaction().commit();
         em.close();
 
+        // トーストメッセージ
         request.getSession().setAttribute("toast", unfollow_name_str + "さんをフォローしました。");
 
         response.sendRedirect(request.getContextPath() + "/members");
