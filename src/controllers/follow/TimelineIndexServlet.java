@@ -29,6 +29,7 @@ public class TimelineIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ログイン中メンバーのIDを取得
         Member login_member = (Member) request.getSession().getAttribute("login_member");
 
         int page;
@@ -37,12 +38,6 @@ public class TimelineIndexServlet extends HttpServlet {
         } catch (Exception e) {
             page = 1;
         }
-
-        List<Idea> getMyFollowingIdeas = em.createNamedQuery("getMyFollowingIdeas", Idea.class)
-                .setParameter("login_member", login_member)
-                .setFirstResult(12 * (page - 1))
-                .setMaxResults(12)
-                .getResultList();
 
         //フォロー判定
         List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
@@ -57,6 +52,14 @@ public class TimelineIndexServlet extends HttpServlet {
             request.setAttribute("follow_idea_id", follow_idea_id);
         }
 
+        // ログイン中メンバーがフォローしているメンバーのideaを取得
+        List<Idea> getMyFollowingIdeas = em.createNamedQuery("getMyFollowingIdeas", Idea.class)
+                .setParameter("login_member", login_member)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
+                .getResultList();
+
+        // ログイン中メンバーがフォローしているメンバーのidea総数を取得
         long getMyFollowingIdeasCnt = (long) em.createNamedQuery("getMyFollowingIdeasCnt", Long.class)
                 .setParameter("login_member", login_member)
                 .getSingleResult();

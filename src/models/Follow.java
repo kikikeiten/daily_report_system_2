@@ -23,7 +23,7 @@ import lombok.Setter;
         // フォロー解除するフォロワーのIDを取得
         @NamedQuery(name = "getDestroyFollower", query = "SELECT f.id FROM Follow f WHERE f.followed_id  = :login_member AND f.following_id = :following_id"),
 
-        // ログイン中メンバーのフォローしているメンバーのideaを取得
+        // ログイン中メンバーがフォローしているメンバーのideaを取得
         @NamedQuery(name = "getMyFollowingIdeas", query = "SELECT i FROM Idea i, Follow f WHERE f.following_id = :login_member AND i.member.id = f.followed_id.id ORDER BY i.updated_at DESC"),
         // カウント
         @NamedQuery(name = "getMyFollowingIdeasCnt", query = "SELECT COUNT(i) FROM Idea i, Follow f WHERE f.followed_id = :login_member AND i.member.id = f.followed_id.id"),
