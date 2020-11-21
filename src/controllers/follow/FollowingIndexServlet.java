@@ -28,7 +28,7 @@ public class FollowingIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
+        Member login_member = (Member) request.getSession().getAttribute("login_member");
 
         int page;
         try {
@@ -37,15 +37,15 @@ public class FollowingIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Follow> getMyAllFollowing = em.createNamedQuery("getMyAllFollowing", Follow.class)
-                .setParameter("employee", login_employee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        List<Follow> getMyFollowing = em.createNamedQuery("getMyFollowing", Follow.class)
+                .setParameter("login_member", login_member)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
         em.close();
 
-        request.setAttribute("getMyAllFollowing", getMyAllFollowing);
+        request.setAttribute("getMyFollowing", getMyFollowing);
         request.setAttribute("page", page);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/following.jsp");
