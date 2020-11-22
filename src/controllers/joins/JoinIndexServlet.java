@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.Join;
 import utils.DBUtil;
 
-@WebServlet("/attendance/all")
+@WebServlet("/join/all")
 public class JoinIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -34,20 +34,20 @@ public class JoinIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Join> getAllAttendances = em.createNamedQuery("getAllAttendances", Join.class)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        List<Join> getJoins = em.createNamedQuery("getJoins", Join.class)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
-        long getAllAttendancesCount = (long) em.createNamedQuery("getAllAttendancesCount", Long.class)
+        long getJoinsCnt = (long) em.createNamedQuery("getJoinsCnt", Long.class)
                 .getSingleResult();
 
         em.close();
 
-        request.setAttribute("getAllAttendances", getAllAttendances);
-        request.setAttribute("getAllAttendancesCount", getAllAttendancesCount);
+        request.setAttribute("getJoins", getJoins);
+        request.setAttribute("getJoinsCnt", getJoinsCnt);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/attendances/all_attendance.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/joins/all.jsp");
         rd.forward(request, response);
 
     }
