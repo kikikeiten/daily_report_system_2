@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.Join;
 import utils.DBUtil;
 
-@WebServlet("/leave/update")
+@WebServlet("/punchout/update")
 public class PunchOutUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -28,36 +28,40 @@ public class PunchOutUpdateServlet extends HttpServlet {
             throws ServletException, IOException {
 
         EntityManager em = DBUtil.createEntityManager();
-        Join a = em.find(Join.class, Integer.parseInt(request.getParameter("id")));
 
-        String leave_time = Integer.parseInt(request.getParameter("leave_hour")) + ":"
-                + Integer.parseInt(request.getParameter("leave_minute")) + ":00";
-        Time leave_time2 = Time.valueOf(leave_time);
+        Join join = em.find(Join.class, Integer.parseInt(request.getParameter("join_id")));
+
+        String punch_out_time_str = Integer.parseInt(request.getParameter("punch_out_hour")) + ":"
+                + Integer.parseInt(request.getParameter("punch_out_minute")) + ":00";
+
+        Time punch_out_time = Time.valueOf(punch_out_time_str);
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        a.setPunch_out(leave_time2);
-        a.setCreated_at(currentTime);
-        a.setUpdated_at(currentTime);
-        a.setAttendance_flag(3); // 3 == Fixed flag
 
-        LocalTime punch_in = a.getPunch_in().toLocalTime();
-        LocalTime punch_out = leave_time2.toLocalTime();
-        long minutes = ChronoUnit.MINUTES.between(punch_in, punch_out);
+        join.setPunch_out(punch_out_time);
+        join.setJoin_flag(3); // 3 == 退席時間の修正済み
+        join.setCreated_at(currentTime);
+        join.setUpdated_at(currentTime);
+
+        LocalTime punch_in_local = join.getPunch_in().toLocalTime();
+        LocalTime punch_out_local = punch_out_time.toLocalTime();
+        long minutes = ChronoUnit.MINUTES.between(punch_in_local, punch_out_local);
 
         long diff_hours = minutes / 60;
         long diff_minutes = minutes % 60;
 
-        String diff_time = diff_hours + ":" + diff_minutes + ":00";
-        Time working_time = Time.valueOf(diff_time);
+        String diff_time_str = diff_hours + ":" + diff_minutes + ":00";
+        Time working_time = Time.valueOf(diff_time_str);
 
-        a.setWorking(working_time);
+        join.setWorking(working_time);
 
         em.getTransaction().begin();
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", "退勤時間を修正しました。");
 
-        response.sendRedirect(request.getContextPath() + "/attendance/all");
+        request.getSession().setAttribute("toast", "退勤時間を修正しました。");
+
+        response.sendRedirect(request.getContextPath() + "/joins/all");
     }
 
 }
