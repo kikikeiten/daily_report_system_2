@@ -12,24 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import models.Idea;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class ManagerRemandCreateServlet
- */
 @WebServlet("/manager/remand/create")
 public class ManagerAdviceCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ManagerAdviceCreateServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
