@@ -25,14 +25,17 @@ public class DirectorAdviceCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("idea_id")));
+        // アドバイスされたアイディアのIDを取得
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
+        // アドバイスされたアイディアのレビュー状態をIdeaテーブルで更新
         idea.setReview_flag(Integer.parseInt(request.getParameter("reviewFlag")));
 
         em.getTransaction().begin();
         em.getTransaction().commit();
         em.close();
 
+        // トーストメッセージをセッションにセット
         request.getSession().setAttribute("toast", "日報「" + idea.getTitle() + "」を部長に再提出しました。");
 
         response.sendRedirect(request.getContextPath() + "/advice/director");
