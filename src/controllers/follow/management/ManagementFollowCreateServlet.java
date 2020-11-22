@@ -27,31 +27,31 @@ public class ManagementFollowCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Follow f = new Follow();
+        Follow follow = new Follow();
+
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        Member e = em.find(Member.class, Integer.parseInt(request.getParameter("follow_id")));
-        Member ee = em.find(Member.class, Integer.parseInt(request.getParameter("employee_operated")));
 
-        f.setEmployee(ee);
-        f.setFollow(e);
-        f.setCreated_at(currentTime);
-        f.setUpdated_at(currentTime);
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("followed_id")));
+        Member member1 = em.find(Member.class, Integer.parseInt(request.getParameter("member_operated")));
 
-        String employee_name = ee.getName();
-        System.out.println("フォローする側の従業員氏名は" + employee_name + "です。");
+        follow.setFollowing_id(member1);
+        follow.setFollowed_id(member);
+        follow.setCreated_at(currentTime);
+        follow.setUpdated_at(currentTime);
 
-        String unfollow_name = e.getName();
-        System.out.println("フォローされる側の従業員氏名は" + unfollow_name + "です。");
+        String member_name_str = follow.getName();
+        String unfollow_name_str = member.getName();
 
-        Integer employee_id = ee.getId();
+        Integer member_id_int = member1.getId();
 
         em.getTransaction().begin();
-        em.persist(f);
+        em.persist(follow);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", employee_name + "さんが" + unfollow_name + "さんをフォローしました。");
 
-        response.sendRedirect(request.getContextPath() + "/management/follow?id=" + employee_id);
+        request.getSession().setAttribute("toast", member_name_str + "さんが" + unfollow_name_str + "さんをフォローしました。");
+
+        response.sendRedirect(request.getContextPath() + "/management/follow?id=" + member_id_int);
     }
 
 }
