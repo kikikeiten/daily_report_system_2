@@ -16,27 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 import models.Join;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class LeaveUpdateServlet
- */
 @WebServlet("/leave/update")
 public class PunchOutUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public PunchOutUpdateServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
         Join a = em.find(Join.class, Integer.parseInt(request.getParameter("id")));
