@@ -19,13 +19,13 @@ import utils.DBUtil;
  * Servlet implementation class DirecorApprovalCreateServlet
  */
 @WebServlet("/director/approval/create")
-public class DirecorApprovalCreateServlet extends HttpServlet {
+public class DirectorReviewsCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DirecorApprovalCreateServlet() {
+    public DirectorReviewsCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
