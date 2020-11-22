@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.Join;
 import utils.DBUtil;
 
-@WebServlet(name = "LeaveEditServlet", urlPatterns = {"/leave/edit"})
+@WebServlet("/punchout/edit")
 public class PunchOutEditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -26,13 +26,13 @@ public class PunchOutEditServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Join a = em.find(Join.class, Integer.parseInt(request.getParameter("id")));
+        Join join = em.find(Join.class, Integer.parseInt(request.getParameter("join_id")));
 
-        request.setAttribute("attendance", a);
+        request.setAttribute("join", join);
 
         em.close();
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/attendances/leave.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/joins/punchout.jsp");
         rd.forward(request, response);
     }
 
