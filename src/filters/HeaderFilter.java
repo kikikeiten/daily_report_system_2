@@ -13,85 +13,78 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import models.Attendance;
-import models.Employee;
+import models.Join;
+import models.Member;
 import utils.DBUtil;
 
-/**
- * Servlet Filter implementation class HeaderFilter
- */
-@WebFilter("/*")
+@WebFilter("/*") // 全てに適応
 public class HeaderFilter implements Filter {
 
-    /**
-     * Default constructor.
-     */
     public HeaderFilter() {
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see Filter#destroy()
-     */
     public void destroy() {
-        // TODO Auto-generated method stub
     }
 
-    /**
-     * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-     */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
         HttpSession session = ((HttpServletRequest) request).getSession();
 
-        Employee login_employee = (Employee) session.getAttribute("login_employee");
+        // ログイン中メンバーのidを取得
+        Member login_member = (Member) session.getAttribute("login_member");
 
-        long getMyFollowingCount = (long) em.createNamedQuery("getMyFollowingCount", Long.class)
-                .setParameter("employee", login_employee)
+        // ログイン中メンバーのフォロー一覧総数を取得
+        long getMyFollowingCnt = (long) em.createNamedQuery("getMyFollowingCnt", Long.class)
+                .setParameter("login_member", login_member)
                 .getSingleResult();
 
-        long getMyFollowerCount = (long) em.createNamedQuery("getMyFollowerCount", Long.class)
-                .setParameter("employee", login_employee)
+        // ログイン中メンバーのフォロワー一覧総数を取得
+        long getMyFollowerCnt = (long) em.createNamedQuery("getMyFollowerCnt", Long.class)
+                .setParameter("login_member", login_member)
                 .getSingleResult();
 
-        long getManagerApprovalReportsCount = (long) em.createNamedQuery("getManagerApprovalReportsCount", Long.class)
+        // マネージャーのレビュー待ちidea総数を取得
+        long getManagerReviewsCnt = (long) em.createNamedQuery("getManagerReviewsCnt", Long.class)
                 .getSingleResult();
 
-        long getDirectorApprovalReportsCount = (long) em.createNamedQuery("getDirectorApprovalReportsCount", Long.class)
+        // ディレクターのレビュー待ちidea総数を取得
+        long getDirectorReviewsCnt = (long) em.createNamedQuery("getDirectorReviewsCnt", Long.class)
                 .getSingleResult();
 
         try {
-            Attendance getMyLatestAttendance = (Attendance) em.createNamedQuery("getMyLatestAttendance", Attendance.class)
-                    .setParameter("employee", login_employee)
-                    .setMaxResults(1)
+            // ログイン中メンバーの最新join履歴を取得（履歴がない場合もあるのでtry-catch）
+            Join getMyLatestJoin = (Join) em
+                    .createNamedQuery("getMyLatestJoin", Join.class)
+                    .setParameter("login_member", login_member)
+                    .setMaxResults(1) // 一件だけ取得
                     .getSingleResult();
 
-            Integer attendance_flag = getMyLatestAttendance.getAttendance_flag();
-            request.setAttribute("attendance_flag", attendance_flag);
+            Integer latest_join = getMyLatestJoin.getJoin_flag(); // Join型からInteger型に変換
+            request.setAttribute("latest_join", latest_join);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        // ログイン中メンバーのidea総数を取得
+        long getMyIdeasCnt = (long) em.createNamedQuery("getMyIdeasCnt", Long.class)
+                .setParameter("login_member", login_member)
+                .getSingleResult();
+
         em.close();
 
-        request.setAttribute("getMyFollowingCount", getMyFollowingCount);
-        request.setAttribute("getMyFollowerCount", getMyFollowerCount);
-        request.setAttribute("getManagerApprovalReportsCount", getManagerApprovalReportsCount);
-        request.setAttribute("getDirectorApprovalReportsCount", getDirectorApprovalReportsCount);
+        request.setAttribute("getMyFollowingCnt", getMyFollowingCnt);
+        request.setAttribute("getMyFollowerCnt", getMyFollowerCnt);
+        request.setAttribute("getManagerReviewsCnt", getManagerReviewsCnt);
+        request.setAttribute("getDirectorReviewsCnt", getDirectorReviewsCnt);
+        request.setAttribute("getMyIdeasCnt", getMyIdeasCnt);
 
         chain.doFilter(request, response);
     }
 
-    /**
-     * @see Filter#init(FilterConfig)
-     */
     public void init(FilterConfig fConfig) throws ServletException {
-        // TODO Auto-generated method stub
     }
-
 }

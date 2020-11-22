@@ -10,53 +10,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class FollowerCreateServlet
- */
 @WebServlet("/follower/create")
 public class FollowerCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public FollowerCreateServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Follow f = new Follow();
+        Follow follow = new Follow();
+
+        // 詳細な時刻を取得
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        Follow ff = em.find(Follow.class, Integer.parseInt(request.getParameter("follow_id")));
 
-        f.setEmployee((Employee) request.getSession().getAttribute("login_employee"));
-        f.setFollow(ff.getEmployee());
-        f.setCreated_at(currentTime);
-        f.setUpdated_at(currentTime);
+        // フォローボタンを押した際にフォローされるメンバーのIDを取得
+        Follow followed = em.find(Follow.class, Integer.parseInt(request.getParameter("followed_id")));
 
-        Employee follow = ff.getEmployee();
-        String follow_name = follow.getName();
+        // Followテーブルに値をセット
+        follow.setFollowing_id((Member) request.getSession().getAttribute("login_member"));
+        follow.setFollowed_id(followed.getMember());
+        follow.setCreated_at(currentTime);
+        follow.setUpdated_at(currentTime);
+
+        // フォローされたメンバーの氏名を取得
+        Member followedMember = followed.getMember();
+        String follow_name_str = followedMember.getName();
 
         em.getTransaction().begin();
-        em.persist(f);
+        em.persist(follow);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", follow_name + "さんをフォローしました。");
 
-        response.sendRedirect(request.getContextPath() + "/reports");
+        request.getSession().setAttribute("toast", follow_name_str + "さんをフォローしました。");
+
+        response.sendRedirect(request.getContextPath() + "/ideas");
     }
 
 }

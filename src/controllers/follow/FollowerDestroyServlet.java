@@ -9,55 +9,51 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class FollowerDestroyServlet
- */
 @WebServlet("/follower/destroy")
 public class FollowerDestroyServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public FollowerDestroyServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
-        Follow ff = em.find(Follow.class, Integer.parseInt(request.getParameter("employee_id")));
+        // ログイン中メンバーのIDを取得
+        Member login_member = (Member) request.getSession().getAttribute("login_member");
 
+        // フォロー解除ボタンを押した際にフォローしているフォロワーのIDを取得
+        Follow following = em.find(Follow.class, Integer.parseInt(request.getParameter("following_id")));
+
+        // フォロー解除するフォロワーのIDを取得
         Integer ei = 0;
-        ei = em.createNamedQuery("followerDestroy", Integer.class)
-                .setParameter("follow", login_employee)
-                .setParameter("employee", ff.getEmployee())
+        ei = em.createNamedQuery("getDestroyFollower", Integer.class)
+                .setParameter("login_member", login_member)
+                .setParameter("following_id", following.getMember())
                 .getSingleResult();
 
-        Follow f = em.find(Follow.class, ei);
+        Follow follow = em.find(Follow.class, ei);
 
-        Employee unfollow = ff.getEmployee();
-        String unfollow_name = unfollow.getName();
+        // フォロー解除したフォロワーの氏名を取得
+        Member unfollow = following.getMember();
+        String unfollow_name_str = unfollow.getName();
 
         em.getTransaction().begin();
-        em.remove(f);
+        em.remove(follow);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", unfollow_name + "さんのフォローを解除しました。");
 
-        response.sendRedirect(request.getContextPath() + "/reports");
+        // トーストメッセージ
+        request.getSession().setAttribute("toast", unfollow_name_str + "さんのフォローを解除しました。");
+
+        response.sendRedirect(request.getContextPath() + "/ideas");
     }
 
 }

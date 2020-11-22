@@ -11,35 +11,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class FollowingIndexServlet
- */
 @WebServlet("/following")
 public class FollowingIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public FollowingIndexServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+        // ログイン中のメンバーIDを取得
+        Member login_member = (Member) request.getSession().getAttribute("login_member");
 
         int page;
         try {
@@ -48,20 +38,20 @@ public class FollowingIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Follow> getMyAllFollowing = em.createNamedQuery("getMyAllFollowing", Follow.class)
-                .setParameter("employee", login_employee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        // ログイン中メンバーのフォロー一覧を取得
+        List<Follow> getMyFollowing = em.createNamedQuery("getMyFollowing", Follow.class)
+                .setParameter("login_member", login_member)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
         em.close();
 
-        request.setAttribute("getMyAllFollowing", getMyAllFollowing);
+        request.setAttribute("getMyFollowing", getMyFollowing);
         request.setAttribute("page", page);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/following.jsp");
         rd.forward(request, response);
-
     }
 
 }

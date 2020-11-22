@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import utils.DBUtil;
 import utils.EncryptUtil;
 
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
         String code = request.getParameter("code");
         String plain_pass = request.getParameter("password");
 
-        Employee e = null;
+        Member m = null;
 
         if (code != null && !code.equals("") && plain_pass != null && !plain_pass.equals("")) {
             EntityManager em = DBUtil.createEntityManager();
@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 
             // 社員番号とパスワードが正しいかチェックする
             try {
-                e = em.createNamedQuery("checkLoginCodeAndPassword", Employee.class)
+                m = em.createNamedQuery("checkLoginCodeAndPassword", Member.class)
                         .setParameter("code", code)
                         .setParameter("pass", password)
                         .getSingleResult();
@@ -79,7 +79,7 @@ public class LoginServlet extends HttpServlet {
 
             em.close();
 
-            if (e != null) {
+            if (m != null) {
                 check_result = true;
             }
         }
@@ -94,9 +94,9 @@ public class LoginServlet extends HttpServlet {
             rd.forward(request, response);
         } else {
             // 認証できたらログイン状態にしてトップページへリダイレクト
-            request.getSession().setAttribute("login_employee", e);
+            request.getSession().setAttribute("login_member", m);
 
-            request.getSession().setAttribute("flush", "ログインしました。");
+            request.getSession().setAttribute("toast", "ログインしました。");
             response.sendRedirect(request.getContextPath() + "/");
         }
     }
