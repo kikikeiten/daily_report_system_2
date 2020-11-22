@@ -28,8 +28,10 @@ public class ReviewHistoriesIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // アドバイス履歴を確認するアイデアのIDを取得
         Idea ideaId = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -37,17 +39,21 @@ public class ReviewHistoriesIndexServlet extends HttpServlet {
             page = 1;
         }
 
+        // アイデアの全アドバイス履歴を取得
         List<Review> getReviews = em.createNamedQuery("getReviews", Review.class)
                 .setParameter("ideaId", ideaId)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)
                 .getResultList();
 
+        // 上記のカウントを取得
         long getReviewsCnt = (long) em.createNamedQuery("getReviewsCnt", Long.class)
                 .setParameter("ideaId", ideaId)
                 .getSingleResult();
 
+        // アドバイス履歴を確認するアイデアのIDをInteger型で取得
         Integer ideaIdInt = ideaId.getId();
+        // アドバイス履歴を確認するアイデアのタイトルをString型で取得
         String ideaIdTitle = ideaId.getTitle();
 
         em.close();
