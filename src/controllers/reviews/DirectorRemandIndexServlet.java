@@ -1,4 +1,4 @@
-package controllers.approvals;
+package controllers.reviews;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,16 +16,16 @@ import models.Idea;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class DraftIndexServlet
+ * Servlet implementation class DirectorRemandIndexServlet
  */
-@WebServlet("/drafts")
-public class DraftIndexServlet extends HttpServlet {
+@WebServlet("/remand/director")
+public class DirectorRemandIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DraftIndexServlet() {
+    public DirectorRemandIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,14 +48,15 @@ public class DraftIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
-                .getSingleResult();
-
-        List<Idea> getMyAllDrafts = em.createNamedQuery("getMyAllDrafts", Idea.class)
+        List<Idea> getAllDirectorRemandReports = em.createNamedQuery("getAllDirectorRemandReports", Idea.class)
                 .setParameter("employee", login_employee)
-                .setFirstResult(12 * (page - 1))
-                .setMaxResults(12)
+                .setFirstResult(10 * (page - 1))
+                .setMaxResults(10)
                 .getResultList();
+
+        long getDirectorRemandReportsCount = (long) em.createNamedQuery("getDirectorRemandReportsCount", Long.class)
+                .setParameter("employee", login_employee)
+                .getSingleResult();
 
         long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
                 .setParameter("employee", login_employee)
@@ -65,24 +66,24 @@ public class DraftIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
-        long getDirectorRemandReportsCount = (long) em.createNamedQuery("getDirectorRemandReportsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
                 .getSingleResult();
 
         em.close();
 
-        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
-        request.setAttribute("getMyAllDrafts", getMyAllDrafts);
-        request.setAttribute("getMyDraftsCount", getMyDraftsCount);
-        request.setAttribute("page", page);
-        request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
+        request.setAttribute("getAllDirectorRemandReports", getAllDirectorRemandReports);
         request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);
+        request.setAttribute("page", page);
+        request.setAttribute("getMyDraftsCount", getMyDraftsCount);
+        request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
+        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/draft.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/director_remand.jsp");
         rd.forward(request, response);
     }
+
 }

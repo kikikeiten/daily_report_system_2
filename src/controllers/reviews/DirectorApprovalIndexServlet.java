@@ -1,4 +1,4 @@
-package controllers.approvals;
+package controllers.reviews;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,16 +16,16 @@ import models.Idea;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ManagerRemandIndexServlet
+ * Servlet implementation class DirectorApprovalIndexServlet
  */
-@WebServlet("/remand/manager")
-public class ManagerRemandIndexServlet extends HttpServlet {
+@WebServlet("/approval/director")
+public class DirectorApprovalIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerRemandIndexServlet() {
+    public DirectorApprovalIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,21 +48,12 @@ public class ManagerRemandIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Idea> getAllManagerRemandReports = em.createNamedQuery("getAllManagerRemandReports", Idea.class)
-                .setParameter("employee", login_employee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        List<Idea> getAllDirectorApprovalReports = em.createNamedQuery("getAllDirectorApprovalReports", Idea.class)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
-        long getManagerRemandReportsCount = (long) em.createNamedQuery("getManagerRemandReportsCount", Long.class)
-                .setParameter("employee", login_employee)
-                .getSingleResult();
-
         long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
-                .setParameter("employee", login_employee)
-                .getSingleResult();
-
-        long getDirectorRemandReportsCount = (long) em.createNamedQuery("getDirectorRemandReportsCount", Long.class)
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
@@ -71,18 +62,16 @@ public class ManagerRemandIndexServlet extends HttpServlet {
 
         em.close();
 
-        request.setAttribute("getAllManagerRemandReports", getAllManagerRemandReports);
-        request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
+        request.setAttribute("getAllDirectorApprovalReports", getAllDirectorApprovalReports);
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
-        request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);
         request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/manager_remand.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/director_approval.jsp");
         rd.forward(request, response);
     }
 

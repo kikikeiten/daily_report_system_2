@@ -1,4 +1,4 @@
-package controllers.approvals;
+package controllers.reviews;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,16 +16,16 @@ import models.Idea;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class DirectorApprovalIndexServlet
+ * Servlet implementation class ManagerIndexServlet
  */
-@WebServlet("/approval/director")
-public class DirectorApprovalIndexServlet extends HttpServlet {
+@WebServlet("/approval/manager")
+public class ManagerApprovalIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DirectorApprovalIndexServlet() {
+    public ManagerApprovalIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,7 +48,7 @@ public class DirectorApprovalIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Idea> getAllDirectorApprovalReports = em.createNamedQuery("getAllDirectorApprovalReports", Idea.class)
+        List<Idea> getAllManagerApprovalReports = em.createNamedQuery("getAllManagerApprovalReports", Idea.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
@@ -57,21 +57,26 @@ public class DirectorApprovalIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
+        long getDirectorRemandReportsCount = (long) em.createNamedQuery("getDirectorRemandReportsCount", Long.class)
+                .setParameter("employee", login_employee)
+                .getSingleResult();
+
         long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
                 .getSingleResult();
 
         em.close();
 
-        request.setAttribute("getAllDirectorApprovalReports", getAllDirectorApprovalReports);
+        request.setAttribute("getAllManagerApprovalReports", getAllManagerApprovalReports);
         request.setAttribute("page", page);
         request.setAttribute("getMyDraftsCount", getMyDraftsCount);
+        request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);
         request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
         if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/director_approval.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/manager_approval.jsp");
         rd.forward(request, response);
     }
 

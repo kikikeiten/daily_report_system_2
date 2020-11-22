@@ -1,4 +1,4 @@
-package controllers.approvals;
+package controllers.reviews;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -16,16 +16,16 @@ import models.Idea;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ManagerApprovalCreate
+ * Servlet implementation class DirecorApprovalCreateServlet
  */
-@WebServlet("/manager/approval/create")
-public class ManagerApprovalCreate extends HttpServlet {
+@WebServlet("/director/approval/create")
+public class DirecorApprovalCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerApprovalCreate() {
+    public DirecorApprovalCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +43,7 @@ public class ManagerApprovalCreate extends HttpServlet {
         Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
         Integer submit = Integer.parseInt(request.getParameter("submit"));
 
-        r.setApproval(Integer.parseInt(request.getParameter("submit")));
+        r.setApproval(submit);
 
         Review a = new Review();
 
@@ -64,7 +64,7 @@ public class ManagerApprovalCreate extends HttpServlet {
         Integer admin_flag = report_employee.getAdmin_flag();
         String report_name = report_employee.getName();
 
-        if (submit == 1) {
+        if (submit == 3) {
             switch (admin_flag) {
             case 0:
                 request.getSession().setAttribute("flush",
@@ -73,6 +73,14 @@ public class ManagerApprovalCreate extends HttpServlet {
             case 1:
                 request.getSession().setAttribute("flush",
                         "日報「" + r.getTitle() + "」を" + report_name + "管理者に差し戻しました。");
+                break;
+            case 2:
+                request.getSession().setAttribute("flush",
+                        "日報「" + r.getTitle() + "」を" + report_name + "課長に差し戻しました。");
+                break;
+            case 3:
+                request.getSession().setAttribute("flush",
+                        "日報「" + r.getTitle() + "」を" + report_name + "部長に差し戻しました。");
                 break;
             }
         } else {
@@ -89,10 +97,14 @@ public class ManagerApprovalCreate extends HttpServlet {
                 request.getSession().setAttribute("flush",
                         report_name + "課長の日報「" + r.getTitle() + "」を承認しました。");
                 break;
+            case 3:
+                request.getSession().setAttribute("flush",
+                        report_name + "部長の日報「" + r.getTitle() + "」を承認しました。");
+                break;
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/approval/manager");
+        response.sendRedirect(request.getContextPath() + "/approval/director");
     }
 
 }

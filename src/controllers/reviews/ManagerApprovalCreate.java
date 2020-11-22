@@ -1,4 +1,4 @@
-package controllers.approvals;
+package controllers.reviews;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -16,16 +16,16 @@ import models.Idea;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class DirecorApprovalCreateServlet
+ * Servlet implementation class ManagerApprovalCreate
  */
-@WebServlet("/director/approval/create")
-public class DirecorApprovalCreateServlet extends HttpServlet {
+@WebServlet("/manager/approval/create")
+public class ManagerApprovalCreate extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DirecorApprovalCreateServlet() {
+    public ManagerApprovalCreate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +43,7 @@ public class DirecorApprovalCreateServlet extends HttpServlet {
         Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
         Integer submit = Integer.parseInt(request.getParameter("submit"));
 
-        r.setApproval(submit);
+        r.setApproval(Integer.parseInt(request.getParameter("submit")));
 
         Review a = new Review();
 
@@ -64,7 +64,7 @@ public class DirecorApprovalCreateServlet extends HttpServlet {
         Integer admin_flag = report_employee.getAdmin_flag();
         String report_name = report_employee.getName();
 
-        if (submit == 3) {
+        if (submit == 1) {
             switch (admin_flag) {
             case 0:
                 request.getSession().setAttribute("flush",
@@ -73,14 +73,6 @@ public class DirecorApprovalCreateServlet extends HttpServlet {
             case 1:
                 request.getSession().setAttribute("flush",
                         "日報「" + r.getTitle() + "」を" + report_name + "管理者に差し戻しました。");
-                break;
-            case 2:
-                request.getSession().setAttribute("flush",
-                        "日報「" + r.getTitle() + "」を" + report_name + "課長に差し戻しました。");
-                break;
-            case 3:
-                request.getSession().setAttribute("flush",
-                        "日報「" + r.getTitle() + "」を" + report_name + "部長に差し戻しました。");
                 break;
             }
         } else {
@@ -97,14 +89,10 @@ public class DirecorApprovalCreateServlet extends HttpServlet {
                 request.getSession().setAttribute("flush",
                         report_name + "課長の日報「" + r.getTitle() + "」を承認しました。");
                 break;
-            case 3:
-                request.getSession().setAttribute("flush",
-                        report_name + "部長の日報「" + r.getTitle() + "」を承認しました。");
-                break;
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/approval/director");
+        response.sendRedirect(request.getContextPath() + "/approval/manager");
     }
 
 }
