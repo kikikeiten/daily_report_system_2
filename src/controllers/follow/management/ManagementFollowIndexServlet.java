@@ -27,9 +27,7 @@ public class ManagementFollowIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member ee = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
-
-        System.out.println("リストの従業員idは" + ee + "です。");
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
 
         int page;
         try {
@@ -38,40 +36,39 @@ public class ManagementFollowIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Member> getEmployeeNotFollowing = em.createNamedQuery("getEmployeeNotFollowing", Member.class)
-                .setParameter("employee", ee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        List<Member> getMemberNotFollowing = em.createNamedQuery("getMemberNotFollowing", Member.class)
+                .setParameter("member", member)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
-        System.out.println("リストの従業員がフォローしていない従業員は" + getEmployeeNotFollowing + "です。");
-
-        long getEmployeeNotFollowingCount = (long) em.createNamedQuery("getEmployeeNotFollowingCount", Long.class)
-                .setParameter("employee", ee)
+        long getMemberNotFollowingCnt = (long) em.createNamedQuery("getMemberNotFollowingCnt", Long.class)
+                .setParameter("member", member)
                 .getSingleResult();
 
         try {
-            String employee_name = ee.getName();
-            Integer employee_operated = ee.getId();
+            String member_name_str = member.getName();
+            Integer member_operated_int = member.getId();
 
-            request.setAttribute("employee_name", employee_name);
-            request.setAttribute("employee_operated", employee_operated);
+            request.setAttribute("member_name_str", member_name_str);
+            request.setAttribute("member_operated_int", member_operated_int);
+
         } catch (Exception e) {
-
         }
-        Integer page_number = Integer.parseInt(request.getParameter("id"));
+
+        Integer member_id_int = Integer.parseInt(request.getParameter("member_id"));
 
         em.close();
 
-        request.setAttribute("employee", ee);
-        request.setAttribute("getEmployeeNotFollowing", getEmployeeNotFollowing);
         request.setAttribute("page", page);
-        request.setAttribute("getEmployeeNotFollowingCount", getEmployeeNotFollowingCount);
-        request.setAttribute("page_number", page_number);
+        request.setAttribute("member", member);
+        request.setAttribute("getMemberNotFollowing", getMemberNotFollowing);
+        request.setAttribute("getMemberNotFollowingCnt", getMemberNotFollowingCnt);
+        request.setAttribute("member_id_int", member_id_int);
 
-        if (request.getSession().getAttribute("flush") != null) {
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
+        if (request.getSession().getAttribute("toast") != null) {
+            request.setAttribute("toast", request.getSession().getAttribute("toast"));
+            request.getSession().removeAttribute("toast");
         }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/management/follow.jsp");
