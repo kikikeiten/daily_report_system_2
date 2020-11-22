@@ -27,6 +27,7 @@ public class JoinsIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -34,11 +35,13 @@ public class JoinsIndexServlet extends HttpServlet {
             page = 1;
         }
 
+        // 全てのjoin履歴を取得
         List<Join> getJoins = em.createNamedQuery("getJoins", Join.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
+        // 上記のカウント
         long getJoinsCnt = (long) em.createNamedQuery("getJoinsCnt", Long.class)
                 .getSingleResult();
 
