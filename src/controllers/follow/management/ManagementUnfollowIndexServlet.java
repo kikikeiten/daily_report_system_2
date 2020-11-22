@@ -28,7 +28,7 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member ee = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
 
         int page;
         try {
@@ -37,37 +37,35 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Follow> getEmployeeFollowing = em.createNamedQuery("getEmployeeFollowing", Follow.class)
-                .setParameter("employee", ee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        List<Follow> getMemberFollowing = em.createNamedQuery("getMemberFollowing", Follow.class)
+                .setParameter("member", member)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
-        long getEmployeeFollowingCount = (long) em.createNamedQuery("getEmployeeFollowingCount", Long.class)
-                .setParameter("employee", ee)
+        long getMemberFollowingCnt = (long) em.createNamedQuery("getMemberFollowingCnt", Long.class)
+                .setParameter("member", member)
                 .getSingleResult();
 
-
         try {
-            String employee_name = ee.getName();
-
-            request.setAttribute("employee_name", employee_name);
+            String member_name_str = member.getName();
+            request.setAttribute("member_name_str", member_name_str);
         } catch (Exception e) {
-
         }
-        Integer page_number = Integer.parseInt(request.getParameter("id"));
+
+        Integer member_id_int = Integer.parseInt(request.getParameter("member_id"));
 
         em.close();
 
-        request.setAttribute("employee", ee);
-        request.setAttribute("getEmployeeFollowing", getEmployeeFollowing);
         request.setAttribute("page", page);
-        request.setAttribute("getEmployeeFollowingCount", getEmployeeFollowingCount);
-        request.setAttribute("page_number", page_number);
+        request.setAttribute("member", member);
+        request.setAttribute("getMemberFollowing", getMemberFollowing);
+        request.setAttribute("getMemberFollowingCnt", getMemberFollowingCnt);
+        request.setAttribute("member_id_int", member_id_int);
 
-        if (request.getSession().getAttribute("flush") != null) {
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
+        if (request.getSession().getAttribute("toast") != null) {
+            request.setAttribute("toast", request.getSession().getAttribute("toast"));
+            request.getSession().removeAttribute("toast");
         }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/management/unfollow.jsp");
