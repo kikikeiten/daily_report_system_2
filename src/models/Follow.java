@@ -40,7 +40,7 @@ import lombok.Setter;
         // カウント
         @NamedQuery(name = "getMyFollowerCnt", query = "SELECT COUNT(f) FROM  Follow f, Member m WHERE f.followed_id = :login_member AND m.id = f.following_id.id"),
 
-        // 他のメンバーのフォロー一覧を表示
+        // 対象メンバーのフォロー一覧を表示
         @NamedQuery(name = "getMemberFollowing", query = "SELECT f FROM Follow f WHERE f.following_id = :login_member ORDER BY f.updated_at DESC"),
         // カウント
         @NamedQuery(name = "getMemberFollowingCnt", query = "SELECT COUNT(f) FROM Follow f WHERE f.following_id = :login_member"),

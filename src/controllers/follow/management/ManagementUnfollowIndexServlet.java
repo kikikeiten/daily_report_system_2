@@ -28,8 +28,10 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // 対象メンバーのIDを取得
         Member member = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -37,22 +39,26 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
             page = 1;
         }
 
+        // 対象メンバーのフォロー一覧を表示
         List<Follow> getMemberFollowing = em.createNamedQuery("getMemberFollowing", Follow.class)
                 .setParameter("member", member)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
+        // 上記のカウント
         long getMemberFollowingCnt = (long) em.createNamedQuery("getMemberFollowingCnt", Long.class)
                 .setParameter("member", member)
                 .getSingleResult();
 
         try {
+            // 対象メンバーの氏名を取得
             String member_name_str = member.getName();
             request.setAttribute("member_name_str", member_name_str);
         } catch (Exception e) {
         }
 
+        // 対象メンバーのIDをint型で取得
         Integer member_id_int = Integer.parseInt(request.getParameter("member_id"));
 
         em.close();
@@ -63,6 +69,7 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
         request.setAttribute("getMemberFollowingCnt", getMemberFollowingCnt);
         request.setAttribute("member_id_int", member_id_int);
 
+        // トーストメッセージがセッションにあれば表示
         if (request.getSession().getAttribute("toast") != null) {
             request.setAttribute("toast", request.getSession().getAttribute("toast"));
             request.getSession().removeAttribute("toast");
