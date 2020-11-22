@@ -15,7 +15,7 @@ import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
-@WebServlet("/approval/director")
+@WebServlet("/reviews/director")
 public class DirectorReviewsIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class DirectorReviewsIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
         int page;
         try {
@@ -37,30 +37,31 @@ public class DirectorReviewsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Idea> getAllDirectorApprovalReports = em.createNamedQuery("getAllDirectorApprovalReports", Idea.class)
+        List<Idea> getDirectorReviews = em.createNamedQuery("getDirectorReviews", Idea.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
+        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 
         em.close();
 
-        request.setAttribute("getAllDirectorApprovalReports", getAllDirectorApprovalReports);
+        request.setAttribute("getDirectorReviews", getDirectorReviews);
         request.setAttribute("page", page);
-        request.setAttribute("getMyDraftsCount", getMyDraftsCount);
-        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
-        if (request.getSession().getAttribute("flush") != null) {
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
+        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
+        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
+
+        if (request.getSession().getAttribute("toast") != null) {
+            request.setAttribute("toast", request.getSession().getAttribute("toast"));
+            request.getSession().removeAttribute("toast");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/director_approval.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reviews/director.jsp");
         rd.forward(request, response);
     }
 
