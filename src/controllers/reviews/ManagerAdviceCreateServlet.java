@@ -16,13 +16,13 @@ import utils.DBUtil;
  * Servlet implementation class ManagerRemandCreateServlet
  */
 @WebServlet("/manager/remand/create")
-public class ManagerRemandCreateServlet extends HttpServlet {
+public class ManagerAdviceCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerRemandCreateServlet() {
+    public ManagerAdviceCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
