@@ -21,7 +21,7 @@ import lombok.Setter;
 @Table(name = "joins")
 @NamedQueries({
         // ログイン中メンバーの全join履歴を取得
-        @NamedQuery(name = "getMyJoins", query = "SELECT j FROM Join j WHERE j.member = :login_member_id ORDER BY j.updated_at DESC"),
+        @NamedQuery(name = "getMyJoins", query = "SELECT j FROM Join j WHERE j.member = :login_member ORDER BY j.updated_at DESC"),
         // カウント
         @NamedQuery(name = "getMyJoinCnt", query = "SELECT COUNT(j) FROM Join j WHERE j.member = :login_member"),
 

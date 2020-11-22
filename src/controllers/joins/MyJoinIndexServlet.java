@@ -28,7 +28,7 @@ public class MyJoinIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
+        Member login_member = (Member) request.getSession().getAttribute("login_member");
 
         int page;
         try {
@@ -37,24 +37,23 @@ public class MyJoinIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Join> getMyAllAttendances = em.createNamedQuery("getMyAllAttendances", Join.class)
-                .setParameter("employee", login_employee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        List<Join> getMyJoins = em.createNamedQuery("getMyJoins", Join.class)
+                .setParameter("login_member", login_member)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
-        long getMyAttendancesCount = (long) em.createNamedQuery("getMyAttendancesCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getMyJoinCnt = (long) em.createNamedQuery("getMyJoinCnt", Long.class)
+                .setParameter("login_member", login_member)
                 .getSingleResult();
 
         em.close();
 
-        request.setAttribute("getMyAllAttendances", getMyAllAttendances);
-        request.setAttribute("getMyAttendancesCount", getMyAttendancesCount);
+        request.setAttribute("getMyJoins", getMyJoins);
+        request.setAttribute("getMyJoinCnt", getMyJoinCnt);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/attendances/my_attendance.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/joins/my.jsp");
         rd.forward(request, response);
 
     }
-
 }
