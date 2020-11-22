@@ -15,27 +15,16 @@ import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class DirecorApprovalCreateServlet
- */
 @WebServlet("/director/approval/create")
 public class DirectorReviewsCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public DirectorReviewsCreateServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
@@ -66,41 +55,41 @@ public class DirectorReviewsCreateServlet extends HttpServlet {
 
         if (submit == 3) {
             switch (admin_flag) {
-            case 0:
-                request.getSession().setAttribute("flush",
-                        "日報「" + r.getTitle() + "」を" + report_name + "社員に差し戻しました。");
-                break;
-            case 1:
-                request.getSession().setAttribute("flush",
-                        "日報「" + r.getTitle() + "」を" + report_name + "管理者に差し戻しました。");
-                break;
-            case 2:
-                request.getSession().setAttribute("flush",
-                        "日報「" + r.getTitle() + "」を" + report_name + "課長に差し戻しました。");
-                break;
-            case 3:
-                request.getSession().setAttribute("flush",
-                        "日報「" + r.getTitle() + "」を" + report_name + "部長に差し戻しました。");
-                break;
+                case 0:
+                    request.getSession().setAttribute("flush",
+                            "日報「" + r.getTitle() + "」を" + report_name + "社員に差し戻しました。");
+                    break;
+                case 1:
+                    request.getSession().setAttribute("flush",
+                            "日報「" + r.getTitle() + "」を" + report_name + "管理者に差し戻しました。");
+                    break;
+                case 2:
+                    request.getSession().setAttribute("flush",
+                            "日報「" + r.getTitle() + "」を" + report_name + "課長に差し戻しました。");
+                    break;
+                case 3:
+                    request.getSession().setAttribute("flush",
+                            "日報「" + r.getTitle() + "」を" + report_name + "部長に差し戻しました。");
+                    break;
             }
         } else {
             switch (admin_flag) {
-            case 0:
-                request.getSession().setAttribute("flush",
-                        report_name + "社員の日報「" + r.getTitle() + "」を承認しました。");
-                break;
-            case 1:
-                request.getSession().setAttribute("flush",
-                        report_name + "管理者の日報「" + r.getTitle() + "」を承認しました。");
-                break;
-            case 2:
-                request.getSession().setAttribute("flush",
-                        report_name + "課長の日報「" + r.getTitle() + "」を承認しました。");
-                break;
-            case 3:
-                request.getSession().setAttribute("flush",
-                        report_name + "部長の日報「" + r.getTitle() + "」を承認しました。");
-                break;
+                case 0:
+                    request.getSession().setAttribute("flush",
+                            report_name + "社員の日報「" + r.getTitle() + "」を承認しました。");
+                    break;
+                case 1:
+                    request.getSession().setAttribute("flush",
+                            report_name + "管理者の日報「" + r.getTitle() + "」を承認しました。");
+                    break;
+                case 2:
+                    request.getSession().setAttribute("flush",
+                            report_name + "課長の日報「" + r.getTitle() + "」を承認しました。");
+                    break;
+                case 3:
+                    request.getSession().setAttribute("flush",
+                            report_name + "部長の日報「" + r.getTitle() + "」を承認しました。");
+                    break;
             }
         }
 
