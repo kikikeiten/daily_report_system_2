@@ -27,8 +27,10 @@ public class ManagementFollowIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // 対象のメンバーIDを取得
         Member member = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -36,18 +38,22 @@ public class ManagementFollowIndexServlet extends HttpServlet {
             page = 1;
         }
 
+        // 対象のメンバーがフォローしていないメンバー一覧を表示
         List<Member> getMemberNotFollowing = em.createNamedQuery("getMemberNotFollowing", Member.class)
                 .setParameter("member", member)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
+        // 上記カウント
         long getMemberNotFollowingCnt = (long) em.createNamedQuery("getMemberNotFollowingCnt", Long.class)
                 .setParameter("member", member)
                 .getSingleResult();
 
         try {
+            // 対象のメンバー名を取得
             String member_name_str = member.getName();
+            // 対象のメンバーIDを取得
             Integer member_operated_int = member.getId();
 
             request.setAttribute("member_name_str", member_name_str);
@@ -56,6 +62,7 @@ public class ManagementFollowIndexServlet extends HttpServlet {
         } catch (Exception e) {
         }
 
+        // 対象のメンバーIDをint型で取得
         Integer member_id_int = Integer.parseInt(request.getParameter("member_id"));
 
         em.close();
@@ -66,6 +73,7 @@ public class ManagementFollowIndexServlet extends HttpServlet {
         request.setAttribute("getMemberNotFollowingCnt", getMemberNotFollowingCnt);
         request.setAttribute("member_id_int", member_id_int);
 
+        // トーストメッセージのセッションがあるか確認
         if (request.getSession().getAttribute("toast") != null) {
             request.setAttribute("toast", request.getSession().getAttribute("toast"));
             request.getSession().removeAttribute("toast");
