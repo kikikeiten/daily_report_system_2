@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="daily_report_system_2:war exploded">
-    <output-path>$PROJECT_DIR$/target/daily_report_system_2-0.0.1-SNAPSHOT</output-path>
+    <output-path>$PROJECT_DIR$/target/tipswatch-0.0.1-SNAPSHOT</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -32,10 +32,13 @@
           <element id="library" level="project" name="Maven: org.attoparser:attoparser:2.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.unbescape:unbescape:1.1.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp:jsp-api:2.2" />
+          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.3.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/daily_report_system_2-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/tipswatch-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="daily_report_system_2/web/Web" />
     </root>

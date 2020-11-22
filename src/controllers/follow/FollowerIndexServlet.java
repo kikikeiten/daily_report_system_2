@@ -12,36 +12,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class FollowerIndexServlet
- */
 @WebServlet("/follower")
 public class FollowerIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public FollowerIndexServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Employee login_employee = (Employee) request.getSession().getAttribute("login_employee");
+        // ログイン中のメンバーIDを取得
+        Member login_member = (Member) request.getSession().getAttribute("login_member");
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -49,36 +40,33 @@ public class FollowerIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Follow> getMyAllFollower = em.createNamedQuery("getMyAllFollower", Follow.class)
-                .setParameter("employee", login_employee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        // ログイン中メンバーのフォロワー一覧を取得
+        List<Follow> getMyFollower = em.createNamedQuery("getMyFollower", Follow.class)
+                .setParameter("login_member", login_member)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
         //フォロー判定
-        List<Employee> checkMyFollow = em.createNamedQuery("checkMyFollow", Employee.class)
-                .setParameter("employee", login_employee)
+        List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
+                .setParameter("login_member", login_member)
                 .getResultList();
 
-        List<Integer> list_report_id = new ArrayList<Integer>();
+        List<Integer> follow_idea_id = new ArrayList<Integer>();
 
-        for (Employee report_id : checkMyFollow) {
-            Integer int_report_id = report_id.getId();
-            list_report_id.add(int_report_id);
-            System.out.println("ログイン中の従業員がフォローしている従業員id一覧は" + list_report_id + "です。");
-            request.setAttribute("list_report_id", list_report_id);
+        for (Member idea_id : checkMyFollow) {
+            Integer idea_id_int = idea_id.getId();
+            follow_idea_id.add(idea_id_int);
+            request.setAttribute("follow_idea_id", follow_idea_id);
         }
-
-        //フォロー判定ここまで
 
         em.close();
 
-        request.setAttribute("getMyAllFollower", getMyAllFollower);
+        request.setAttribute("getMyFollower", getMyFollower);
         request.setAttribute("page", page);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/follower.jsp");
         rd.forward(request, response);
-
     }
 
 }

@@ -10,59 +10,56 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
+import models.Member;
 import models.Follow;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class ManagementFollowCreateServlet
- */
 @WebServlet("/management/follow/create")
 public class ManagementFollowCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ManagementFollowCreateServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Follow f = new Follow();
+        Follow follow = new Follow();
+
+        // 詳細な現在時刻を取得
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        Employee e = em.find(Employee.class, Integer.parseInt(request.getParameter("follow_id")));
-        Employee ee = em.find(Employee.class, Integer.parseInt(request.getParameter("employee_operated")));
 
-        f.setEmployee(ee);
-        f.setFollow(e);
-        f.setCreated_at(currentTime);
-        f.setUpdated_at(currentTime);
+        // フォローされる側のメンバーIDを取得
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("followed_id")));
+        // フォローする側のメンバーIDを取得
+        Member member1 = em.find(Member.class, Integer.parseInt(request.getParameter("member_operated")));
 
-        String employee_name = ee.getName();
-        System.out.println("フォローする側の従業員氏名は" + employee_name + "です。");
+        // Followテーブルにセット
+        follow.setFollowing_id(member1);
+        follow.setFollowed_id(member);
+        follow.setCreated_at(currentTime);
+        follow.setUpdated_at(currentTime);
 
-        String unfollow_name = e.getName();
-        System.out.println("フォローされる側の従業員氏名は" + unfollow_name + "です。");
+        // フォローされる側の氏名を取得
+        String member_name_str = follow.getName();
+        // フォローする側の氏名を取得
+        String unfollow_name_str = member.getName();
 
-        Integer employee_id = ee.getId();
+        // フォローする側のメンバーIDを取得
+        Integer member_id_int = member1.getId();
 
         em.getTransaction().begin();
-        em.persist(f);
+        em.persist(follow);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", employee_name + "さんが" + unfollow_name + "さんをフォローしました。");
 
-        response.sendRedirect(request.getContextPath() + "/management/follow?id=" + employee_id);
+        // トーストメッセージをセット
+        request.getSession().setAttribute("toast", member_name_str + "さんが" + unfollow_name_str + "さんをフォローしました。");
+
+        response.sendRedirect(request.getContextPath() + "/management/follow?id=" + member_id_int);
     }
 
 }

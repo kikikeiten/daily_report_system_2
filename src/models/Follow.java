@@ -18,19 +18,37 @@ import lombok.Setter;
 
 @Table(name = "follows")
 @NamedQueries({
-        @NamedQuery(name = "followDestroy", query = "SELECT f.id FROM Follow AS f WHERE f.follow  = :follow AND f.employee = :employee"),
-        @NamedQuery(name = "followerDestroy", query = "SELECT f.id FROM Follow AS f WHERE f.follow  = :employee AND f.employee = :follow"),
-        @NamedQuery(name = "getMyFollowAllReports", query = "SELECT r FROM Report AS r, Follow AS f WHERE f.employee = :employee AND r.employee.id = f.follow.id ORDER BY r.id DESC"),
-        @NamedQuery(name = "getMyFollowReportsCount", query = "SELECT COUNT(r) FROM Report AS r, Follow AS f WHERE f.employee = :employee AND r.employee.id = f.follow.id"),
-        @NamedQuery(name = "getMyAllFollowing", query = "SELECT f FROM Employee AS e, Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id ORDER BY f.id DESC"),
-        @NamedQuery(name = "getMyFollowingCount", query = "SELECT COUNT(f) FROM Employee AS e, Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id"),
-        @NamedQuery(name = "getMyAllFollower", query = "SELECT f FROM Employee AS e, Follow AS f WHERE f.follow = :employee AND e.id = f.employee.id ORDER BY f.id DESC"),
-        @NamedQuery(name = "getMyFollowerCount", query = "SELECT COUNT(f) FROM Employee AS e, Follow AS f WHERE f.follow = :employee AND e.id = f.employee.id"),
-        @NamedQuery(name = "checkMyFollow", query = "SELECT f.follow FROM Follow AS f WHERE f.employee = :employee"),
-        @NamedQuery(name = "getEmployeeFollowing", query = "SELECT f FROM Follow AS f WHERE f.employee = :employee ORDER BY f.id DESC"), // Follow-up list for any employee
-        @NamedQuery(name = "getEmployeeFollowingCount", query = "SELECT COUNT(f) FROM Follow AS f WHERE f.employee = :employee"), //Follow count for any employee
-        @NamedQuery(name = "getEmployeeNotFollowing", query = "SELECT e FROM Employee AS e WHERE NOT EXISTS (SELECT f FROM Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id) AND e.id <> :employee ORDER BY e.id DESC"), // List of other employees that one employee doesn't follow
-        @NamedQuery(name = "getEmployeeNotFollowingCount", query = "SELECT COUNT(e) FROM Employee AS e WHERE NOT EXISTS (SELECT f FROM Follow AS f WHERE f.employee = :employee AND e.id = f.follow.id) AND e.id <> :employee") //Counts on the list of other employees that one employee doesn't follow
+        // フォロー解除するメンバーIDを取得
+        @NamedQuery(name = "getDestroyFollow", query = "SELECT f.id FROM Follow f WHERE f.followed_id  = :followed_id AND f.following_id = :login_member"),
+        // フォロー解除するフォロワーのIDを取得
+        @NamedQuery(name = "getDestroyFollower", query = "SELECT f.id FROM Follow f WHERE f.followed_id  = :login_member AND f.following_id = :following_id"),
+
+        // ログイン中メンバーがフォローしているメンバーのideaを取得
+        @NamedQuery(name = "getMyFollowingIdeas", query = "SELECT i FROM Idea i, Follow f WHERE f.following_id = :login_member AND i.member.id = f.followed_id.id ORDER BY i.updated_at DESC"),
+        // カウント
+        @NamedQuery(name = "getMyFollowingIdeasCnt", query = "SELECT COUNT(i) FROM Idea i, Follow f WHERE f.followed_id = :login_member AND i.member.id = f.followed_id.id"),
+
+        // ログイン中メンバーのフォロー一覧を取得
+        @NamedQuery(name = "getMyFollowing", query = "SELECT f FROM Follow f, Member m WHERE f.following_id = :login_member AND m.id = f.followed_id.id ORDER BY f.updated_at DESC"),
+        // カウント
+        @NamedQuery(name = "getMyFollowingCnt", query = "SELECT COUNT(f) FROM Follow f, Member m WHERE f.following_id = :login_member AND m.id = f.followed_id.id"),
+        // ログイン中メンバーのフォローしているメンバーIDを取得（削除予定）
+        @NamedQuery(name = "checkMyFollow", query = "SELECT f.followed_id FROM Follow f WHERE f.following_id = :login_member"),
+
+        // ログイン中メンバーのフォロワー一覧を取得
+        @NamedQuery(name = "getMyFollower", query = "SELECT f FROM Follow f, Member m WHERE f.followed_id = :login_member AND m.id = f.following_id.id ORDER BY f.updated_at DESC"),
+        // カウント
+        @NamedQuery(name = "getMyFollowerCnt", query = "SELECT COUNT(f) FROM  Follow f, Member m WHERE f.followed_id = :login_member AND m.id = f.following_id.id"),
+
+        // 対象メンバーのフォロー一覧を表示
+        @NamedQuery(name = "getMemberFollowing", query = "SELECT f FROM Follow f WHERE f.following_id = :login_member ORDER BY f.updated_at DESC"),
+        // カウント
+        @NamedQuery(name = "getMemberFollowingCnt", query = "SELECT COUNT(f) FROM Follow f WHERE f.following_id = :login_member"),
+
+        // 対象のメンバーがフォローしていないメンバー一覧を表示
+        @NamedQuery(name = "getMemberNotFollowing", query = "SELECT m FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.following_id = :login_member AND m.id = f.followed_id.id) AND m.id <> :login_member ORDER BY m.updated_at DESC"),
+        // カウント
+        @NamedQuery(name = "getMemberNotFollowingCnt", query = "SELECT COUNT(m) FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.following_id = :login_member AND m.id = f.followed_id.id) AND m.id <> :login_member")
 })
 
 @Getter
@@ -42,13 +60,15 @@ public class Follow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // フォローする側のメンバーid
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
+    @JoinColumn(name = "following_id", nullable = false)
+    private Member following_id;
 
+    // フォローされる側のメンバーid
     @ManyToOne
-    @JoinColumn(name = "follow_id", nullable = false)
-    private Employee follow;
+    @JoinColumn(name = "followed_id", nullable = false)
+    private Member followed_id;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
