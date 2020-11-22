@@ -1,4 +1,4 @@
-package controllers.ideas;
+package controllers.drafts;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,10 +16,10 @@ import models.Idea;
 import utils.DBUtil;
 
 @WebServlet("/drafts")
-public class DraftIndexServlet extends HttpServlet {
+public class DraftsIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public DraftIndexServlet() {
+    public DraftsIndexServlet() {
         super();
     }
 

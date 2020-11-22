@@ -1,4 +1,4 @@
-package controllers.reviews;
+package controllers.drafts;
 
 import java.io.IOException;
 
@@ -17,13 +17,13 @@ import utils.DBUtil;
  * Servlet implementation class SubmissionUpdateServlet
  */
 @WebServlet("/submission/update")
-public class SubmissionUpdateServlet extends HttpServlet {
+public class DraftsUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubmissionUpdateServlet() {
+    public DraftsUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
