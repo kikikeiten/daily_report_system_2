@@ -20,13 +20,13 @@ import utils.DBUtil;
  * Servlet implementation class LeaveUpdateServlet
  */
 @WebServlet("/leave/update")
-public class LeaveUpdateServlet extends HttpServlet {
+public class PunchOutUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LeaveUpdateServlet() {
+    public PunchOutUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
