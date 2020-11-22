@@ -15,7 +15,7 @@ import models.Review;
 import models.Idea;
 import utils.DBUtil;
 
-@WebServlet("/approval/history")
+@WebServlet("/advice/history")
 public class ReviewHistoriesIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class ReviewHistoriesIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
+        Idea ideaId = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
         int page;
         try {
@@ -37,28 +37,28 @@ public class ReviewHistoriesIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Review> getReportApprovals = em.createNamedQuery("getReportApprovals", Review.class)
-                .setParameter("report", r)
+        List<Review> getReviews = em.createNamedQuery("getReviews", Review.class)
+                .setParameter("ideaId", ideaId)
                 .setFirstResult(10 * (page - 1))
                 .setMaxResults(10)
                 .getResultList();
 
-        long getReportApprovalsCount = (long) em.createNamedQuery("getReportApprovalsCount", Long.class)
-                .setParameter("report", r)
+        long getReviewsCnt = (long) em.createNamedQuery("getReviewsCnt", Long.class)
+                .setParameter("ideaId", ideaId)
                 .getSingleResult();
 
-        Integer report_id = r.getId();
-        String report_title = r.getTitle();
+        Integer ideaIdInt = ideaId.getId();
+        String ideaIdTitle = ideaId.getTitle();
 
         em.close();
 
-        request.setAttribute("getReportApprovals", getReportApprovals);
         request.setAttribute("page", page);
-        request.setAttribute("getReportApprovalsCount", getReportApprovalsCount);
-        request.setAttribute("report_id", report_id);
-        request.setAttribute("report_title", report_title);
+        request.setAttribute("getReviews", getReviews);
+        request.setAttribute("getReviewsCnt", getReviewsCnt);
+        request.setAttribute("ideaIdInt", ideaIdInt);
+        request.setAttribute("ideaIdTitle", ideaIdTitle);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/history.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/advice/history/index.jsp");
         rd.forward(request, response);
     }
 
