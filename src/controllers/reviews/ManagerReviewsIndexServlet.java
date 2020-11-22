@@ -28,7 +28,7 @@ public class ManagerReviewsIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
         int page;
         try {
@@ -37,35 +37,36 @@ public class ManagerReviewsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Idea> getAllManagerApprovalReports = em.createNamedQuery("getAllManagerApprovalReports", Idea.class)
+        List<Idea> getManagerReviews = em.createNamedQuery("getManagerReviews", Idea.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        long getDirectorRemandReportsCount = (long) em.createNamedQuery("getDirectorRemandReportsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
+        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 
         em.close();
 
-        request.setAttribute("getAllManagerApprovalReports", getAllManagerApprovalReports);
         request.setAttribute("page", page);
-        request.setAttribute("getMyDraftsCount", getMyDraftsCount);
-        request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);
-        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
-        if (request.getSession().getAttribute("flush") != null) {
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
+        request.setAttribute("getManagerReviews", getManagerReviews);
+        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
+        request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
+        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
+
+        if (request.getSession().getAttribute("toast") != null) {
+            request.setAttribute("toast", request.getSession().getAttribute("toast"));
+            request.getSession().removeAttribute("toast");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/manager_approval.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reviews/manager/index.jsp");
         rd.forward(request, response);
     }
 
