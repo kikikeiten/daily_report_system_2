@@ -28,14 +28,17 @@ public class PunchInCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ログイン中のメンバーIDを取得
         Member member = (Member) request.getSession().getAttribute("login_member");
 
         Join join = new Join();
 
+        // 時間をそれぞれ取得
         Date date = new Date(System.currentTimeMillis());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         Time time = new Time(System.currentTimeMillis());
 
+        // Joinテーブルにセット
         join.setMember(member);
         join.setJoin_date(date);
         join.setPunch_in(time);
@@ -48,6 +51,7 @@ public class PunchInCreateServlet extends HttpServlet {
         em.getTransaction().commit();
         em.close();
 
+        // トーストメッセージをセッションにセット
         request.getSession().setAttribute("toast", "出勤時間を打刻しました。");
 
         response.sendRedirect(request.getContextPath() + "/");
