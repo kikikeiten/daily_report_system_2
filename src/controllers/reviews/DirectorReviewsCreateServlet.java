@@ -15,7 +15,7 @@ import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
-@WebServlet("/director/approval/create")
+@WebServlet("/reviews/director/create")
 public class DirectorReviewsCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -28,72 +28,75 @@ public class DirectorReviewsCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member e = (Member) request.getSession().getAttribute("login_employee");
-        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
-        Integer submit = Integer.parseInt(request.getParameter("submit"));
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
-        r.setApproval(submit);
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
-        Review a = new Review();
+        Integer reviewFlag = Integer.parseInt(request.getParameter("reviewFlag"));
 
-        a.setReport(r);
-        a.setEmployee(e);
-        a.setApproval(submit);
-        a.setComment(request.getParameter("comment"));
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        a.setCreated_at(currentTime);
-        a.setUpdated_at(currentTime);
+        idea.setReview_flag(reviewFlag);
+
+        Review review = new Review();
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        review.setIdea(idea);
+        review.setMember(loginMember);
+        review.setReview_flag(reviewFlag);
+        review.setAdvice(request.getParameter("advice"));
+        review.setCreated_at(timestamp);
+        review.setUpdated_at(timestamp);
 
         em.getTransaction().begin();
-        em.persist(a);
+        em.persist(review);
         em.getTransaction().commit();
         em.close();
 
-        Member report_employee = r.getEmployee();
-        Integer admin_flag = report_employee.getAdmin_flag();
-        String report_name = report_employee.getName();
+        Member ideaMember = idea.getMember();
+        Integer roleFlag = ideaMember.getRole_flag();
+        String ideaMemberName = ideaMember.getName();
 
-        if (submit == 3) {
-            switch (admin_flag) {
+        if (reviewFlag == 3) {
+            switch (roleFlag) {
                 case 0:
-                    request.getSession().setAttribute("flush",
-                            "日報「" + r.getTitle() + "」を" + report_name + "社員に差し戻しました。");
+                    request.getSession().setAttribute("toast",
+                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "社員に差し戻しました。");
                     break;
                 case 1:
-                    request.getSession().setAttribute("flush",
-                            "日報「" + r.getTitle() + "」を" + report_name + "管理者に差し戻しました。");
+                    request.getSession().setAttribute("toast",
+                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "管理者に差し戻しました。");
                     break;
                 case 2:
-                    request.getSession().setAttribute("flush",
-                            "日報「" + r.getTitle() + "」を" + report_name + "課長に差し戻しました。");
+                    request.getSession().setAttribute("toast",
+                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "課長に差し戻しました。");
                     break;
                 case 3:
-                    request.getSession().setAttribute("flush",
-                            "日報「" + r.getTitle() + "」を" + report_name + "部長に差し戻しました。");
+                    request.getSession().setAttribute("toast",
+                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "部長に差し戻しました。");
                     break;
             }
         } else {
-            switch (admin_flag) {
+            switch (roleFlag) {
                 case 0:
-                    request.getSession().setAttribute("flush",
-                            report_name + "社員の日報「" + r.getTitle() + "」を承認しました。");
+                    request.getSession().setAttribute("toast",
+                            ideaMemberName + "社員の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
                 case 1:
-                    request.getSession().setAttribute("flush",
-                            report_name + "管理者の日報「" + r.getTitle() + "」を承認しました。");
+                    request.getSession().setAttribute("toast",
+                            ideaMemberName + "管理者の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
                 case 2:
-                    request.getSession().setAttribute("flush",
-                            report_name + "課長の日報「" + r.getTitle() + "」を承認しました。");
+                    request.getSession().setAttribute("toast",
+                            ideaMemberName + "課長の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
                 case 3:
-                    request.getSession().setAttribute("flush",
-                            report_name + "部長の日報「" + r.getTitle() + "」を承認しました。");
+                    request.getSession().setAttribute("toast",
+                            ideaMemberName + "部長の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/approval/director");
+        response.sendRedirect(request.getContextPath() + "/reviews/director");
     }
 
 }
