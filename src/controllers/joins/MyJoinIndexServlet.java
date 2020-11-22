@@ -28,8 +28,10 @@ public class MyJoinIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ログイン中のメンバーIDを取得
         Member login_member = (Member) request.getSession().getAttribute("login_member");
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -37,12 +39,14 @@ public class MyJoinIndexServlet extends HttpServlet {
             page = 1;
         }
 
+        // ログイン中メンバーの全join履歴を取得
         List<Join> getMyJoins = em.createNamedQuery("getMyJoins", Join.class)
                 .setParameter("login_member", login_member)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
+        // 上記カウント
         long getMyJoinCnt = (long) em.createNamedQuery("getMyJoinCnt", Long.class)
                 .setParameter("login_member", login_member)
                 .getSingleResult();
