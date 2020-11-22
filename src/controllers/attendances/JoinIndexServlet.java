@@ -15,10 +15,10 @@ import models.Join;
 import utils.DBUtil;
 
 @WebServlet("/attendance/all")
-public class AllAttendanceIndexServlet extends HttpServlet {
+public class JoinIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public AllAttendanceIndexServlet() {
+    public JoinIndexServlet() {
         super();
     }
 
