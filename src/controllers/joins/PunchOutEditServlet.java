@@ -14,10 +14,10 @@ import models.Join;
 import utils.DBUtil;
 
 @WebServlet(name = "LeaveEditServlet", urlPatterns = {"/leave/edit"})
-public class LeaveEditServlet extends HttpServlet {
+public class PunchOutEditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public LeaveEditServlet() {
+    public PunchOutEditServlet() {
         super();
     }
 
