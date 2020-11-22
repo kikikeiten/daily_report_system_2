@@ -28,75 +28,82 @@ public class DirectorReviewsCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ログイン中のメンバーIDを取得
         Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
-        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
+        // レビューされるメンバーのIDを取得
+        Idea ideaId = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
+        // レビュー状況を取得
         Integer reviewFlag = Integer.parseInt(request.getParameter("reviewFlag"));
 
-        idea.setReview_flag(reviewFlag);
-
         Review review = new Review();
-
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        review.setIdea(idea);
+        // Reviewテーブルに新規のレコードをセット
+        review.setIdea(ideaId);
         review.setMember(loginMember);
         review.setReview_flag(reviewFlag);
         review.setAdvice(request.getParameter("advice"));
         review.setCreated_at(timestamp);
         review.setUpdated_at(timestamp);
 
+        // Ideaテーブルの値を更新
+        ideaId.setReview_flag(reviewFlag);
+
         em.getTransaction().begin();
         em.persist(review);
         em.getTransaction().commit();
         em.close();
 
-        Member ideaMember = idea.getMember();
+        // レビューされるメンバーIDを取得
+        Member ideaMember = ideaId.getMember();
+        // メンバーの役割を取得
         Integer roleFlag = ideaMember.getRole_flag();
+        // レビューされるメンバー名を取得
         String ideaMemberName = ideaMember.getName();
 
-        if (reviewFlag == 3) {
+        // 値に応じてトーストメッセージをセッションにセット
+        if (reviewFlag == 3) { // ideaにadviceを付けて差し戻す
             switch (roleFlag) {
-                case 0:
+                case 0: // associate宛て
                     request.getSession().setAttribute("toast",
-                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "社員に差し戻しました。");
+                            "日報「" + ideaId.getTitle() + "」を" + ideaMemberName + "社員に差し戻しました。");
                     break;
-                case 1:
+                case 1: // administrator宛て
                     request.getSession().setAttribute("toast",
-                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "管理者に差し戻しました。");
+                            "日報「" + ideaId.getTitle() + "」を" + ideaMemberName + "管理者に差し戻しました。");
                     break;
-                case 2:
+                case 2: // manager宛て
                     request.getSession().setAttribute("toast",
-                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "課長に差し戻しました。");
+                            "日報「" + ideaId.getTitle() + "」を" + ideaMemberName + "課長に差し戻しました。");
                     break;
-                case 3:
+                case 3: // director宛て
                     request.getSession().setAttribute("toast",
-                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "部長に差し戻しました。");
+                            "日報「" + ideaId.getTitle() + "」を" + ideaMemberName + "部長に差し戻しました。");
                     break;
             }
-        } else {
+        } else { // ideaを承認する
             switch (roleFlag) {
-                case 0:
+                case 0: // associate宛て
                     request.getSession().setAttribute("toast",
-                            ideaMemberName + "社員の日報「" + idea.getTitle() + "」を承認しました。");
+                            ideaMemberName + "社員の日報「" + ideaId.getTitle() + "」を承認しました。");
                     break;
-                case 1:
+                case 1: // administrator宛て
                     request.getSession().setAttribute("toast",
-                            ideaMemberName + "管理者の日報「" + idea.getTitle() + "」を承認しました。");
+                            ideaMemberName + "管理者の日報「" + ideaId.getTitle() + "」を承認しました。");
                     break;
-                case 2:
+                case 2: // manager宛て
                     request.getSession().setAttribute("toast",
-                            ideaMemberName + "課長の日報「" + idea.getTitle() + "」を承認しました。");
+                            ideaMemberName + "課長の日報「" + ideaId.getTitle() + "」を承認しました。");
                     break;
-                case 3:
+                case 3: // director宛て
                     request.getSession().setAttribute("toast",
-                            ideaMemberName + "部長の日報「" + idea.getTitle() + "」を承認しました。");
+                            ideaMemberName + "部長の日報「" + ideaId.getTitle() + "」を承認しました。");
                     break;
             }
         }
 
         response.sendRedirect(request.getContextPath() + "/reviews/director");
     }
-
 }
