@@ -1,4 +1,4 @@
-package controllers.attendances;
+package controllers.joins;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package controllers.attendances;
+package controllers.joins;
 
 import java.io.IOException;
 import java.sql.Time;
@@ -14,19 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Join;
+import models.Member;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class LeaveUpdateServlet
+ * Servlet implementation class PunchOutCreateServlet
  */
-@WebServlet("/leave/update")
-public class LeaveUpdateServlet extends HttpServlet {
+@WebServlet("/punchout/create")
+public class PunchOutCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LeaveUpdateServlet() {
+    public PunchOutCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,21 +40,27 @@ public class LeaveUpdateServlet extends HttpServlet {
         // TODO Auto-generated method stub
 
         EntityManager em = DBUtil.createEntityManager();
-        Join a = em.find(Join.class, Integer.parseInt(request.getParameter("id")));
 
-        String leave_time = Integer.parseInt(request.getParameter("leave_hour")) + ":"
-                + Integer.parseInt(request.getParameter("leave_minute")) + ":00";
-        Time leave_time2 = Time.valueOf(leave_time);
+        Member e = (Member) request.getSession().getAttribute("login_employee");
+
+        Integer getMyLatestAttendanceId = em.createNamedQuery("getMyLatestAttendanceId", Integer.class)
+                .setParameter("employee", e)
+                .setMaxResults(1)
+                .getSingleResult();
+
+        Join a = em.find(Join.class, getMyLatestAttendanceId);
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        a.setPunch_out(leave_time2);
+        Time currentTime2 = new Time(System.currentTimeMillis());
+        a.setPunch_out(currentTime2);
         a.setCreated_at(currentTime);
         a.setUpdated_at(currentTime);
-        a.setAttendance_flag(3); // 3 == Fixed flag
+        a.setAttendance_flag(0);
 
+        LocalTime nowLocalDate = LocalTime.now();
         LocalTime punch_in = a.getPunch_in().toLocalTime();
-        LocalTime punch_out = leave_time2.toLocalTime();
-        long minutes = ChronoUnit.MINUTES.between(punch_in, punch_out);
+
+        long minutes = ChronoUnit.MINUTES.between(punch_in, nowLocalDate);
 
         long diff_hours = minutes / 60;
         long diff_minutes = minutes % 60;
@@ -66,9 +73,9 @@ public class LeaveUpdateServlet extends HttpServlet {
         em.getTransaction().begin();
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", "退勤時間を修正しました。");
+        request.getSession().setAttribute("flush", "退勤時間を打刻しました。");
 
-        response.sendRedirect(request.getContextPath() + "/attendance/all");
+        response.sendRedirect(request.getContextPath() + "/");
     }
 
 }
