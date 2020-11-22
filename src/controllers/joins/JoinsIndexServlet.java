@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import models.Join;
 import utils.DBUtil;
 
-@WebServlet("/join/all")
-public class JoinIndexServlet extends HttpServlet {
+@WebServlet("/joins/all")
+public class JoinsIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public JoinIndexServlet() {
+    public JoinsIndexServlet() {
         super();
     }
 
