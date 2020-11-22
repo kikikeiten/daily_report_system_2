@@ -28,8 +28,10 @@ public class DirectorReviewsIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // ログイン中のメンバーIDを取得
         Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -37,25 +39,29 @@ public class DirectorReviewsIndexServlet extends HttpServlet {
             page = 1;
         }
 
+        // ディレクターのレビュー待ちideaを取得
         List<Idea> getDirectorReviews = em.createNamedQuery("getDirectorReviews", Idea.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
+        // ログイン中メンバーの下書き総数を取得
         long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
+        // 下書きを除いたidea総数を取得
         long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 
         em.close();
 
-        request.setAttribute("getDirectorReviews", getDirectorReviews);
         request.setAttribute("page", page);
+        request.setAttribute("getDirectorReviews", getDirectorReviews);
         request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
         request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
 
+        // トーストメッセージをセッションにセット
         if (request.getSession().getAttribute("toast") != null) {
             request.setAttribute("toast", request.getSession().getAttribute("toast"));
             request.getSession().removeAttribute("toast");
