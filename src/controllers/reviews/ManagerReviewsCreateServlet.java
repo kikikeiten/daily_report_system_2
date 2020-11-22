@@ -19,13 +19,13 @@ import utils.DBUtil;
  * Servlet implementation class ManagerApprovalCreate
  */
 @WebServlet("/manager/approval/create")
-public class ManagerApprovalCreate extends HttpServlet {
+public class ManagerReviewsCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerApprovalCreate() {
+    public ManagerReviewsCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
