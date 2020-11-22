@@ -28,60 +28,62 @@ public class ManagerReviewsCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member e = (Member) request.getSession().getAttribute("login_employee");
-        Idea r = em.find(Idea.class, Integer.parseInt(request.getParameter("report_id")));
-        Integer submit = Integer.parseInt(request.getParameter("submit"));
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
-        r.setApproval(Integer.parseInt(request.getParameter("submit")));
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
-        Review a = new Review();
+        idea.setReview_flag(Integer.parseInt(request.getParameter("reviewFlag")));
 
-        a.setReport(r);
-        a.setEmployee(e);
-        a.setApproval(submit);
-        a.setComment(request.getParameter("comment"));
+        Integer reviewFlag = Integer.parseInt(request.getParameter("reviewFlag"));
+
+        Review review = new Review();
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        a.setCreated_at(currentTime);
-        a.setUpdated_at(currentTime);
+
+        review.setIdea(idea);
+        review.setMember(loginMember);
+        review.setReview_flag(reviewFlag);
+        review.setAdvice(request.getParameter("advice"));
+        review.setCreated_at(currentTime);
+        review.setUpdated_at(currentTime);
 
         em.getTransaction().begin();
-        em.persist(a);
+        em.persist(review);
         em.getTransaction().commit();
         em.close();
 
-        Member report_employee = r.getEmployee();
-        Integer admin_flag = report_employee.getAdmin_flag();
-        String report_name = report_employee.getName();
+        Member ideaMember = idea.getMember();
+        Integer ideaMemberRoleFlag = ideaMember.getRole_flag();
+        String ideaMemberName = ideaMember.getName();
 
-        if (submit == 1) {
-            switch (admin_flag) {
+        if (reviewFlag == 1) {
+            switch (ideaMemberRoleFlag) {
             case 0:
-                request.getSession().setAttribute("flush",
-                        "日報「" + r.getTitle() + "」を" + report_name + "社員に差し戻しました。");
+                request.getSession().setAttribute("toast",
+                        "日報「" + idea.getTitle() + "」を" + ideaMemberName + "社員に差し戻しました。");
                 break;
             case 1:
-                request.getSession().setAttribute("flush",
-                        "日報「" + r.getTitle() + "」を" + report_name + "管理者に差し戻しました。");
+                request.getSession().setAttribute("toast",
+                        "日報「" + idea.getTitle() + "」を" + ideaMemberName + "管理者に差し戻しました。");
                 break;
             }
         } else {
-            switch (admin_flag) {
+            switch (ideaMemberRoleFlag) {
             case 0:
-                request.getSession().setAttribute("flush",
-                        report_name + "社員の日報「" + r.getTitle() + "」を承認しました。");
+                request.getSession().setAttribute("toast",
+                        ideaMemberName + "社員の日報「" + idea.getTitle() + "」を承認しました。");
                 break;
             case 1:
-                request.getSession().setAttribute("flush",
-                        report_name + "管理者の日報「" + r.getTitle() + "」を承認しました。");
+                request.getSession().setAttribute("toast",
+                        ideaMemberName + "管理者の日報「" + idea.getTitle() + "」を承認しました。");
                 break;
             case 2:
-                request.getSession().setAttribute("flush",
-                        report_name + "課長の日報「" + r.getTitle() + "」を承認しました。");
+                request.getSession().setAttribute("toast",
+                        ideaMemberName + "課長の日報「" + idea.getTitle() + "」を承認しました。");
                 break;
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/approval/manager");
+        response.sendRedirect(request.getContextPath() + "/reviews/manager");
     }
 
 }
