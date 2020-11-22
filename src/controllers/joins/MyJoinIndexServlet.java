@@ -19,13 +19,13 @@ import utils.DBUtil;
  * Servlet implementation class MyAttendanceIndexServlet
  */
 @WebServlet("/attendance/my")
-public class MyAttendanceIndexServlet extends HttpServlet {
+public class MyJoinIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyAttendanceIndexServlet() {
+    public MyJoinIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
