@@ -28,7 +28,7 @@ public class DirectorAdviceIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member login_employee = (Member) request.getSession().getAttribute("login_employee");
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
         int page;
         try {
@@ -37,41 +37,42 @@ public class DirectorAdviceIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Idea> getAllDirectorRemandReports = em.createNamedQuery("getAllDirectorRemandReports", Idea.class)
-                .setParameter("employee", login_employee)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+        List<Idea> getDirectorAdvice = em.createNamedQuery("getDirectorAdvice", Idea.class)
+                .setParameter("loginMember", loginMember)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
-        long getDirectorRemandReportsCount = (long) em.createNamedQuery("getDirectorRemandReportsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        long getMyDraftsCount = (long) em.createNamedQuery("getMyDraftsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        long getManagerRemandReportsCount = (long) em.createNamedQuery("getManagerRemandReportsCount", Long.class)
-                .setParameter("employee", login_employee)
+        long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        long getReportsCountButDrafts = (long) em.createNamedQuery("getReportsCountButDrafts", Long.class)
+        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 
         em.close();
 
-        request.setAttribute("getAllDirectorRemandReports", getAllDirectorRemandReports);
-        request.setAttribute("getDirectorRemandReportsCount", getDirectorRemandReportsCount);
         request.setAttribute("page", page);
-        request.setAttribute("getMyDraftsCount", getMyDraftsCount);
-        request.setAttribute("getManagerRemandReportsCount", getManagerRemandReportsCount);
-        request.setAttribute("getReportsCountButDrafts", getReportsCountButDrafts);
-        if (request.getSession().getAttribute("flush") != null) {
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
+        request.setAttribute("getDirectorAdvice", getDirectorAdvice);
+        request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
+        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
+        request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
+        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
+
+        if (request.getSession().getAttribute("toast") != null) {
+            request.setAttribute("toast", request.getSession().getAttribute("toast"));
+            request.getSession().removeAttribute("toast");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/approvals/director_remand.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/advice/director/index.jsp");
         rd.forward(request, response);
     }
 
