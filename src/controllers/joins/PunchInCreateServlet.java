@@ -27,27 +27,28 @@ public class PunchInCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         EntityManager em = DBUtil.createEntityManager();
-        Member e = (Member) request.getSession().getAttribute("login_employee");
 
-        Join a = new Join();
+        Member member = (Member) request.getSession().getAttribute("login_member");
 
-        a.setEmployee(e);
+        Join join = new Join();
 
-        Date attendance_date = new Date(System.currentTimeMillis());
-        a.setAttendance_date(attendance_date);
+        Date date = new Date(System.currentTimeMillis());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Time time = new Time(System.currentTimeMillis());
 
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        Time currentTime2 = new Time(System.currentTimeMillis());
-        a.setPunch_in(currentTime2);
-        a.setCreated_at(currentTime);
-        a.setUpdated_at(currentTime);
-        a.setAttendance_flag(1);
+        join.setMember(member);
+        join.setJoin_date(date);
+        join.setPunch_in(time);
+        join.setJoin_flag(1); // 1 == 参加
+        join.setCreated_at(timestamp);
+        join.setUpdated_at(timestamp);
 
         em.getTransaction().begin();
-        em.persist(a);
+        em.persist(join);
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", "出勤時間を打刻しました。");
+
+        request.getSession().setAttribute("toast", "出勤時間を打刻しました。");
 
         response.sendRedirect(request.getContextPath() + "/");
     }
