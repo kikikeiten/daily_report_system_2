@@ -27,21 +27,22 @@ public class IdeasEditServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // ideas/edit.jspからideaのidを取得
-        Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("idea_id")));
+        // 編集するアイデアのIDを取得
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
-        Integer review_flag_int = i.getReview_flag();
+        Integer reviewFlag = idea.getReviewStatus();
 
         em.close();
 
-        // ログイン中メンバーのidを取得
-        Member login_member = (Member) request.getSession().getAttribute("login_member");
+        // ログイン中メンバーのIDを取得
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
-        if (i != null && login_member.getId() == i.getMember().getId()) {
-            request.setAttribute("idea", i);
+        // 編集するアイデアが存在かつログイン中メンバーとアイデアの作者が同じ場合
+        if (idea != null && loginMember.getId() == idea.getMember().getId()) {
+            request.setAttribute("idea", idea);
             request.setAttribute("_token", request.getSession().getId());
-            request.getSession().setAttribute("idea_id", i.getId());
-            request.setAttribute("review_flag_int", review_flag_int);
+            request.getSession().setAttribute("ideaId", idea.getId());
+            request.setAttribute("reviewFlag", reviewFlag);
         }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ideas/edit.jsp");
