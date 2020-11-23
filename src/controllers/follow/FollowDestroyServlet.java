@@ -27,31 +27,32 @@ public class FollowDestroyServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("member_id")));
+        // フォロー解除するメンバーの作成したアイデアのIDを取得
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("memberId")));
 
         // ログイン中のメンバーIDを取得
-        Member login_member = (Member) request.getSession().getAttribute("login_member");
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
         // フォロー解除するメンバーのIDを取得
         Integer ei = 0;
         ei = em.createNamedQuery("getDestroyFollow", Integer.class)
-                .setParameter("followed_id", idea.getMember())
-                .setParameter("login_member", login_member)
+                .setParameter("followedId", idea.getMember())
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        Follow f = em.find(Follow.class, ei);
+        Follow follow = em.find(Follow.class, ei);
 
         // フォロー解除するメンバーの氏名を取得
         Member unfollow = idea.getMember();
-        String unfollow_name_str = unfollow.getName();
+        String unfollowName = unfollow.getName();
 
         em.getTransaction().begin();
-        em.remove(f);
+        em.remove(follow);
         em.getTransaction().commit();
         em.close();
 
-        // トーストメッセージ
-        request.getSession().setAttribute("toast", unfollow_name_str + "さんのフォローを解除しました。");
+        // トーストメッセージをセッションにセット
+        request.getSession().setAttribute("toast", unfollowName + "さんのフォローを解除しました。");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
     }
