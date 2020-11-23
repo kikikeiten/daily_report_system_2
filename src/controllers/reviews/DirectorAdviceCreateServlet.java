@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.Idea;
 import utils.DBUtil;
 
-@WebServlet("/director/remand/create")
+@WebServlet("/advice/director/create")
 public class DirectorAdviceCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

@@ -15,7 +15,7 @@ import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
-@WebServlet("/remand/director")
+@WebServlet("/advice/director")
 public class DirectorAdviceIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

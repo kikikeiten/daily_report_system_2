@@ -15,7 +15,7 @@ import models.Join;
 import models.Member;
 import utils.DBUtil;
 
-@WebServlet("/attendance/my")
+@WebServlet("/joins/my")
 public class MyJoinIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
