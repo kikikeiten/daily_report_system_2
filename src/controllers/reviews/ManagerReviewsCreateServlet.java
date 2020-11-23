@@ -15,7 +15,7 @@ import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
-@WebServlet("/manager/approval/create")
+@WebServlet("/reviews/manager/create")
 public class ManagerReviewsCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
