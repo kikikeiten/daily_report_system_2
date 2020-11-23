@@ -29,7 +29,7 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 対象メンバーのIDを取得
-        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("memberId")));
 
         // ページネーション
         int page;
@@ -39,27 +39,28 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // 対象メンバーのフォロー一覧を表示
+        // 対象メンバーのフォロー一覧を取得
         List<Follow> getMemberFollowing = em.createNamedQuery("getMemberFollowing", Follow.class)
                 .setParameter("member", member)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        // 上記のカウント
+        // 上記のカウントを取得
         long getMemberFollowingCnt = (long) em.createNamedQuery("getMemberFollowingCnt", Long.class)
                 .setParameter("member", member)
                 .getSingleResult();
 
         try {
             // 対象メンバーの氏名を取得
-            String member_name_str = member.getName();
-            request.setAttribute("member_name_str", member_name_str);
+            String memberName = member.getName();
+            request.setAttribute("memberName", memberName);
         } catch (Exception e) {
+        } finally {
+            // 対象メンバーのIDをInteger型で取得
+            Integer memberId = Integer.parseInt(request.getParameter("memberId"));
+            request.setAttribute("memberId", memberId);
         }
-
-        // 対象メンバーのIDをint型で取得
-        Integer member_id_int = Integer.parseInt(request.getParameter("member_id"));
 
         em.close();
 
@@ -67,9 +68,8 @@ public class ManagementUnfollowIndexServlet extends HttpServlet {
         request.setAttribute("member", member);
         request.setAttribute("getMemberFollowing", getMemberFollowing);
         request.setAttribute("getMemberFollowingCnt", getMemberFollowingCnt);
-        request.setAttribute("member_id_int", member_id_int);
 
-        // トーストメッセージがセッションにあれば表示
+        // トーストメッセージがセッションにあるか確認
         if (request.getSession().getAttribute("toast") != null) {
             request.setAttribute("toast", request.getSession().getAttribute("toast"));
             request.getSession().removeAttribute("toast");
