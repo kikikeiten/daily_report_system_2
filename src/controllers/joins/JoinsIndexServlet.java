@@ -41,7 +41,7 @@ public class JoinsIndexServlet extends HttpServlet {
                 .setMaxResults(12)
                 .getResultList();
 
-        // 上記のカウント
+        // 上記のカウントを取得
         long getJoinsCnt = (long) em.createNamedQuery("getJoinsCnt", Long.class)
                 .getSingleResult();
 
