@@ -29,7 +29,7 @@ public class DirectorAdviceCreateServlet extends HttpServlet {
         Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
         // アドバイスされたアイディアのレビュー状態をIdeaテーブルで更新
-        idea.setReview_flag(Integer.parseInt(request.getParameter("reviewFlag")));
+        idea.setReviewStatus(Integer.parseInt(request.getParameter("reviewStatus")));
 
         em.getTransaction().begin();
         em.getTransaction().commit();
