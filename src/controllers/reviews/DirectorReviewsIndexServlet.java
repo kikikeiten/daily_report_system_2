@@ -39,18 +39,18 @@ public class DirectorReviewsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // ディレクターのレビュー待ちideaを取得
+        // ディレクターのレビュー待ちアイデアを取得
         List<Idea> getDirectorReviews = em.createNamedQuery("getDirectorReviews", Idea.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        // ログイン中メンバーの下書き総数を取得
+        // ログイン中メンバーのドラフト総数を取得
         long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // 下書きを除いたidea総数を取得
+        // 下書きを除いたアイデア総数を取得
         long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 

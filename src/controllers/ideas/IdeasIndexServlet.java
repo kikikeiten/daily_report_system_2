@@ -29,8 +29,8 @@ public class IdeasIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // ログイン中メンバーのidを取得
-        Member login_member = (Member) request.getSession().getAttribute("login_member");
+        // ログイン中メンバーのIDを取得
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
         // ページネーション
         int page;
@@ -42,40 +42,40 @@ public class IdeasIndexServlet extends HttpServlet {
 
         //フォロー判定
         List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .getResultList();
 
-        List<Integer> follow_idea_id = new ArrayList<Integer>();
+        List<Integer> followIdea = new ArrayList<Integer>();
 
-        for (Member idea_id : checkMyFollow) {
-            Integer idea_id_int = idea_id.getId();
-            follow_idea_id.add(idea_id_int);
-            request.setAttribute("follow_idea_id", follow_idea_id);
+        for (Member ideaId : checkMyFollow) {
+            Integer ideaIdInt = ideaId.getId();
+            followIdea.add(ideaIdInt);
+            request.setAttribute("followIdea", followIdea);
         }
 
-        // 下書きを除いたideaを取得
+        // ドラフトを除いたアイデアを取得
         List<Idea> getIdeasButDrafts = em.createNamedQuery("getIdeasButDrafts", Idea.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        // 下書きを除いたidea総数を取得
+        // 上記カウントを取得
         long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 
-        // ログイン中メンバーの下書き総数を取得
+        // ログイン中メンバーのドラフト総数を取得
         long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // マネージャーのアドバイス有idea総数を取得
+        // マネージャーのアドバイス有アイデア総数を取得
         long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // ディレクターのアドバイス有ideas総数を取得
+        // ディレクターのアドバイス有アイデア総数を取得
         long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
         em.close();

@@ -31,25 +31,25 @@ public class ManagerReviewsCreateServlet extends HttpServlet {
         // ログイン中のメンバーIDを取得
         Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
-        // レビューするアイデアIDを取得
+        // レビューするアイデアのIDを取得
         Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
-        // Ideaテーブルのレビュー状態を更新
-        idea.setReview_flag(Integer.parseInt(request.getParameter("reviewFlag")));
-
         // Ideaテーブルのレビュー状態を取得しInteger型に変換
-        Integer reviewFlag = Integer.parseInt(request.getParameter("reviewFlag"));
+        Integer reviewStatus = Integer.parseInt(request.getParameter("reviewStatus"));
+
+        // Ideaテーブルのレビュー状態を更新
+        idea.setReviewStatus(reviewStatus);
 
         Review review = new Review();
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         // Reviewテーブルに値を新規登録
         review.setIdea(idea);
         review.setMember(loginMember);
-        review.setReview_flag(reviewFlag);
+        review.setReviewStatus(reviewStatus);
         review.setAdvice(request.getParameter("advice"));
-        review.setCreated_at(currentTime);
-        review.setUpdated_at(currentTime);
+        review.setCreatedAt(timestamp);
+        review.setUpdatedAt(timestamp);
 
         em.getTransaction().begin();
         em.persist(review);
@@ -59,32 +59,32 @@ public class ManagerReviewsCreateServlet extends HttpServlet {
         // アイデアを書いたメンバーのIDを取得
         Member ideaMember = idea.getMember();
         // アイデアを書いたメンバーの役割を取得
-        Integer ideaMemberRoleFlag = ideaMember.getRole_flag();
+        Integer ideaMemberRole = ideaMember.getRole();
         // アイデアを書いたメンバー名を取得
         String ideaMemberName = ideaMember.getName();
 
-        if (reviewFlag == 1) { // アイデアにアドバイスを付けて送り返す場合
-            switch (ideaMemberRoleFlag) {
-                case 0: // associate宛て
+        if (reviewStatus == 1) { // アイデアにアドバイスを付けて送り返す場合
+            switch (ideaMemberRole) {
+                case 0: // アソシエイト宛て
                     request.getSession().setAttribute("toast",
                             "日報「" + idea.getTitle() + "」を" + ideaMemberName + "社員に差し戻しました。");
                     break;
-                case 1: // administrator宛て
+                case 1: // 管理者宛て
                     request.getSession().setAttribute("toast",
                             "日報「" + idea.getTitle() + "」を" + ideaMemberName + "管理者に差し戻しました。");
                     break;
             }
         } else { // アイデアを承認する場合
-            switch (ideaMemberRoleFlag) {
-                case 0: // associateから
+            switch (ideaMemberRole) {
+                case 0: // アソシエイトから
                     request.getSession().setAttribute("toast",
                             ideaMemberName + "社員の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
-                case 1: // administratorから
+                case 1: // 管理者から
                     request.getSession().setAttribute("toast",
                             ideaMemberName + "管理者の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
-                case 2: // managerから
+                case 2: // マネージャーから
                     request.getSession().setAttribute("toast",
                             ideaMemberName + "課長の日報「" + idea.getTitle() + "」を承認しました。");
                     break;

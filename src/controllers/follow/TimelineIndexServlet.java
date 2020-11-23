@@ -30,8 +30,9 @@ public class TimelineIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // ログイン中メンバーのIDを取得
-        Member login_member = (Member) request.getSession().getAttribute("login_member");
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -41,27 +42,27 @@ public class TimelineIndexServlet extends HttpServlet {
 
         //フォロー判定
         List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .getResultList();
 
-        List<Integer> follow_idea_id = new ArrayList<Integer>();
+        List<Integer> followIdea = new ArrayList<Integer>();
 
-        for (Member idea_id : checkMyFollow) {
-            Integer idea_id_int = idea_id.getId();
-            follow_idea_id.add(idea_id_int);
-            request.setAttribute("follow_idea_id", follow_idea_id);
+        for (Member ideaId : checkMyFollow) {
+            Integer ideaIdInt = ideaId.getId();
+            followIdea.add(ideaIdInt);
+            request.setAttribute("followIdea", followIdea);
         }
 
-        // ログイン中メンバーがフォローしているメンバーのideaを取得
+        // ログイン中メンバーがフォローしているメンバーのアイデアを取得
         List<Idea> getMyFollowingIdeas = em.createNamedQuery("getMyFollowingIdeas", Idea.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        // ログイン中メンバーがフォローしているメンバーのidea総数を取得
+        // ログイン中メンバーがフォローしているメンバーのアイデア総数を取得
         long getMyFollowingIdeasCnt = (long) em.createNamedQuery("getMyFollowingIdeasCnt", Long.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
         em.close();

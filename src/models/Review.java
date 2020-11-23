@@ -19,9 +19,9 @@ import lombok.Setter;
 
 @Table(name = "reviews")
 @NamedQueries({
-        // ideaの全レビューを取得
-        @NamedQuery(name = "getReviews", query = "SELECT r FROM Review r WHERE r.idea = :idea ORDER BY r.updated_at DESC"),
-        // カウント
+        // アイデアの全レビューを取得
+        @NamedQuery(name = "getReviews", query = "SELECT r FROM Review r WHERE r.idea = :idea ORDER BY r.updatedAt DESC"),
+        // カウントを取得
         @NamedQuery(name = "getReviewsCnt", query = "SELECT COUNT(r) FROM Review r WHERE r.idea = :idea")
 })
 
@@ -35,11 +35,11 @@ public class Review {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "idea_id", nullable = false)
+    @JoinColumn(name = "idea", nullable = false)
     private Idea idea;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", nullable = false)
+    @JoinColumn(name = "member", nullable = false)
     private Member member;
 
     /*
@@ -50,16 +50,16 @@ public class Review {
      * 4 : ディレクターのレビュー待ち
      * 6 : 採用
      * */
-    @Column(name = "review_flag", nullable = false)
-    private Integer review_flag;
+    @Column(name = "reviewStatus", nullable = false)
+    private Integer reviewStatus;
 
     @Lob // テキストエリアの指定（改行もデータベースに保存）
     @Column(name = "advice", nullable = true)
     private String advice;
 
-    @Column(name = "created_at", nullable = false)
-    private Timestamp created_at;
+    @Column(name = "createdAt", nullable = false)
+    private Timestamp createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    private Timestamp updated_at;
+    @Column(name = "updatedAt", nullable = false)
+    private Timestamp updatedAt;
 }

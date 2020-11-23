@@ -39,29 +39,29 @@ public class DirectorAdviceIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // ディレクターのアドバイス有ideaを取得
+        // ディレクターのアドバイス有アイデアを取得
         List<Idea> getDirectorAdvice = em.createNamedQuery("getDirectorAdvice", Idea.class)
                 .setParameter("loginMember", loginMember)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        // 上記カウント
+        // ディレクターのアドバイス有アイデア総数を取得
         long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // ログイン中メンバーの下書き総数を取得
+        // ログイン中メンバーのドラフト総数を取得
         long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // マネージャーのアドバイス有ideaを取得
+        // マネージャーのアドバイス有アイデアを取得
         long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // 下書きを除いたidea総数を取得
+        // ドラフトを除いたアイデア総数を取得
         long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 

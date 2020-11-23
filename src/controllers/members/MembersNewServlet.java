@@ -24,6 +24,7 @@ public class MembersNewServlet extends HttpServlet {
 
         request.setAttribute("_token", request.getSession().getId());
 
+        // Memberを初期化してセット
         request.setAttribute("member", new Member());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/new.jsp");

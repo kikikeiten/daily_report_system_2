@@ -28,8 +28,10 @@ public class FavorsIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("idea_id")));
+        // 賛成一覧の対象アイデアIDを取得
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -37,28 +39,28 @@ public class FavorsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // 全てのideaに付いたfavorを取得
+        // アイデアに付いた全ての賛成を取得
         List<Favor> getFavors = em.createNamedQuery("getFavors", Favor.class)
-                .setParameter("idea", i)
+                .setParameter("idea", idea)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        // 全てのideaに付いたfavor総数を取得
+        // アイデアに付いた賛成総数を取得
         long getFavorsCnt = (long) em.createNamedQuery("getFavorsCnt", Long.class)
-                .setParameter("idea", i)
+                .setParameter("idea", idea)
                 .getSingleResult();
 
-        // URLに付与するパラメータを送信
-        Integer url_int = Integer.parseInt(request.getParameter("idea_id"));
+        // URLに付与するアイデアIDを取得
+        Integer ideaId = Integer.parseInt(request.getParameter("ideaId"));
 
         em.close();
 
-        request.setAttribute("idea_id", i);
+        request.setAttribute("idea", idea);
         request.setAttribute("page", page);
         request.setAttribute("getFavors", getFavors);
         request.setAttribute("getFavorsCnt", getFavorsCnt);
-        request.setAttribute("url_int", url_int);
+        request.setAttribute("ideaId", ideaId);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/favors/index.jsp");
         rd.forward(request, response);

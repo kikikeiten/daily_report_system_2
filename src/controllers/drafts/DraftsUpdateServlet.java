@@ -33,7 +33,7 @@ public class DraftsUpdateServlet extends HttpServlet {
         Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
         // Ideaテーブルのレビュー状態を更新
-        idea.setReview_flag(Integer.parseInt(request.getParameter("review_flag")));
+        idea.setReviewStatus(Integer.parseInt(request.getParameter("reviewStatus")));
 
         em.getTransaction().begin();
         em.getTransaction().commit();
@@ -42,19 +42,19 @@ public class DraftsUpdateServlet extends HttpServlet {
         // 提出する下書きのタイトルをString型で取得
         String ideaTitle = idea.getTitle();
 
-        switch (loginMember.getRole_flag()) {
-        case 0: // associateの場合
-            request.getSession().setAttribute("toast", "日報「" + ideaTitle + "」を課長に提出しました。");
-            break;
-        case 1: // administratorの場合
-            request.getSession().setAttribute("toast", "日報「" + ideaTitle + "」を課長に提出しました。");
-            break;
-        case 2: // managerの場合
-            request.getSession().setAttribute("toast", "日報「" + ideaTitle + "」を部長に提出しました。");
-            break;
-        case 3: // directorの場合
-            request.getSession().setAttribute("toast", "日報「" + ideaTitle + "」を提出しました。");
-            break;
+        switch (loginMember.getRole()) {
+            case 0: // associateの場合
+                request.getSession().setAttribute("toast", "日報「" + ideaTitle + "」を課長に提出しました。");
+                break;
+            case 1: // administratorの場合
+                request.getSession().setAttribute("toast", "日報「" + ideaTitle + "」を課長に提出しました。");
+                break;
+            case 2: // managerの場合
+                request.getSession().setAttribute("toast", "日報「" + ideaTitle + "」を部長に提出しました。");
+                break;
+            case 3: // directorの場合
+                request.getSession().setAttribute("toast", "日報「" + ideaTitle + "」を提出しました。");
+                break;
         }
 
         response.sendRedirect(request.getContextPath() + "/drafts");

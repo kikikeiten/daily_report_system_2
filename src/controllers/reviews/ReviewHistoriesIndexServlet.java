@@ -29,7 +29,7 @@ public class ReviewHistoriesIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // アドバイス履歴を確認するアイデアのIDを取得
-        Idea ideaId = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
         // ページネーション
         int page;
@@ -41,28 +41,28 @@ public class ReviewHistoriesIndexServlet extends HttpServlet {
 
         // アイデアの全アドバイス履歴を取得
         List<Review> getReviews = em.createNamedQuery("getReviews", Review.class)
-                .setParameter("ideaId", ideaId)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+                .setParameter("idea", idea)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
         // 上記のカウントを取得
         long getReviewsCnt = (long) em.createNamedQuery("getReviewsCnt", Long.class)
-                .setParameter("ideaId", ideaId)
+                .setParameter("idea", idea)
                 .getSingleResult();
 
         // アドバイス履歴を確認するアイデアのIDをInteger型で取得
-        Integer ideaIdInt = ideaId.getId();
+        Integer ideaId = idea.getId();
         // アドバイス履歴を確認するアイデアのタイトルをString型で取得
-        String ideaIdTitle = ideaId.getTitle();
+        String ideaTitle = idea.getTitle();
 
         em.close();
 
         request.setAttribute("page", page);
         request.setAttribute("getReviews", getReviews);
         request.setAttribute("getReviewsCnt", getReviewsCnt);
-        request.setAttribute("ideaIdInt", ideaIdInt);
-        request.setAttribute("ideaIdTitle", ideaIdTitle);
+        request.setAttribute("ideaId", ideaId);
+        request.setAttribute("ideaTitle", ideaTitle);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/advice/history/index.jsp");
         rd.forward(request, response);

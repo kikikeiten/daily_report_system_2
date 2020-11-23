@@ -29,8 +29,9 @@ public class FollowingIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // ログイン中のメンバーIDを取得
-        Member login_member = (Member) request.getSession().getAttribute("login_member");
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
+        // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
@@ -40,15 +41,15 @@ public class FollowingIndexServlet extends HttpServlet {
 
         // ログイン中メンバーのフォロー一覧を取得
         List<Follow> getMyFollowing = em.createNamedQuery("getMyFollowing", Follow.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
         em.close();
 
-        request.setAttribute("getMyFollowing", getMyFollowing);
         request.setAttribute("page", page);
+        request.setAttribute("getMyFollowing", getMyFollowing);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follow/following.jsp");
         rd.forward(request, response);
