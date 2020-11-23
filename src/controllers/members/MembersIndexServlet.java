@@ -28,33 +28,37 @@ public class MembersIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Member login_member = (Member) request.getSession().getAttribute("login_member");
+        // ログイン中のメンバーIDを取得
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
+        // ページネーション
         int page = 1;
         try {
             page = Integer.parseInt(request.getParameter("page"));
         } catch (NumberFormatException e) {
         }
 
+        // 全てのメンバー情報を取得
         List<Member> getMembers = em.createNamedQuery("getMembers", Member.class)
-                .setFirstResult(10 * (page - 1))
-                .setMaxResults(10)
+                .setFirstResult(12 * (page - 1))
+                .setMaxResults(12)
                 .getResultList();
 
+        // 上記カウントを取得
         long getMembersCnt = (long) em.createNamedQuery("getMembersCnt", Long.class)
                 .getSingleResult();
 
         //フォロー判定
         List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .getResultList();
 
-        List<Integer> follow_idea_id = new ArrayList<Integer>();
+        List<Integer> followIdeaId = new ArrayList<Integer>();
 
-        for (Member idea_id : checkMyFollow) {
-            Integer idea_id_int = idea_id.getId();
-            follow_idea_id.add(idea_id_int);
-            request.setAttribute("follow_idea_id", follow_idea_id);
+        for (Member ideaId : checkMyFollow) {
+            Integer ideaIdInt = ideaId.getId();
+            followIdeaId.add(ideaIdInt);
+            request.setAttribute("followIdeaId", followIdeaId);
         }
 
         em.close();
@@ -63,6 +67,7 @@ public class MembersIndexServlet extends HttpServlet {
         request.setAttribute("getMembers", getMembers);
         request.setAttribute("getMembersCnt", getMembersCnt);
 
+        // トーストメッセージがセッションに保存されているか確認
         if (request.getSession().getAttribute("toast") != null) {
             request.setAttribute("toast", request.getSession().getAttribute("toast"));
             request.getSession().removeAttribute("toast");
