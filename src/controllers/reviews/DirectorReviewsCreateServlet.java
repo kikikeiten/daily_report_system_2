@@ -43,10 +43,10 @@ public class DirectorReviewsCreateServlet extends HttpServlet {
         // Reviewテーブルに新規のレコードをセット
         review.setIdea(idea);
         review.setMember(loginMember);
-        review.setReview_flag(reviewStatus);
+        review.setReviewStatus(reviewStatus);
         review.setAdvice(request.getParameter("advice"));
-        review.setCreated_at(timestamp);
-        review.setUpdated_at(timestamp);
+        review.setCreatedAt(timestamp);
+        review.setUpdatedAt(timestamp);
 
         // Ideaテーブルの値を更新
         idea.setReviewStatus(reviewStatus);

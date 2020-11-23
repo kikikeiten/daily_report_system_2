@@ -68,26 +68,25 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // 今日の日付を取得
-        Date today = new Date(System.currentTimeMillis());
+        Date date = new Date(System.currentTimeMillis());
 
         // ドラフトのポスト忘れ総数を取得（前日以前）
         long get4getMyDraftsCnt = (long) em.createNamedQuery("get4getMyDraftsCnt", Long.class)
-                .setParameter("today", today)
+                .setParameter("date", date)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
         // マネージャーのレビュー忘れアイデアを取得（前日以前）
         long get4getManagerReviewsCnt = (long) em
                 .createNamedQuery("get4getManagerReviewsCnt", Long.class)
-                .setParameter("today", today)
+                .setParameter("date", date)
                 .setParameter("role", loginMember.getRole())
                 .getSingleResult();
 
         // ディレクターのレビュー忘れアイデアを取得（前日以前）
         long get4getDirectorReviewsCnt = (long) em
                 .createNamedQuery("get4getDirectorReviewsCnt", Long.class)
-                .setParameter("today", today)
+                .setParameter("date", date)
                 .setParameter("role", loginMember.getRole())
                 .getSingleResult();
 
@@ -98,7 +97,7 @@ public class TopPageIndexServlet extends HttpServlet {
         try {
             // 退席忘れを取得（履歴がない場合もあるのでtry-catch）
             List<Join> get4getJoins = em.createNamedQuery("get4getJoins", Join.class)
-                    .setParameter("today", today)
+                    .setParameter("date", date)
                     .getResultList();
 
             // 退席忘れのjoinStatusにそれぞれ2を付与

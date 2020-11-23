@@ -61,11 +61,11 @@ import lombok.Setter;
         @NamedQuery(name = "getDirectorAdviceCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :loginMember AND i.reviewStatus = 3"),
 
         // マネージャーのレビュー忘れアイデアを取得（前日以前）
-        @NamedQuery(name = "get4getManagerReviewsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.reviewStatus = 2 AND :role = 2 AND i.createdDate < :today"),
+        @NamedQuery(name = "get4getManagerReviewsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.reviewStatus = 2 AND :role = 2 AND i.createdDate < :date"),
         // ディレクターのレビュー忘れアイデアを取得（前日以前）
-        @NamedQuery(name = "get4getDirectorReviewsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.reviewStatus = 4 AND :role = 3 AND i.createdDate < :today"),
+        @NamedQuery(name = "get4getDirectorReviewsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.reviewStatus = 4 AND :role = 3 AND i.createdDate < :date"),
         // ドラフトのポスト忘れを取得（前日以前）
-        @NamedQuery(name = "get4getMyDraftsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :loginMember AND i.reviewStatus = 0 AND i.createdDate < :today")
+        @NamedQuery(name = "get4getMyDraftsCnt", query = "SELECT COUNT(i) FROM Idea i WHERE i.member = :loginMember AND i.reviewStatus = 0 AND i.createdDate < :date")
 })
 
 @Getter
