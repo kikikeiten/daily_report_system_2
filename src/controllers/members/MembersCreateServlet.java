@@ -34,28 +34,29 @@ public class MembersCreateServlet extends HttpServlet {
 
             EntityManager em = DBUtil.createEntityManager();
 
-            Member m = new Member();
-            // 現在の詳細な時刻を追加
-            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            Member member = new Member();
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-            m.setCode(request.getParameter("code"));
-            m.setName(request.getParameter("name"));
-            m.setPassword( // 暗号化してセットする
+            // Memberテーブルに値をセット
+            member.setCode(request.getParameter("code"));
+            member.setName(request.getParameter("name"));
+            member.setPassword( // 暗号化してセットする
                     EncryptUtil.getPasswordEncrypt(
                             request.getParameter("password"),
                             (String) this.getServletContext().getAttribute("pepper")));
-            m.setRole_flag(Integer.parseInt(request.getParameter("role_flag")));
-            m.setDelete_flag(0); // 初期値
-            m.setCreated_at(currentTime);
-            m.setUpdated_at(currentTime);
+            member.setRole(Integer.parseInt(request.getParameter("role")));
+            member.setDeleteFlag(0); // 初期値
+            member.setCreatedAt(timestamp);
+            member.setUpdatedAt(timestamp);
 
-            List<String> errors = MemberValidator.validate(m, true, true);
+            List<String> errors = MemberValidator.validate(member, true, true);
 
+            // エラーがあればパラメータを送信
             if (errors.size() > 0) {
                 em.close();
 
                 request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("member", m);
+                request.setAttribute("member", member);
                 request.setAttribute("errors", errors);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/new.jsp");
@@ -63,7 +64,7 @@ public class MembersCreateServlet extends HttpServlet {
 
             } else {
                 em.getTransaction().begin();
-                em.persist(m);
+                em.persist(member);
                 em.getTransaction().commit();
                 em.close();
                 request.getSession().setAttribute("toast", "登録が完了しました。");
