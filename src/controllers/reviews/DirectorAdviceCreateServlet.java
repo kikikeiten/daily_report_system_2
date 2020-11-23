@@ -25,10 +25,10 @@ public class DirectorAdviceCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // アドバイスされたアイディアのIDを取得
+        // アドバイスされたアイデアのIDを取得
         Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
-        // アドバイスされたアイディアのレビュー状態をIdeaテーブルで更新
+        // アドバイスされたアイデアのレビュー状態をIdeaテーブルで更新
         idea.setReviewStatus(Integer.parseInt(request.getParameter("reviewStatus")));
 
         em.getTransaction().begin();
