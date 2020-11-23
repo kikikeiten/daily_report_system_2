@@ -26,14 +26,14 @@ public class MembersEditServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // members/edit.jspのmember_idからメンバーidを取得
-        Member m = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
+        // 編集するメンバーのIDを取得
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("memberId")));
 
         em.close();
 
-        request.setAttribute("member", m);
+        request.setAttribute("member", member);
         request.setAttribute("_token", request.getSession().getId());
-        request.getSession().setAttribute("member_id", m.getId());
+        request.getSession().setAttribute("memberId", member.getId());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/edit.jsp");
         rd.forward(request, response);

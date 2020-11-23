@@ -29,22 +29,21 @@ public class PunchInCreateServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // ログイン中のメンバーIDを取得
-        Member member = (Member) request.getSession().getAttribute("login_member");
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
         Join join = new Join();
 
-        // 時間をそれぞれ取得
         Date date = new Date(System.currentTimeMillis());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         Time time = new Time(System.currentTimeMillis());
 
-        // Joinテーブルにセット
-        join.setMember(member);
-        join.setJoin_date(date);
-        join.setPunch_in(time);
-        join.setJoin_flag(1); // 1 == 参加
-        join.setCreated_at(timestamp);
-        join.setUpdated_at(timestamp);
+        // Joinテーブルに値をセット
+        join.setMember(loginMember);
+        join.setJoinDate(date);
+        join.setPunchIn(time);
+        join.setJoinStatus(1); // 1 == 参加
+        join.setCreatedAt(timestamp);
+        join.setUpdatedAt(timestamp);
 
         em.getTransaction().begin();
         em.persist(join);

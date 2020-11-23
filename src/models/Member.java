@@ -16,15 +16,15 @@ import lombok.Setter;
 
 @Table(name = "members")
 @NamedQueries({
-        // 全てのメンバーを取得
-        @NamedQuery(name = "getMembers", query = "SELECT m FROM Member m ORDER BY m.created_at DESC"),
-        // カウント
+        // 全てのメンバー情報を取得
+        @NamedQuery(name = "getMembers", query = "SELECT m FROM Member m ORDER BY m.createdAt DESC"),
+        // カウントを取得
         @NamedQuery(name = "getMembersCnt", query = "SELECT COUNT(m) FROM Member m"),
 
         // 登録されたコードを確認
         @NamedQuery(name = "checkRegisteredCode", query = "SELECT COUNT(m) FROM Member m WHERE m.code = :code"),
         // コードとパスワードを確認（ログイン時）
-        @NamedQuery(name = "checkLoginCodeAndPassword", query = "SELECT m FROM Member m WHERE m.delete_flag = 0 AND m.code = :code AND m.password = :pass")
+        @NamedQuery(name = "checkLoginCodeAndPassword", query = "SELECT m FROM Member m WHERE m.deleteFlag = 0 AND m.code = :code AND m.password = :pass")
 })
 
 @Getter
@@ -46,24 +46,24 @@ public class Member {
     private String password;
 
     /*
-     * 0 : Associate
-     * 1 : Administrator
-     * 2 : Manager
-     * 3 : Director
+     * 0 : アソシエイト
+     * 1 : 管理者
+     * 2 : マネージャー
+     * 3 : ディレクター
      * */
-    @Column(name = "role_flag", nullable = false)
-    private Integer role_flag;
+    @Column(name = "role", nullable = false)
+    private Integer role;
 
     /*
      * 0 : 存在（初期値）
      * 1 : 論理削除
      * */
-    @Column(name = "delete_flag", nullable = false)
-    private Integer delete_flag;
+    @Column(name = "deleteFlag", nullable = false)
+    private Integer deleteFlag;
 
-    @Column(name = "created_at", nullable = false)
-    private Timestamp created_at;
+    @Column(name = "createdAt", nullable = false)
+    private Timestamp createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    private Timestamp updated_at;
+    @Column(name = "updatedAt", nullable = false)
+    private Timestamp updatedAt;
 }

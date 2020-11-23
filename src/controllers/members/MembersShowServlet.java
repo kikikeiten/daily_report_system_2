@@ -26,12 +26,12 @@ public class MembersShowServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // members/index.jspのmember_idからメンバーidを取得
-        Member m = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
+        // 詳細を確認するメンバーのIDを取得
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("memberId")));
 
         em.close();
 
-        request.setAttribute("member", m);
+        request.setAttribute("member", member);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/show.jsp");
         rd.forward(request, response);

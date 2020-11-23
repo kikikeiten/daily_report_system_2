@@ -22,9 +22,11 @@ public class PropertiesListener implements ServletContextListener {
     }
 
     public void contextInitialized(ServletContextEvent arg0) {
+
         ServletContext context = arg0.getServletContext();
 
         String path = context.getRealPath("/META-INF/application.properties");
+
         try {
             InputStream is = new FileInputStream(path);
             Properties properties = new Properties();
@@ -32,10 +34,12 @@ public class PropertiesListener implements ServletContextListener {
             is.close();
 
             Iterator<String> pit = properties.stringPropertyNames().iterator();
+
             while (pit.hasNext()) {
                 String pname = pit.next();
                 context.setAttribute(pname, properties.getProperty(pname));
             }
+
         } catch (FileNotFoundException e) {
         } catch (IOException e) {
         }

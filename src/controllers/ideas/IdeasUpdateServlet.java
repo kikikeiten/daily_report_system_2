@@ -29,35 +29,36 @@ public class IdeasUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // トークンを取得しセット
         String _token = (String) request.getParameter("_token");
 
         if (_token != null && _token.equals(request.getSession().getId())) {
 
             EntityManager em = DBUtil.createEntityManager();
 
-            // ideas/edit.jspからideaのidを取得
-            Idea i = em.find(Idea.class, (Integer) (request.getSession().getAttribute("idea_id")));
+            // 更新するアイデアのIDを取得
+            Idea idea = em.find(Idea.class, (Integer) (request.getSession().getAttribute("ideaId")));
 
-            // ideas/edit.jspからレビュー経過のパラメータを取得
-            Integer review_flag_int = Integer.parseInt(request.getParameter("review_flag"));
+            // 更新後のパラメータを取得
+            Integer reviewStatus = Integer.parseInt(request.getParameter("reviewStatus"));
 
-            // ログイン中メンバーのidを取得
-            Member login_member = (Member) request.getSession().getAttribute("login_member");
+            // ログイン中メンバーのIDを取得
+            Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
-            i.setTitle(request.getParameter("title"));
-            i.setContent(request.getParameter("content"));
-            i.setReview_flag(review_flag_int);
-            i.setCreared_date(Date.valueOf(request.getParameter("created_date")));
-            i.setUpdated_at(new Timestamp(System.currentTimeMillis()));
+            // Ideaテーブルに値をセット
+            idea.setTitle(request.getParameter("title"));
+            idea.setContent(request.getParameter("content"));
+            idea.setReviewStatus(reviewStatus);
+            idea.setCrearedDate(Date.valueOf(request.getParameter("createdDate")));
+            idea.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 
-            List<String> errors = IdeaValidator.validate(i);
+            List<String> errors = IdeaValidator.validate(idea);
 
+            // エラーがある場合
             if (errors.size() > 0) {
                 em.close();
 
                 request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("idea", i);
+                request.setAttribute("idea", idea);
                 request.setAttribute("errors", errors);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ideas/edit.jsp");
@@ -68,60 +69,60 @@ public class IdeasUpdateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
 
-                // associateとadministlatorの場合
-                if (login_member.getRole_flag() == 0 || login_member.getRole_flag() == 1) {
+                // アソシエイトと管理者の場合
+                if (loginMember.getRole() == 0 || loginMember.getRole() == 1) {
 
-                    switch (review_flag_int) {
-                        case 0: // 下書きを再保存
+                    switch (reviewStatus) {
+                        case 0: // ドラフトを再保存
                             request.getSession().setAttribute("toast",
                                     "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
                             break;
-                        case 2: // 下書きまたはmanagerからのアドバイス付きideaをpost
+                        case 2: // ドラフトまたはマネージャーからのアドバイス付きアイデアを提出
                             request.getSession().setAttribute("toast",
                                     "日報「" + request.getParameter("title") + "」を課長に提出しました。");
                             break;
-                        case 4: // directorからのアドバイス付きideaをpost
+                        case 4: // ディレクターからのアドバイス付きアイデアを提出
                             request.getSession().setAttribute("toast",
                                     "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
                             break;
                     }
                 }
 
-                // managerの場合
-                if (login_member.getRole_flag() == 2) {
+                // マネージャーの場合
+                if (loginMember.getRole() == 2) {
 
-                    switch (review_flag_int) {
-                        case 0: // 下書きを再保存
+                    switch (reviewStatus) {
+                        case 0: // ドラフトを再保存
                             request.getSession().setAttribute("toast",
                                     "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
                             break;
-                        case 2: // 下書きのideaをpost
+                        case 2: // ドラフトを提出
                             request.getSession().setAttribute("toast",
                                     "日報「" + request.getParameter("title") + "」を他課長に提出しました。");
                             break;
-                        case 4: // directorからのアドバイス付きideaをpost
+                        case 4: // ディレクターからのアドバイス付きアイデアを提出
                             request.getSession().setAttribute("toast",
                                     "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
                             break;
                     }
                 }
 
-                // directorの場合
-                if (login_member.getRole_flag() == 3) {
+                // ディレクターの場合
+                if (loginMember.getRole() == 3) {
 
-                    switch (review_flag_int) {
-                        case 0: // 下書きを再保存
+                    switch (reviewStatus) {
+                        case 0: // ドラフトを再保存
                             request.getSession().setAttribute("toast",
                                     "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
                             break;
-                        case 4: // 下書きのideaをpost
+                        case 4: // ドラフトを提出
                             request.getSession().setAttribute("toast",
                                     "日報「" + request.getParameter("title") + "」を他部長に提出しました。");
                             break;
                     }
                 }
 
-                request.getSession().removeAttribute("idea_id");
+                request.getSession().removeAttribute("ideaId");
 
                 response.sendRedirect(request.getContextPath() + "/ideas");
             }

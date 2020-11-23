@@ -28,38 +28,37 @@ public class FavorsCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("idea_id")));
+        // 賛成するアイデアのIDを取得
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
 
-        Favor f = new Favor();
+        Favor favor = new Favor();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        // 詳細な現在時刻を取得
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        // Favorテーブルに値をセット
+        favor.setMember((Member) request.getSession().getAttribute("loginMember"));
+        favor.setIdea(idea);
+        favor.setCreatedAt(timestamp);
+        favor.setUpdatedAt(timestamp);
 
-        // Favorテーブルにセット
-        f.setMember((Member) request.getSession().getAttribute("login_member"));
-        f.setIdea(i);
-        f.setCreated_at(currentTime);
-        f.setUpdated_at(currentTime);
+        // Ideaテーブルに値をセット
+        idea.setFavors(Integer.parseInt(request.getParameter("favors")) + idea.getFavors());
 
-        // Ideaテーブルにセット
-        i.setFavors(Integer.parseInt(request.getParameter("favors")) + i.getFavors());
+        // 賛成されたアイデアの作者名をString型に変換
+        Member ideaMember = idea.getMember();
+        String ideaMemberName = ideaMember.getName();
 
-        // favorされたメンバーの氏名を取得
-        Member member = i.getMember();
-        String member_name_str = member.getName();
-
-        // favorされたideaのタイトルを取得
-        String idea_title_str = i.getTitle();
+        // 賛成されたアイデアのタイトルをString型に変換
+        String ideaTitle = idea.getTitle();
 
         em.getTransaction().begin();
-        em.persist(f);
+        em.persist(favor);
         em.getTransaction().commit();
         em.close();
 
-        // トーストメッセージ
-        request.getSession().setAttribute("toast", member_name_str + "さんの日報「" + idea_title_str + "」にいいねしました。");
+        // トーストメッセージをセッションにセット
+        request.getSession().setAttribute("toast", ideaMemberName + "さんの日報「" + ideaTitle + "」にいいねしました。");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
-
     }
+
 }

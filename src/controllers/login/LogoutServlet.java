@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     public LogoutServlet() {
@@ -18,9 +19,13 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().removeAttribute("login_member");
 
+        // ログイン中のセッションを削除
+        request.getSession().removeAttribute("loginMember");
+
+        // トーストメッセージをセッションにセット
         request.getSession().setAttribute("toast", "ログアウトしました。");
+
         response.sendRedirect(request.getContextPath() + "/login");
     }
 

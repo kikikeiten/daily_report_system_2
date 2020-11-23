@@ -7,16 +7,18 @@ import models.Idea;
 
 public class IdeaValidator {
     public static List<String> validate(Idea i) {
+
         List<String> errors = new ArrayList<String>();
 
-        String title_error = _validateTitle(i.getTitle());
-        if (!title_error.equals("")) {
-            errors.add(title_error);
+        String titleError = _validateTitle(i.getTitle());
+
+        if (!titleError.equals("")) {
+            errors.add(titleError);
         }
 
-        String content_error = _validateContent(i.getContent());
-        if (!content_error.equals("")) {
-            errors.add(content_error);
+        String contentError = _validateContent(i.getContent());
+        if (!contentError.equals("")) {
+            errors.add(contentError);
         }
 
         return errors;

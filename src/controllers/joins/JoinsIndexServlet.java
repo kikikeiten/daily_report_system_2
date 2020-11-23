@@ -35,13 +35,13 @@ public class JoinsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // 全てのjoin履歴を取得
+        // 全てのジョイン履歴を取得
         List<Join> getJoins = em.createNamedQuery("getJoins", Join.class)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        // 上記のカウント
+        // 上記のカウントを取得
         long getJoinsCnt = (long) em.createNamedQuery("getJoinsCnt", Long.class)
                 .getSingleResult();
 

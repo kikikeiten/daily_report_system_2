@@ -26,21 +26,22 @@ public class LoginFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        String context_path = ((HttpServletRequest) request).getContextPath();
-        String servlet_path = ((HttpServletRequest) request).getServletPath();
 
-        if (!servlet_path.matches("/css.*")) { // CSSフォルダ内は認証処理から除外する
+        String contextPath = ((HttpServletRequest) request).getContextPath();
+        String servletPath = ((HttpServletRequest) request).getServletPath();
+
+        if (!servletPath.matches("/css.*")) { // CSSフォルダ内は認証処理から除外する
             HttpSession session = ((HttpServletRequest) request).getSession();
 
             // セッションスコープに保存されたメンバー（ログインメンバー）情報を取得
-            Member m = (Member) session.getAttribute("login_member");
+            Member loginMember = (Member) session.getAttribute("loginMember");
 
-            if (!servlet_path.equals("/login")) {
+            if (!servletPath.equals("/login")) {
                 // ログイン画面以外について
                 // ログアウトしている状態であれば
                 // ログイン画面にリダイレクト
-                if (m == null) {
-                    ((HttpServletResponse) response).sendRedirect(context_path + "/login");
+                if (loginMember == null) {
+                    ((HttpServletResponse) response).sendRedirect(contextPath + "/login");
                     return;
                 }
 
@@ -48,8 +49,8 @@ public class LoginFilter implements Filter {
                 // ログイン画面について
                 // ログインしているのにログイン画面を表示させようとした場合は
                 // システムのトップページにリダイレクト
-                if (m != null) {
-                    ((HttpServletResponse) response).sendRedirect(context_path + "/");
+                if (loginMember != null) {
+                    ((HttpServletResponse) response).sendRedirect(contextPath + "/");
                     return;
                 }
             }

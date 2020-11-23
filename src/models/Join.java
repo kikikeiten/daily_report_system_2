@@ -20,23 +20,23 @@ import lombok.Setter;
 
 @Table(name = "joins")
 @NamedQueries({
-        // ログイン中メンバーの全join履歴を取得
-        @NamedQuery(name = "getMyJoins", query = "SELECT j FROM Join j WHERE j.member = :login_member ORDER BY j.updated_at DESC"),
-        // カウント
-        @NamedQuery(name = "getMyJoinCnt", query = "SELECT COUNT(j) FROM Join j WHERE j.member = :login_member"),
+        // ログイン中メンバーの全ジョイン履歴を取得
+        @NamedQuery(name = "getMyJoins", query = "SELECT j FROM Join j WHERE j.memberId = :loginMember ORDER BY j.updatedAt DESC"),
+        // カウントを取得
+        @NamedQuery(name = "getMyJoinCnt", query = "SELECT COUNT(j) FROM Join j WHERE j.memberId = :loginMember"),
 
-        // 全てのjoin履歴を取得
-        @NamedQuery(name = "getJoins", query = "SELECT j FROM Join j ORDER BY j.updated_at DESC"),
-        // カウント
+        // 全てのジョイン履歴を取得
+        @NamedQuery(name = "getJoins", query = "SELECT j FROM Join j ORDER BY j.updatedAt DESC"),
+        // カウントを取得
         @NamedQuery(name = "getJoinsCnt", query = "SELECT COUNT(j) FROM Join j"),
 
-        // ログイン中メンバーの最新join履歴を取得
-        @NamedQuery(name = "getMyLatestJoin", query = "SELECT j FROM Join j WHERE j.member = :login_member ORDER BY j.updated_at DESC"),
-        // ログイン中メンバーの最新join履歴idを取得（削除予定）
-        @NamedQuery(name = "getMyLatestJoinId", query = "SELECT j.id FROM Join j WHERE j.member = :login_member ORDER BY j.updated_at DESC"),
+        // ログイン中メンバーの最新ジョイン履歴を取得
+        @NamedQuery(name = "getMyLatestJoin", query = "SELECT j FROM Join j WHERE j.memberId = :loginMember ORDER BY j.updatedAt DESC"),
+        // ログイン中メンバーの最新ジョイン履歴IDを取得（削除予定）
+        @NamedQuery(name = "getMyLatestJoinId", query = "SELECT j.id FROM Join j WHERE j.memberId = :loginMember ORDER BY j.updatedAt DESC"),
 
-        // punch_out忘れを取得
-        @NamedQuery(name = "get4getJoins", query = "SELECT j FROM Join j WHERE j.join_flag = 1 AND j.join_date <> :today")
+        // 退席忘れを取得
+        @NamedQuery(name = "get4getJoins", query = "SELECT j FROM Join j WHERE j.joinStatus = 1 AND j.joinDate <> :today")
 })
 
 @Getter
@@ -49,23 +49,23 @@ public class Join {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", nullable = false)
+    @JoinColumn(name = "member", nullable = false)
     private Member member;
 
-    @Column(name = "join_date", nullable = false)
-    private Date join_date;
+    @Column(name = "joinDate", nullable = false)
+    private Date joinDate;
 
     // 参加時間
-    @Column(name = "punch_in", nullable = false)
-    private Time punch_in;
+    @Column(name = "punchIn", nullable = false)
+    private Time punchIn;
 
     // 退席時間
-    @Column(name = "punch_out", nullable = true)
-    private Time punch_out;
+    @Column(name = "punchOut", nullable = true)
+    private Time punchOut;
 
     // 退席時間と参加時間の差
-    @Column(name = "working_time", nullable = true)
-    private Time working;
+    @Column(name = "workingTime", nullable = true)
+    private Time workingTime;
 
     /*
      * 0 : 退席済み
@@ -73,12 +73,12 @@ public class Join {
      * 2 : 退席忘れ
      * 3 : 退席時間の修正済み
      * */
-    @Column(name = "join_flag", nullable = false)
-    private Integer join_flag;
+    @Column(name = "joinStatus", nullable = false)
+    private Integer joinStatus;
 
-    @Column(name = "created_at", nullable = false)
-    private Timestamp created_at;
+    @Column(name = "createdAt", nullable = false)
+    private Timestamp createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    private Timestamp updated_at;
+    @Column(name = "updatedAt", nullable = false)
+    private Timestamp updatedAt;
 }

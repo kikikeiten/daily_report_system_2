@@ -31,48 +31,48 @@ public class MembersUpdateServlet extends HttpServlet {
         String _token = (String) request.getParameter("_token");
 
         if (_token != null && _token.equals(request.getSession().getId())) {
+
             EntityManager em = DBUtil.createEntityManager();
 
-            Member m = em.find(Member.class, (Integer) (request.getSession().getAttribute("member_id")));
+            Member member = em.find(Member.class, (Integer) (request.getSession().getAttribute("memberId")));
 
-            // 現在の値と異なるmember_idが入力されていたら
-            // 重複チェックを行う指定をする
-            Boolean code_duplicate_check = true;
+            // 現在の値と異なるメンバーIDが入力されていたら重複チェック
+            Boolean codeDuplicateCheck = true;
 
-            if (m.getCode().equals(request.getParameter("code"))) {
-                code_duplicate_check = false;
+            if (member.getCode().equals(request.getParameter("code"))) {
+                codeDuplicateCheck = false;
             } else {
-                m.setCode(request.getParameter("code"));
+                member.setCode(request.getParameter("code"));
             }
 
-            // パスワード欄に入力があったら
-            // パスワードの入力値チェックを行う指定をする
-            Boolean password_check_flag = true;
+            // パスワード欄に入力があったらパスワードの入力値チェック
+            Boolean passwordCheckFlag = true;
 
             String password = request.getParameter("password");
 
             if (password == null || password.equals("")) {
-                password_check_flag = false;
-
+                passwordCheckFlag = false;
             } else {
-                m.setPassword(
+                member.setPassword(
                         EncryptUtil.getPasswordEncrypt(
                                 password,
                                 (String) this.getServletContext().getAttribute("pepper")));
             }
 
-            m.setName(request.getParameter("name"));
-            m.setRole_flag(Integer.parseInt(request.getParameter("role_flag")));
-            m.setDelete_flag(0);
-            m.setUpdated_at(new Timestamp(System.currentTimeMillis()));
+            // Memberテーブルに値をセット
+            member.setName(request.getParameter("name"));
+            member.setRole(Integer.parseInt(request.getParameter("role")));
+            member.setDeleteFlag(0);
+            member.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 
-            List<String> errors = MemberValidator.validate(m, code_duplicate_check, password_check_flag);
+            List<String> errors = MemberValidator.validate(member, codeDuplicateCheck, passwordCheckFlag);
 
+            // エラーがあればパラメータとして送信
             if (errors.size() > 0) {
                 em.close();
 
                 request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("member", m);
+                request.setAttribute("member", member);
                 request.setAttribute("errors", errors);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/edit.jsp");
@@ -84,7 +84,7 @@ public class MembersUpdateServlet extends HttpServlet {
                 em.close();
                 request.getSession().setAttribute("toast", "Update completed!");
 
-                request.getSession().removeAttribute("member_id");
+                request.getSession().removeAttribute("memberId");
 
                 response.sendRedirect(request.getContextPath() + "/members");
             }

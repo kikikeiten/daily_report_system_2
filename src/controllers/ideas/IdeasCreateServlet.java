@@ -29,47 +29,49 @@ public class IdeasCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // トークンを取得
         String _token = (String) request.getParameter("_token");
 
         if (_token != null && _token.equals(request.getSession().getId())) {
 
             EntityManager em = DBUtil.createEntityManager();
 
-            // ログイン中メンバーのidを取得
-            Member login_member = (Member) request.getSession().getAttribute("login_member");
+            // ログイン中メンバーのIDを取得
+            Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
-            // ideaのレビュー経過を取得
-            Integer review_flag_int = Integer.parseInt(request.getParameter("review_flag"));
+            // アイデアのレビュー状態を取得
+            Integer reviewStatus = Integer.parseInt(request.getParameter("reviewStatus"));
 
-            // 本日の日付を取得
-            Date created_date = new Date(System.currentTimeMillis());
-            // 本日の詳細時刻を取得
-            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            Date date = new Date(System.currentTimeMillis());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-            String cd_str = request.getParameter("created_date");
-            if (cd_str != null && !cd_str.equals("")) {
-                created_date = Date.valueOf(request.getParameter("created_date"));
+            // アイデアの作成日を取得
+            String createdDate = request.getParameter("createdDate");
+
+            // 作成日のインプットスペースに作成日を予め入れておく
+            if (createdDate != null && !createdDate.equals("")) {
+                date = Date.valueOf(request.getParameter("createdDate"));
             }
 
-            Idea i = new Idea();
+            Idea idea = new Idea();
 
-            i.setMember(login_member);
-            i.setTitle(request.getParameter("title"));
-            i.setContent(request.getParameter("content"));
-            i.setFavors(0); // 初期化
-            i.setReview_flag(review_flag_int);
-            i.setCreated_date(created_date);
-            i.setCreated_at(currentTime);
-            i.setUpdated_at(currentTime);
+            // Ideaテーブルに値をセット
+            idea.setMember(loginMember);
+            idea.setTitle(request.getParameter("title"));
+            idea.setContent(request.getParameter("content"));
+            idea.setFavors(0); // 初期化
+            idea.setReviewStatus(reviewStatus);
+            idea.setCreatedDate(date);
+            idea.setCreatedAt(timestamp);
+            idea.setUpdatedAt(timestamp);
 
-            List<String> errors = IdeaValidator.validate(i);
+            List<String> errors = IdeaValidator.validate(idea);
 
+            // エラーがある場合
             if (errors.size() > 0) {
                 em.close();
 
                 request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("idea", i);
+                request.setAttribute("idea", idea);
                 request.setAttribute("errors", errors);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ideas/new.jsp");
@@ -77,20 +79,20 @@ public class IdeasCreateServlet extends HttpServlet {
 
             } else {
                 em.getTransaction().begin();
-                em.persist(i);
+                em.persist(idea);
                 em.getTransaction().commit();
                 em.close();
 
-                if (review_flag_int == 0) { // 下書きとして保存した場合
+                if (reviewStatus == 0) { // ドラフトとして保存した場合
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
 
-                } else if (review_flag_int == 2 && (login_member.getRole_flag() == 0 || login_member.getRole_flag() == 1)) { // associateまたはadministlatorがideaをpost
+                } else if (reviewStatus == 2 && (loginMember.getRole() == 0 || loginMember.getRole() == 1)) { // アソシエイトまたは管理者
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を課長へ提出しました。");
 
-                } else if (review_flag_int == 2 && login_member.getRole_flag() == 2) { // managerがideaを提出したpost
+                } else if (reviewStatus == 2 && loginMember.getRole() == 2) { // マネージャー
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を他課長へ提出しました。");
 
-                } else if (review_flag_int == 4 && login_member.getRole_flag() == 3) { // directorがideaを提出したpost
+                } else if (reviewStatus == 4 && loginMember.getRole() == 3) { // ディレクター
                     request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を他部長へ提出しました。");
                 }
 

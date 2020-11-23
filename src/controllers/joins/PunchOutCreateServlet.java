@@ -31,45 +31,44 @@ public class PunchOutCreateServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // ログイン中のメンバーIDを取得
-        Member login_member = (Member) request.getSession().getAttribute("login_member");
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
-        // ログイン中メンバーの最新join履歴idを取得
+        // ログイン中メンバーの最新ジョイン履歴IDを1件取得
         Integer getMyLatestJoinId = em.createNamedQuery("getMyLatestJoinId", Integer.class)
-                .setParameter("login_member", login_member)
+                .setParameter("loginMember", loginMember)
                 .setMaxResults(1)
                 .getSingleResult();
 
         Join join = em.find(Join.class, getMyLatestJoinId);
 
-        // それぞれの時刻を取得
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         Time time = new Time(System.currentTimeMillis());
 
         // Joinテーブルに値をセット
-        join.setPunch_out(time);
-        join.setJoin_flag(0); // 0 == 退席済み
-        join.setCreated_at(timestamp);
-        join.setUpdated_at(timestamp);
+        join.setPunchOut(time);
+        join.setJoinStatus(0); // 0 == 退席済み
+        join.setCreatedAt(timestamp);
+        join.setUpdatedAt(timestamp);
 
         // LocalTime型の現在時刻を取得
         LocalTime localTime = LocalTime.now();
         // 参加時刻をLocalDate型に変換
-        LocalTime punch_in_local = join.getPunch_in().toLocalTime();
+        LocalTime punchInLocal = join.getPunchIn().toLocalTime();
 
-        // 現在時刻と参加時刻の差分を求める（working time）
-        long minutes = ChronoUnit.MINUTES.between(punch_in_local, localTime);
+        // 現在時刻と参加時刻の差分を求める
+        long minutes = ChronoUnit.MINUTES.between(punchInLocal, localTime);
 
         // 時間と分を求める
-        long diff_hours = minutes / 60;
-        long diff_minutes = minutes % 60;
+        long diffHours = minutes / 60;
+        long diffMinutes = minutes % 60;
 
         // HH:mmのString型に変換
-        String diff_time_str = diff_hours + ":" + diff_minutes + ":00";
+        String diffTime = diffHours + ":" + diffMinutes + ":00";
         // Time型に変換
-        Time working_time = Time.valueOf(diff_time_str);
+        Time workingTime = Time.valueOf(diffTime);
 
         // Joinテーブルに値をセット
-        join.setWorking(working_time);
+        join.setWorkingTime(workingTime);
 
         em.getTransaction().begin();
         em.getTransaction().commit();
