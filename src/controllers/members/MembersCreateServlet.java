@@ -67,6 +67,8 @@ public class MembersCreateServlet extends HttpServlet {
                 em.persist(member);
                 em.getTransaction().commit();
                 em.close();
+
+                // トーストメッセージをセッションにセット
                 request.getSession().setAttribute("toast", "登録が完了しました。");
 
                 response.sendRedirect(request.getContextPath() + "/members");
