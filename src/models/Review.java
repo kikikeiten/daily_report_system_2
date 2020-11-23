@@ -21,7 +21,7 @@ import lombok.Setter;
 @NamedQueries({
         // アイデアの全レビューを取得
         @NamedQuery(name = "getReviews", query = "SELECT r FROM Review r WHERE r.ideaId = :ideaId ORDER BY r.updatedAt DESC"),
-        // カウント
+        // カウントを取得
         @NamedQuery(name = "getReviewsCnt", query = "SELECT COUNT(r) FROM Review r WHERE r.ideaId = :ideaId")
 })
 
@@ -35,12 +35,12 @@ public class Review {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "ideaId", nullable = false)
-    private Idea ideaId;
+    @JoinColumn(name = "idea", nullable = false)
+    private Idea idea;
 
     @ManyToOne
-    @JoinColumn(name = "memberId", nullable = false)
-    private Member memberId;
+    @JoinColumn(name = "member", nullable = false)
+    private Member member;
 
     /*
      * 0 : 下書き

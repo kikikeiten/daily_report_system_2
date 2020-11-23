@@ -18,7 +18,7 @@ import lombok.Setter;
 @NamedQueries({
         // 全てのメンバー情報を取得
         @NamedQuery(name = "getMembers", query = "SELECT m FROM Member m ORDER BY m.createdAt DESC"),
-        // カウント
+        // カウントを取得
         @NamedQuery(name = "getMembersCnt", query = "SELECT COUNT(m) FROM Member m"),
 
         // 登録されたコードを確認
@@ -46,13 +46,13 @@ public class Member {
     private String password;
 
     /*
-     * 0 : Associate
-     * 1 : Administrator
-     * 2 : Manager
-     * 3 : Director
+     * 0 : アソシエイト
+     * 1 : 管理者
+     * 2 : マネージャー
+     * 3 : ディレクター
      * */
-    @Column(name = "roleStatus", nullable = false)
-    private Integer roleStatus;
+    @Column(name = "role", nullable = false)
+    private Integer role;
 
     /*
      * 0 : 存在（初期値）

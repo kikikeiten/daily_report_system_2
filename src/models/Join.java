@@ -22,12 +22,12 @@ import lombok.Setter;
 @NamedQueries({
         // ログイン中メンバーの全ジョイン履歴を取得
         @NamedQuery(name = "getMyJoins", query = "SELECT j FROM Join j WHERE j.memberId = :loginMember ORDER BY j.updatedAt DESC"),
-        // カウント
+        // カウントを取得
         @NamedQuery(name = "getMyJoinCnt", query = "SELECT COUNT(j) FROM Join j WHERE j.memberId = :loginMember"),
 
         // 全てのジョイン履歴を取得
         @NamedQuery(name = "getJoins", query = "SELECT j FROM Join j ORDER BY j.updatedAt DESC"),
-        // カウント
+        // カウントを取得
         @NamedQuery(name = "getJoinsCnt", query = "SELECT COUNT(j) FROM Join j"),
 
         // ログイン中メンバーの最新ジョイン履歴を取得
@@ -49,8 +49,8 @@ public class Join {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "memberId", nullable = false)
-    private Member memberId;
+    @JoinColumn(name = "member", nullable = false)
+    private Member member;
 
     @Column(name = "joinDate", nullable = false)
     private Date joinDate;
