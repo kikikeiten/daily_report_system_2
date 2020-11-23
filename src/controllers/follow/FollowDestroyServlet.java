@@ -33,14 +33,14 @@ public class FollowDestroyServlet extends HttpServlet {
         // ログイン中のメンバーIDを取得
         Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
-        // フォロー解除するメンバーのIDを取得
-        Integer ei = 0;
-        ei = em.createNamedQuery("getDestroyFollow", Integer.class)
+        // フォローリストの中からフォロー解除するメンバーのIDを取得
+        Integer memberId = 0;
+        memberId = em.createNamedQuery("getDestroyFollow", Integer.class)
                 .setParameter("followedId", idea.getMember())
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        Follow follow = em.find(Follow.class, ei);
+        Follow follow = em.find(Follow.class, memberId);
 
         // フォロー解除するメンバーの氏名を取得
         Member unfollow = idea.getMember();

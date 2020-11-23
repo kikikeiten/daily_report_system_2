@@ -27,29 +27,30 @@ public class FollowDestroyServlet2 extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // ログイン中メンバーのIDを取得
-        Member login_member = (Member) request.getSession().getAttribute("login_member");
-
-        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("member_id")));
+        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
         // フォロー解除するメンバーのIDを取得
-        Integer ei = 0;
-        ei = em.createNamedQuery("getDestroyFollow", Integer.class)
-                .setParameter("followed_id", member)
-                .setParameter("login_member", login_member)
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("memberId")));
+
+        // フォローリストの中からフォロー解除するメンバーのIDを取得
+        Integer memberId = 0;
+        memberId = em.createNamedQuery("getDestroyFollow", Integer.class)
+                .setParameter("followedId", member)
+                .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        Follow f = em.find(Follow.class, ei);
+        Follow follow = em.find(Follow.class, memberId);
 
         // フォロー解除するメンバーの氏名を取得
-        String unfollow_name_str = member.getName();
+        String unfollowName = member.getName();
 
         em.getTransaction().begin();
-        em.remove(f);
+        em.remove(follow);
         em.getTransaction().commit();
         em.close();
 
-        // トーストメッセージ
-        request.getSession().setAttribute("toast", unfollow_name_str + "さんのフォローを解除しました。");
+        // トーストメッセージをセッションにセット
+        request.getSession().setAttribute("toast", unfollowName + "さんのフォローを解除しました。");
 
         response.sendRedirect(request.getContextPath() + "/members");
     }
