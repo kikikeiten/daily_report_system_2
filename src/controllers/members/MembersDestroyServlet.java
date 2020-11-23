@@ -30,7 +30,7 @@ public class MembersDestroyServlet extends HttpServlet {
 
             EntityManager em = DBUtil.createEntityManager();
 
-            // member_idのセッションからメンバーidを取得
+            // 削除するメンバーIDをセッションから取得
             Member member = em.find(Member.class, (Integer) (request.getSession().getAttribute("memberId")));
 
             member.setDeleteFlag(1); // 論理削除
