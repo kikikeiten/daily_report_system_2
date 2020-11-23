@@ -1,23 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+getDirectorReviewsCnt
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
 
     <c:param name="content">
 
         <c:if test="${flush != null}">
             <script>
-            $('body')
-            .toast({
-              class: 'success',
-              message: "${flush}",
-              position: 'bottom right',
-              showProgress: 'top',
-              progressUp: true,
-              className: {
-                  toast: 'ui message'
-              }
-              });
+                $('body')
+                    .toast({
+                        class: 'success',
+                        message: "${flush}",
+                        position: 'bottom right',
+                        showProgress: 'top',
+                        progressUp: true,
+                        className: {
+                            toast: 'ui message'
+                        }
+                    });
             </script>
         </c:if>
 
@@ -25,18 +26,18 @@
 
         <div class="circular ui icon blue mini button" data-variation="inverted"></div>
         <script>
-        $('.blue.button')
-        .popup({
-            position : 'bottom center',
-            content  : 'Waiting for the director\'s review'
-        })
-        ;
+            $('.blue.button')
+                .popup({
+                    position: 'bottom center',
+                    content: 'Waiting for the director\'s review'
+                })
+            ;
         </script>
 
         <div class="ui raised very padded container segment">
 
             <c:choose>
-                <c:when test="${getAllDirectorReviewsCount == 0}">
+                <c:when test="${getDirectorReviewsCnt == 0}">
 
                     <div class="ui active dimmer">
                         <div class="content">
@@ -48,7 +49,8 @@
                     <div class="ui three stackable raised link cards">
                         <c:forEach begin="0" end="5" step="1">
                             <div class="ui card">
-                                <a class="content" href=""> <span class="right floated"></span> <span class="header"></span> <span class="description"> </span>
+                                <a class="content" href=""> <span class="right floated"></span> <span
+                                        class="header"></span> <span class="description"> </span>
                                 </a>
                                 <div class="extra content">
                                     <button class="circular ui mini icon button">
@@ -63,33 +65,43 @@
                 <c:otherwise>
 
                     <div class="ui three stackable raised link cards">
-                        <c:forEach var="review" items="${getAllDirectorReviews}">
+                        <c:forEach var="idea" items="${getDirectorReviews}">
 
                             <div class="ui blue card">
-                                <a class="content" href="<c:url value='/ideas/?id=${review.id}' />"> <span class="right floated"><fmt:formatDate value='${review.idea_date}' pattern='MM / dd' /></span> <span class="header"><c:out value="${review.title}" /></span> <span class="description"> </span>
+                                <a class="content" href="<c:url value='/ideas/show?id=${idea.id}' />"> <span
+                                        class="right floated"><fmt:formatDate value='${idea.createdDate}'
+                                                                              pattern='MM / dd'/></span> <span
+                                        class="header"><c:out value="${idea.title}"/></span> <span
+                                        class="description"> </span>
                                 </a>
 
                                 <div class="extra content">
 
-                                    <c:if test="${sessionScope.login_member.id != idea.member.id && idea.member.admin_role != 3}">
-                                        <form method="POST" action="<c:url value='/reviews/director/create' />" class="left floated">
-                                            <input type="hidden" name="idea_id" value="${review.id}" />
-                                            <button type="submit" name="submit" value="${3}" class="circular ui mini icon teal button">
+                                    <c:if test="${sessionScope.loginMember.id != idea.member.id && idea.member.role != 3}">
+                                        <form method="POST" action="<c:url value='/reviews/director/create' />"
+                                              class="left floated">
+                                            <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                            <button type="submit" name="reviewStatus" value="${3}"
+                                                    class="circular ui mini icon teal button">
                                                 <i class="fas fa-comment-medical"></i>
                                             </button>
                                         </form>
                                     </c:if>
 
-                                    <c:if test="${sessionScope.login_member.id != review.member.id}">
-                                        <form method="POST" action="<c:url value='/reviews/director/create' />" class="left floated">
-                                            <input type="hidden" name="idea_id" value="${review.id}" />
-                                            <button type="submit" name="submit" value="${6}" class="circular ui mini icon purple button">
+                                    <c:if test="${sessionScope.loginMember.id != idea.member.id}">
+                                        <form method="POST" action="<c:url value='/reviews/director/create' />"
+                                              class="left floated">
+                                            <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                            <button type="submit" name="reviewStatus" value="${6}"
+                                                    class="circular ui mini icon purple button">
                                                 <i class="far fa-paper-plane"></i>
                                             </button>
                                         </form>
                                     </c:if>
 
-                                    <a class="right floated date" href="<c:url value='/members/?id=${review.member.id}' />"> <c:out value="${review.member.name}" />
+                                    <a class="right floated date"
+                                       href="<c:url value='/members/show?id=${idea.member.id}' />"> <c:out
+                                            value="${idea.member.name}"/>
                                     </a>
 
                                 </div>
@@ -101,15 +113,16 @@
                     <div class="ui hidden divider"></div>
 
                     <div class="ui mini pagination menu">
-                        <c:forEach var="i" begin="1" end="${((getAllDirectorReviewsCount - 1) / 12) + 1}" step="1">
+                        <c:forEach var="i" begin="1" end="${((getDirectorReviewsCnt - 1) / 12) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
                                     <div class="item active">
-                                        <c:out value="${i}" />
+                                        <c:out value="${i}"/>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
-                                    <a class="item" href="<c:url value='/reviews/director?page=${i}' />"><c:out value="${i}" /></a>
+                                    <a class="item" href="<c:url value='/reviews/director?page=${i}' />"><c:out
+                                            value="${i}"/></a>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -120,18 +133,20 @@
 
         </div>
 
-        <a href="<c:url value='/' />" class="ui image label"> My ideas <span class="detail"> ${getMyIdeasCount} </span>
+        <a href="<c:url value='/' />" class="ui image label"> My ideas <span class="detail"> ${getMyIdeasCnt} </span>
         </a>
 
-        <a href="<c:url value='/ideas' />" class="ui image label"> All ideas <span class="detail"> ${getAllIdeasCountButDrafts} </span>
+        <a href="<c:url value='/ideas' />" class="ui image label"> All ideas <span
+                class="detail"> ${getIdeasCntButDrafts} </span>
         </a>
 
-        <a href="<c:url value='/drafts' />" class="ui image label"> My drafts <span class="detail"> ${getMyDraftsCount} </span>
+        <a href="<c:url value='/drafts' />" class="ui image label"> My drafts <span
+                class="detail"> ${getMyDraftsCnt} </span>
         </a>
 
         <div class="ui image teal label">
             Director's reviews
-            <div class="detail">${getAllDirectorReviewsCount}</div>
+            <div class="detail">${getDirectorReviewsCnt}</div>
         </div>
 
     </c:param>
