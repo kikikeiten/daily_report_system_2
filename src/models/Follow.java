@@ -46,9 +46,9 @@ import lombok.Setter;
         @NamedQuery(name = "getMemberFollowingCnt", query = "SELECT COUNT(f) FROM Follow f WHERE f.followingId = :loginMember"),
 
         // 対象のメンバーがフォローしていないメンバー一覧を取得
-        @NamedQuery(name = "getMemberNotFollowing", query = "SELECT m FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.followingId = :loginMember AND m.id = f.followedId.id) AND m.id <> :loginMember ORDER BY m.updated_at DESC"),
+        @NamedQuery(name = "getMemberNotFollowing", query = "SELECT m FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.followingId = :member AND m.id = f.followedId.id) AND m.id <> :member ORDER BY m.updatedAt DESC"),
         // カウントを取得
-        @NamedQuery(name = "getMemberNotFollowingCnt", query = "SELECT COUNT(m) FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.followingId = :loginMember AND m.id = f.followedId.id) AND m.id <> :loginMember")
+        @NamedQuery(name = "getMemberNotFollowingCnt", query = "SELECT COUNT(m) FROM Member m WHERE NOT EXISTS (SELECT f FROM Follow f WHERE f.followingId = :member AND m.id = f.followedId.id) AND m.id <> :member")
 })
 
 @Getter
