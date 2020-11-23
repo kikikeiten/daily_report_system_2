@@ -64,40 +64,40 @@ public class DirectorReviewsCreateServlet extends HttpServlet {
         String ideaMemberName = ideaMember.getName();
 
         // 値に応じてトーストメッセージをセッションにセット
-        if (reviewStatus == 3) { // ideaにadviceを付けて差し戻す
+        if (reviewStatus == 3) { // アイデアにアドバイスを付けて差し戻す
             switch (role) {
-                case 0: // associate宛て
+                case 0: // アソシエイト宛て
                     request.getSession().setAttribute("toast",
                             "日報「" + idea.getTitle() + "」を" + ideaMemberName + "社員に差し戻しました。");
                     break;
-                case 1: // administrator宛て
+                case 1: // 管理者宛て
                     request.getSession().setAttribute("toast",
                             "日報「" + idea.getTitle() + "」を" + ideaMemberName + "管理者に差し戻しました。");
                     break;
-                case 2: // manager宛て
+                case 2: // マネージャー宛て
                     request.getSession().setAttribute("toast",
                             "日報「" + idea.getTitle() + "」を" + ideaMemberName + "課長に差し戻しました。");
                     break;
-                case 3: // director宛て
+                case 3: // ディレクター宛て
                     request.getSession().setAttribute("toast",
                             "日報「" + idea.getTitle() + "」を" + ideaMemberName + "部長に差し戻しました。");
                     break;
             }
-        } else { // ideaを承認する
+        } else { // アイデアを承認する
             switch (role) {
-                case 0: // associate宛て
+                case 0: // アソシエイトから
                     request.getSession().setAttribute("toast",
                             ideaMemberName + "社員の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
-                case 1: // administrator宛て
+                case 1: // 管理者から
                     request.getSession().setAttribute("toast",
                             ideaMemberName + "管理者の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
-                case 2: // manager宛て
+                case 2: // マネージャーから
                     request.getSession().setAttribute("toast",
                             ideaMemberName + "課長の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
-                case 3: // director宛て
+                case 3: // ディレクターから
                     request.getSession().setAttribute("toast",
                             ideaMemberName + "部長の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
