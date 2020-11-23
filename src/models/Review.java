@@ -19,10 +19,10 @@ import lombok.Setter;
 
 @Table(name = "reviews")
 @NamedQueries({
-        // ideaの全レビューを取得
-        @NamedQuery(name = "getReviews", query = "SELECT r FROM Review r WHERE r.idea = :ideaId ORDER BY r.updatedAt DESC"),
+        // アイデアの全レビューを取得
+        @NamedQuery(name = "getReviews", query = "SELECT r FROM Review r WHERE r.ideaId = :ideaId ORDER BY r.updatedAt DESC"),
         // カウント
-        @NamedQuery(name = "getReviewsCnt", query = "SELECT COUNT(r) FROM Review r WHERE r.idea = :idea")
+        @NamedQuery(name = "getReviewsCnt", query = "SELECT COUNT(r) FROM Review r WHERE r.ideaId = :ideaId")
 })
 
 @Getter
@@ -36,11 +36,11 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "ideaId", nullable = false)
-    private Idea idea;
+    private Idea ideaId;
 
     @ManyToOne
     @JoinColumn(name = "memberId", nullable = false)
-    private Member member;
+    private Member memberId;
 
     /*
      * 0 : 下書き
