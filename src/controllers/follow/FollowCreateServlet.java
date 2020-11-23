@@ -28,31 +28,29 @@ public class FollowCreateServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Follow f = new Follow();
+        Follow follow = new Follow();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        // 詳細な現在時刻を追加
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-
-        // フォローボタンを押されたideaを書いたメンバーidを取得
-        Idea i = em.find(Idea.class, Integer.parseInt(request.getParameter("following_id")));
+        // フォローされるメンバーのIDを取得
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("followedId")));
 
         // Followテーブルに値をセット
-        f.setFollowing_id((Member) request.getSession().getAttribute("login_member"));
-        f.setFollowed_id(i.getMember());
-        f.setCreated_at(currentTime);
-        f.setUpdated_at(currentTime);
+        follow.setFollowingId((Member) request.getSession().getAttribute("loginMember"));
+        follow.setFollowedId(idea.getMember());
+        follow.setCreatedAt(timestamp);
+        follow.setUpdatedAt(timestamp);
 
-        // フォローされた人の氏名を取得
-        Member unfollow = i.getMember();
-        String unfollow_name_str = unfollow.getName();
+        // フォローされたメンバーの氏名を取得
+        Member followed = idea.getMember();
+        String followedName = followed.getName();
 
         em.getTransaction().begin();
-        em.persist(f);
+        em.persist(follow);
         em.getTransaction().commit();
         em.close();
 
-        // トーストメッセージ
-        request.getSession().setAttribute("toast", unfollow_name_str + "さんをフォローしました。");
+        // トーストメッセージをセッションにセット
+        request.getSession().setAttribute("toast", followedName + "さんをフォローしました。");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
     }
