@@ -18,9 +18,9 @@ import lombok.Setter;
 
 @Table(name = "favors")
 @NamedQueries({
-        // 全てのideaに付いたfavorを取得
-        @NamedQuery(name = "getFavors", query = "SELECT f FROM Favor f WHERE f.idea = :idea ORDER BY f.created_at DESC"),
-        // カウント
+        // 全てのアイデアに付いた賛成を取得
+        @NamedQuery(name = "getFavors", query = "SELECT f FROM Favor f WHERE f.idea = :idea ORDER BY f.createdAt DESC"),
+        // カウントを取得
         @NamedQuery(name = "getFavorsCnt", query = "SELECT COUNT(f) FROM Favor f WHERE f.idea = :idea "),
 })
 
@@ -34,16 +34,16 @@ public class Favor {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", nullable = false)
+    @JoinColumn(name = "member", nullable = false)
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "idea_id", nullable = false)
+    @JoinColumn(name = "idea", nullable = false)
     private Idea idea;
 
-    @Column(name = "created_at", nullable = false)
-    private Timestamp created_at;
+    @Column(name = "createdAt", nullable = false)
+    private Timestamp createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    private Timestamp updated_at;
+    @Column(name = "updatedAt", nullable = false)
+    private Timestamp updatedAt;
 }

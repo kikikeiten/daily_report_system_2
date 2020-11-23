@@ -60,12 +60,12 @@ public class Follow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // フォローする側のメンバーid
+    // フォローする側のメンバーID
     @ManyToOne
     @JoinColumn(name = "followingId", nullable = false)
     private Member followingId;
 
-    // フォローされる側のメンバーid
+    // フォローされる側のメンバーID
     @ManyToOne
     @JoinColumn(name = "followedId", nullable = false)
     private Member followedId;
