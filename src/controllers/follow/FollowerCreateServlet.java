@@ -24,10 +24,6 @@ public class FollowerCreateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< Updated upstream
-=======
-        // TODO auto-generated method stub
->>>>>>> Stashed changes
 
         EntityManager em = DBUtil.createEntityManager();
 
