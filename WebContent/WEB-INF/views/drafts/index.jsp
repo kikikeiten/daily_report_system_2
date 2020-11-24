@@ -67,7 +67,7 @@
                                     </span>
                                 </a>
                                 <div class="extra content">
-                                    <form method="POST" action="<c:url value='/punchout/update' />" class="left floated">
+                                    <form method="POST" action="<c:url value='/drafts/update' />" class="left floated">
                                         <c:choose>
                                             <c:when test="${sessionScope.loginMember.role != 3}">
                                                 <button type="submit" name="reviewStatus" value="${2}" class="circular ui mini icon green button">

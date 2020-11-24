@@ -22,28 +22,28 @@
             <i class="close icon"></i>
             <div style="display: inline-flex">
                 <c:if test="${joinStatus == 0}">
-                    <form method="POST" action="<c:url value='/punchin/create' />">
+                    <form method="POST" action="<c:url value='joins/my/punch-in/create' />">
                         <button type="submit" class="ui positive button">Work!</button>
                     </form>
                 </c:if>
                 <c:if test="${joinStatus == 1}">
-                    <form method="POST" action="<c:url value='/punchout/create' />">
+                    <form method="POST" action="<c:url value='/joins/my/punch-out/create' />">
                         <button type="submit" class="ui negative button">Finish!</button>
                     </form>
                 </c:if>
                 <c:if test="${joinStatus == 2}">
-                    <form method="POST" action="<c:url value='/punchin/create' />">
+                    <form method="POST" action="<c:url value='joins/my/punch-in/create' />">
                         <button type="submit" class="ui positive button">Work!</button>
                     </form>
                 </c:if>
                 <c:if test="${joinStatus == 3}">
-                    <form method="POST" action="<c:url value='/punchin/create' />">
+                    <form method="POST" action="<c:url value='/joins/my/punch-in/create' />">
                         <button type="submit" class="ui positive button">Work!</button>
                     </form>
                     &nbsp;
                 </c:if>
                 <c:if test="${joinStatus == null}">
-                    <form method="POST" action="<c:url value='/punchin/create' />">
+                    <form method="POST" action="<c:url value='/joins/my/punch-in/create' />">
                         <button type="submit" class="ui positive button">Work!</button>
                     </form>
                 </c:if>

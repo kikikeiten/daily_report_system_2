@@ -22,7 +22,7 @@
                         <c:choose>
                         <c:when test="${!fn:contains(followIdea,idea.member.id)}">
                         <td>
-                            <form method="POST" action="<c:url value='/follow/create'/>">
+                            <form method="POST" action="<c:url value='/following/create/idea'/>">
                                 <button class="ui tiny active button" type="submit" name="followedId" value="${idea.id}">
                                     <i class="user icon"></i>フォロー
                                 </button>
@@ -31,7 +31,7 @@
                         </c:when>
                         <c:otherwise>
                         <td>
-                            <form method="POST" action="<c:url value='/follow/destroy' />">
+                            <form method="POST" action="<c:url value='/following/destroy/idea' />">
                                 <button class="ui tiny animated button" type="submit" name="memberId" value="${idea.id}">
                                     <div class="visible content">
                                         <i class="user icon"></i>フォロー中

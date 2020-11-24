@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
             request.getSession().removeAttribute("flush");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/login.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/index.jsp");
         rd.forward(request, response);
     }
 
@@ -82,7 +82,7 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("hasError", true);
             request.setAttribute("code", code);
 
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/login.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/index.jsp");
             rd.forward(request, response);
         } else {
             // 認証できたらログイン状態にしてトップページへリダイレクト

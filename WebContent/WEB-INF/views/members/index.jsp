@@ -41,14 +41,14 @@
                                         <c:when test="${sessionScope.loginMember.id != member.id}">
                                             <c:choose>
                                                 <c:when test="${!fn:contains(followIdea, member.id)}">
-                                                    <form method="POST" action="<c:url value='/follow/create/2' />" class="left floated">
+                                                    <form method="POST" action="<c:url value='/following/create/member' />" class="left floated">
                                                         <button class="circular ui mini icon green basic button" type="submit" name="following" value="${member.id}">
                                                             <i class="fas fa-user-plus"></i>
                                                         </button>
                                                     </form>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <form method="POST" action="<c:url value='/follow/destroy/2' />" class="left floated">
+                                                    <form method="POST" action="<c:url value='/following/create/member' />" class="left floated">
                                                         <button class="circular ui mini icon green button" type="submit" name="employee_id" value="${member.id}">
                                                             <i class="fas fa-user-minus"></i>
                                                         </button>
@@ -58,10 +58,10 @@
                                         </c:when>
                                     </c:choose>
                                     <span class="right floated">
-                                        <button onclick="location.href='<c:url value='/management/unfollow?id=${member.id}'/>'" class="circular ui mini icon blue button">
+                                        <button onclick="location.href='<c:url value='/management/following?id=${member.id}'/>'" class="circular ui mini icon blue button">
                                             <i class="far fa-paper-plane"></i>
                                         </button>
-                                        <button onclick="location.href='<c:url value='/management/follow?id=${member.id}'/>'" class="circular ui mini icon blue button">
+                                        <button onclick="location.href='<c:url value='/management/unfollowing?id=${member.id}'/>'" class="circular ui mini icon blue button">
                                             <i class="far fa-paper-plane"></i>
                                         </button>
                                     </span>

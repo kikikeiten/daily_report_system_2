@@ -1,4 +1,4 @@
-package controllers.drafts;
+package controllers.advice.manager;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,11 +15,11 @@ import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
-@WebServlet("/drafts")
-public class DraftsIndexServlet extends HttpServlet {
+@WebServlet("/advice/manager")
+public class AdviceManagerIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public DraftsIndexServlet() {
+    public AdviceManagerIndexServlet() {
         super();
     }
 
@@ -39,40 +39,40 @@ public class DraftsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // ログイン中メンバーの下書きを取得
-        List<Idea> getMyIdeas = em.createNamedQuery("getMyIdeas", Idea.class)
+        // マネージャーのアドバイス有アイデアを取得
+        List<Idea> getManagerAdvice = em.createNamedQuery("getManagerAdvice", Idea.class)
                 .setParameter("loginMember", loginMember)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        // 上記のカウント
-        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // 下書きを除いたidea総数を取得
-        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
-                .getSingleResult();
-
-        // マネージャーのアドバイス有ideaを取得
+        // 上記のカウントを取得
         long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // ディレクターのアドバイス有ideaを取得
+        // ログイン中メンバーのドラフト総数を取得
+        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
+                .setParameter("loginMember", loginMember)
+                .getSingleResult();
+
+        // ディレクターのアドバイス有アイデア総数を取得
         long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
                 .setParameter("loginMember", loginMember)
+                .getSingleResult();
+
+        // ドラフトを除いたアイデア総数を取得
+        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 
         em.close();
 
         request.setAttribute("page", page);
-        request.setAttribute("getMyAllDrafts", getMyIdeas);
-        request.setAttribute("getMyDraftsCount", getMyDraftsCnt);
-        request.setAttribute("getReportsCountButDrafts", getIdeasCntButDrafts);
-        request.setAttribute("getManagerRemandReportsCount", getManagerAdviceCnt);
-        request.setAttribute("getDirectorRemandReportsCount", getDirectorAdviceCnt);
+        request.setAttribute("getManagerAdvice", getManagerAdvice);
+        request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
+        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
+        request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
+        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
 
         // トーストメッセージがセッションに保存されているか確認
         if (request.getSession().getAttribute("toast") != null) {
@@ -80,7 +80,8 @@ public class DraftsIndexServlet extends HttpServlet {
             request.getSession().removeAttribute("toast");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/drafts/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/advice/manager/index.jsp");
         rd.forward(request, response);
     }
+
 }
