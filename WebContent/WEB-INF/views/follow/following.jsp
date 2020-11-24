@@ -1,72 +1,84 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>フォロー中</h2>
+        <h2>
+            フォロー中
+        </h2>
         <c:choose>
-            <c:when test="${getMyFollowingCount == 0}">
+            <c:when test="${getMyFollowingCnt == 0}">
                 <h3>
-                    <c:out value="${sessionScope.login_employee.name}" />
+                    <c:out value="${sessionScope.loginMember.name}"/>
                     さんはまだ誰もフォローしていません。
                 </h3>
-                <p>作成されるとここに表示されます。</p>
+                <p>
+                    作成されるとここに表示されます。
+                </p>
             </c:when>
             <c:otherwise>
-                <table id="following_list" class="ui celled striped table">
+                <table class="ui celled striped table">
                     <tbody>
+                    <tr>
+                        <th>
+                            氏名
+                        </th>
+                        <th>
+                            フォロー
+                        </th>
+                        <th>
+                            日付
+                        </th>
+                    </tr>
+                    <c:forEach var="member" items="${getMyFollowing}">
                         <tr>
-                            <th class="following_name">氏名</th>
-                            <th class="follow">フォロー</th>
-                            <th class="following_date">日付</th>
+                            <td>
+                                <c:out value="${member.follow.name}"/>
+                            </td>
+                            <td>
+                                <form method="POST" action="<c:url value='/following/destroy'/>">
+                                    <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">
+                                        <div class="visible content">
+                                            <i class="user icon"></i>
+                                            フォロー中
+                                        </div>
+                                        <div class="hidden content">
+                                            <i class="user icon"></i>
+                                            フォロー解除
+                                        </div>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <fmt:formatDate value='${member.createdAt}' pattern='yyyy-MM-dd HH:mm'/>
+                            </td>
                         </tr>
-                        <c:forEach var="following" items="${getMyAllFollowing}"
-                            varStatus="status">
-                            <tr class="row${status.count % 2}">
-                                <td class="following_name"><c:out
-                                        value="${following.follow.name}" /></td>
-                                <td class="follow">
-                                    <form method="POST"
-                                        action="<c:url value='/following/destroy' />">
-                                        <button class="ui tiny animated button" type="submit"
-                                            name="follow_id" value="${following.id}">
-                                            <div class="visible content">
-                                                <i class="user icon"></i>フォロー中
-                                            </div>
-                                            <div class="hidden content">
-                                                <i class="user icon"></i>フォロー解除
-                                            </div>
-                                        </button>
-                                    </form>
-                                </td>
-                                <td class="following_date"><fmt:formatDate
-                                        value='${following.created_at}' pattern='yyyy-MM-dd HH:mm' /></td>
-                            </tr>
-                        </c:forEach>
+                    </c:forEach>
                     </tbody>
                 </table>
-                <div class="ui label">フォロー中 ${getMyFollowingCount}</div>&nbsp;
+                <div class="ui label">
+                    フォロー中
+                    <c:out value="${getMyFollowingCnt}"/>
+                </div>
+                &nbsp;
                 <div class="ui mini pagination menu">
-                    <c:forEach var="i" begin="1"
-                        end="${((getMyFollowingCount - 1) / 10) + 1}" step="1">
+                    <c:forEach var="i" begin="1" end="${((getMyFollowingCnt - 1) / 12) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
                                 <div class="item active">
-                                    <c:out value="${i}" />
+                                    <c:out value="${i}"/>
                                 </div>
                             </c:when>
                             <c:otherwise>
-                                <a class="item" href="<c:url value='/following?page=${i}' />"><c:out
-                                        value="${i}" /></a>&nbsp;
-                    </c:otherwise>
+                                <a class="item" href="<c:url value='/following?page=${i}' />">
+                                    <c:out value="${i}"/>
+                                </a>&nbsp;
+                            </c:otherwise>
                         </c:choose>
                     </c:forEach>
                 </div>
             </c:otherwise>
         </c:choose>
-        <br>
-        <br>
         <p>
             <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>

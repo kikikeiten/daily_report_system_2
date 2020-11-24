@@ -74,8 +74,7 @@
                 <div class="ui label">
                     フォロワー
                     <c:out value="${getMyFollowerCnt}"/>
-                </div>
-                &nbsp;
+                </div>&nbsp;
                 <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1" end="${((getMyFollowerCnt - 1) / 12) + 1}" step="1">
                         <c:choose>
