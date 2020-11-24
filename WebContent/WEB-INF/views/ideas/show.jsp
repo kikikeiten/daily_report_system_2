@@ -182,7 +182,7 @@
                         <td>
                             <c:if test="${(sessionScope.loginMember.role == 2 && idea.reviewStatus == 2 && sessionScope.loginMember.id != idea.member.id) || (sessionScope.loginMember.role == 3 && idea.approval == 4 && sessionScope.loginMember.id != idea.member.id)}">
                                 <form class="ui form">
-                                    <textarea name="comment" rows="10" cols="50" form="form_id"></textarea>
+                                    <textarea name="comment" rows="10" cols="50" form="formId"></textarea>
                                 </form>
                             </c:if>
                         </td>
