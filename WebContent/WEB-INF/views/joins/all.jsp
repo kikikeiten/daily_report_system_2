@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -19,21 +18,37 @@
                     });
             </script>
         </c:if>
-        <h2>全打刻履歴</h2>
+        <h2>
+            全打刻履歴
+        </h2>
         <c:choose>
             <c:when test="${getJoinsCnt == 0}">
-                <h3>打刻はまだありません。</h3>
-                <p>打刻するとここに表示されます。</p>
+                <h3>
+                    打刻はまだありません。
+                </h3>
+                <p>
+                    打刻するとここに表示されます 。
+                </p>
             </c:when>
             <c:otherwise>
                 <table class="ui celled striped table">
                     <tbody>
                     <tr>
-                        <th>従業員氏名</th>
-                        <th>日付</th>
-                        <th>出勤時刻</th>
-                        <th>退勤時刻</th>
-                        <th>勤務時間</th>
+                        <th>
+                            従業員氏名
+                        </th>
+                        <th>
+                            日付
+                        </th>
+                        <th>
+                            出勤時刻
+                        </th>
+                        <th>
+                            退勤時刻
+                        </th>
+                        <th>
+                            勤務時間
+                        </th>
                     </tr>
                     <c:forEach var="join" items="${getJoins}">
                         <tr>
@@ -80,7 +95,7 @@
                     <c:out value="${getJoinsCnt}"/>
                 </div>
                 <div class="ui mini pagination menu">
-                    <c:forEach var="i" begin="1" end="${((getJoinsCnt - 1) / 10) + 1}" step="1">
+                    <c:forEach var="i" begin="1" end="${((getJoinsCnt - 1) / 12) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
                                 <div class="item active">

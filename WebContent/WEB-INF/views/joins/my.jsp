@@ -1,23 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>My打刻履歴</h2>
+        <h2>
+            My打刻履歴
+        </h2>
         <c:choose>
             <c:when test="${getMyJoinCnt == 0}">
-                <h3>打刻はまだありません。</h3>
-                <p>打刻するとここに表示されます。</p>
+                <h3>
+                    打刻はまだありません。
+                </h3>
+                <p>
+                    打刻するとここに表示されます。
+                </p>
             </c:when>
             <c:otherwise>
                 <table class="ui celled striped table">
                     <tbody>
                     <tr>
-                        <th>日付</th>
-                        <th>出勤時刻</th>
-                        <th>退勤時刻</th>
-                        <th>勤務時間</th>
+                        <th>
+                            日付
+                        </th>
+                        <th>
+                            出勤時刻
+                        </th>
+                        <th>
+                            退勤時刻
+                        </th>
+                        <th>
+                            勤務時間
+                        </th>
                     </tr>
                     <c:forEach var="join" items="${getMyJoin}">
                         <tr>
@@ -74,7 +87,9 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value='/' />">トップページに戻る</a>
+            <a href="<c:url value='/' />">
+                トップページに戻る
+            </a>
         </p>
     </c:param>
 </c:import>

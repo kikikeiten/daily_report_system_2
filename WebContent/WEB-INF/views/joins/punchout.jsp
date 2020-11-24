@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <body>
         <div class="ui raised very padded text container segment">
-            <h2>退勤時刻の修正</h2>
+            <h2>
+                退勤時刻の修正
+            </h2>
             <div class="ui image label">
                 従業員名
                 <div class="detail">
