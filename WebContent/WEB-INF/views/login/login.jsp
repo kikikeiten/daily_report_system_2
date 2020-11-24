@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
 
     <c:param name="content">
@@ -8,7 +8,7 @@
             <div class="ui error message">
                 <i class="close icon"></i>
                 <script>
-                    $('.message .close').on('click', function() {
+                    $('.message .close').on('click', function () {
                         $(this).closest('.message').transition('fade');
                     });
                 </script>
@@ -18,17 +18,17 @@
 
         <c:if test="${flush != null}">
             <script>
-            $('body')
-            .toast({
-              class: 'success',
-              message: "${flush}",
-              position: 'bottom right',
-              showProgress: 'top',
-              progressUp: true,
-              className: {
-                  toast: 'ui message'
-              }
-              });
+                $('body')
+                    .toast({
+                        class: 'success',
+                        message: "${flush}",
+                        position: 'bottom right',
+                        showProgress: 'top',
+                        progressUp: true,
+                        className: {
+                            toast: 'ui message'
+                        }
+                    });
             </script>
         </c:if>
 
@@ -42,13 +42,13 @@
                 <div class="field">
                     <label for="code">User id</label>
                     <div class="ui left icon input">
-                        <input type="text" name="code" value="${code}" placeholder="Username" /> <i class="user icon"></i>
+                        <input type="text" name="code" value="${code}" placeholder="Username"/> <i class="user icon"></i>
                     </div>
                 </div>
                 <div class="field">
                     <label for="password">Password</label>
                     <div class="ui left icon input">
-                        <input type="password" name="password" /> <i class="lock icon"></i> <input type="hidden" name="_token" value="${_token}" />
+                        <input type="password" name="password"/> <i class="lock icon"></i> <input type="hidden" name="_token" value="${_token}"/>
                     </div>
                 </div>
 
