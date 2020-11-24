@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-
         <c:if test="${flush != null}">
             <script>
                 $('body')
@@ -19,28 +18,32 @@
                     });
             </script>
         </c:if>
-
-        <h2>All menbers</h2>
-
+        <h2>
+            All menbers
+        </h2>
         <div class="ui raised very padded container segment">
-
             <c:choose>
                 <c:when test="${getMembersCnt == 0}">
-                    <h3>従業員は未登録です。</h3>
-                    <p>登録されるとここに表示されます。</p>
+                    <h3>
+                        従業員は未登録です。
+                    </h3>
+                    <p>
+                        登録されるとここに表示されます。
+                    </p>
                 </c:when>
-
                 <c:otherwise>
                     <div class="ui three stackable cards">
-
                         <c:forEach var="member" items="${getMembers}">
                             <div class="card">
-                                <a class="content" href="<c:url value='/members/show?id=${member.id}' />"> <span class="header"> <c:out value="${member.name}"/>
-                                </span> <span class="meta"> @ <c:out value="${member.code}"/>
-                                </span> <span class="description"></span>
+                                <a class="content" href="<c:url value='/members/show?id=${member.id}' />">
+                                    <span class="header">
+                                        <c:out value="${member.name}"/>
+                                    </span>
+                                    <span class="meta"> @ <c:out value="${member.code}"/>
+                                    </span>
+                                    <span class="description"></span>
                                 </a>
                                 <div class="extra content">
-
                                     <c:choose>
                                         <c:when test="${sessionScope.loginMember.id != member.id}">
                                             <c:choose>
@@ -61,7 +64,6 @@
                                             </c:choose>
                                         </c:when>
                                     </c:choose>
-
                                     <span class="right floated">
                                         <button onclick="location.href='<c:url value='/management/unfollow?id=${member.id}'/>'" class="circular ui mini icon blue button">
                                             <i class="far fa-paper-plane"></i>
@@ -73,13 +75,9 @@
                                 </div>
                             </div>
                         </c:forEach>
-
                     </div>
-
                     <div class="ui hidden divider"></div>
-
                     <div class="ui mini pagination menu">
-
                         <c:forEach var="i" begin="1" end="${((getMembersCnt - 1) / 10) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
@@ -92,18 +90,18 @@
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
-
                     </div>
                 </c:otherwise>
             </c:choose>
-
         </div>
-
         <div class="ui teal image label">
             All menbers
-            <div class="detail">${getMembersCnt}</div>
+            <div class="detail">
+                <c:out value="${getMembersCnt}"/>
+            </div>
         </div>
-
-        <button onclick="location.href='<c:url value='/members/new'/>'" class="ui positive button">新規従業員</button>
+        <button onclick="location.href='<c:url value='/members/new'/>'" class="ui positive button">
+            新規従業員
+        </button>
     </c:param>
 </c:import>
