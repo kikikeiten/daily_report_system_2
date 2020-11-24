@@ -18,7 +18,9 @@
                     });
             </script>
         </c:if>
-        <h2>My drafts</h2>
+        <h2>
+            My drafts
+        </h2>
         <div class="circular ui icon yellow mini button" data-variation="inverted"></div>
         <script>
             $('.yellow.button')

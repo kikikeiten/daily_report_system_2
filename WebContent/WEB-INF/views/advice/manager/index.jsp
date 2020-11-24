@@ -3,12 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:if test="${flush != null}">
+        <c:if test="${toast != null}">
             <script>
                 $('body')
                     .toast({
                         class: 'success',
-                        message: "${flush}",
+                        message: "${toast}",
                         position: 'bottom right',
                         showProgress: 'top',
                         progressUp: true,
