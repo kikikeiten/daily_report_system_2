@@ -53,12 +53,12 @@ public class MembersIndexServlet extends HttpServlet {
                 .setParameter("loginMember", loginMember)
                 .getResultList();
 
-        List<Integer> followIdeaId = new ArrayList<Integer>();
+        List<Integer> followIdea = new ArrayList<Integer>();
 
         for (Member ideaId : checkMyFollow) {
             Integer ideaIdInt = ideaId.getId();
-            followIdeaId.add(ideaIdInt);
-            request.setAttribute("followIdeaId", followIdeaId);
+            followIdea.add(ideaIdInt);
+            request.setAttribute("followIdea", followIdea);
         }
 
         em.close();
