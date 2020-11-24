@@ -1,94 +1,106 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:if test="${flush != null}">
+        <c:if test="${toast != null}">
             <script>
-            $('body')
-            .toast({
-              class: 'success',
-              message: "${flush}",
-              position: 'bottom right',
-              showProgress: 'top',
-              progressUp: true,
-              className: {
-                  toast: 'ui message'
-              }
-            })
-          ;
+                $('body')
+                    .toast({
+                        class: 'success',
+                        message: "${toast}",
+                        position: 'bottom right',
+                        showProgress: 'top',
+                        progressUp: true,
+                        className: {
+                            toast: 'ui message'
+                        }
+                    });
             </script>
         </c:if>
         <h2>全打刻履歴</h2>
         <c:choose>
-            <c:when test="${getAllAttendancesCount == 0}">
+            <c:when test="${getJoinsCnt == 0}">
                 <h3>打刻はまだありません。</h3>
                 <p>打刻するとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table id="all_attendance_list" class="ui celled striped table">
+                <table class="ui celled striped table">
                     <tbody>
+                    <tr>
+                        <th>従業員氏名</th>
+                        <th>日付</th>
+                        <th>出勤時刻</th>
+                        <th>退勤時刻</th>
+                        <th>勤務時間</th>
+                    </tr>
+                    <c:forEach var="join" items="${getJoins}">
                         <tr>
-                            <th class="all_attendance_employee">従業員氏名</th>
-                            <th class="all_attendance_date">日付</th>
-                            <th class="all_attendance_punchIn">出勤時刻</th>
-                            <th class="all_attendance_punchOut">退勤時刻</th>
-                            <th class="all_attendance_working">勤務時間</th>
+                            <td>
+                                <c:out value="${join.member.name}"/>
+                                <c:if test="${join.joinStatus == 1}">
+                                    <div class="ui green label">
+                                        勤務中
+                                    </div>
+                                </c:if>
+                                <c:if test="${join.joinStatus == 2}">
+                                    <a href="<c:url value='/punchout/edit?id=${join.id}'/>" class="ui red label">
+                                        打刻忘れ
+                                    </a>
+                                </c:if>
+                                <c:if test="${join.joinStatus == 3}">
+                                    <div class="ui orange label">
+                                        修正済み
+                                    </div>
+                                </c:if>
+                            </td>
+                            <td>
+                                <fmt:formatDate value='${join.joinStatus}' pattern='MM / dd'/>
+                            </td>
+                            <td>
+                                <fmt:formatDate value='${join.punchIn}' pattern='HH : mm'/>
+                            </td>
+                            <td><fmt:formatDate value='${join.punchOut}' pattern='HH : mm'/>
+                                <c:if test="${join.joinStatus == 2}">
+                                    未登録
+                                </c:if>
+                            </td>
+                            <td><fmt:formatDate value='${join.workingTime}' pattern='HH : mm'/>
+                                <c:if test="${join.joinStatus == 2}">
+                                    未登録
+                                </c:if>
+                            </td>
                         </tr>
-                        <c:forEach var="attendance" items="${getAllAttendances}"
-                            varStatus="status">
-                            <tr class="row${status.count % 2}">
-                                <td class="all_attendance_employee"><c:out
-                                        value="${attendance.employee.name}" /> <c:if
-                                        test="${attendance.attendance_flag == 1}">
-                                        <div class="ui green label">勤務中</div>
-                                    </c:if> <c:if test="${attendance.attendance_flag == 2}">
-                                        <a href="<c:url value='/leave/edit?id=${attendance.id}'/>"
-                                            class="ui red label">打刻忘れ</A>
-                                    </c:if> <c:if test="${attendance.attendance_flag == 3}">
-                                        <div class="ui orange label">修正済み</div>
-                                    </c:if></td>
-                                <td class="all_attendance_date"><fmt:formatDate
-                                        value='${attendance.attendance_date}' pattern='MM / dd' /></td>
-                                <td class="all_attendance_punchIn"><fmt:formatDate
-                                        value='${attendance.punch_in}' pattern='HH : mm' /></td>
-                                <td class="all_attendance_punchOut"><fmt:formatDate
-                                        value='${attendance.punch_out}' pattern='HH : mm' /> <c:if
-                                        test="${attendance.attendance_flag == 2}">
-                                        未登録</c:if></td>
-                                <td class="all_attendance_working"><fmt:formatDate
-                                        value='${attendance.working}' pattern='HH : mm' /> <c:if
-                                        test="${attendance.attendance_flag == 2}">
-                                        未登録</c:if></td>
-                            </tr>
-                        </c:forEach>
+                    </c:forEach>
                     </tbody>
                 </table>
-                <div class="ui label">履歴数 ${getAllAttendancesCount}</div>&nbsp;
-        <div class="ui mini pagination menu">
-                    <c:forEach var="i" begin="1"
-                        end="${((getAllAttendancesCount - 1) / 10) + 1}" step="1">
+                <div class="ui label">
+                    履歴数
+                    <c:out value="${getJoinsCnt}"/>
+                </div>
+                <div class="ui mini pagination menu">
+                    <c:forEach var="i" begin="1" end="${((getJoinsCnt - 1) / 10) + 1}" step="1">
                         <c:choose>
                             <c:when test="${i == page}">
                                 <div class="item active">
-                                    <c:out value="${i}" />
+                                    <c:out value="${i}"/>
                                 </div>
                             </c:when>
                             <c:otherwise>
-                                <a class="item"
-                                    href="<c:url value='/attendance/all?page=${i}' />"><c:out
-                                        value="${i}" /></a>&nbsp;
-                    </c:otherwise>
+                                <a class="item" href="<c:url value='/joins/all?page=${i}' />">
+                                    <c:out value="${i}"/>
+                                </a>&nbsp;
+                            </c:otherwise>
                         </c:choose>
                     </c:forEach>
                 </div>
             </c:otherwise>
         </c:choose>
-        <br>
-        <br>
         <p>
-            <a href="<c:url value='/' />">トップページに戻る</a>
+            <a href="<c:url value='/' />">
+                トップページに戻る
+            </a>
         </p>
     </c:param>
 </c:import>
