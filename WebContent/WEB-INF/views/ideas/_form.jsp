@@ -10,28 +10,19 @@
     </div>
 </c:if>
 <div class="field">
-    <label for="createdDate">
-        Date
-    </label>
+    <label for="createdDate">Date</label>
     <input type="date" name="createdDate" value="<fmt:formatDate value='${idea.createdDate}' pattern='yyyy / MM / dd' />"/>
 </div>
 <div class="field">
-    <label for="name">
-        Name
-    </label>
+    <label for="name">Name</label>
     <c:out value="${sessionScope.loginMember.name}"/>
 </div>
-
 <div class="field">
-    <label for="title">
-        Title
-    </label>
+    <label for="title">Title</label>
     <input type="text" name="title" value="${idea.title}"/>
 </div>
 <div class="field">
-    <label for="content">
-        Content
-    </label>
+    <label for="content">Content</label>
     <textarea name="content" rows="10" cols="50">
         <c:out value="${idea.content}"/>
     </textarea>

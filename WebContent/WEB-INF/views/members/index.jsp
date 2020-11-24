@@ -18,18 +18,12 @@
                     });
             </script>
         </c:if>
-        <h2>
-            All menbers
-        </h2>
+        <h2>All menbers</h2>
         <div class="ui raised very padded container segment">
             <c:choose>
                 <c:when test="${getMembersCnt == 0}">
-                    <h3>
-                        従業員は未登録です。
-                    </h3>
-                    <p>
-                        登録されるとここに表示されます。
-                    </p>
+                    <h3>従業員は未登録です。</h3>
+                    <p>登録されるとここに表示されます。</p>
                 </c:when>
                 <c:otherwise>
                     <div class="ui three stackable cards">
@@ -39,8 +33,7 @@
                                     <span class="header">
                                         <c:out value="${member.name}"/>
                                     </span>
-                                    <span class="meta"> @ <c:out value="${member.code}"/>
-                                    </span>
+                                    <span class="meta"> @ <c:out value="${member.code}"/></span>
                                     <span class="description"></span>
                                 </a>
                                 <div class="extra content">
@@ -78,7 +71,7 @@
                     </div>
                     <div class="ui hidden divider"></div>
                     <div class="ui mini pagination menu">
-                        <c:forEach var="i" begin="1" end="${((getMembersCnt - 1) / 10) + 1}" step="1">
+                        <c:forEach var="i" begin="1" end="${((getMembersCnt - 1) / 12) + 1}" step="1">
                             <c:choose>
                                 <c:when test="${i == page}">
                                     <div class="item active">
@@ -94,14 +87,11 @@
                 </c:otherwise>
             </c:choose>
         </div>
-        <div class="ui teal image label">
-            All menbers
+        <div class="ui teal image label">All menbers
             <div class="detail">
                 <c:out value="${getMembersCnt}"/>
             </div>
         </div>
-        <button onclick="location.href='<c:url value='/members/new'/>'" class="ui positive button">
-            新規従業員
-        </button>
+        <button onclick="location.href='<c:url value='/members/new'/>'" class="ui positive button">新規従業員</button>
     </c:param>
 </c:import>

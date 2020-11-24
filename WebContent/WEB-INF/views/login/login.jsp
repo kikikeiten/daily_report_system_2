@@ -30,31 +30,23 @@
         </c:if>
         <div class="ui hidden divider"></div>
         <div class="ui raised very padded text container segment">
-            <h2>
-                Login
-            </h2>
+            <h2>Login</h2>
             <form class="ui fluid form" method="POST" action="<c:url value='/login' />">
                 <div class="field">
-                    <label for="code">
-                        User id
-                    </label>
+                    <label for="code">User id</label>
                     <div class="ui left icon input">
                         <input type="text" name="code" value="${code}" placeholder="Username"/>
                         <i class="user icon"></i>
                     </div>
                 </div>
                 <div class="field">
-                    <label for="password">
-                        Password
-                    </label>
+                    <label for="password">Password</label>
                     <div class="ui left icon input">
                         <input type="password" name="password"/>
                         <i class="lock icon"></i> <input type="hidden" name="_token" value="${_token}"/>
                     </div>
                 </div>
-                <button class="ui primary button" type="submit">
-                    Enter
-                </button>
+                <button class="ui primary button" type="submit">Enter</button>
             </form>
         </div>
     </c:param>

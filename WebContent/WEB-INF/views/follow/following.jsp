@@ -3,32 +3,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>
-            フォロー中
-        </h2>
+        <h2>フォロー中</h2>
         <c:choose>
             <c:when test="${getMyFollowingCnt == 0}">
-                <h3>
-                    <c:out value="${sessionScope.loginMember.name}"/>
-                    さんはまだ誰もフォローしていません。
-                </h3>
-                <p>
-                    作成されるとここに表示されます。
-                </p>
+                <h3><c:out value="${sessionScope.loginMember.name}"/>さんはまだ誰もフォローしていません。</h3>
+                <p>作成されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
                 <table class="ui celled striped table">
                     <tbody>
                     <tr>
-                        <th>
-                            氏名
-                        </th>
-                        <th>
-                            フォロー
-                        </th>
-                        <th>
-                            日付
-                        </th>
+                        <th>氏名</th>
+                        <th>フォロー</th>
+                        <th>日付</th>
                     </tr>
                     <c:forEach var="member" items="${getMyFollowing}">
                         <tr>
@@ -39,12 +26,10 @@
                                 <form method="POST" action="<c:url value='/following/destroy'/>">
                                     <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">
                                         <div class="visible content">
-                                            <i class="user icon"></i>
-                                            フォロー中
+                                            <i class="user icon"></i>フォロー中
                                         </div>
                                         <div class="hidden content">
-                                            <i class="user icon"></i>
-                                            フォロー解除
+                                            <i class="user icon"></i>フォロー解除
                                         </div>
                                     </button>
                                 </form>
@@ -56,8 +41,7 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <div class="ui label">
-                    フォロー中
+                <div class="ui label">フォロー中
                     <c:out value="${getMyFollowingCnt}"/>
                 </div>
                 &nbsp;

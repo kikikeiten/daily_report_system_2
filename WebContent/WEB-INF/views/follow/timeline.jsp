@@ -4,41 +4,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>
-            タイムライン
-        </h2>
+        <h2>タイムライン</h2>
         <c:choose>
             <c:when test="${getMyFollowingIdeasCnt == 0}">
-                <h3>
-                    <c:out value="${sessionScope.loginMember.name}"/>
-                    さんはまだ誰もフォローしていません。
-                </h3>
-                <p>
-                    作成されるとここに表示されます。
-                </p>
+                <h3><c:out value="${sessionScope.loginMember.name}"/>さんはまだ誰もフォローしていません。</h3>
+                <p>作成されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
                 <table class="ui celled striped table">
                     <tbody>
                     <tr>
-                        <th>
-                            氏名
-                        </th>
-                        <th>
-                            フォロー
-                        </th>
-                        <th>
-                            日付
-                        </th>
-                        <th>
-                            タイトル
-                        </th>
-                        <th>
-                            操作
-                        </th>
-                        <th>
-                            いいね数
-                        </th>
+                        <th>氏名</th>
+                        <th>フォロー</th>
+                        <th>日付</th>
+                        <th>タイトル</th>
+                        <th>操作</th>
+                        <th>いいね数</th>
                     </tr>
                     <c:forEach var="idea" items="${getMyFollowingIdeas}">
                         <tr>
@@ -52,8 +33,7 @@
                                             <td>
                                                 <form method="POST" action="<c:url value='/follow/create' />">
                                                     <button class="ui tiny active button" type="submit" name="followedId" value="${idea.id}">
-                                                        <i class="user icon"></i>
-                                                        フォロー
+                                                        <i class="user icon"></i>フォロー
                                                     </button>
                                                 </form>
                                             </td>
@@ -63,12 +43,10 @@
                                                 <form method="POST" action="<c:url value='/follow/destroy' />">
                                                     <button class="ui tiny animated button" type="submit" name="followedId" value="${idea.id}">
                                                         <div class="visible content">
-                                                            <i class="user icon"></i>
-                                                            フォロー中
+                                                            <i class="user icon"></i>フォロー中
                                                         </div>
                                                         <div class="hidden content">
-                                                            <i class="user icon"></i>
-                                                            フォロー解除
+                                                            <i class="user icon"></i>フォロー解除
                                                         </div>
                                                     </button>
                                                 </form>
@@ -87,9 +65,7 @@
                                 <c:out value="${idea.title}"/>
                             </td>
                             <td>
-                                <a href="<c:url value='/ideas/show?id=${idea.id}' />">
-                                    詳細を見る
-                                </a>
+                                <a href="<c:url value='/ideas/show?id=${idea.id}' />">詳細を見る</a>
                             </td>
                             <c:choose>
                                 <c:when test="${idea.favors == 0}">
@@ -109,8 +85,7 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <div class="ui label">
-                    日報件数
+                <div class="ui label">日報件数
                     <c:out value="${getMyFollowingIdeasCnt}"/>
                 </div>&nbsp;
                 <div class="ui mini pagination menu">
@@ -132,9 +107,7 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value='/' />">
-                トップページへ戻る
-            </a>
+            <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>
     </c:param>
 </c:import>

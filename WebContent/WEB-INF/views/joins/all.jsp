@@ -18,56 +18,34 @@
                     });
             </script>
         </c:if>
-        <h2>
-            全打刻履歴
-        </h2>
+        <h2>全打刻履歴</h2>
         <c:choose>
             <c:when test="${getJoinsCnt == 0}">
-                <h3>
-                    打刻はまだありません。
-                </h3>
-                <p>
-                    打刻するとここに表示されます 。
-                </p>
+                <h3>打刻はまだありません。</h3>
+                <p>打刻するとここに表示されます 。</p>
             </c:when>
             <c:otherwise>
                 <table class="ui celled striped table">
                     <tbody>
                     <tr>
-                        <th>
-                            従業員氏名
-                        </th>
-                        <th>
-                            日付
-                        </th>
-                        <th>
-                            出勤時刻
-                        </th>
-                        <th>
-                            退勤時刻
-                        </th>
-                        <th>
-                            勤務時間
-                        </th>
+                        <th>従業員氏名</th>
+                        <th>日付</th>
+                        <th>出勤時刻</th>
+                        <th>退勤時刻</th>
+                        <th>勤務時間</th>
                     </tr>
                     <c:forEach var="join" items="${getJoins}">
                         <tr>
                             <td>
                                 <c:out value="${join.member.name}"/>
                                 <c:if test="${join.joinStatus == 1}">
-                                    <div class="ui green label">
-                                        勤務中
-                                    </div>
+                                    <div class="ui green label">勤務中</div>
                                 </c:if>
                                 <c:if test="${join.joinStatus == 2}">
-                                    <a href="<c:url value='/punchout/edit?id=${join.id}'/>" class="ui red label">
-                                        打刻忘れ
-                                    </a>
+                                    <a href="<c:url value='/punchout/edit?id=${join.id}'/>" class="ui red label">打刻忘れ</a>
                                 </c:if>
                                 <c:if test="${join.joinStatus == 3}">
-                                    <div class="ui orange label">
-                                        修正済み
-                                    </div>
+                                    <div class="ui orange label">修正済み</div>
                                 </c:if>
                             </td>
                             <td>
@@ -77,22 +55,17 @@
                                 <fmt:formatDate value='${join.punchIn}' pattern='HH : mm'/>
                             </td>
                             <td><fmt:formatDate value='${join.punchOut}' pattern='HH : mm'/>
-                                <c:if test="${join.joinStatus == 2}">
-                                    未登録
-                                </c:if>
+                                <c:if test="${join.joinStatus == 2}">未登録</c:if>
                             </td>
                             <td><fmt:formatDate value='${join.workingTime}' pattern='HH : mm'/>
-                                <c:if test="${join.joinStatus == 2}">
-                                    未登録
-                                </c:if>
+                                <c:if test="${join.joinStatus == 2}">未登録</c:if>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
                 <div class="ui label">
-                    履歴数
-                    <c:out value="${getJoinsCnt}"/>
+                    履歴数<c:out value="${getJoinsCnt}"/>
                 </div>
                 <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1" end="${((getJoinsCnt - 1) / 12) + 1}" step="1">
@@ -113,9 +86,7 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value='/' />">
-                トップページに戻る
-            </a>
+            <a href="<c:url value='/' />">トップページに戻る</a>
         </p>
     </c:param>
 </c:import>

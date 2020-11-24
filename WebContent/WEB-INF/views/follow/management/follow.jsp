@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -21,27 +20,17 @@
         </c:if>
         <c:choose>
             <c:when test="${member != null}">
-                <h2>
-                    <c:out value="${memberName}"/>
-                    さんにフォローさせる
-                </h2>
+                <h2><c:out value="${memberName}"/>さんにフォローさせる</h2>
                 <c:choose>
                     <c:when test="${getMemberNotFollowingCnt == 0}">
-                        <h3>
-                            <c:out value="${memberName}"/>
-                            さんは全ての従業員をフォローしています。
-                        </h3>
+                        <h3><c:out value="${memberName}"/>さんは全ての従業員をフォローしています。</h3>
                     </c:when>
                     <c:otherwise>
                         <table class="ui celled striped table">
                             <tbody>
                             <tr>
-                                <th>
-                                    氏名
-                                </th>
-                                <th>
-                                    フォロー
-                                </th>
+                                <th>氏名</th>
+                                <th>フォロー</th>
                             </tr>
                             <c:forEach var="member" items="${getMemberNotFollowing}">
                                 <tr>
@@ -51,8 +40,7 @@
                                     <td>
                                         <form method="POST" action="<c:url value='/management/follow/create' />">
                                             <button class="ui tiny active button" type="submit" name="followedId" value="${member.id}">
-                                                <i class="user icon"></i>
-                                                フォロー
+                                                <i class="user icon"></i>フォロー
                                             </button>
                                             <input type="hidden" name="followingId" value="${followingId}">
                                         </form>
@@ -61,8 +49,7 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                        <div class="ui label">
-                            未フォロー
+                        <div class="ui label">未フォロー
                             <c:out value="${getMemberNotFollowingCnt}"/>
                         </div>
                         <div class="ui mini pagination menu">
@@ -84,15 +71,11 @@
                 </c:choose>
             </c:when>
             <c:otherwise>
-                <h2>
-                    お探しのデータは見つかりませんでした。
-                </h2>
+                <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value='/members' />">
-                従業員一覧へ戻る
-            </a>
+            <a href="<c:url value='/members' />">従業員一覧へ戻る</a>
         </p>
     </c:param>
 </c:import>
