@@ -28,7 +28,7 @@ public class ManagementsFollowingIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 対象のメンバーIDを取得
-        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("memberId")));
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
 
         // ページネーション
         int page;
@@ -62,7 +62,7 @@ public class ManagementsFollowingIndexServlet extends HttpServlet {
         } catch (Exception e) {
         } finally {
             // 対象のメンバーIDをInteger型で取得
-            Integer memberId = Integer.parseInt(request.getParameter("memberId"));
+            Integer memberId = Integer.parseInt(request.getParameter("id"));
             request.setAttribute("memberId", memberId);
         }
 
