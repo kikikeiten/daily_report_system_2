@@ -172,7 +172,7 @@
                                 <c:choose>
                                     <c:when test="${idea.reviewStatus == 0 && sessionScope.loginMember.id == idea.member.id}">
                                         <form method="POST" action="<c:url value='/drafts/update'/>">
-                                            <input type="hidden" name="report_id" value="${idea.id}"/>
+                                            <input type="hidden" name="ideaId" value="${idea.id}"/>
                                             <button type="submit" name="reviewStatus" value="${2}" class="ui positive button">提出</button>
                                         </form>
                                     </c:when>
@@ -220,11 +220,10 @@
                                     <c:when test="${idea.reviewStatus == 4 && sessionScope.loginMember.id != idea.member.id && idea.member.role != 3}">
                                         <div style="display: inline-flex">
                                             <form method="POST" action="<c:url value='/reviews/director/create'/>" id="formId">
-                                                <input type="hidden" name="ideaId" value="${idea.id}"/>
                                                 <button type="submit" name="reviewStatus" value="${6}" class="ui positive button">
                                                     承認
                                                 </button>
-                                                &nbsp; <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                                <input type="hidden" name="ideaId" value="${idea.id}"/>
                                                 <button type="submit" name="reviewStatus" value="${3}" class="ui negative button">
                                                     差し戻し
                                                 </button>

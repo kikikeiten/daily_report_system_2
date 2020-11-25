@@ -56,19 +56,10 @@ public class IdeasShowServlet extends HttpServlet {
                     .setMaxResults(1) // 一件だけ表示
                     .getSingleResult();
 
-            // アドバイスを取得しString型に変換
-            String advice = getReviews.getAdvice();
-            // レビューした人のメンバーIDを取得
-            Member reviewer = getReviews.getMember();
-            // レビューした人の氏名を取得しString型に変換
-            String name = reviewer.getName();
-            // レビューした人の役割を取得しInteger型に変換
-            Integer role = reviewer.getRole();
+            request.setAttribute("advice", getReviews.getAdvice());
+            request.setAttribute("name", getReviews.getMember().getName());
 
-            request.setAttribute("advice", advice);
-            request.setAttribute("name", name);
-
-            switch (role) {
+            switch (getReviews.getMember().getRole()) {
                 case 2: // マネージャー
                     request.setAttribute("role", "Manager");
                     break;
@@ -77,7 +68,7 @@ public class IdeasShowServlet extends HttpServlet {
                     break;
             }
 
-         // レビューの経過を取得しInteger型に変換
+            // レビューの経過を取得しInteger型に変換
             Integer reviewFlag = getReviews.getReviewStatus();
 
             if (reviewFlag == 1 || reviewFlag == 3) {
