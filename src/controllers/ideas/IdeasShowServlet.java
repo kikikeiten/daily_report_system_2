@@ -31,7 +31,7 @@ public class IdeasShowServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 詳細を見るアイデアのIDを取得
-        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
 
         // ログイン中メンバーのIDを取得
         Member loginMember = (Member) request.getSession().getAttribute("loginMember");
@@ -77,15 +77,7 @@ public class IdeasShowServlet extends HttpServlet {
                     break;
             }
 
-        } catch (Exception e) {
-        } finally {
-
-            Review getReviews = em.createNamedQuery("getReviews", Review.class)
-                    .setParameter("idea", idea)
-                    .setMaxResults(1) // 一件だけ表示
-                    .getSingleResult();
-
-            // レビューの経過を取得しInteger型に変換
+         // レビューの経過を取得しInteger型に変換
             Integer reviewFlag = getReviews.getReviewStatus();
 
             if (reviewFlag == 1 || reviewFlag == 3) {
@@ -96,6 +88,8 @@ public class IdeasShowServlet extends HttpServlet {
             }
 
             request.setAttribute("reviewFlag", reviewFlag);
+
+        } catch (Exception e) {
         }
 
         em.close();

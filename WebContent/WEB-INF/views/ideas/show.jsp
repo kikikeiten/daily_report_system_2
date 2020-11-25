@@ -133,7 +133,7 @@
                     <tr>
                         <th>新規コメント</th>
                         <td>
-                            <c:if test="${(sessionScope.loginMember.role == 2 && idea.reviewStatus == 2 && sessionScope.loginMember.id != idea.member.id) || (sessionScope.loginMember.role == 3 && idea.approval == 4 && sessionScope.loginMember.id != idea.member.id)}">
+                            <c:if test="${(sessionScope.loginMember.role == 2 && idea.reviewStatus == 2 && sessionScope.loginMember.id != idea.member.id) || (sessionScope.loginMember.role == 3 && idea.reviewStatus == 4 && sessionScope.loginMember.id != idea.member.id)}">
                                 <form class="ui form">
                                     <textarea name="comment" rows="10" cols="50" form="formId"></textarea>
                                 </form>
