@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Review;
 import models.Idea;
+import models.Review;
 import utils.DBUtil;
 
 @WebServlet("/advice/history")
@@ -29,7 +29,7 @@ public class HistoryIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // アドバイス履歴を確認するアイデアのIDを取得
-        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
 
         // ページネーション
         int page;

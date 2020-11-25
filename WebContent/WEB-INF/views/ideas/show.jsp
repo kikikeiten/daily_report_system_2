@@ -117,7 +117,7 @@
                     <tr>
                         <th>承認履歴</th>
                         <td>
-                            <a href="<c:url value='/advice/history?id=${idea.id}'/>"></a>
+                            <a href="<c:url value='/advice/history?id=${idea.id}'/>">詳細</a>
                         </td>
                     </tr>
                     <tr>
