@@ -18,7 +18,7 @@
                         <th>退勤時刻</th>
                         <th>勤務時間</th>
                     </tr>
-                    <c:forEach var="join" items="${getMyJoin}">
+                    <c:forEach var="join" items="${getMyJoins}">
                         <tr>
                             <td>
                                 <fmt:formatDate value='${join.joinDate}' pattern='MM / dd'/>

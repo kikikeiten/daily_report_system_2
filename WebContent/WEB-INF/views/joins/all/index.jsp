@@ -49,7 +49,7 @@
                                 </c:if>
                             </td>
                             <td>
-                                <fmt:formatDate value='${join.joinStatus}' pattern='MM / dd'/>
+                                <fmt:formatDate value='${join.joinDate}' pattern='MM / dd'/>
                             </td>
                             <td>
                                 <fmt:formatDate value='${join.punchIn}' pattern='HH : mm'/>
