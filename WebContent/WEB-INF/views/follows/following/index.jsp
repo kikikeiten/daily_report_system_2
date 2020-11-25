@@ -20,7 +20,7 @@
                     <c:forEach var="member" items="${getMyFollowing}">
                         <tr>
                             <td>
-                                <c:out value="${member.follow.name}"/>
+                                <c:out value="${member.followedId.name}"/>
                             </td>
                             <td>
                                 <form method="POST" action="<c:url value='/following/destroy/index'/>">
