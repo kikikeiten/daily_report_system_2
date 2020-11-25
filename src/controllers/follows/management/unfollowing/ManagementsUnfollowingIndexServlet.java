@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Follow;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/management/unfollowing")
@@ -29,7 +29,7 @@ public class ManagementsUnfollowingIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 対象メンバーのIDを取得
-        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("memberId")));
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
 
         // ページネーション
         int page;
@@ -58,7 +58,7 @@ public class ManagementsUnfollowingIndexServlet extends HttpServlet {
         } catch (Exception e) {
         } finally {
             // 対象メンバーのIDをInteger型で取得
-            Integer memberId = Integer.parseInt(request.getParameter("memberId"));
+            Integer memberId = Integer.parseInt(request.getParameter("id"));
             request.setAttribute("memberId", memberId);
         }
 
