@@ -37,14 +37,14 @@
                             <c:forEach var="member" items="${getMemberFollowing}">
                                 <tr>
                                     <td>
-                                        <c:out value="${member.follow.name}"/></td>
+                                        <c:out value="${member.followedId.name}"/></td>
                                     <td>
                                         <form method="POST" action="<c:url value='/management/following/destroy' />">
                                             <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">
                                                 <div class="visible content">
                                                     <i class="user icon"></i>フォロー中
                                                 </div>
-                                                <div>
+                                                <div class="hidden content">
                                                     <i class="user icon"></i>フォロー解除
                                                 </div>
                                             </button>

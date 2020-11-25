@@ -34,7 +34,7 @@
                             </tr>
                             <c:forEach var="member" items="${getMemberNotFollowing}">
                                 <tr>
-                                    <td class="following_name">
+                                    <td>
                                         <c:out value="${member.name}"/>
                                     </td>
                                     <td>
@@ -42,7 +42,7 @@
                                             <button class="ui tiny active button" type="submit" name="followedId" value="${member.id}">
                                                 <i class="user icon"></i>フォロー
                                             </button>
-                                            <input type="hidden" name="followingId" value="${followingId}">
+                                            <input type="hidden" name="followingId" value="${member.id}">
                                         </form>
                                     </td>
                                 </tr>

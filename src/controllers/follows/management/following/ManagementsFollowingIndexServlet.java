@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Follow;
 import models.Member;
 import utils.DBUtil;
 
@@ -27,7 +28,7 @@ public class ManagementsFollowingIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // 対象のメンバーIDを取得
+        // 対象メンバーのIDを取得
         Member member = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
 
         // ページネーション
@@ -38,43 +39,37 @@ public class ManagementsFollowingIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // 対象のメンバーがフォローしていないメンバー一覧を取得
-        List<Member> getMemberNotFollowing = em.createNamedQuery("getMemberNotFollowing", Member.class)
+        // 対象メンバーのフォロー一覧を取得
+        List<Follow> getMemberFollowing = em.createNamedQuery("getMemberFollowing", Follow.class)
                 .setParameter("member", member)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
 
-        // 上記カウントを取得
-        long getMemberNotFollowingCnt = (long) em.createNamedQuery("getMemberNotFollowingCnt", Long.class)
+        // 上記のカウントを取得
+        long getMemberFollowingCnt = (long) em.createNamedQuery("getMemberFollowingCnt", Long.class)
                 .setParameter("member", member)
                 .getSingleResult();
 
         try {
-            // 対象のメンバー名を取得
+            // 対象メンバーの氏名を取得
             String memberName = member.getName();
-            // 対象のメンバーIDを取得
-            Integer memberId = member.getId();
-
             request.setAttribute("memberName", memberName);
-            request.setAttribute("memberId", memberId);
-
         } catch (Exception e) {
         } finally {
-            // 対象のメンバーIDをInteger型で取得
+            // 対象メンバーのIDをInteger型で取得
             Integer memberId = Integer.parseInt(request.getParameter("id"));
             request.setAttribute("memberId", memberId);
         }
-
 
         em.close();
 
         request.setAttribute("page", page);
         request.setAttribute("member", member);
-        request.setAttribute("getMemberNotFollowing", getMemberNotFollowing);
-        request.setAttribute("getMemberNotFollowingCnt", getMemberNotFollowingCnt);
+        request.setAttribute("getMemberFollowing", getMemberFollowing);
+        request.setAttribute("getMemberFollowingCnt", getMemberFollowingCnt);
 
-        // トーストメッセージのセッションがあるか確認
+        // トーストメッセージがセッションにあるか確認
         if (request.getSession().getAttribute("toast") != null) {
             request.setAttribute("toast", request.getSession().getAttribute("toast"));
             request.getSession().removeAttribute("toast");
