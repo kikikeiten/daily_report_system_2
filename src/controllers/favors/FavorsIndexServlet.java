@@ -52,7 +52,7 @@ public class FavorsIndexServlet extends HttpServlet {
                 .getSingleResult();
 
         // URLに付与するアイデアIDを取得
-        Integer ideaId = Integer.parseInt(request.getParameter("ideaId"));
+        Integer ideaId = Integer.parseInt(request.getParameter("id"));
 
         em.close();
 
