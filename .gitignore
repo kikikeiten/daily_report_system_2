@@ -23,3 +23,6 @@ Thumbs.db
 WebContent/META-INF/application.properties
 
 persistence.xml
+
+# CSS
+WebContent/css/style.css

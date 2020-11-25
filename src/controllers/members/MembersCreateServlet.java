@@ -37,7 +37,6 @@ public class MembersCreateServlet extends HttpServlet {
             Member member = new Member();
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-            // Memberテーブルに値をセット
             member.setCode(request.getParameter("code"));
             member.setName(request.getParameter("name"));
             member.setPassword( // 暗号化してセットする
