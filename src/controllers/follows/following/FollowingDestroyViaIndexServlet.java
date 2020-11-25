@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Follow;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/following/destroy/index")
@@ -30,7 +30,7 @@ public class FollowingDestroyViaIndexServlet extends HttpServlet {
         Follow followed = em.find(Follow.class, Integer.parseInt(request.getParameter("followedId")));
 
         // フォロー解除するメンバーの氏名を取得
-        Member unfollow = followed.getFollow();
+        Member unfollow = followed.getFollowedId();
         String unfollowName = unfollow.getName();
 
         em.getTransaction().begin();

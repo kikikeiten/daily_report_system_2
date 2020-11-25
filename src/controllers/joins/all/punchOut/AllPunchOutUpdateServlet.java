@@ -64,7 +64,7 @@ public class AllPunchOutUpdateServlet extends HttpServlet {
         Time workingTime = Time.valueOf(diffTime);
 
         // Joinテーブルに値をセット
-        join.setWorkingtime(workingTime);
+        join.setWorkingTime(workingTime);
 
         em.getTransaction().begin();
         em.getTransaction().commit();

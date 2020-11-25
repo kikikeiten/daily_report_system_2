@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Follow;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/followers/create")
@@ -35,12 +35,12 @@ public class FollowersCreateServlet extends HttpServlet {
 
         // Followテーブルに値をセット
         follow.setFollowingId((Member) request.getSession().getAttribute("loginMember"));
-        follow.setFollowedId(followed.getMember());
+        follow.setFollowedId(followed.getFollowingId());
         follow.setCreatedAt(timestamp);
         follow.setUpdatedAt(timestamp);
 
         // フォローされたメンバーの氏名を取得
-        Member followedMember = followed.getMember();
+        Member followedMember = followed.getFollowingId();
         String followName = followedMember.getName();
 
         em.getTransaction().begin();

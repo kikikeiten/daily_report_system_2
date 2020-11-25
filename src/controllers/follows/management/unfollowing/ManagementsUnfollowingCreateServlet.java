@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Follow;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/management/unfollowing/create")
@@ -36,7 +36,7 @@ public class ManagementsUnfollowingCreateServlet extends HttpServlet {
         Member followed = em.find(Member.class, Integer.parseInt(request.getParameter("followedId")));
 
         // Followテーブルにセット
-        follow.setFollowingId(memberOperated);
+        follow.setFollowingId(following);
         follow.setFollowedId(followed);
         follow.setCreatedAt(timestamp);
         follow.setUpdatedAt(timestamp);

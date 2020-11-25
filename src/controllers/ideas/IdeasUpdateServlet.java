@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Idea;
+import models.Member;
 import models.validators.IdeaValidator;
 import utils.DBUtil;
 
@@ -48,7 +48,7 @@ public class IdeasUpdateServlet extends HttpServlet {
             idea.setTitle(request.getParameter("title"));
             idea.setContent(request.getParameter("content"));
             idea.setReviewStatus(reviewStatus);
-            idea.setCrearedDate(Date.valueOf(request.getParameter("createdDate")));
+            idea.setCreatedDate(Date.valueOf(request.getParameter("createdDate")));
             idea.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 
             List<String> errors = IdeaValidator.validate(idea);
