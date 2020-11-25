@@ -24,7 +24,7 @@
                                 <c:out value="${follower.member.name}"/>
                             </td>
                             <c:choose>
-                                <c:when test="${!fn:contains(followIdea,member.member.id)}">
+                                <c:when test="${!fn:contains(followIdea,member.followingId.id)}">
                                     <td>
                                         <form method="POST" action="<c:url value='/followers/create' />">
                                             <button class="ui tiny active button" type="submit" name="followedId" value="${member.id}">

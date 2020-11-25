@@ -18,7 +18,7 @@
                     });
             </script>
         </c:if>
-        <h2>All menbers</h2>
+        <h2>All members</h2>
         <div class="ui raised very padded container segment">
             <c:choose>
                 <c:when test="${getMembersCnt == 0}">
