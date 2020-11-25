@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Idea;
+import models.Member;
 import models.validators.IdeaValidator;
 import utils.DBUtil;
 
@@ -47,10 +47,11 @@ public class IdeasCreateServlet extends HttpServlet {
             // アイデアの作成日を取得
             String createdDate = request.getParameter("createdDate");
 
+            /*
             // 作成日のインプットスペースに作成日を予め入れておく
             if (createdDate != null && !createdDate.equals("")) {
                 date = Date.valueOf(request.getParameter("createdDate"));
-            }
+            }*/
 
             Idea idea = new Idea();
 
