@@ -54,7 +54,7 @@
                         <a href="<c:url value='/following' />" class="item">
                             <b><c:out value="${getMyFollowingCnt}"/></b>Following
                         </a>
-                        <a href="<c:url value='/follower' />" class="item">
+                        <a href="<c:url value='/followers' />" class="item">
                             <b><c:out value="${getMyFollowerCnt}"/></b>Follower
                         </a>
                         <c:if test="${sessionScope.loginMember.role == 2}">
