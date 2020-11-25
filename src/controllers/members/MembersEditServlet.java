@@ -27,7 +27,7 @@ public class MembersEditServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 編集するメンバーのIDを取得
-        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("memberId")));
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
