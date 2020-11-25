@@ -50,22 +50,9 @@ public class ManagementsUnfollowingIndexServlet extends HttpServlet {
                 .setParameter("member", member)
                 .getSingleResult();
 
-        try {
-            // 対象のメンバー名を取得
-            String memberName = member.getName();
-            // 対象のメンバーIDを取得
-            Integer memberId = member.getId();
-
-            request.setAttribute("memberName", memberName);
-            request.setAttribute("memberId", memberId);
-
-        } catch (Exception e) {
-        } finally {
-            // 対象のメンバーIDをInteger型で取得
-            Integer memberId = Integer.parseInt(request.getParameter("id"));
-            request.setAttribute("memberId", memberId);
-        }
-
+        // 対象のメンバーIDをInteger型で取得
+        Integer memberId = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("memberId", memberId);
 
         em.close();
 

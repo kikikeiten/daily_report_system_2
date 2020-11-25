@@ -20,7 +20,7 @@
         </c:if>
         <c:choose>
             <c:when test="${member != null}">
-                <h2><c:out value="${memberName}"/>さんにフォローさせる</h2>
+                <h2><c:out value="${member.name}"/>さんにフォローさせる</h2>
                 <c:choose>
                     <c:when test="${getMemberNotFollowingCnt == 0}">
                         <h3><c:out value="${memberName}"/>さんは全ての従業員をフォローしています。</h3>

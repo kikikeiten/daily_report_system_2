@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-        <c:if test="${flush != null}">
+        <c:if test="${toast != null}">
             <script>
                 $('body')
                     .toast({

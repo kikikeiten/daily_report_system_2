@@ -63,6 +63,7 @@
                                     </span>
                                     <span class="header">
                                             <c:out value="${idea.title}"/>
+                                    </span>
                                     <span class="description">
                                     </span>
                                 </a>
@@ -122,7 +123,7 @@
         </a>
         <div class="ui teal image label">My drafts
             <div class="detail">
-                <c:out value="${getMyDraftsCount}"/>
+                <c:out value="${getMyDraftsCnt}"/>
             </div>
         </div>
         <c:if test="${sessionScope.loginMember.role == 0 || sessionScope.loginMember.role == 1}">

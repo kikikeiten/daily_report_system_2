@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Idea;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/drafts")
@@ -40,7 +40,7 @@ public class DraftsIndexServlet extends HttpServlet {
         }
 
         // ログイン中メンバーの下書きを取得
-        List<Idea> getMyIdeas = em.createNamedQuery("getMyIdeas", Idea.class)
+        List<Idea> getMyDrafts = em.createNamedQuery("getMyDrafts", Idea.class)
                 .setParameter("loginMember", loginMember)
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
@@ -68,11 +68,11 @@ public class DraftsIndexServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("page", page);
-        request.setAttribute("getMyAllDrafts", getMyIdeas);
-        request.setAttribute("getMyDraftsCount", getMyDraftsCnt);
-        request.setAttribute("getReportsCountButDrafts", getIdeasCntButDrafts);
-        request.setAttribute("getManagerRemandReportsCount", getManagerAdviceCnt);
-        request.setAttribute("getDirectorRemandReportsCount", getDirectorAdviceCnt);
+        request.setAttribute("getMyDrafts", getMyDrafts);
+        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
+        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
+        request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
+        request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
 
         // トーストメッセージがセッションに保存されているか確認
         if (request.getSession().getAttribute("toast") != null) {

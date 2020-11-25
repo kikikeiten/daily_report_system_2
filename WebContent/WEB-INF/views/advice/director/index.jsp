@@ -59,9 +59,10 @@
                         <c:forEach var="idea" items="${getDirectorAdvice}">
                             <div class="ui teal card">
                                 <a class="content" href="<c:url value='/ideas/show?id=${idea.id}' />">
-                                    <span class="right floated"><fmt:formatDate value='${idea.createdate}' pattern='MM / dd'/>
+                                    <span class="right floated"><fmt:formatDate value='${idea.createdate}' pattern='MM / dd'/></span>
                                     <span class="header">
                                             <c:out value="${idea.title}"/>
+                                    </span>
                                     <span class="description">
                                     </span>
                                 </a>

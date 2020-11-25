@@ -82,6 +82,8 @@ public class MembersUpdateServlet extends HttpServlet {
                 em.getTransaction().begin();
                 em.getTransaction().commit();
                 em.close();
+
+                // トーストメッセージをセッションにセット
                 request.getSession().setAttribute("toast", "Update completed!");
 
                 request.getSession().removeAttribute("memberId");
