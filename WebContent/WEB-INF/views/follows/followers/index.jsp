@@ -21,7 +21,7 @@
                     <c:forEach var="member" items="${getMyFollower}">
                         <tr>
                             <td>
-                                <c:out value="${follower.member.name}"/>
+                                <c:out value="${member.followingId.name}"/>
                             </td>
                             <c:choose>
                                 <c:when test="${!fn:contains(followIdea,member.followingId.id)}">
