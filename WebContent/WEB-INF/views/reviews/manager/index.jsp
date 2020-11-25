@@ -59,7 +59,7 @@
                             <div class="ui green card">
                                 <a class="content" href="<c:url value='/ideas/show?id=${idea.id}' />">
                                     <span class="right floated">
-                                        <fmt:formatDate value='${idea.idea_date}' pattern='MM / dd'/>
+                                        <fmt:formatDate value='${idea.createdDate}' pattern='MM / dd'/>
                                     </span>
                                     <span class="header">
                                         <c:out value="${idea.title}"/>

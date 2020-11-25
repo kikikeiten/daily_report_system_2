@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Review;
-import models.Member;
 import models.Idea;
+import models.Member;
+import models.Review;
 import utils.DBUtil;
 
 @WebServlet("/reviews/manager/create")

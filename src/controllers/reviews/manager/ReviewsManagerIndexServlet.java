@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Idea;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/reviews/manager")
@@ -50,8 +50,8 @@ public class ReviewsManagerIndexServlet extends HttpServlet {
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // マネージャーのアドバイス有アイデア総数を取得
-        long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
+        // ディレクターのアドバイス有アイデア総数を取得
+        long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
@@ -64,7 +64,7 @@ public class ReviewsManagerIndexServlet extends HttpServlet {
         request.setAttribute("page", page);
         request.setAttribute("getManagerReviews", getManagerReviews);
         request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
-        request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
+        request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
         request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
 
         // トーストメッセージがセッションに保存されているか確認
