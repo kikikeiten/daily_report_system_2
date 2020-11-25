@@ -56,10 +56,6 @@ public class ManagementsFollowingIndexServlet extends HttpServlet {
             String memberName = member.getName();
             request.setAttribute("memberName", memberName);
         } catch (Exception e) {
-        } finally {
-            // 対象メンバーのIDをInteger型で取得
-            Integer memberId = Integer.parseInt(request.getParameter("id"));
-            request.setAttribute("memberId", memberId);
         }
 
         em.close();

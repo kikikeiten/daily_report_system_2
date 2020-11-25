@@ -56,7 +56,7 @@ public class ManagementsUnfollowingCreateServlet extends HttpServlet {
         // トーストメッセージをセッションにセット
         request.getSession().setAttribute("toast", followingName + "さんが" + followedName + "さんをフォローしました。");
 
-        response.sendRedirect(request.getContextPath() + "/follows/management/unfollowing?id=" + followingId);
+        response.sendRedirect(request.getContextPath() + "/management/unfollowing?id=" + followingId);
     }
 
 }

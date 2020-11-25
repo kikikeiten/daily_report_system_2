@@ -42,7 +42,7 @@
                                             <button class="ui tiny active button" type="submit" name="followedId" value="${member.id}">
                                                 <i class="user icon"></i>フォロー
                                             </button>
-                                            <input type="hidden" name="followingId" value="${member.id}">
+                                            <input type="hidden" name="followingId" value="${memberId}">
                                         </form>
                                     </td>
                                 </tr>

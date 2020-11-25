@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Follow;
-import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/management/following/destroy")
@@ -30,15 +29,13 @@ public class ManagementsFollowingDestroyServlet extends HttpServlet {
         Follow unfollowed = em.find(Follow.class, Integer.parseInt(request.getParameter("followedId")));
 
         // フォロー解除されるメンバーの氏名をString型で取得
-        Member unfollowedMember = unfollowed.getFollowingId();
-        String unfollowedMemberName = unfollowedMember.getName();
+        String unfollowedMember = unfollowed.getFollowingId().getName();
 
         // フォロー解除するメンバーの氏名をString型で取得
-        Member unfollowingMember = unfollowed.getFollowedId();
-        String unfollowingMemberName = unfollowingMember.getName();
+        String unfollowingMember = unfollowed.getFollowedId().getName();
 
         // フォロー解除するメンバーのIDをInteger型で取得
-        Integer unfollowingMemberId = unfollowingMember.getId();
+        Integer unfollowingMemberId = unfollowed.getFollowingId().getId();
 
         em.getTransaction().begin();
         em.remove(unfollowed);
@@ -46,9 +43,9 @@ public class ManagementsFollowingDestroyServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", unfollowedMemberName + "さんが" + unfollowingMemberName + "さんのフォローを解除しました。");
+        request.getSession().setAttribute("toast", unfollowedMember + "さんが" + unfollowingMember + "さんのフォローを解除しました。");
 
-        response.sendRedirect(request.getContextPath() + "/follows/management/following?id=" + unfollowingMemberId);
+        response.sendRedirect(request.getContextPath() + "/management/following?id=" + unfollowingMemberId);
     }
 
 }
