@@ -80,7 +80,7 @@ public class DraftsIndexServlet extends HttpServlet {
             request.getSession().removeAttribute("toast");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ideas/draft.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/drafts/index.jsp");
         rd.forward(request, response);
     }
 }

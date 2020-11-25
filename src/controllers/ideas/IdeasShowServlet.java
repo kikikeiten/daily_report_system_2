@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Review;
-import models.Member;
 import models.Idea;
+import models.Member;
+import models.Review;
 import utils.DBUtil;
 
 @WebServlet("/ideas/show")
@@ -79,6 +79,11 @@ public class IdeasShowServlet extends HttpServlet {
 
         } catch (Exception e) {
         } finally {
+
+            Review getReviews = em.createNamedQuery("getReviews", Review.class)
+                    .setParameter("idea", idea)
+                    .setMaxResults(1) // 一件だけ表示
+                    .getSingleResult();
 
             // レビューの経過を取得しInteger型に変換
             Integer reviewFlag = getReviews.getReviewStatus();

@@ -29,7 +29,7 @@ public class FavorsIndexServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 賛成一覧の対象アイデアIDを取得
-        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
 
         // ページネーション
         int page;
