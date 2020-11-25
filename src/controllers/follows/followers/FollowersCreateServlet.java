@@ -31,7 +31,7 @@ public class FollowersCreateServlet extends HttpServlet {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         // フォローされたメンバーのIDを取得
-        Follow followed = em.find(Follow.class, Integer.parseInt(request.getParameter("followedId")));
+        Follow followed = em.find(Follow.class, Integer.parseInt(request.getParameter("followerId")));
 
         // Followテーブルに値をセット
         follow.setFollowingId((Member) request.getSession().getAttribute("loginMember"));

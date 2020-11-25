@@ -30,19 +30,19 @@ public class FollowersDestroyServlet extends HttpServlet {
         Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
         // フォロー解除されるメンバーのIDを取得
-        Follow following = em.find(Follow.class, Integer.parseInt(request.getParameter("followingId")));
+        Follow follower = em.find(Follow.class, Integer.parseInt(request.getParameter("followerId")));
 
         // フォローリストの中からフォロー解除されるメンバーのIDを取得
         Integer memberId = 0;
         memberId = em.createNamedQuery("getDestroyFollower", Integer.class)
                 .setParameter("loginMember", loginMember)
-                .setParameter("followingId", following.getFollowingId())
+                .setParameter("followerId", follower.getFollowingId())
                 .getSingleResult();
 
         Follow follow = em.find(Follow.class, memberId);
 
         // フォロー解除されるメンバーの氏名を取得
-        Member unfollow = following.getFollowingId();
+        Member unfollow = follower.getFollowingId();
         String unfollowName = unfollow.getName();
 
         em.getTransaction().begin();

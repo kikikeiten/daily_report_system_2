@@ -27,7 +27,7 @@
                                 <c:when test="${!fn:contains(followIdea,member.followingId.id)}">
                                     <td>
                                         <form method="POST" action="<c:url value='/followers/create' />">
-                                            <button class="ui tiny active button" type="submit" name="followedId" value="${member.id}">
+                                            <button class="ui tiny active button" type="submit" name="followerId" value="${member.id}">
                                                 <i class="user icon"></i>フォロー
                                             </button>
                                         </form>
@@ -36,7 +36,7 @@
                                 <c:otherwise>
                                     <td>
                                         <form method="POST" action="<c:url value='/followers/destroy' />">
-                                            <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">
+                                            <button class="ui tiny animated button" type="submit" name="followerId" value="${member.id}">
                                                 <div class="visible content">
                                                     <i class="user icon"></i>フォロー中
                                                 </div>

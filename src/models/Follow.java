@@ -21,7 +21,7 @@ import lombok.Setter;
         // フォロー解除するメンバーのIDを取得
         @NamedQuery(name = "getDestroyFollow", query = "SELECT f.id FROM Follow f WHERE f.followedId  = :followedId AND f.followingId = :loginMember"),
         // フォロー解除するフォロワーのIDを取得
-        @NamedQuery(name = "getDestroyFollower", query = "SELECT f.id FROM Follow f WHERE f.followedId  = :loginMember AND f.followingId = :followingId"),
+        @NamedQuery(name = "getDestroyFollower", query = "SELECT f.id FROM Follow f WHERE f.followingId  = :loginMember AND f.followedId = :followerId"),
 
         // ログイン中メンバーがフォローしているメンバーのアイデアを取得
         @NamedQuery(name = "getMyFollowingIdeas", query = "SELECT i FROM Idea i, Follow f WHERE f.followingId = :loginMember AND i.member.id = f.followedId.id ORDER BY i.updatedAt DESC"),
