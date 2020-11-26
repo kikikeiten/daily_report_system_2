@@ -91,6 +91,6 @@
     <div class="ui container">${param.content}</div>
 </div>
 <div class="ui hidden divider"></div>
-<div id="footer">© 2020 KIKI.</div>
+<div id="footer"></div>
 </body>
 </html>
