@@ -30,7 +30,7 @@ public class AllPunchOutUpdateServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 退席したメンバーのIDを取得
-        Join join = em.find(Join.class, Integer.parseInt(request.getParameter("joinId")));
+        Join join = em.find(Join.class, Integer.parseInt(request.getParameter("id")));
 
         // 入力された時刻をString型で保存
         String punchOutTimeStr = Integer.parseInt(request.getParameter("punchOutHour")) + ":"

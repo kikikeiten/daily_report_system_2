@@ -20,7 +20,7 @@
                     <c:out value="${join.punchIn}"/>
                 </div>
             </div>
-            <form class="ui fluid form" method="POST" action="<c:url value='joins/all/punch-out/update' />">
+            <form class="ui fluid form" method="POST" action="<c:url value='/joins/all/punch-out/update' />">
                 <div class="fields">
                     <div class="four wide field">
                         <label for="punchOutHour">時</label>
