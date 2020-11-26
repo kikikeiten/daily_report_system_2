@@ -284,7 +284,7 @@
                     </c:when>
                 </c:choose>
                 <c:if test="${sessionScope.loginMember.id == idea.member.id}">
-                    <c:if test="${reviewStatus == 0 || reviewStatus == 1 || reviewStatus == 3}">
+                    <c:if test="${idea.reviewStatus == 0 || idea.reviewStatus == 1 || idea.reviewStatus == 3}">
                         <p>
                             <a href="<c:url value="/ideas/edit?id=${idea.id}" />">この日報を編集する</a>
                         </p>

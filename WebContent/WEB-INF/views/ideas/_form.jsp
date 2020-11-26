@@ -23,9 +23,7 @@
 </div>
 <div class="field">
     <label for="content">Content</label>
-    <textarea name="content" rows="10" cols="50">
-        <c:out value="${idea.content}"/>
-    </textarea>
+    <textarea name="content" rows="10" cols="50"><c:out value="${idea.content}"/></textarea>
 </div>
 <c:if test="${sessionScope.loginMember.role == 0 || sessionScope.loginMember.role == 1}">
     <c:choose>
