@@ -27,7 +27,7 @@ public class AllPunchOutEditServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 変更対象のジョインIDを取得
-        Join join = em.find(Join.class, Integer.parseInt(request.getParameter("joinId")));
+        Join join = em.find(Join.class, Integer.parseInt(request.getParameter("id")));
 
         request.setAttribute("join", join);
 

@@ -12,12 +12,12 @@
             </div>
             <div class="ui image label">出勤日
                 <div class="detail">
-                    <c:out value="${join.join_date}"/>
+                    <c:out value="${join.joinDate}"/>
                 </div>
             </div>
             <div class="ui image label">出勤時刻
                 <div class="detail">
-                    <c:out value="${join.punch_in}"/>
+                    <c:out value="${join.punchIn}"/>
                 </div>
             </div>
             <form class="ui fluid form" method="POST" action="<c:url value='joins/all/punch-out/update' />">
