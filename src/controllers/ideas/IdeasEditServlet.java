@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Idea;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/ideas/edit")
@@ -28,7 +28,7 @@ public class IdeasEditServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 編集するアイデアのIDを取得
-        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("ideaId")));
+        Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
 
         Integer reviewFlag = idea.getReviewStatus();
 

@@ -11,7 +11,7 @@
 </c:if>
 <div class="field">
     <label for="createdDate">Date</label>
-    <input type="date" name="createdDate" value="<fmt:formatDate value='${idea.createdDate}' pattern='yyyy / MM / dd' />"/>
+    <input type="date" name="createdDate" value="<fmt:formatDate value='${idea.createdDate}' pattern='yyyy-MM-dd' />"/>
 </div>
 <div class="field">
     <label for="name">Name</label>
