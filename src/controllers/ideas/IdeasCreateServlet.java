@@ -44,15 +44,12 @@ public class IdeasCreateServlet extends HttpServlet {
             Date date = new Date(System.currentTimeMillis());
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-            /*
-            // アイデアの作成日を取得
             String createdDate = request.getParameter("createdDate");
 
-
-            // 作成日のインプットスペースに作成日を予め入れておく
+            // 作成日のインプットスペースが空白の場合は当日の日付を入れる
             if (createdDate != null && !createdDate.equals("")) {
                 date = Date.valueOf(request.getParameter("createdDate"));
-            }*/
+            }
 
             Idea idea = new Idea();
 
