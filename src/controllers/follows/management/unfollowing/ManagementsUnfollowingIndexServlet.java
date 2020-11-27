@@ -50,14 +50,10 @@ public class ManagementsUnfollowingIndexServlet extends HttpServlet {
                 .setParameter("member", member)
                 .getSingleResult();
 
-        // 対象のメンバーIDをInteger型で取得
-        Integer memberId = Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("memberId", memberId);
-
         em.close();
 
-        request.setAttribute("page", page);
         request.setAttribute("member", member);
+        request.setAttribute("page", page);
         request.setAttribute("getMemberNotFollowing", getMemberNotFollowing);
         request.setAttribute("getMemberNotFollowingCnt", getMemberNotFollowingCnt);
 

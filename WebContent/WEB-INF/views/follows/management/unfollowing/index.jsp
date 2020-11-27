@@ -23,7 +23,7 @@
                 <h2><c:out value="${member.name}"/>さんにフォローさせる</h2>
                 <c:choose>
                     <c:when test="${getMemberNotFollowingCnt == 0}">
-                        <h3><c:out value="${memberName}"/>さんは全ての従業員をフォローしています。</h3>
+                        <h3><c:out value="${member.name}"/>さんは全ての従業員をフォローしています。</h3>
                     </c:when>
                     <c:otherwise>
                         <table class="ui celled striped table">
@@ -42,7 +42,7 @@
                                             <button class="ui tiny active button" type="submit" name="followedId" value="${member.id}">
                                                 <i class="user icon"></i>フォロー
                                             </button>
-                                            <input type="hidden" name="followingId" value="${memberId}">
+                                            <input type="hidden" name="followingId" value="${member.id}">
                                         </form>
                                     </td>
                                 </tr>
@@ -61,7 +61,7 @@
                                         </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <a class="item" href="<c:url value='/management/unfollowing?id=${page_number}&page=${i}'/>">
+                                        <a class="item" href="<c:url value='/management/unfollowing?id=${member.id}&page=${i}'/>">
                                             <c:out value="${i}"/></a>&nbsp;
                                     </c:otherwise>
                                 </c:choose>
