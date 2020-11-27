@@ -41,17 +41,13 @@ public class FollowersDestroyServlet extends HttpServlet {
 
         Follow follow = em.find(Follow.class, memberId);
 
-        // フォロー解除されるメンバーの氏名を取得
-        Member unfollow = follower.getFollowingId();
-        String unfollowName = unfollow.getName();
-
         em.getTransaction().begin();
         em.remove(follow);
         em.getTransaction().commit();
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", unfollowName + "さんのフォローを解除しました。");
+        request.getSession().setAttribute("toast", follower.getFollowingId().getName() + "さんのフォローを解除しました。");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
     }
