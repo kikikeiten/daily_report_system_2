@@ -77,9 +77,7 @@ public class IdeasShowServlet extends HttpServlet {
             } else if (reviewFlag == 4 || reviewFlag == 6) {
                 request.setAttribute("reviewFlag", "承認");
             }
-
             request.setAttribute("reviewFlag", reviewFlag);
-
         } catch (Exception e) {
         }
 

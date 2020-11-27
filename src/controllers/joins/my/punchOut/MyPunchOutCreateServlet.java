@@ -50,23 +50,10 @@ public class MyPunchOutCreateServlet extends HttpServlet {
         join.setCreatedAt(timestamp);
         join.setUpdatedAt(timestamp);
 
-        // LocalTime型の現在時刻を取得
-        LocalTime localTime = LocalTime.now();
-        // 参加時刻をLocalDate型に変換
-        LocalTime punchInLocal = join.getPunchIn().toLocalTime();
-
         // 現在時刻と参加時刻の差分を求める
-        long minutes = ChronoUnit.MINUTES.between(punchInLocal, localTime);
-
-        // 時間と分を求める
-        long diffHours = minutes / 60;
-        long diffMinutes = minutes % 60;
-
-        // HH:mmのString型に変換
-        String diffTime = diffHours + ":" + diffMinutes + ":00";
+        long minutes = ChronoUnit.MINUTES.between(join.getPunchIn().toLocalTime(), LocalTime.now());
         // Time型に変換
-        Time workingTime = Time.valueOf(diffTime);
-
+        Time workingTime = Time.valueOf(minutes / 60 + ":" + minutes % 60 + ":00");
         // Joinテーブルに値をセット
         join.setWorkingTime(workingTime);
 
