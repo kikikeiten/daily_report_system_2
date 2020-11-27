@@ -91,6 +91,6 @@
     <div class="ui container">${param.content}</div>
 </div>
 <div class="ui hidden divider"></div>
-<div id="footer"></div>
+<div id="footer"><c:import url="/WEB-INF/views/layout/footer.jsp"/></div>
 </body>
 </html>
