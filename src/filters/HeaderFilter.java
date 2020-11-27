@@ -59,17 +59,10 @@ public class HeaderFilter implements Filter {
                     .setMaxResults(1) // 一件だけ取得
                     .getSingleResult();
 
-            Integer latestJoin = getMyLatestJoin.getJoinStatus(); // Join型からInteger型に変換
-            request.setAttribute("latestJoin", latestJoin);
-
+            request.setAttribute("latestJoin", getMyLatestJoin.getJoinStatus());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // ログイン中メンバーのアイデア総数を取得
-        long getMyIdeasCnt = (long) em.createNamedQuery("getMyIdeasCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
 
         em.close();
 
@@ -77,7 +70,6 @@ public class HeaderFilter implements Filter {
         request.setAttribute("getMyFollowerCnt", getMyFollowerCnt);
         request.setAttribute("getManagerReviewsCnt", getManagerReviewsCnt);
         request.setAttribute("getDirectorReviewsCnt", getDirectorReviewsCnt);
-        request.setAttribute("getMyIdeasCnt", getMyIdeasCnt);
 
         chain.doFilter(request, response);
     }

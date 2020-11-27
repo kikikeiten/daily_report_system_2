@@ -70,7 +70,6 @@ public class ForgetCntFilter implements Filter {
                 em.getTransaction().begin();
                 em.getTransaction().commit();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
