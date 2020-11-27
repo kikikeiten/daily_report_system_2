@@ -1,7 +1,6 @@
 package controllers.ideas;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Idea;
-import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/ideas")
@@ -29,28 +27,12 @@ public class IdeasIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // ログイン中メンバーのIDを取得
-        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
-
         // ページネーション
         int page;
         try {
             page = Integer.parseInt(request.getParameter("page"));
         } catch (Exception e) {
             page = 1;
-        }
-
-        //フォロー判定
-        List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
-                .setParameter("loginMember", loginMember)
-                .getResultList();
-
-        List<Integer> followIdea = new ArrayList<Integer>();
-
-        for (Member ideaId : checkMyFollow) {
-            Integer ideaIdInt = ideaId.getId();
-            followIdea.add(ideaIdInt);
-            request.setAttribute("followIdea", followIdea);
         }
 
         // ドラフトを除いたアイデアを取得

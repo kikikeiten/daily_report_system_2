@@ -1,7 +1,6 @@
 package controllers.follows.timeline;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -38,17 +37,6 @@ public class TimelineIndexServlet extends HttpServlet {
             page = Integer.parseInt(request.getParameter("page"));
         } catch (Exception e) {
             page = 1;
-        }
-
-        //フォロー判定
-        List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
-                .setParameter("loginMember", loginMember)
-                .getResultList();
-
-        List<Integer> followIdea = new ArrayList<Integer>();
-
-        for (Member ideaId : checkMyFollow) {
-            request.setAttribute("followIdea", followIdea.add(ideaId.getId()));
         }
 
         // ログイン中メンバーがフォローしているメンバーのアイデアを取得

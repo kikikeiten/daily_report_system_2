@@ -1,7 +1,6 @@
 package controllers.follows.followers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Follow;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/followers")
@@ -46,19 +45,6 @@ public class FollowersIndexServlet extends HttpServlet {
                 .setFirstResult(12 * (page - 1))
                 .setMaxResults(12)
                 .getResultList();
-
-        //フォロー判定
-        List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
-                .setParameter("loginMember", loginMember)
-                .getResultList();
-
-        List<Integer> followIdea = new ArrayList<Integer>();
-
-        for (Member ideaId : checkMyFollow) {
-            Integer ideaIdInt = ideaId.getId();
-            followIdea.add(ideaIdInt);
-            request.setAttribute("followIdea", followIdea);
-        }
 
         em.close();
 

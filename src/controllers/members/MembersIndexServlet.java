@@ -1,7 +1,6 @@
 package controllers.members;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -28,9 +27,6 @@ public class MembersIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // ログイン中のメンバーIDを取得
-        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
-
         // ページネーション
         int page = 1;
         try {
@@ -47,19 +43,6 @@ public class MembersIndexServlet extends HttpServlet {
         // 上記カウントを取得
         long getMembersCnt = (long) em.createNamedQuery("getMembersCnt", Long.class)
                 .getSingleResult();
-
-        //フォロー判定
-        List<Member> checkMyFollow = em.createNamedQuery("checkMyFollow", Member.class)
-                .setParameter("loginMember", loginMember)
-                .getResultList();
-
-        List<Integer> followIdea = new ArrayList<Integer>();
-
-        for (Member ideaId : checkMyFollow) {
-            request.setAttribute("followIdea", followIdea.add(ideaId.getId()));
-        }
-
-        em.close();
 
         request.setAttribute("page", page);
         request.setAttribute("getMembers", getMembers);
