@@ -12,12 +12,12 @@
     <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
 </head>
 <body>
-<div id="wrapper"><c:import url="/WEB-INF/views/layout/header.jsp"/></div>
+<c:import url="/WEB-INF/views/layout/_header.jsp"/>
 <div class="ui hidden divider"></div>
 <div id="content">
     <div class="ui container">${param.content}</div>
 </div>
 <div class="ui hidden divider"></div>
-<div id="footer"><c:import url="/WEB-INF/views/layout/footer.jsp"/></div>
+<c:import url="/WEB-INF/views/layout/_footer.jsp"/>
 </body>
 </html>
