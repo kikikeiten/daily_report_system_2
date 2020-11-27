@@ -43,19 +43,26 @@ public class ForgetCntFilter implements Filter {
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
-        // マネージャーのレビュー忘れアイデアを取得（前日以前）
-        long get4getManagerReviewsCnt = (long) em
-                .createNamedQuery("get4getManagerReviewsCnt", Long.class)
-                .setParameter("date", date)
-                .setParameter("role", loginMember.getRole())
-                .getSingleResult();
+        try {
+            // マネージャーのレビュー忘れアイデアを取得（前日以前）
+            long get4getManagerReviewsCnt = (long) em
+                    .createNamedQuery("get4getManagerReviewsCnt", Long.class)
+                    .setParameter("date", date)
+                    .setParameter("role", loginMember.getRole())
+                    .getSingleResult();
 
-        // ディレクターのレビュー忘れアイデアを取得（前日以前）
-        long get4getDirectorReviewsCnt = (long) em
-                .createNamedQuery("get4getDirectorReviewsCnt", Long.class)
-                .setParameter("date", date)
-                .setParameter("role", loginMember.getRole())
-                .getSingleResult();
+            // ディレクターのレビュー忘れアイデアを取得（前日以前）
+            long get4getDirectorReviewsCnt = (long) em
+                    .createNamedQuery("get4getDirectorReviewsCnt", Long.class)
+                    .setParameter("date", date)
+                    .setParameter("role", loginMember.getRole())
+                    .getSingleResult();
+
+            request.setAttribute("get4getManagerReviewsCnt", get4getManagerReviewsCnt);
+            request.setAttribute("get4getDirectorReviewsCnt", get4getDirectorReviewsCnt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             // 退席忘れを取得（履歴がない場合もあるのでtry-catch）
@@ -77,8 +84,6 @@ public class ForgetCntFilter implements Filter {
         em.close();
 
         request.setAttribute("get4getMyDraftsCnt", get4getMyDraftsCnt);
-        request.setAttribute("get4getManagerReviewsCnt", get4getManagerReviewsCnt);
-        request.setAttribute("get4getDirectorReviewsCnt", get4getDirectorReviewsCnt);
 
         chain.doFilter(request, response);
     }
