@@ -41,22 +41,15 @@ public class ManagementsUnfollowingCreateServlet extends HttpServlet {
         follow.setCreatedAt(timestamp);
         follow.setUpdatedAt(timestamp);
 
-        // フォローする側の氏名を取得
-        String followingName = following.getName();
-        // フォローする側のメンバーIDを取得
-        Integer followingId = following.getId();
-        // フォローされる側の氏名を取得
-        String followedName = followed.getName();
-
         em.getTransaction().begin();
         em.persist(follow);
         em.getTransaction().commit();
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", followingName + "さんが" + followedName + "さんをフォローしました。");
+        request.getSession().setAttribute("toast", following.getName() + "さんが" + followed.getName() + "さんをフォローしました。");
 
-        response.sendRedirect(request.getContextPath() + "/management/unfollowing?id=" + followingId);
+        response.sendRedirect(request.getContextPath() + "/management/unfollowing?id=" + following.getId());
     }
 
 }
