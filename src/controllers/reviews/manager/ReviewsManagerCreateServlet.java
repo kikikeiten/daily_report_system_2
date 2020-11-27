@@ -56,37 +56,30 @@ public class ReviewsManagerCreateServlet extends HttpServlet {
         em.getTransaction().commit();
         em.close();
 
-        // アイデアを書いたメンバーのIDを取得
-        Member ideaMember = idea.getMember();
-        // アイデアを書いたメンバーの役割を取得
-        Integer ideaMemberRole = ideaMember.getRole();
-        // アイデアを書いたメンバー名を取得
-        String ideaMemberName = ideaMember.getName();
-
         if (reviewStatus == 1) { // アイデアにアドバイスを付けて送り返す場合
-            switch (ideaMemberRole) {
+            switch (idea.getMember().getRole()) {
                 case 0: // アソシエイト宛て
                     request.getSession().setAttribute("toast",
-                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "社員に差し戻しました。");
+                            "日報「" + idea.getTitle() + "」を" + idea.getMember().getName() + "社員に差し戻しました。");
                     break;
                 case 1: // 管理者宛て
                     request.getSession().setAttribute("toast",
-                            "日報「" + idea.getTitle() + "」を" + ideaMemberName + "管理者に差し戻しました。");
+                            "日報「" + idea.getTitle() + "」を" + idea.getMember().getName() + "管理者に差し戻しました。");
                     break;
             }
         } else { // アイデアを承認する場合
-            switch (ideaMemberRole) {
+            switch (idea.getMember().getRole()) {
                 case 0: // アソシエイトから
                     request.getSession().setAttribute("toast",
-                            ideaMemberName + "社員の日報「" + idea.getTitle() + "」を承認しました。");
+                            idea.getMember().getName() + "社員の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
                 case 1: // 管理者から
                     request.getSession().setAttribute("toast",
-                            ideaMemberName + "管理者の日報「" + idea.getTitle() + "」を承認しました。");
+                            idea.getMember().getName() + "管理者の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
                 case 2: // マネージャーから
                     request.getSession().setAttribute("toast",
-                            ideaMemberName + "課長の日報「" + idea.getTitle() + "」を承認しました。");
+                            idea.getMember().getName() + "課長の日報「" + idea.getTitle() + "」を承認しました。");
                     break;
             }
         }
