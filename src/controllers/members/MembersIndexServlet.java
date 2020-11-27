@@ -56,9 +56,7 @@ public class MembersIndexServlet extends HttpServlet {
         List<Integer> followIdea = new ArrayList<Integer>();
 
         for (Member ideaId : checkMyFollow) {
-            Integer ideaIdInt = ideaId.getId();
-            followIdea.add(ideaIdInt);
-            request.setAttribute("followIdea", followIdea);
+            request.setAttribute("followIdea", followIdea.add(ideaId.getId()));
         }
 
         em.close();
