@@ -3,10 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>日報「<c:out value="${ideaTitle}"/>」の承認履歴一覧</h2>
+        <h2>日報「<c:out value="${idea.title}"/>」の承認履歴一覧</h2>
         <c:choose>
             <c:when test="${getReviewsCnt == 0}">
-                <h3>日報「<c:out value="${ideaTitle}"></c:out>」に承認履歴はありません。</h3>
+                <h3>日報「<c:out value="${idea.title}"></c:out>」に承認履歴はありません。</h3>
                 <p>日報が承認または差し戻しされるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
@@ -63,7 +63,7 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value='/ideas/show?id=${ideaId}' />">日報詳細ページに戻る</a>
+            <a href="<c:url value='/ideas/show?id=${idea.id}' />">日報詳細ページに戻る</a>
         </p>
     </c:param>
 </c:import>

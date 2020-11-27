@@ -51,18 +51,12 @@ public class HistoryIndexServlet extends HttpServlet {
                 .setParameter("idea", idea)
                 .getSingleResult();
 
-        // アドバイス履歴を確認するアイデアのIDをInteger型で取得
-        Integer ideaId = idea.getId();
-        // アドバイス履歴を確認するアイデアのタイトルをString型で取得
-        String ideaTitle = idea.getTitle();
-
         em.close();
 
+        request.setAttribute("idea", idea);
         request.setAttribute("page", page);
         request.setAttribute("getReviews", getReviews);
         request.setAttribute("getReviewsCnt", getReviewsCnt);
-        request.setAttribute("ideaId", ideaId);
-        request.setAttribute("ideaTitle", ideaTitle);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/advice/history/index.jsp");
         rd.forward(request, response);
