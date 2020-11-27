@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Follow;
 import models.Idea;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/following/create/idea")
@@ -40,17 +40,13 @@ public class FollowingCreateViaIdeaServlet extends HttpServlet {
         follow.setCreatedAt(timestamp);
         follow.setUpdatedAt(timestamp);
 
-        // フォローされたメンバーの氏名を取得
-        Member followed = idea.getMember();
-        String followedName = followed.getName();
-
         em.getTransaction().begin();
         em.persist(follow);
         em.getTransaction().commit();
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", followedName + "さんをフォローしました。");
+        request.getSession().setAttribute("toast", idea.getMember().getName() + "さんをフォローしました。");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
     }
