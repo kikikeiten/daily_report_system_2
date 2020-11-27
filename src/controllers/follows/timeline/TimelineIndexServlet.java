@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Idea;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/timeline")
@@ -48,9 +48,7 @@ public class TimelineIndexServlet extends HttpServlet {
         List<Integer> followIdea = new ArrayList<Integer>();
 
         for (Member ideaId : checkMyFollow) {
-            Integer ideaIdInt = ideaId.getId();
-            followIdea.add(ideaIdInt);
-            request.setAttribute("followIdea", followIdea);
+            request.setAttribute("followIdea", followIdea.add(ideaId.getId()));
         }
 
         // ログイン中メンバーがフォローしているメンバーのアイデアを取得
