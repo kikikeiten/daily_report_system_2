@@ -100,6 +100,6 @@
                 </c:otherwise>
             </c:choose>
         </div>
-        <c:import url="_labels.jsp"></c:import>
+        <c:import url="_labels.jsp"/>
     </c:param>
 </c:import>
