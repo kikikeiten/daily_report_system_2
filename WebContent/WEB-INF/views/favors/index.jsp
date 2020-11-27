@@ -36,7 +36,7 @@
                                 </div>
                             </c:when>
                             <c:otherwise>
-                                <a class="item" href="<c:url value='/favors?id=${ideaId}&page=${i}' />">
+                                <a class="item" href="<c:url value='/favors?id=${idea.id}&page=${i}' />">
                                     <c:out value="${i}"/>
                                 </a>&nbsp;
                             </c:otherwise>

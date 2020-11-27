@@ -51,16 +51,12 @@ public class FavorsIndexServlet extends HttpServlet {
                 .setParameter("idea", idea)
                 .getSingleResult();
 
-        // URLに付与するアイデアIDを取得
-        Integer ideaId = Integer.parseInt(request.getParameter("id"));
-
         em.close();
 
         request.setAttribute("idea", idea);
         request.setAttribute("page", page);
         request.setAttribute("getFavors", getFavors);
         request.setAttribute("getFavorsCnt", getFavorsCnt);
-        request.setAttribute("ideaId", ideaId);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/favors/index.jsp");
         rd.forward(request, response);
