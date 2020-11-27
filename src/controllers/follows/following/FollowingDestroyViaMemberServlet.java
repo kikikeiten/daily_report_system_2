@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Follow;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/following/destroy/member")
@@ -41,16 +41,13 @@ public class FollowingDestroyViaMemberServlet extends HttpServlet {
 
         Follow follow = em.find(Follow.class, memberId);
 
-        // フォロー解除するメンバーの氏名を取得
-        String unfollowName = member.getName();
-
         em.getTransaction().begin();
         em.remove(follow);
         em.getTransaction().commit();
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", unfollowName + "さんのフォローを解除しました。");
+        request.getSession().setAttribute("toast", member.getName() + "さんのフォローを解除しました。");
 
         response.sendRedirect(request.getContextPath() + "/members");
     }
