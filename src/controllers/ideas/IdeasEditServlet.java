@@ -30,8 +30,6 @@ public class IdeasEditServlet extends HttpServlet {
         // 編集するアイデアのIDを取得
         Idea idea = em.find(Idea.class, Integer.parseInt(request.getParameter("id")));
 
-        Integer reviewFlag = idea.getReviewStatus();
-
         em.close();
 
         // ログイン中メンバーのIDを取得
@@ -42,7 +40,7 @@ public class IdeasEditServlet extends HttpServlet {
             request.setAttribute("idea", idea);
             request.setAttribute("_token", request.getSession().getId());
             request.getSession().setAttribute("ideaId", idea.getId());
-            request.setAttribute("reviewFlag", reviewFlag);
+            request.setAttribute("reviewFlag", idea.getReviewStatus());
         }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ideas/edit.jsp");

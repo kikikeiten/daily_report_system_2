@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Idea;
-import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/reviews/manager")
@@ -28,9 +27,6 @@ public class ReviewsManagerIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // ログイン中メンバーのIDを取得
-        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
-
         // ページネーション
         int page;
         try {
@@ -45,27 +41,10 @@ public class ReviewsManagerIndexServlet extends HttpServlet {
                 .setMaxResults(12)
                 .getResultList();
 
-        // ログイン中メンバーのドラフト総数を取得
-        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // ディレクターのアドバイス有アイデア総数を取得
-        long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // ドラフトを除いたアイデア総数を取得
-        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
-                .getSingleResult();
-
         em.close();
 
         request.setAttribute("page", page);
         request.setAttribute("getManagerReviews", getManagerReviews);
-        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
-        request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
-        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
 
         // トーストメッセージがセッションに保存されているか確認
         if (request.getSession().getAttribute("toast") != null) {

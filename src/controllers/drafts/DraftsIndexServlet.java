@@ -46,33 +46,10 @@ public class DraftsIndexServlet extends HttpServlet {
                 .setMaxResults(12)
                 .getResultList();
 
-        // 上記のカウント
-        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // 下書きを除いたidea総数を取得
-        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
-                .getSingleResult();
-
-        // マネージャーのアドバイス有ideaを取得
-        long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // ディレクターのアドバイス有ideaを取得
-        long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
         em.close();
 
         request.setAttribute("page", page);
         request.setAttribute("getMyDrafts", getMyDrafts);
-        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
-        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
-        request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
-        request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
 
         // トーストメッセージがセッションに保存されているか確認
         if (request.getSession().getAttribute("toast") != null) {

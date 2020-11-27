@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Idea;
 import utils.DBUtil;
 
@@ -28,9 +27,6 @@ public class ReviewsDirectorIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // ログイン中のメンバーIDを取得
-        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
-
         // ページネーション
         int page;
         try {
@@ -45,21 +41,10 @@ public class ReviewsDirectorIndexServlet extends HttpServlet {
                 .setMaxResults(12)
                 .getResultList();
 
-        // ログイン中メンバーのドラフト総数を取得
-        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // 下書きを除いたアイデア総数を取得
-        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
-                .getSingleResult();
-
         em.close();
 
         request.setAttribute("page", page);
         request.setAttribute("getDirectorReviews", getDirectorReviews);
-        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
-        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
 
         // トーストメッセージをセッションにセット
         if (request.getSession().getAttribute("toast") != null) {
