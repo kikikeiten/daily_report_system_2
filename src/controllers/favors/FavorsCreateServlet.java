@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Member;
 import models.Favor;
 import models.Idea;
+import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/favors/create")
@@ -43,12 +43,6 @@ public class FavorsCreateServlet extends HttpServlet {
         // Ideaテーブルに値をセット
         idea.setFavors(Integer.parseInt(request.getParameter("favors")) + idea.getFavors());
 
-        // 賛成されたアイデアの作者名をString型に変換
-        Member ideaMember = idea.getMember();
-        String ideaMemberName = ideaMember.getName();
-
-        // 賛成されたアイデアのタイトルをString型に変換
-        String ideaTitle = idea.getTitle();
 
         em.getTransaction().begin();
         em.persist(favor);
@@ -56,7 +50,7 @@ public class FavorsCreateServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", ideaMemberName + "さんの日報「" + ideaTitle + "」にいいねしました。");
+        request.getSession().setAttribute("toast", idea.getMember().getName() + "さんの日報「" + idea.getTitle() + "」にいいねしました。");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
     }
