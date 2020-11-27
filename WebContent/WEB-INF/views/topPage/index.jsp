@@ -3,21 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-        <c:if test="${toast != null}">
-            <script>
-                $('body')
-                    .toast({
-                        class: 'success',
-                        message: "${toast}",
-                        position: 'bottom right',
-                        showProgress: 'top',
-                        progressUp: true,
-                        className: {
-                            toast: 'ui message'
-                        }
-                    });
-            </script>
-        </c:if>
         <c:import url="_join.jsp"/>
         <c:import url="_reminder.jsp"/>
         <h2>My Swatches</h2>

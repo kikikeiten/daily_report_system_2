@@ -4,21 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:if test="${toast != null}">
-            <script>
-                $('body')
-                    .toast({
-                        class: 'success',
-                        message: "${toast}",
-                        position: 'bottom right',
-                        showProgress: 'top',
-                        progressUp: true,
-                        className: {
-                            toast: 'ui message'
-                        }
-                    });
-            </script>
-        </c:if>
         <h2>All swatches</h2>
         <c:import url="_circular.jsp"/>
         <div class="ui raised very padded container segment">

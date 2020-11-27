@@ -3,21 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:if test="${toast != null}">
-            <script>
-                $('body')
-                    .toast({
-                        class: 'success',
-                        message: "${toast}",
-                        position: 'bottom right',
-                        showProgress: 'top',
-                        progressUp: true,
-                        className: {
-                            toast: 'ui message'
-                        }
-                    });
-            </script>
-        </c:if>
         <h2>全打刻履歴</h2>
         <c:choose>
             <c:when test="${getJoinsCnt == 0}">

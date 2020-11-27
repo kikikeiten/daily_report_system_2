@@ -3,21 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:if test="${toast != null}">
-            <script>
-                $('body')
-                    .toast({
-                        class: 'success',
-                        message: "${toast}",
-                        position: 'bottom right',
-                        showProgress: 'top',
-                        progressUp: true,
-                        className: {
-                            toast: 'ui message'
-                        }
-                    });
-            </script>
-        </c:if>
         <h2>Waiting for the manager's review</h2>
         <div class="circular ui icon green mini button" data-variation="inverted"></div>
         <script>

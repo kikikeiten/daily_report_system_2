@@ -13,21 +13,6 @@
                 社員番号かパスワードが間違っています。
             </div>
         </c:if>
-        <c:if test="${toast != null}">
-            <script>
-                $('body')
-                    .toast({
-                        class: 'success',
-                        message: "${toast}",
-                        position: 'bottom right',
-                        showProgress: 'top',
-                        progressUp: true,
-                        className: {
-                            toast: 'ui message'
-                        }
-                    });
-            </script>
-        </c:if>
         <div class="ui hidden divider"></div>
         <div class="ui raised very padded text container segment">
             <h2>Login</h2>

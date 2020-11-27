@@ -12,6 +12,7 @@
     <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
 </head>
 <body>
+<c:import url="/WEB-INF/views/layout/_toast.jsp"/>
 <c:import url="/WEB-INF/views/layout/_header.jsp"/>
 <div class="ui hidden divider"></div>
 <div id="content">
