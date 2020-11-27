@@ -20,10 +20,10 @@
         </c:if>
         <c:choose>
             <c:when test="${member != null}">
-                <h2><c:out value="${memberName}"/>さんのフォローしている従業員一覧</h2>
+                <h2><c:out value="${member.name}"/>さんのフォローしている従業員一覧</h2>
                 <c:choose>
                     <c:when test="${getEmployeeFollowingCount == 0}">
-                        <h3><c:out value="${memberName}"/>さんはまだ誰もフォローしていません。</h3>
+                        <h3><c:out value="${member.name}"/>さんはまだ誰もフォローしていません。</h3>
                         <p>作成されるとここに表示されます。</p>
                     </c:when>
                     <c:otherwise>
@@ -69,7 +69,7 @@
                                         </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <a class="item" href="<c:url value='/management/unfollowing?id=${memberId}&page=${i}' />">
+                                        <a class="item" href="<c:url value='/management/unfollowing?id=${member.id}&page=${i}' />">
                                             <c:out value="${i}"/>
                                         </a>&nbsp;
                                     </c:otherwise>

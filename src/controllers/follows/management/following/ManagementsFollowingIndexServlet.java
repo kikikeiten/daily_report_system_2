@@ -51,17 +51,10 @@ public class ManagementsFollowingIndexServlet extends HttpServlet {
                 .setParameter("member", member)
                 .getSingleResult();
 
-        try {
-            // 対象メンバーの氏名を取得
-            String memberName = member.getName();
-            request.setAttribute("memberName", memberName);
-        } catch (Exception e) {
-        }
-
         em.close();
 
-        request.setAttribute("page", page);
         request.setAttribute("member", member);
+        request.setAttribute("page", page);
         request.setAttribute("getMemberFollowing", getMemberFollowing);
         request.setAttribute("getMemberFollowingCnt", getMemberFollowingCnt);
 
