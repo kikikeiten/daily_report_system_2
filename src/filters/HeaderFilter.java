@@ -11,7 +11,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import models.Join;
 import models.Member;
@@ -31,10 +30,8 @@ public class HeaderFilter implements Filter {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        HttpSession session = ((HttpServletRequest) request).getSession();
-
         // ログイン中メンバーのIDを取得
-        Member loginMember = (Member) session.getAttribute("loginMember");
+        Member loginMember = (Member) ((HttpServletRequest) request).getSession().getAttribute("loginMember");
 
         // ログイン中メンバーのフォロー一覧総数を取得
         long getMyFollowingCnt = (long) em.createNamedQuery("getMyFollowingCnt", Long.class)

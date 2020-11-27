@@ -11,7 +11,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import models.Member;
 import utils.DBUtil;
@@ -30,10 +29,8 @@ public class IdeasCntFilter implements Filter {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        HttpSession session = ((HttpServletRequest) request).getSession();
-
         // ログイン中メンバーのIDを取得
-        Member loginMember = (Member) session.getAttribute("loginMember");
+        Member loginMember = (Member) ((HttpServletRequest) request).getSession().getAttribute("loginMember");
 
         // ドラフトを除いたアイデア総数を取得
         long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
@@ -58,6 +55,8 @@ public class IdeasCntFilter implements Filter {
         long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
+
+        em.close();
 
         request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
         request.setAttribute("getMyIdeasCnt", getMyIdeasCnt);
