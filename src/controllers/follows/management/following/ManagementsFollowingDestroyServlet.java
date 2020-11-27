@@ -28,24 +28,15 @@ public class ManagementsFollowingDestroyServlet extends HttpServlet {
         // フォロー解除されるメンバーのIDを取得
         Follow unfollowed = em.find(Follow.class, Integer.parseInt(request.getParameter("followedId")));
 
-        // フォロー解除されるメンバーの氏名をString型で取得
-        String unfollowedMember = unfollowed.getFollowingId().getName();
-
-        // フォロー解除するメンバーの氏名をString型で取得
-        String unfollowingMember = unfollowed.getFollowedId().getName();
-
-        // フォロー解除するメンバーのIDをInteger型で取得
-        Integer unfollowingMemberId = unfollowed.getFollowingId().getId();
-
         em.getTransaction().begin();
         em.remove(unfollowed);
         em.getTransaction().commit();
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", unfollowedMember + "さんが" + unfollowingMember + "さんのフォローを解除しました。");
+        request.getSession().setAttribute("toast", unfollowed.getFollowingId().getName() + "さんが" + unfollowed.getFollowedId().getName() + "さんのフォローを解除しました。");
 
-        response.sendRedirect(request.getContextPath() + "/management/following?id=" + unfollowingMemberId);
+        response.sendRedirect(request.getContextPath() + "/management/following?id=" + unfollowed.getFollowingId().getId());
     }
 
 }
