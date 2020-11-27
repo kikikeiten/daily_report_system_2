@@ -39,17 +39,13 @@ public class FollowersCreateServlet extends HttpServlet {
         follow.setCreatedAt(timestamp);
         follow.setUpdatedAt(timestamp);
 
-        // フォローされたメンバーの氏名を取得
-        Member followedMember = followed.getFollowingId();
-        String followName = followedMember.getName();
-
         em.getTransaction().begin();
         em.persist(follow);
         em.getTransaction().commit();
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", followName + "さんをフォローしました。");
+        request.getSession().setAttribute("toast", followed.getFollowingId().getName() + "さんをフォローしました。");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
     }
