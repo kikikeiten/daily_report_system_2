@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import models.Member;
 import utils.DBUtil;
 
-@WebFilter(urlPatterns = { "/index.html", "/idea/*" })
+@WebFilter(urlPatterns = { "/index.html", "/ideas/*", "/drafts/*", "/reviews/*", "/advice/*" })
 public class IdeasCntFilter implements Filter {
 
     public IdeasCntFilter() {
