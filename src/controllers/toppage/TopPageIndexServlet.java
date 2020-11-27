@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Idea;
 import models.Join;
 import models.Member;
-import models.Idea;
 import utils.DBUtil;
 
 @WebServlet("/index.html")
@@ -48,26 +48,6 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setMaxResults(12)
                 .getResultList();
 
-        // ログイン中メンバーのアイデア総数を取得
-        long getMyIdeasCnt = (long) em.createNamedQuery("getMyIdeasCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // ログイン中メンバーのドラフト総数を取得
-        long getMyDraftsCnt = (long) em.createNamedQuery("getMyDraftsCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // マネージャーのアドバイス有アイデア総数を取得
-        long getManagerAdviceCnt = (long) em.createNamedQuery("getManagerAdviceCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // ディレクターのアドバイス有アイデア総数を取得
-        long getDirectorAdviceCnt = (long) em.createNamedQuery("getDirectorAdviceCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
         Date date = new Date(System.currentTimeMillis());
 
         // ドラフトのポスト忘れ総数を取得（前日以前）
@@ -88,10 +68,6 @@ public class TopPageIndexServlet extends HttpServlet {
                 .createNamedQuery("get4getDirectorReviewsCnt", Long.class)
                 .setParameter("date", date)
                 .setParameter("role", loginMember.getRole())
-                .getSingleResult();
-
-        // ドラフトを除いたアイデア総数を取得
-        long getIdeasCntButDrafts = (long) em.createNamedQuery("getIdeasCntButDrafts", Long.class)
                 .getSingleResult();
 
         try {
@@ -116,14 +92,9 @@ public class TopPageIndexServlet extends HttpServlet {
 
         request.setAttribute("page", page);
         request.setAttribute("getMyIdeas", getMyIdeas);
-        request.setAttribute("getMyIdeasCnt", getMyIdeasCnt);
-        request.setAttribute("getMyDraftsCnt", getMyDraftsCnt);
-        request.setAttribute("getManagerAdviceCnt", getManagerAdviceCnt);
-        request.setAttribute("getDirectorAdviceCnt", getDirectorAdviceCnt);
         request.setAttribute("get4getMyDraftsCnt", get4getMyDraftsCnt);
         request.setAttribute("get4getManagerReviewsCnt", get4getManagerReviewsCnt);
         request.setAttribute("get4getDirectorReviewsCnt", get4getDirectorReviewsCnt);
-        request.setAttribute("getIdeasCntButDrafts", getIdeasCntButDrafts);
 
         // トーストメッセージがある場合はセッションとして保存
         if (request.getSession().getAttribute("toast") != null) {
