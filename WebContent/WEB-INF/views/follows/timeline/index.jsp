@@ -5,6 +5,7 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <h2>タイムライン</h2>
+        <div class="ui raised very padded container segment">
         <c:choose>
             <c:when test="${getMyFollowingIdeasCnt == 0}">
                 <h3><c:out value="${sessionScope.loginMember.name}"/>さんはまだ誰もフォローしていません。</h3>
@@ -106,6 +107,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        </div>
         <p>
             <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>

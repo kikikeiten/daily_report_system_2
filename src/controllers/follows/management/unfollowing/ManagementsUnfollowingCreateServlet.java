@@ -49,7 +49,7 @@ public class ManagementsUnfollowingCreateServlet extends HttpServlet {
         // トーストメッセージをセッションにセット
         request.getSession().setAttribute("toast", following.getName() + "さんが" + followed.getName() + "さんをフォローしました。");
 
-        response.sendRedirect(request.getContextPath() + "/management/unfollowing?id=" + following.getId());
+        response.sendRedirect(request.getContextPath() + "/management/unfollowing?id=" + followed.getId());
     }
 
 }

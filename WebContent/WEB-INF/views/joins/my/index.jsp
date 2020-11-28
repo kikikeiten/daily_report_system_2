@@ -4,6 +4,7 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <h2>My打刻履歴</h2>
+        <div class="ui raised very padded container segment">
         <c:choose>
             <c:when test="${getMyJoinCnt == 0}">
                 <h3>打刻はまだありません。</h3>
@@ -62,6 +63,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        </div>
         <p>
             <a href="<c:url value='/' />">トップページに戻る</a>
         </p>

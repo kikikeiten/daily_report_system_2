@@ -4,12 +4,14 @@
     <c:param name="content">
         <div class="ui text container">
             <h2>従業員 新規登録ページ</h2>
+            <div class="ui raised very padded container segment">
             <form method="POST" action="<c:url value='/members/create' />" class="ui fluid form">
                 <c:import url="_form.jsp"/>
             </form>
             <p>
                 <a href="<c:url value='/members' />">一覧に戻る</a>
             </p>
+        </div>
         </div>
     </c:param>
 </c:import>

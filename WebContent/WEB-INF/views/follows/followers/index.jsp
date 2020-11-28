@@ -5,6 +5,7 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <h2>フォロワー</h2>
+        <div class="ui raised very padded container segment">
         <c:choose>
             <c:when test="${getMyFollowerCnt == 0}">
                 <h3><c:out value="${sessionScope.loginMember.name}"/>さんにはまだフォロワーがいません。</h3>
@@ -75,6 +76,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        </div>
         <p>
             <a href="<c:url value='/' />">トップページへ戻る</a>
         </p>

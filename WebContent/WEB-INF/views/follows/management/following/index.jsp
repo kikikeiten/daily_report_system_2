@@ -6,6 +6,7 @@
         <c:choose>
             <c:when test="${member != null}">
                 <h2><c:out value="${member.name}"/>さんのフォローしている従業員一覧</h2>
+                <div class="ui raised very padded container segment">
                 <c:choose>
                     <c:when test="${getEmployeeFollowingCount == 0}">
                         <h3><c:out value="${member.name}"/>さんはまだ誰もフォローしていません。</h3>
@@ -63,6 +64,7 @@
                         </div>
                     </c:otherwise>
                 </c:choose>
+                </div>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>

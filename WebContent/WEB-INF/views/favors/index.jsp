@@ -6,6 +6,7 @@
         <c:choose>
             <c:when test="${idea != null}">
                 <h2>いいねした人</h2>
+                <div class="ui raised very padded container segment">
                 <table class="ui celled striped table">
                     <tbody>
                     <tr>
@@ -24,6 +25,7 @@
                     </c:forEach>
                     </tbody>
                 </table>
+                </div>
                 <div class="ui label">いいね数
                     <c:out value="${getFavorsCnt}"/>
                 </div>
