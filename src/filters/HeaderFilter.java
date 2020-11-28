@@ -58,7 +58,7 @@ public class HeaderFilter implements Filter {
                     .setParameter("loginMember", loginMember)
                     .setMaxResults(1) // 一件だけ取得
                     .getSingleResult();
-
+            
             request.setAttribute("latestJoin", getMyLatestJoin.getJoinStatus());
         } catch (Exception e) {
             e.printStackTrace();

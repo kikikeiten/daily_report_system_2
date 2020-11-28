@@ -27,14 +27,14 @@
                                             <c:choose>
                                                 <c:when test="${!fn:contains(followIdea, member.id)}">
                                                     <form method="POST" action="<c:url value='/following/create/member' />" class="left floated">
-                                                        <button class="circular ui mini icon green basic button" type="submit" name="following" value="${member.id}">
+                                                        <button class="circular ui mini icon green basic button" type="submit" name="followedId" value="${member.id}">
                                                             <i class="fas fa-user-plus"></i>
                                                         </button>
                                                     </form>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <form method="POST" action="<c:url value='/following/create/member' />" class="left floated">
-                                                        <button class="circular ui mini icon green button" type="submit" name="employee_id" value="${member.id}">
+                                                    <form method="POST" action="<c:url value='/following/destroy/member' />" class="left floated">
+                                                        <button class="circular ui mini icon green button" type="submit" name="unfollowedId" value="${member.id}">
                                                             <i class="fas fa-user-minus"></i>
                                                         </button>
                                                     </form>

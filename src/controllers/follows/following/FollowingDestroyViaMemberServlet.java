@@ -30,7 +30,7 @@ public class FollowingDestroyViaMemberServlet extends HttpServlet {
         Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
         // フォロー解除するメンバーのIDを取得
-        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("memberId")));
+        Member member = em.find(Member.class, Integer.parseInt(request.getParameter("unfollowedId")));
 
         // フォローリストの中からフォロー解除するメンバーのIDを取得
         Integer memberId = 0;

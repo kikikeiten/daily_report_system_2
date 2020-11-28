@@ -60,11 +60,7 @@ public class ForgetCntFilter implements Filter {
 
             request.setAttribute("get4getManagerReviewsCnt", get4getManagerReviewsCnt);
             request.setAttribute("get4getDirectorReviewsCnt", get4getDirectorReviewsCnt);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        try {
             // 退席忘れを取得（履歴がない場合もあるのでtry-catch）
             List<Join> get4getJoins = em.createNamedQuery("get4getJoins", Join.class)
                     .setParameter("date", date)
