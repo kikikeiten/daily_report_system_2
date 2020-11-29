@@ -11,9 +11,9 @@
                     <p>登録されるとここに表示されます。</p>
                 </c:when>
                 <c:otherwise>
-                    <div class="ui three stackable cards">
+                    <div class="ui three stackable raised link cards">
                         <c:forEach var="member" items="${getMembers}">
-                            <div class="card">
+                            <div class="ui card">
                                 <a class="content" href="<c:url value='/members/show?id=${member.id}' />">
                                     <span class="header">
                                         <c:out value="${member.name}"/>
