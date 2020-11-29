@@ -12,10 +12,8 @@
                 <c:when test="${getMyIdeasCnt == 0}">
                     <div class="ui active dimmer">
                         <div class="content">
-                            <h3>
-                                <c:out value="${sessionScope.loginMember.name}"/>さんのメモはまだありません。
-                            </h3>
-                            <p>作成されるとここに表示されます。</p>
+                            <h3><c:out value="${sessionScope.loginMember.name}"/>'s idea has not been created yet.</h3>
+                            <p>If even one idea is created, it will be displayed here.</p>
                         </div>
                     </div>
                     <div class="ui three stackable raised link cards">
