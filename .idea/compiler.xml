@@ -7,11 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="daily_report_system_2" />
+        <module name="tipswatch" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="daily_report_system_2" target="1.8" />
+      <module name="tipswatch" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
