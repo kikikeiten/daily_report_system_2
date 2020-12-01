@@ -5,14 +5,15 @@
     <c:param name="content">
         <c:choose>
             <c:when test="${member != null}">
-                <h2><c:out value="${member.name}"/>さんにフォローさせる</h2>
+                <h2>List of members <c:out value="${member.name}"/> isn't following</h2>
                 <div class="ui raised very padded container segment">
                     <c:choose>
                         <c:when test="${getMemberNotFollowingCnt == 0}">
                             <h3><c:out value="${member.name}"/>さんは全ての従業員をフォローしています。</h3>
                         </c:when>
                         <c:otherwise>
-                            <table class="ui celled striped table">
+                        <div class="ui text container">
+                            <table class="ui padded single line striped table">
                                 <tbody>
                                 <c:forEach var="member" items="${getMemberNotFollowing}">
                                     <tr>
@@ -22,18 +23,17 @@
                                         <td>
                                             <form method="POST" action="<c:url value='/management/unfollowing/create' />">
                                                 <button class="ui tiny active button" type="submit" name="followedId" value="${member.id}">
-                                                    <i class="user icon"></i>フォロー
+                                                    <i class="user icon"></i>follow
                                                 </button>
-                                                <input type="hidden" name="followingId" value="${member.id}">
+                                                <input type="hidden" name="followingId" value="${followingId}">
                                             </form>
                                         </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <div class="ui label">未フォロー
-                                <c:out value="${getMemberNotFollowingCnt}"/>
                             </div>
+                            <div class="ui hidden divider"></div>
                             <div class="ui mini pagination menu">
                                 <c:forEach var="i" begin="1" end="${((getMemberNotFollowingCnt - 1) / 12) + 1}" step="1">
                                     <c:choose>
@@ -52,13 +52,11 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
+                <c:import url="_labels.jsp"/>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-        <p>
-            <a href="<c:url value='/members' />">従業員一覧へ戻る</a>
-        </p>
     </c:param>
 </c:import>

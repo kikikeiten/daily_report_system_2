@@ -7,6 +7,6 @@
     <c:out value="${getMemberFollowingCnt}" />
     </div>
 </div>
-<a href="<c:url value='/management/unfollowing?id=${member.id}'/>" class="ui image label"><c:out value="${member.name}" /> isn't following<span class="detail"> <c:out value="${getMemberNotFollowingCnt}" />
+<a href="<c:url value='/management/unfollowing?id=${member.id}'/>" class="ui image label"><c:out value="${member.name}" /> isn't follow<span class="detail"> <c:out value="${getMemberNotFollowingCnt}" />
 </span>
 </a>

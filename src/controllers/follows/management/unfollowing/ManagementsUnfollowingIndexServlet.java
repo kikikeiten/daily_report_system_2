@@ -50,12 +50,22 @@ public class ManagementsUnfollowingIndexServlet extends HttpServlet {
                 .setParameter("member", member)
                 .getSingleResult();
 
+        // 対象メンバーのフォロー総数を取得
+        long getMemberFollowingCnt = (long) em.createNamedQuery("getMemberFollowingCnt", Long.class)
+                .setParameter("member", member)
+                .getSingleResult();
+
+        // フォローする側のメンバーIDを取得
+        Integer followingId = member.getId();
+
         em.close();
 
         request.setAttribute("member", member);
         request.setAttribute("page", page);
         request.setAttribute("getMemberNotFollowing", getMemberNotFollowing);
         request.setAttribute("getMemberNotFollowingCnt", getMemberNotFollowingCnt);
+        request.setAttribute("getMemberFollowingCnt", getMemberFollowingCnt);
+        request.setAttribute("followingId", followingId);
 
         // トーストメッセージのセッションがあるか確認
         if (request.getSession().getAttribute("toast") != null) {
