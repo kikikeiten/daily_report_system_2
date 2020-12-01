@@ -5,15 +5,36 @@
     <c:param name="content">
         <c:choose>
             <c:when test="${member != null}">
-                <h2><c:out value="${member.name}"/>さんのフォローしているメンバ一覧</h2>
+                <h2>List of members <c:out value="${member.name}"/> is following</h2>
                 <div class="ui raised very padded container segment">
                     <c:choose>
-                        <c:when test="${getEmployeeFollowingCount == 0}">
-                            <h3><c:out value="${member.name}"/>さんはまだ誰もフォローしていません。</h3>
-                            <p>作成されるとここに表示されます。</p>
+                        <c:when test="${getMemberFollowingCnt == 0}">
+                            <div class="ui active dimmer">
+                        <div class="content">
+                            <h3><c:out value="${member.name}"/> hasn't followed anyone yet.</h3>
+                            <p>If <c:out value="${member.name}"/> follows, your followers will be displayed here</p>
+                        </div>
+                    </div>
+                    <div class="ui three stackable raised link cards">
+                        <c:forEach begin="0" end="5" step="1">
+                            <div class="ui card">
+                                <a class="content" href="">
+                                    <span class="right floated"></span>
+                                    <span class="header"></span>
+                                    <span class="description"></span>
+                                </a>
+                                <div class="extra content">
+                                    <button class="circular ui mini icon button">
+                                        <i class="far fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
                         </c:when>
                         <c:otherwise>
-                            <table class="ui padded celled striped table">
+                            <div class="ui text container">
+                            <table class="ui padded single line striped table">
                                 <tbody>
                                 <c:forEach var="member" items="${getMemberFollowing}">
                                     <tr>
@@ -23,10 +44,10 @@
                                             <form method="POST" action="<c:url value='/management/following/destroy' />">
                                                 <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">
                                                     <div class="visible content">
-                                                        <i class="user icon"></i>フォロー中
+                                                        <i class="user icon"></i>following
                                                     </div>
                                                     <div class="hidden content">
-                                                        <i class="user icon"></i>フォロー解除
+                                                        <i class="user icon"></i>unfollow
                                                     </div>
                                                 </button>
                                             </form>
@@ -35,9 +56,8 @@
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <div class="ui label">フォロー中
-                                <c:out value="${getMemberFollowingCnt}"/>
                             </div>
+                            <div class="ui hidden divider"></div>
                             <div class="ui mini pagination menu">
                                 <c:forEach var="i" begin="1" end="${((getMemberFollowingCnt - 1) / 12) + 1}" step="1">
                                     <c:choose>
@@ -57,6 +77,7 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
+                <c:import url="_labels.jsp"/>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>

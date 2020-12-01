@@ -51,12 +51,18 @@ public class ManagementsFollowingIndexServlet extends HttpServlet {
                 .setParameter("member", member)
                 .getSingleResult();
 
+        // 対象のメンバーがフォローしていないメンバー総数を取得
+        long getMemberNotFollowingCnt = (long) em.createNamedQuery("getMemberNotFollowingCnt", Long.class)
+                .setParameter("member", member)
+                .getSingleResult();
+
         em.close();
 
         request.setAttribute("member", member);
         request.setAttribute("page", page);
         request.setAttribute("getMemberFollowing", getMemberFollowing);
         request.setAttribute("getMemberFollowingCnt", getMemberFollowingCnt);
+        request.setAttribute("getMemberNotFollowingCnt", getMemberNotFollowingCnt);
 
         // トーストメッセージがセッションにあるか確認
         if (request.getSession().getAttribute("toast") != null) {
