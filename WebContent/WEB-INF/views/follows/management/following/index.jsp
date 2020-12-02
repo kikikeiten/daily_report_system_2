@@ -16,20 +16,16 @@
                         </div>
                     </div>
                     <div class="ui three stackable raised link cards">
-                        <c:forEach begin="0" end="5" step="1">
-                            <div class="ui card">
-                                <a class="content" href="">
-                                    <span class="right floated"></span>
-                                    <span class="header"></span>
-                                    <span class="description"></span>
-                                </a>
-                                <div class="extra content">
-                                    <button class="circular ui mini icon button">
-                                        <i class="far fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                            </div>
+                    <div class="ui text container">
+                            <table class="ui padded single line striped table">
+                        <c:forEach begin="0" end="3" step="1">
+                            <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            </tr>
                         </c:forEach>
+                        </table>
+                            </div>
                     </div>
                         </c:when>
                         <c:otherwise>
@@ -56,7 +52,7 @@
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            </div>
+
                             <div class="ui hidden divider"></div>
                             <div class="ui mini pagination menu">
                                 <c:forEach var="i" begin="1" end="${((getMemberFollowingCnt - 1) / 12) + 1}" step="1">
@@ -73,6 +69,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
+                            </div>
                             </div>
                         </c:otherwise>
                     </c:choose>

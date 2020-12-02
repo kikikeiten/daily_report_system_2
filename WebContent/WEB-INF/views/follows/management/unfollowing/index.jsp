@@ -9,7 +9,25 @@
                 <div class="ui raised very padded container segment">
                     <c:choose>
                         <c:when test="${getMemberNotFollowingCnt == 0}">
-                            <h3><c:out value="${member.name}"/>さんは全ての従業員をフォローしています。</h3>
+
+                            <div class="ui active dimmer">
+                        <div class="content">
+                            <h3><c:out value="${member.name}"/> follows all the members.</h3>
+                            <p>Any members <c:out value="${member.name}"/> doesn't follow will be displayed here.</p>
+                        </div>
+                    </div>
+                    <div class="ui three stackable raised link cards">
+                    <div class="ui text container">
+                            <table class="ui padded single line striped table">
+                        <c:forEach begin="0" end="3" step="1">
+                            <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            </tr>
+                        </c:forEach>
+                        </table>
+                            </div>
+                    </div>
                         </c:when>
                         <c:otherwise>
                         <div class="ui text container">
@@ -32,7 +50,7 @@
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            </div>
+
                             <div class="ui hidden divider"></div>
                             <div class="ui mini pagination menu">
                                 <c:forEach var="i" begin="1" end="${((getMemberNotFollowingCnt - 1) / 12) + 1}" step="1">
@@ -48,6 +66,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
+                            </div>
                             </div>
                         </c:otherwise>
                     </c:choose>
