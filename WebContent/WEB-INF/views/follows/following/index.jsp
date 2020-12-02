@@ -32,7 +32,8 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <table class="ui celled striped table">
+                <div class="ui text container">
+                    <table class="ui padded single line striped table">
                         <tbody>
                             <c:forEach var="member" items="${getMyFollowing}">
                                 <tr>
@@ -68,6 +69,7 @@
                             </c:otherwise>
                             </c:choose>
                         </c:forEach>
+                    </div>
                     </div>
                 </c:otherwise>
             </c:choose>

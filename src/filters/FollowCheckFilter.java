@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import models.Member;
 import utils.DBUtil;
 
-@WebFilter(urlPatterns = {"/ideas/*", "/members/*", "/timeline/*" })
+@WebFilter(urlPatterns = {"/ideas/*", "/members/*", "/timeline/*", "/followers/*" })
 public class FollowCheckFilter implements Filter {
 
     public FollowCheckFilter() {
