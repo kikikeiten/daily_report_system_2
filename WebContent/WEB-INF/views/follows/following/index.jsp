@@ -3,11 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>フォロー中</h2>
+        <h2>Following</h2>
         <div class="ui raised very padded container segment">
         <c:choose>
             <c:when test="${getMyFollowingCnt == 0}">
-                <h3><c:out value="${sessionScope.loginMember.name}"/>さんはまだ誰もフォローしていません。</h3>
+                <h3><c:out value="${sessionScope.loginMember.name}"/> hasn't followed anyone yet.</h3>
                 <p>作成されるとここに表示されます。</p>
             </c:when>
             <c:otherwise>
@@ -65,8 +65,5 @@
             </c:otherwise>
         </c:choose>
         </div>
-        <p>
-            <a href="<c:url value='/' />">トップページへ戻る</a>
-        </p>
     </c:param>
 </c:import>
