@@ -5,7 +5,7 @@
     <c:param name="content">
         <c:import url="_join.jsp"/>
         <c:import url="_reminder.jsp"/>
-        <h2>My Swatches</h2>
+        <h2>My ideas</h2>
         <c:import url="_circular.jsp"/>
         <div class="ui raised very padded container segment">
             <c:choose>

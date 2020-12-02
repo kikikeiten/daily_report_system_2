@@ -36,20 +36,21 @@
                     <c:if test="${sessionScope.loginMember.role == 1 || sessionScope.loginMember.role == 2 || sessionScope.loginMember.role == 3}">
                         <a href="<c:url value='/members' />" class="item">All members</a>
                     </c:if>
-                    <a href="<c:url value='/ideas' />" class="item">All swatches</a> <a href="<c:url value='/timeline' />" class="item">Timeline</a> <a href="<c:url value='/following' />" class="item"> <b><c:out value="${getMyFollowingCnt}" /></b>Following
-                    </a> <a href="<c:url value='/followers' />" class="item"> <b><c:out value="${getMyFollowerCnt}" /></b>Follower
+                    <a href="<c:url value='/ideas' />" class="item">All ideas</a> <a href="<c:url value='/timeline' />" class="item">Timeline</a>
+                    <a href="<c:url value='/following' />" class="item">Following<span class="ui mini circular label"><c:out value="${getMyFollowingCnt}" /></span>
+                    </a> <a href="<c:url value='/followers' />" class="item">Follower<span class="ui mini circular label"><c:out value="${getMyFollowerCnt}" /></span>
                     </a>
                     <c:if test="${sessionScope.loginMember.role == 2}">
-                        <a href="<c:url value='/reviews/manager'/>" class="item">Waiting <b><c:out value="${getManagerReviewsCnt}" />件</b>
+                        <a href="<c:url value='/reviews/manager'/>" class="item">Waiting<span class="ui mini circular label"><c:out value="${getManagerReviewsCnt}" /></span>
                         </a>
                     </c:if>
                     <c:if test="${sessionScope.loginMember.role == 3}">
-                        <a href="<c:url value='/reviews/director' />" class="item">Waiting <b><c:out value="${getDirectorReviewsCnt}" />件</b>
+                        <a href="<c:url value='/reviews/director' />" class="item">Waiting<span class="ui mini circular label"><c:out value="${getDirectorReviewsCnt}" /></span>
                         </a>
                     </c:if>
                     <a class="item" href="<c:url value='/logout'/>"> Logout </a>
                 </div>
-            </div>
+            </div>&nbsp;&nbsp;
             <script>
                     $('.custom.button')
                         .popup({

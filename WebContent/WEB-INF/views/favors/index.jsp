@@ -5,18 +5,37 @@
     <c:param name="content">
         <c:choose>
             <c:when test="${idea != null}">
-                <h2>いいねした人</h2>
+                <h2>Favors</h2>
                 <div class="ui raised very padded container segment">
-                <table class="ui celled striped table">
+                <c:choose>
+                        <c:when test="${getFavorsCnt == 0}">
+                            <div class="ui active dimmer">
+                        <div class="content">
+                            <h3>There's no favorite in <c:out value="${idea.member.name}"/>'s idea</h3>
+                            <p>Will be displayed here when favored</p>
+                        </div>
+                    </div>
+                    <div class="ui three stackable raised link cards">
+                    <div class="ui text container">
+                            <table class="ui padded single line striped table">
+                        <c:forEach begin="0" end="3" step="1">
+                            <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            </tr>
+                        </c:forEach>
+                        </table>
+                            </div>
+                    </div>
+                        </c:when>
+                        <c:otherwise>
+                <div class="ui text container">
+                            <table class="ui padded single line striped table">
                     <tbody>
-                    <tr>
-                        <th>氏名</th>
-                        <th>いいねした日時</th>
-                    </tr>
                     <c:forEach var="favor" items="${getFavors}">
                         <tr>
                             <td>
-                                <c:out value="${favor.member.name}"/>
+                            <a href="<c:url value="/members/show?id=${favor.member.id}"/>"><c:out value="${favor.member.name}"/></a>
                             </td>
                             <td>
                                 <fmt:formatDate value="${favor.createdAt}" pattern="yyyy-MM-dd HH:mm"/>
@@ -25,10 +44,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                </div>
-                <div class="ui label">いいね数
-                    <c:out value="${getFavorsCnt}"/>
-                </div>
                 <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1" end="${((getFavorsCnt - 1) / 12) + 1}" step="1">
                         <c:choose>
@@ -45,13 +60,15 @@
                         </c:choose>
                     </c:forEach>
                 </div>
+                </div>
+                </c:otherwise>
+                </c:choose>
+                </div>
+                <c:import url="_labels.jsp"/>
             </c:when>
             <c:otherwise>
-                <h2>お探しのデータは見つかりませんでした。</h2>
+                <h2>The data you were looking for wasn't found.</h2>
             </c:otherwise>
         </c:choose>
-        <p>
-            <a href="<c:url value="/ideas" />">一覧に戻る</a>
-        </p>
     </c:param>
 </c:import>

@@ -32,7 +32,7 @@
                         <table class="ui padded single line striped table">
                             <c:forEach var="member" items="${getMyFollower}">
                                 <tr>
-                                    <td><c:out value="${member.followingId.name}" /></td>
+                                    <td><a href="<c:url value="/members/show?id=${member.followingId.id}"/>"><c:out value="${member.followingId.name}" /></a></td>
                                     <c:choose>
                                         <c:when test="${!fn:contains(followIdea,member.followingId.id)}">
                                             <td>

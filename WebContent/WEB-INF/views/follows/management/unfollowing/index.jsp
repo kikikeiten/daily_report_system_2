@@ -36,7 +36,7 @@
                                 <c:forEach var="member" items="${getMemberNotFollowing}">
                                     <tr>
                                         <td>
-                                            <c:out value="${member.name}"/>
+                                            <a href="<c:url value="/members/show?id=${member.id}"/>"><c:out value="${member.name}"/></a>
                                         </td>
                                         <td>
                                             <form method="POST" action="<c:url value='/management/unfollowing/create' />">

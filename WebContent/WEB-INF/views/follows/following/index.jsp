@@ -36,7 +36,7 @@
                         <tbody>
                             <c:forEach var="member" items="${getMyFollowing}">
                                 <tr>
-                                    <td><c:out value="${member.followedId.name}" /></td>
+                                    <td><a href="<c:url value="/members/show?id=${member.followedId.id}"/>"><c:out value="${member.followedId.name}" /></a></td>
                                     <td>
                                         <form method="POST" action="<c:url value='/following/destroy/index'/>">
                                             <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">

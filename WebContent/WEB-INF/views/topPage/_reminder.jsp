@@ -8,7 +8,7 @@
                 $(this).closest('.message').transition('fade');
             });
         </script>
-        <a href="<c:url value='/drafts' />"> Unsubmitted drafts&nbsp;<span class="ui yellow circular label"><c:out value="${get4getMyDraftsCnt}" /></span>
+        <a href="<c:url value='/drafts' />"> Unsubmitted drafts&nbsp;<span class="ui yellow circular label"><c:out value="${get4getMyDraftsCnt}" /></span><br/>
         </a> <a href="<c:url value='/reviews/manager' />"> Ideas waiting for manager's reviews&nbsp;<span class="ui  green circular label"><c:out value="${get4getManagerReviewsCnt}" /></span>
         </a>
     </div>
@@ -21,7 +21,7 @@
                 $(this).closest('.message').transition('fade');
             });
         </script>
-        <a href="<c:url value='/drafts' />"> Unsubmitted drafts&nbsp;<span class="ui yellow circular label"><c:out value="${get4getMyDraftsCnt}" /></span>
+        <a href="<c:url value='/drafts' />"> Unsubmitted drafts&nbsp;<span class="ui yellow circular label"><c:out value="${get4getMyDraftsCnt}" /></span><br/>
         </a> <a href="<c:url value='/reviews/director' />">Ideas waiting for director's reviews&nbsp;<span class="ui blue circular label"><c:out value="${get4getDirectorReviewsCnt}" /></span>
         </a>
     </div>

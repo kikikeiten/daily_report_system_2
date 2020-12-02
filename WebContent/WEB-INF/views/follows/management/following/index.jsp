@@ -15,7 +15,6 @@
                             <p>If <c:out value="${member.name}"/> follows, your followers will be displayed here</p>
                         </div>
                     </div>
-                    <div class="ui three stackable raised link cards">
                     <div class="ui text container">
                             <table class="ui padded single line striped table">
                         <c:forEach begin="0" end="3" step="1">
@@ -26,7 +25,6 @@
                         </c:forEach>
                         </table>
                             </div>
-                    </div>
                         </c:when>
                         <c:otherwise>
                             <div class="ui text container">
@@ -35,7 +33,7 @@
                                 <c:forEach var="member" items="${getMemberFollowing}">
                                     <tr>
                                         <td>
-                                            <c:out value="${member.followedId.name}"/></td>
+                                            <a href="<c:url value="/members/show?id=${member.followedId.id}"/>"><c:out value="${member.followedId.name}"/></a></td>
                                         <td>
                                             <form method="POST" action="<c:url value='/management/following/destroy' />">
                                                 <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">
