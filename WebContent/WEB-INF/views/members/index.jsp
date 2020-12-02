@@ -4,6 +4,9 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <h2>All members</h2>
+        <c:if test="${sessionScope.loginMember.role != 0}">
+        <button onclick="location.href='<c:url value='/members/new'/>'" class="circular ui icon positive button"><i class="fas fa-plus-circle"></i></button>
+        </c:if>
         <div class="ui raised very padded container segment">
             <c:choose>
                 <c:when test="${getMembersCnt == 0}">
@@ -91,6 +94,5 @@
                 <c:out value="${getMembersCnt}" />
             </div>
         </div>
-        <button onclick="location.href='<c:url value='/members/new'/>'" class="ui positive button">新規従業員</button>
     </c:param>
 </c:import>

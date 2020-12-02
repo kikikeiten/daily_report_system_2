@@ -5,28 +5,28 @@
     <div style="display: inline-flex">
         <c:if test="${latestJoin == 0}">
             <form method="POST" action="<c:url value='joins/my/punch-in/create' />">
-                <button type="submit" class="ui positive button">Work!</button>
+                <button type="submit" class="ui positive button"><i class="fas fa-sign-in-alt"></i></button>
             </form>
         </c:if>
         <c:if test="${latestJoin == 1}">
             <form method="POST" action="<c:url value='/joins/my/punch-out/create' />">
-                <button type="submit" class="ui negative button">Finish!</button>
+                <button type="submit" class="ui negative button"><i class="fas fa-sign-out-alt"></i></button>
             </form>
         </c:if>
         <c:if test="${latestJoin == 2}">
             <form method="POST" action="<c:url value='joins/my/punch-in/create' />">
-                <button type="submit" class="ui positive button">Work!</button>
+                <button type="submit" class="ui positive button"><i class="fas fa-sign-in-alt"></i></button>
             </form>
         </c:if>
         <c:if test="${latestJoin == 3}">
             <form method="POST" action="<c:url value='/joins/my/punch-in/create' />">
-                <button type="submit" class="ui positive button">Work!</button>
+                <button type="submit" class="ui positive button"><i class="fas fa-sign-in-alt"></i></button>
             </form>
                     &nbsp;
                 </c:if>
         <c:if test="${latestJoin == null}">
             <form method="POST" action="<c:url value='/joins/my/punch-in/create' />">
-                <button type="submit" class="ui positive button">Work!</button>
+                <button type="submit" class="ui positive button"><i class="fas fa-sign-in-alt"></i></button>
             </form>
         </c:if>
     </div>
@@ -46,16 +46,16 @@
                     var nowHour = set2fig(nowTime.getHours());
                     var nowMin = set2fig(nowTime.getMinutes());
                     var nowSec = set2fig(nowTime.getSeconds());
-                    var msg = "現在時刻は" + nowHour + ":" + nowMin + ":" + nowSec + " です。";
+                    var msg = nowHour + ":" + nowMin + ":" + nowSec;
                     document.getElementById("RealtimeClockArea2").innerHTML = msg;
                 }
                 setInterval('showClock2()', 1000);
             </script>
     &nbsp;
     <div class="ui right floated buttons">
-        <button class="ui button" onclick="location.href='<c:url value='/joins/my'/>'">My打刻履歴</button>
+        <button class="ui button" onclick="location.href='<c:url value='/joins/my'/>'">My stamps</button>
         <c:if test="${sessionScope.loginMember.role == 2 || sessionScope.loginMember.role == 3}">
-            <button class="ui button" onclick="location.href='<c:url value='/joins/all'/>'">全打刻履歴</button>
+            <button class="ui button" onclick="location.href='<c:url value='/joins/all'/>'">All stamps</button>
         </c:if>
     </div>
 </div>

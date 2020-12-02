@@ -8,8 +8,8 @@
                 $(this).closest('.message').transition('fade');
             });
         </script>
-        <a href="<c:url value='/drafts' />"> 下書きのメモが<c:out value="${get4getMyDraftsCnt}" />件あります。
-        </a> <a href="<c:url value='/reviews/manager' />"> 課長承認待ちの日報が<c:out value="${get4getManagerReviewsCnt}" />件あります。
+        <a href="<c:url value='/drafts' />"> Unsubmitted drafts&nbsp;<span class="ui yellow circular label"><c:out value="${get4getMyDraftsCnt}" /></span>
+        </a> <a href="<c:url value='/reviews/manager' />"> Ideas waiting for manager's reviews&nbsp;<span class="ui  green circular label"><c:out value="${get4getManagerReviewsCnt}" /></span>
         </a>
     </div>
 </c:if>
@@ -21,8 +21,8 @@
                 $(this).closest('.message').transition('fade');
             });
         </script>
-        <a href="<c:url value='/drafts' />"> 下書きのメモが<c:out value="${get4getMyDraftsCnt}" />件あります。
-        </a> <a href="<c:url value='/reviews/director' />"> 部長承認待ちの日報が<c:out value="${get4getDirectorReviewsCnt}" />件あります。
+        <a href="<c:url value='/drafts' />"> Unsubmitted drafts&nbsp;<span class="ui yellow circular label"><c:out value="${get4getMyDraftsCnt}" /></span>
+        </a> <a href="<c:url value='/reviews/director' />">Ideas waiting for director's reviews&nbsp;<span class="ui blue circular label"><c:out value="${get4getDirectorReviewsCnt}" /></span>
         </a>
     </div>
 </c:if>
@@ -34,7 +34,7 @@
                 $(this).closest('.message').transition('fade');
             });
         </script>
-        <a href="<c:url value='/drafts' />"> 下書きのメモが<c:out value="${get4getMyDraftsCnt}" />件あります。
+        <a href="<c:url value='/drafts' />">Unsubmitted drafts&nbsp;<span class="ui yellow circular label"><c:out value="${get4getMyDraftsCnt}" /></span>
         </a>
     </div>
 </c:if>
@@ -46,7 +46,7 @@
                 $(this).closest('.message').transition('fade');
             });
         </script>
-        <a href="<c:url value='/reviews/manager' />"> 課長承認待ちの日報が<c:out value="${get4getManagerReviewsCnt}" />件あります。
+        <a href="<c:url value='/reviews/manager' />"> Ideas waiting for manager's reviews&nbsp;<span class="ui green circular label"><c:out value="${get4getManagerReviewsCnt}" /></span>
         </a>
     </div>
 </c:if>
@@ -58,7 +58,7 @@
                 $(this).closest('.message').transition('fade');
             });
         </script>
-        <a href="<c:url value='/reviews/director' />"> 部長承認待ちの日報が<c:out value="${get4getDirectorReviewsCnt}" />件あります。
+        <a href="<c:url value='/reviews/director' />"> Ideas waiting for director's reviews&nbsp;<span class="ui blue circular label"><c:out value="${get4getDirectorReviewsCnt}" /></span>
         </a>
     </div>
 </c:if>
