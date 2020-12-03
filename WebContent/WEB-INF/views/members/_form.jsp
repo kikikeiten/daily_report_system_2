@@ -2,24 +2,51 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${errors != null}">
     <div class="ui message">
-        入力内容にエラーがあります。<br/>
+        There're errors in the input contents.<br/>
         <c:forEach var="error" items="${errors}">
-            ・<c:out value="${error}"/>
+            ・<c:out value="${error}"/><br/>
         </c:forEach>
     </div>
 </c:if>
-<label for="code">メンバーID</label>
-<input type="text" name="code" value="${member.code}"/>
-<label for="name">氏名</label>
-<input type="text" name="name" value="${member.name}"/>
-<label for="password">パスワード</label>
-<input type="password" name="password"/>
-<label for="role">役割</label>
-<select name="role" class="ui selection dropdown">
-    <option value="0" <c:if test="${member.role == 0}">selected</c:if>>Associate</option>
-    <option value="1"<c:if test="${member.role == 1}"> selected</c:if>>Administrator</option>
-    <option value="2"<c:if test="${member.role == 2}"> selected</c:if>>Manager</option>
-    <option value="3"<c:if test="${member.role == 3}"> selected</c:if>>Director</option>
-</select>
+<div class="field">
+    <label for="code">Member ID</label>
+    <input type="text" name="code" value="${member.code}"/>
+</div>
+<div class="field">
+    <label for="name">Name</label>
+    <input type="text" name="name" value="${member.name}"/>
+</div>
+<div class="field">
+    <label for="password">Password</label>
+    <input type="password" name="password"/>
+</div>
+<div class="grouped fields">
+    <label for="role">Role</label>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input value="0" type="radio" name="role" <c:if test="${member.role == 0}">checked="checked"</c:if>>
+        <label>Associate</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input value="1" type="radio" name="role" <c:if test="${member.role == 1}">checked="checked"</c:if>>
+        <label>Administrator</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input value="2" type="radio" name="role" <c:if test="${member.role == 2}">checked="checked"</c:if>>
+        <label>Manager</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input value="3" type="radio" name="role" <c:if test="${member.role == 3}">checked="checked"</c:if>>
+        <label>Director</label>
+      </div>
+    </div>
+  </div>
+
 <input type="hidden" name="_token" value="${_token}"/>
-<button type="submit" class="ui positive button">投稿</button>
+<button type="submit" class="circular ui icon positive button"><i class="far fa-paper-plane"></i></button>

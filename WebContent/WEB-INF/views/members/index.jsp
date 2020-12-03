@@ -5,7 +5,7 @@
     <c:param name="content">
         <h2>All members</h2>
         <c:if test="${sessionScope.loginMember.role != 0}">
-        <button onclick="location.href='<c:url value='/members/new'/>'" class="circular ui icon positive button"><i class="fas fa-plus-circle"></i></button>
+        <button onclick="location.href='<c:url value='/members/new'/>'" class="circular ui icon positive button"><i class="fas fa-user-plus"></i></button>
         </c:if>
         <div class="ui raised very padded container segment">
             <c:choose>
