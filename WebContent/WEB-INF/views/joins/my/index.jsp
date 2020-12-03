@@ -36,12 +36,25 @@
                                 </c:if>
                             </td>
                             <td><fmt:formatDate value='${join.punchIn}' pattern='HH : mm'/></td>
-                            <td><fmt:formatDate value='${join.punchOut}' pattern='HH : mm'/>
-                                <c:if test="${join.joinStatus == 2}">Unregistered</c:if>
-                            </td>
-                            <td><fmt:formatDate value='${join.workingTime}' pattern='HH : mm'/>
-                                <c:if test="${join.joinStatus == 2}">Unregistered</c:if>
-                            </td>
+                            <c:choose>
+                                    <c:when test="${join.joinStatus == 2}">
+                                        <td class="negative">Unregistered</td>
+                                    </c:when>
+                                    <c:when test="${join.joinStatus == 3}">
+                                        <td class="warning"><fmt:formatDate value='${join.punchOut}' pattern='HH : mm' /></td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td><fmt:formatDate value='${join.punchOut}' pattern='HH : mm' /> <c:if test="${join.joinStatus == 2}">Unregistered</c:if></td>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${join.joinStatus == 2}">
+                                        <td class="negative">Unregistered</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td><fmt:formatDate value='${join.workingTime}' pattern='HH : mm' /> <c:if test="${join.joinStatus == 2}">Unregistered</c:if></td>
+                                    </c:otherwise>
+                                </c:choose>
                         </tr>
                     </c:forEach>
                     </tbody>
