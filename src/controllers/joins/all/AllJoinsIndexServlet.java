@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Join;
-import models.Member;
 import utils.DBUtil;
 
 @WebServlet("/joins/all")
@@ -28,9 +27,6 @@ public class AllJoinsIndexServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        // ログイン中のメンバーIDを取得
-        Member loginMember = (Member) request.getSession().getAttribute("loginMember");
-
         // ページネーション
         int page;
         try {
@@ -45,20 +41,9 @@ public class AllJoinsIndexServlet extends HttpServlet {
                 .setMaxResults(12)
                 .getResultList();
 
-        // 上記のカウントを取得
-        long getJoinsCnt = (long) em.createNamedQuery("getJoinsCnt", Long.class)
-                .getSingleResult();
-
-        // ログイン中メンバーの全ジョイン履歴数を取得
-        long getMyJoinCnt = (long) em.createNamedQuery("getMyJoinCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
         em.close();
 
         request.setAttribute("getJoins", getJoins);
-        request.setAttribute("getJoinsCnt", getJoinsCnt);
-        request.setAttribute("getMyJoinCnt", getMyJoinCnt);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/joins/all/index.jsp");
         rd.forward(request, response);

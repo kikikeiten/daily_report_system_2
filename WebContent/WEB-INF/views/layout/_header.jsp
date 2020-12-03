@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:if test="${latestJoin == 1}">
-    <div class="ui top right attached green label">Working</div>
-</c:if>
 <div class="ui hidden divider"></div>
 <div class="ui borderless container menu">
     <a href="<c:url value='/'/>" class="item"> <b>TipSwatch</b>
@@ -59,7 +56,7 @@
                         });
                 </script>
             <button onclick="location.href='<c:url value='/ideas/new'/>'" class="ui positive button">
-                <i class="fas fa-feather-alt"></i>
+                <i class="fas fa-edit"></i>
             </button>
         </div>
     </c:if>

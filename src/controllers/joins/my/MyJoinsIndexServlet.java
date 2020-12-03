@@ -46,20 +46,9 @@ public class MyJoinsIndexServlet extends HttpServlet {
                 .setMaxResults(12)
                 .getResultList();
 
-        // 上記のカウントを取得
-        long getMyJoinCnt = (long) em.createNamedQuery("getMyJoinCnt", Long.class)
-                .setParameter("loginMember", loginMember)
-                .getSingleResult();
-
-        // 全てのジョイン履歴数を取得
-        long getJoinsCnt = (long) em.createNamedQuery("getJoinsCnt", Long.class)
-                .getSingleResult();
-
         em.close();
 
         request.setAttribute("getMyJoins", getMyJoins);
-        request.setAttribute("getMyJoinCnt", getMyJoinCnt);
-        request.setAttribute("getJoinsCnt", getJoinsCnt);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/joins/my/index.jsp");
         rd.forward(request, response);
