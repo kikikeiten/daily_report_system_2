@@ -23,7 +23,7 @@ import lombok.Setter;
         // ログイン中メンバーの全ジョイン履歴を取得
         @NamedQuery(name = "getMyJoins", query = "SELECT j FROM Join j WHERE j.member = :loginMember ORDER BY j.updatedAt DESC"),
         // カウントを取得
-        @NamedQuery(name = "getMyJoinCnt", query = "SELECT COUNT(j) FROM Join j WHERE j.member = :loginMember"),
+        @NamedQuery(name = "getMyJoinsCnt", query = "SELECT COUNT(j) FROM Join j WHERE j.member = :loginMember"),
 
         // 全てのジョイン履歴を取得
         @NamedQuery(name = "getJoins", query = "SELECT j FROM Join j ORDER BY j.updatedAt DESC"),

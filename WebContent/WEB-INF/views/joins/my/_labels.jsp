@@ -6,7 +6,7 @@
 <div class="ui teal image label">
     My stamps
     <div class="detail">
-    <c:out value="${getMyJoinCnt}" />
+    <c:out value="${getMyJoinsCnt}" />
     </div>
 </div>
 <c:if test="${sessionScope.loginMember.role != 0}">

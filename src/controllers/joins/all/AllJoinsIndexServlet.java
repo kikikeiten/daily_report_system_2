@@ -43,6 +43,7 @@ public class AllJoinsIndexServlet extends HttpServlet {
 
         em.close();
 
+        request.setAttribute("page", page);
         request.setAttribute("getJoins", getJoins);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/joins/all/index.jsp");

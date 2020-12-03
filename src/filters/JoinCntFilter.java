@@ -33,7 +33,7 @@ public class JoinCntFilter implements Filter {
         Member loginMember = (Member) ((HttpServletRequest) request).getSession().getAttribute("loginMember");
 
         // ログイン中メンバーの全ジョイン履歴数を取得
-        long getMyJoinCnt = (long) em.createNamedQuery("getMyJoinCnt", Long.class)
+        long getMyJoinsCnt = (long) em.createNamedQuery("getMyJoinsCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
@@ -43,7 +43,7 @@ public class JoinCntFilter implements Filter {
 
         em.close();
 
-        request.setAttribute("getMyJoinCnt", getMyJoinCnt);
+        request.setAttribute("getMyJoinsCnt", getMyJoinsCnt);
         request.setAttribute("getJoinsCnt", getJoinsCnt);
 
         chain.doFilter(request, response);
