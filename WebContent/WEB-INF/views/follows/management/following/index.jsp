@@ -63,7 +63,7 @@
                                         <c:otherwise>
                                             <a class="item" href="<c:url value='/management/unfollowing?id=${member.id}&page=${i}' />">
                                                 <c:out value="${i}"/>
-                                            </a>&nbsp;
+                                            </a>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
@@ -75,7 +75,7 @@
                 <c:import url="_labels.jsp"/>
             </c:when>
             <c:otherwise>
-                <h2>お探しのデータは見つかりませんでした。</h2>
+                <h2>The data you were looking for wasn't found.</h2>
             </c:otherwise>
         </c:choose>
     </c:param>

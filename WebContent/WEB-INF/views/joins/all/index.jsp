@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>全打刻履歴</h2>
+        <h2>All stamps</h2>
         <div class="ui raised very padded container segment">
         <c:choose>
             <c:when test="${getJoinsCnt == 0}">
@@ -11,48 +11,48 @@
                 <p>打刻するとここに表示されます 。</p>
             </c:when>
             <c:otherwise>
-                <table class="ui celled striped table">
+                <table class="ui padded celled striped table">
                     <tbody>
+                    <thead>
                     <tr>
-                        <th>従業員氏名</th>
-                        <th>日付</th>
-                        <th>出勤時刻</th>
-                        <th>退勤時刻</th>
-                        <th>勤務時間</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Joined time</th>
+                        <th>Leaved time</th>
+                        <th>Duration</th>
                     </tr>
+                    </thead>
                     <c:forEach var="join" items="${getJoins}">
                         <tr>
                             <td>
-                                <c:out value="${join.member.name}"/>
+                                <c:out value="${join.member.name}"/>&nbsp;&nbsp;
                                 <c:if test="${join.joinStatus == 1}">
-                                    <div class="ui green label">勤務中</div>
+                                    <div class="ui green label">Joining now</div>
                                 </c:if>
                                 <c:if test="${join.joinStatus == 2}">
-                                    <a href="<c:url value='/joins/all/punch-out/edit?id=${join.id}'/>" class="ui red label">打刻忘れ</a>
+                                    <a href="<c:url value='/joins/all/punch-out/edit?id=${join.id}'/>" class="ui red label">Forgot</a>
                                 </c:if>
                                 <c:if test="${join.joinStatus == 3}">
-                                    <div class="ui orange label">修正済み</div>
+                                    <div class="ui orange label">Fixed</div>
                                 </c:if>
                             </td>
                             <td>
-                                <fmt:formatDate value='${join.joinDate}' pattern='MM / dd'/>
+                                <fmt:formatDate value='${join.joinDate}' pattern='yyyy / MM / dd'/>
                             </td>
                             <td>
                                 <fmt:formatDate value='${join.punchIn}' pattern='HH : mm'/>
                             </td>
                             <td><fmt:formatDate value='${join.punchOut}' pattern='HH : mm'/>
-                                <c:if test="${join.joinStatus == 2}">未登録</c:if>
+                                <c:if test="${join.joinStatus == 2}">Unregistered</c:if>
                             </td>
                             <td><fmt:formatDate value='${join.workingTime}' pattern='HH : mm'/>
-                                <c:if test="${join.joinStatus == 2}">未登録</c:if>
+                                <c:if test="${join.joinStatus == 2}">Unregistered</c:if>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                <div class="ui label">
-                    履歴数<c:out value="${getJoinsCnt}"/>
-                </div>
+                <div class="ui hidden divider"></div>
                 <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1" end="${((getJoinsCnt - 1) / 12) + 1}" step="1">
                         <c:choose>
@@ -72,8 +72,6 @@
             </c:otherwise>
         </c:choose>
         </div>
-        <p>
-            <a href="<c:url value='/' />">トップページに戻る</a>
-        </p>
+        <c:import url="_labels.jsp"/>
     </c:param>
 </c:import>

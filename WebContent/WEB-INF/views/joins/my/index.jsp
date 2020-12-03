@@ -11,13 +11,13 @@
                 <p>打刻するとここに表示されます。</p>
             </c:when>
             <c:otherwise>
-                <table class="ui celled striped table">
+                <table class="ui padded celled striped table">
                     <tbody>
                     <thead>
                     <tr>
                         <th>Date</th>
-                        <th>Joining time</th>
-                        <th>Leaving time</th>
+                        <th>Joined time</th>
+                        <th>Leaved time</th>
                         <th>Duration</th>
                     </tr>
                     </thead>
@@ -26,27 +26,27 @@
                             <td>
                                 <fmt:formatDate value='${join.joinDate}' pattern='yyyy / MM / dd'/>&nbsp;&nbsp;
                                 <c:if test="${join.joinStatus == 1}">
-                                    <div class="ui green label">joining now</div>
+                                    <div class="ui green label">Joining now</div>
                                 </c:if>
                                 <c:if test="${join.joinStatus == 2}">
-                                    <div class="ui red label">forget</div>
+                                    <div class="ui red label">Forgot</div>
                                 </c:if>
                                 <c:if test="${join.joinStatus == 3}">
-                                    <div class="ui orange label">fixed</div>
+                                    <div class="ui orange label">Fixed</div>
                                 </c:if>
                             </td>
                             <td><fmt:formatDate value='${join.punchIn}' pattern='HH : mm'/></td>
                             <td><fmt:formatDate value='${join.punchOut}' pattern='HH : mm'/>
-                                <c:if test="${join.joinStatus == 2}">未登録</c:if>
+                                <c:if test="${join.joinStatus == 2}">Unregistered</c:if>
                             </td>
                             <td><fmt:formatDate value='${join.workingTime}' pattern='HH : mm'/>
-                                <c:if test="${join.joinStatus == 2}">未登録</c:if>
+                                <c:if test="${join.joinStatus == 2}">Unregistered</c:if>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                <div class="ui label">履歴数${getMyJoinCnt}</div>
+                <div class="ui hidden divider"></div>
                 <div class="ui mini pagination menu">
                     <c:forEach var="i" begin="1" end="${((getMyJoinCnt - 1) / 12) + 1}" step="1">
                         <c:choose>
@@ -66,5 +66,6 @@
             </c:otherwise>
         </c:choose>
         </div>
+        <c:import url="_labels.jsp"/>
     </c:param>
 </c:import>

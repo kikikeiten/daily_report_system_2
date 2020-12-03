@@ -39,7 +39,7 @@ public class MyJoinsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // ログイン中メンバーの全join履歴を取得
+        // ログイン中メンバーの全ジョイン履歴を取得
         List<Join> getMyJoins = em.createNamedQuery("getMyJoins", Join.class)
                 .setParameter("loginMember", loginMember)
                 .setFirstResult(12 * (page - 1))
@@ -51,10 +51,15 @@ public class MyJoinsIndexServlet extends HttpServlet {
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
 
+        // 全てのジョイン履歴数を取得
+        long getJoinsCnt = (long) em.createNamedQuery("getJoinsCnt", Long.class)
+                .getSingleResult();
+
         em.close();
 
         request.setAttribute("getMyJoins", getMyJoins);
         request.setAttribute("getMyJoinCnt", getMyJoinCnt);
+        request.setAttribute("getJoinsCnt", getJoinsCnt);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/joins/my/index.jsp");
         rd.forward(request, response);
