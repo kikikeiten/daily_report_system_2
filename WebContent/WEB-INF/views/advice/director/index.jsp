@@ -4,20 +4,13 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <h2>With advice from the director</h2>
-        <div class="circular ui icon teal mini button" data-variation="inverted"></div>
-        <script>
-            $('.teal.button')
-                .popup({
-                    position: 'bottom center',
-                    content: 'With advice from the director'
-                });
-        </script>
+        <c:import url="_circular.jsp"/>
         <div class="ui raised very padded container segment">
             <c:choose>
                 <c:when test="${getDirectorAdviceCnt == 0}">
                     <div class="ui active dimmer">
                         <div class="content">
-                            <h3>There is no idea with the advice of the director.</h3>
+                            <h3>There's no idea with the advice of the director.</h3>
                             <p>Any advice from the director for ideas will be displayed here.</p>
                         </div>
                     </div>
@@ -27,8 +20,7 @@
                                 <a class="content" href="">
                                     <span class="right floated"></span>
                                     <span class="header"></span>
-                                    <span class="description">
-                                    </span>
+                                    <span class="description"></span>
                                 </a>
                                 <div class="extra content">
                                     <button class="circular ui mini icon button">
@@ -48,8 +40,7 @@
                                     <span class="header">
                                             <c:out value="${idea.title}"/>
                                     </span>
-                                    <span class="description">
-                                    </span>
+                                    <span class="description"></span>
                                 </a>
                                 <div class="extra content">
                                     <form method="POST" action="<c:url value='/advice/director/create' />" class="left floated">
@@ -66,22 +57,7 @@
                         </c:forEach>
                     </div>
                     <div class="ui hidden divider"></div>
-                    <div class="ui mini pagination menu">
-                        <c:forEach var="i" begin="1" end="${((getDirectorAdviceCnt - 1) / 12) + 1}" step="1">
-                            <c:choose>
-                                <c:when test="${i == page}">
-                                    <div class="item active">
-                                        <c:out value="${i}"/>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="item" href="<c:url value='/advice/director?page=${i}' />">
-                                        <c:out value="${i}"/>
-                                    </a>&nbsp;
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </div>
+                    <c:import url="_page.jsp"/>
                 </c:otherwise>
             </c:choose>
         </div>
