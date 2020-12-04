@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -9,22 +8,7 @@
                 <div class="ui raised very padded container segment">
                     <c:choose>
                         <c:when test="${getMemberFollowingCnt == 0}">
-                            <div class="ui active dimmer">
-                                <div class="content">
-                                    <h3><c:out value="${member.name}"/> hasn't followed anyone yet.</h3>
-                                    <p>If <c:out value="${member.name}"/> follows, your followers will be displayed here</p>
-                                </div>
-                            </div>
-                            <div class="ui text container">
-                                <table class="ui padded single line striped table">
-                                    <c:forEach begin="0" end="3" step="1">
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                    </c:forEach>
-                                </table>
-                            </div>
+                            <c:import url="_noFollowing.jsp"/>
                         </c:when>
                         <c:otherwise>
                             <div class="ui text container">
@@ -38,10 +22,12 @@
                                                 <form method="POST" action="<c:url value='/management/following/destroy' />">
                                                     <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">
                                                         <div class="visible content">
-                                                            <i class="user icon"></i>following
+                                                            <i class="user icon"></i>
+                                                            following
                                                         </div>
                                                         <div class="hidden content">
-                                                            <i class="user icon"></i>unfollow
+                                                            <i class="user icon"></i>
+                                                            unfollow
                                                         </div>
                                                     </button>
                                                 </form>
@@ -50,24 +36,8 @@
                                     </c:forEach>
                                     </tbody>
                                 </table>
-
                                 <div class="ui hidden divider"></div>
-                                <div class="ui mini pagination menu">
-                                    <c:forEach var="i" begin="1" end="${((getMemberFollowingCnt - 1) / 12) + 1}" step="1">
-                                        <c:choose>
-                                            <c:when test="${i == page}">
-                                                <div class="item active">
-                                                    <c:out value="${i}"/>
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a class="item" href="<c:url value='/management/unfollowing?id=${member.id}&page=${i}' />">
-                                                    <c:out value="${i}"/>
-                                                </a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                                </div>
+                                <c:import url="_pages.jsp"/>
                             </div>
                         </c:otherwise>
                     </c:choose>
@@ -76,6 +46,9 @@
             </c:when>
             <c:otherwise>
                 <h2>The data you were looking for wasn't found.</h2>
+                <button onclick="location.href='<c:url value='/members'/>'" class="circular ui icon button">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </button>
             </c:otherwise>
         </c:choose>
     </c:param>
