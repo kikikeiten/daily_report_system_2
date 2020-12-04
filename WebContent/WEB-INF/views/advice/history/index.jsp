@@ -3,67 +3,50 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>日報「<c:out value="${idea.title}"/>」の承認履歴一覧</h2>
-        <c:choose>
-            <c:when test="${getReviewsCnt == 0}">
-                <h3>日報「<c:out value="${idea.title}"></c:out>」に承認履歴はありません。</h3>
-                <p>日報が承認または差し戻しされるとここに表示されます。</p>
-            </c:when>
-            <c:otherwise>
-                <table class="ui celled striped table">
-                    <tbody>
-                    <tr>
-                        <th>承認日時</th>
-                        <th>承認状況</th>
-                        <th>コメント</th>
-                        <th>承認者</th>
-                        <th>役職</th>
-                    </tr>
-                    <c:forEach var="review" items="${getReviews}">
-                        <tr>
-                            <td>
-                                <fmt:formatDate value='${review.createdAt}' pattern='yyyy-MM-dd HH:mm'/>
-                            </td>
-                            <td>
-                                <c:if test="${review.reviewStatus == 1 || review.reviewStatus == 3}">差し戻し</c:if>
-                                <c:if test="${review.reviewStatus == 4 || review.reviewStatus == 6}">承認</c:if>
-                            </td>
-                            <td>
-                                <c:out value="${review.advice}"/>
-                            </td>
-                            <td>
-                                <c:out value="${review.member.name}"/>
-                            </td>
-                            <td>
-                                <c:if test="${review.member.role == 2}">課長</c:if>
-                                <c:if test="${review.member.role == 3}">部長</c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                <div class="ui label">履歴件数<c:out value="${getReviewsCnt}"/>
-                </div>
-                <div class="ui mini pagination menu">
-                    <c:forEach var="i" begin="1" end="${((getReviewsCnt - 1) / 12) + 1}" step="1">
-                        <c:choose>
-                            <c:when test="${i == page}">
-                                <div class="item active">
-                                    <c:out value="${i}"/>
+        <h2>Idea "<a href="<c:url value="/ideas/show?id=${idea.id}"/>"><c:out value="${idea.title}"/></a>" advice history</h2>
+        <div class="ui raised very padded container segment">
+            <div class="ui text container">
+                <c:choose>
+                <c:when test="${getReviewsCnt == 0}">
+                    <c:import url="_noAdvice.jsp"/>
+                </c:when>
+                <c:otherwise>
+                <c:forEach var="review" items="${getReviews}">
+                    <div class="ui threaded comments">
+                        <div class="comment">
+                            <div class="content">
+                                <a class="author" href=<c:url value="/members/show?id=${review.member.id}"/>><c:out value="${review.member.name}"/></a>
+                                <div class="metadata">
+                                    <div class="date"><fmt:formatDate value='${review.createdAt}' pattern='yyyy/MM/dd HH:mm'/></div>
+                                    <c:if test="${review.reviewStatus == 1 || review.reviewStatus == 3}">
+                                        <div class="ui pink label">Advised</div>
+                                    </c:if>
+                                    <c:if test="${review.reviewStatus == 4 || review.reviewStatus == 6}">
+                                        <div class="ui green label">Approved!</div>
+                                    </c:if>
                                 </div>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="item" href="<c:url value='/advice/history?page=${i}' />">
-                                    <c:out value="${i}"/>
-                                </a>&nbsp;
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </div>
+                                <div class="text">
+                                    <c:choose>
+                                        <c:when test="${review.advice == null}">
+                                            No advice.
+                                        </c:when>
+                                        <c:otherwise>
+                                            <pre><c:out value="${review.advice}"/></pre>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+                </c:forEach>
+                <div class="ui hidden divider"></div>
+                <c:import url="_page.jsp"/>
+            </div>
             </c:otherwise>
-        </c:choose>
-        <p>
-            <a href="<c:url value='/ideas/show?id=${idea.id}' />">日報詳細ページに戻る</a>
-        </p>
+            </c:choose>
+        </div>
+        <c:import url="_labels.jsp"/>
+        </div>
     </c:param>
 </c:import>
