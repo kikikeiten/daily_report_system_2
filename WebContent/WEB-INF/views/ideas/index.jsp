@@ -9,28 +9,7 @@
         <div class="ui raised very padded container segment">
             <c:choose>
                 <c:when test="${getIdeasCntButDrafts == 0}">
-                    <div class="ui active dimmer">
-                        <div class="content">
-                            <h3>日報はまだありません。</h3>
-                            <p>作成されるとここに表示されます。</p>
-                        </div>
-                    </div>
-                    <div class="ui three stackable raised link cards">
-                        <c:forEach begin="0" end="5" step="1">
-                            <div class="ui card">
-                                <a class="content" href="">
-                                    <span class="right floated"></span>
-                                    <span class="header"></span>
-                                    <span class="description"></span>
-                                </a>
-                                <div class="extra content">
-                                    <button class="circular ui mini icon button">
-                                        <i class="far fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
+                    <c:import url="_noIdea.jsp"/>
                 </c:when>
                 <c:otherwise>
                     <div class="ui three stackable raised link cards">

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Follow;
 import models.Idea;
 import models.Member;
 import utils.DBUtil;
@@ -50,6 +51,8 @@ public class TimelineIndexServlet extends HttpServlet {
         long getMyFollowingIdeasCnt = (long) em.createNamedQuery("getMyFollowingIdeasCnt", Long.class)
                 .setParameter("loginMember", loginMember)
                 .getSingleResult();
+
+        System.out.println("テスト" + getMyFollowingIdeasCnt);
 
         em.close();
 

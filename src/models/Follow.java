@@ -23,10 +23,10 @@ import lombok.Setter;
         // フォロー解除するフォロワーのIDを取得
         @NamedQuery(name = "getDestroyFollower", query = "SELECT f.id FROM Follow f WHERE f.followingId  = :loginMember AND f.followedId = :followerId"),
 
-        // ログイン中メンバーがフォローしているメンバーのアイデアを取得
-        @NamedQuery(name = "getMyFollowingIdeas", query = "SELECT i FROM Idea i, Follow f WHERE f.followingId = :loginMember AND i.member.id = f.followedId.id ORDER BY i.updatedAt DESC"),
+        // ログイン中メンバーがフォローしているメンバーのアイデアを取得（ドラフトを除く）
+        @NamedQuery(name = "getMyFollowingIdeas", query = "SELECT i FROM Idea i, Follow f WHERE f.followingId = :loginMember AND i.member.id = f.followedId.id AND i.reviewStatus <> 0 ORDER BY i.updatedAt DESC"),
         // カウントを取得
-        @NamedQuery(name = "getMyFollowingIdeasCnt", query = "SELECT COUNT(i) FROM Idea i, Follow f WHERE f.followedId = :loginMember AND i.member.id = f.followedId.id"),
+        @NamedQuery(name = "getMyFollowingIdeasCnt", query = "SELECT COUNT(i) FROM Idea i, Follow f WHERE f.followingId = :loginMember AND i.member.id = f.followedId.id AND i.reviewStatus <> 0"),
 
         // ログイン中メンバーのフォロー一覧を取得
         @NamedQuery(name = "getMyFollowing", query = "SELECT f FROM Follow f, Member m WHERE f.followingId = :loginMember AND m.id = f.followedId.id ORDER BY f.updatedAt DESC"),
