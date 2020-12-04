@@ -1,13 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:if test="${errors != null}">
-    <div class="ui message">
-        入力内容にエラーがあります。
-        <c:forEach var="error" items="${errors}">
-            ・<c:out value="${error}"/>
-        </c:forEach>
-    </div>
-</c:if>
+<c:import url="_error.jsp"/>
 <div class="field">
     <label for="createdDate">Date</label>
     <input type="date" name="createdDate" value="<fmt:formatDate value='${idea.createdDate}' pattern='yyyy-MM-dd' />"/>

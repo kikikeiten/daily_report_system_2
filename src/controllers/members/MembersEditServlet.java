@@ -33,7 +33,13 @@ public class MembersEditServlet extends HttpServlet {
 
         request.setAttribute("member", member);
         request.setAttribute("_token", request.getSession().getId());
-        request.getSession().setAttribute("memberId", member.getId());
+
+        // 存在しないパラメータを入力された際に例外処理
+        try {
+            request.getSession().setAttribute("memberId", member.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/members/edit.jsp");
         rd.forward(request, response);
