@@ -24,7 +24,7 @@
     <label for="role">Role</label>
     <div class="field">
       <div class="ui radio checkbox">
-        <input value="0" type="radio" name="role" <c:if test="${member.role == 0}">checked="checked"</c:if>>
+        <input value="0" type="radio" name="role" <c:if test="${member.role == 0 || member.role == null}">checked="checked"</c:if>>
         <label>Associate</label>
       </div>
     </div>
@@ -49,4 +49,3 @@
   </div>
 
 <input type="hidden" name="_token" value="${_token}"/>
-<button type="submit" class="circular ui icon positive button"><i class="far fa-paper-plane"></i></button>

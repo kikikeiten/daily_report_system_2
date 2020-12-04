@@ -9,6 +9,9 @@
                     <c:import url="_form.jsp"/>
                 </form>
             </div>
+            <button onclick="location.href='<c:url value='/members'/>'" class="circular ui icon button">
+                <i class="fas fa-long-arrow-alt-left"></i>
+            </button>
         </div>
     </c:param>
 </c:import>

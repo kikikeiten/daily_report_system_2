@@ -10,64 +10,64 @@
                     <c:choose>
                         <c:when test="${getMemberFollowingCnt == 0}">
                             <div class="ui active dimmer">
-                        <div class="content">
-                            <h3><c:out value="${member.name}"/> hasn't followed anyone yet.</h3>
-                            <p>If <c:out value="${member.name}"/> follows, your followers will be displayed here</p>
-                        </div>
-                    </div>
-                    <div class="ui text container">
-                            <table class="ui padded single line striped table">
-                        <c:forEach begin="0" end="3" step="1">
-                            <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            </tr>
-                        </c:forEach>
-                        </table>
+                                <div class="content">
+                                    <h3><c:out value="${member.name}"/> hasn't followed anyone yet.</h3>
+                                    <p>If <c:out value="${member.name}"/> follows, your followers will be displayed here</p>
+                                </div>
+                            </div>
+                            <div class="ui text container">
+                                <table class="ui padded single line striped table">
+                                    <c:forEach begin="0" end="3" step="1">
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
                             </div>
                         </c:when>
                         <c:otherwise>
                             <div class="ui text container">
-                            <table class="ui padded single line striped table">
-                                <tbody>
-                                <c:forEach var="member" items="${getMemberFollowing}">
-                                    <tr>
-                                        <td>
-                                            <a href="<c:url value="/members/show?id=${member.followedId.id}"/>"><c:out value="${member.followedId.name}"/></a></td>
-                                        <td>
-                                            <form method="POST" action="<c:url value='/management/following/destroy' />">
-                                                <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">
-                                                    <div class="visible content">
-                                                        <i class="user icon"></i>following
-                                                    </div>
-                                                    <div class="hidden content">
-                                                        <i class="user icon"></i>unfollow
-                                                    </div>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+                                <table class="ui padded single line striped table">
+                                    <tbody>
+                                    <c:forEach var="member" items="${getMemberFollowing}">
+                                        <tr>
+                                            <td>
+                                                <a href="<c:url value="/members/show?id=${member.followedId.id}"/>"><c:out value="${member.followedId.name}"/></a></td>
+                                            <td>
+                                                <form method="POST" action="<c:url value='/management/following/destroy' />">
+                                                    <button class="ui tiny animated button" type="submit" name="followedId" value="${member.id}">
+                                                        <div class="visible content">
+                                                            <i class="user icon"></i>following
+                                                        </div>
+                                                        <div class="hidden content">
+                                                            <i class="user icon"></i>unfollow
+                                                        </div>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
 
-                            <div class="ui hidden divider"></div>
-                            <div class="ui mini pagination menu">
-                                <c:forEach var="i" begin="1" end="${((getMemberFollowingCnt - 1) / 12) + 1}" step="1">
-                                    <c:choose>
-                                        <c:when test="${i == page}">
-                                            <div class="item active">
-                                                <c:out value="${i}"/>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <a class="item" href="<c:url value='/management/unfollowing?id=${member.id}&page=${i}' />">
-                                                <c:out value="${i}"/>
-                                            </a>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                            </div>
+                                <div class="ui hidden divider"></div>
+                                <div class="ui mini pagination menu">
+                                    <c:forEach var="i" begin="1" end="${((getMemberFollowingCnt - 1) / 12) + 1}" step="1">
+                                        <c:choose>
+                                            <c:when test="${i == page}">
+                                                <div class="item active">
+                                                    <c:out value="${i}"/>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class="item" href="<c:url value='/management/unfollowing?id=${member.id}&page=${i}' />">
+                                                    <c:out value="${i}"/>
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </div>
                             </div>
                         </c:otherwise>
                     </c:choose>

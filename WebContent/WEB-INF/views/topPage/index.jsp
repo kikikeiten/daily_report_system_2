@@ -47,23 +47,27 @@
                                             <span class="description"></span>
                                         </a>
                                         <div class="extra content">
-                                            <form method="POST" action="<c:url value='/drafts/update' />" class="left floated">
+                                            <form method="POST" action="<c:url value='/drafts/update' />"
+                                                  class="left floated">
                                                 <c:choose>
                                                     <c:when test="${sessionScope.loginMember.role != 3}">
-                                                        <button type="submit" name="reviewStatus" value="${2}" class="circular ui mini icon green button">
+                                                        <button type="submit" name="reviewStatus" value="${2}"
+                                                                class="circular ui mini icon green button">
                                                             <i class="far fa-paper-plane"></i>
                                                         </button>
                                                         <input type="hidden" name="ideaId" value="${idea.id}"/>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <button type="submit" name="reviewStatus" value="${4}" class="circular ui mini icon blue button">
+                                                        <button type="submit" name="reviewStatus" value="${4}"
+                                                                class="circular ui mini icon blue button">
                                                             <i class="far fa-paper-plane"></i>
                                                         </button>
                                                         <input type="hidden" name="ideaId" value="${idea.id}"/>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </form>
-                                            <a class="right floated date" href="<c:url value='/members/show?id=${idea.member.id}' />">
+                                            <a class="right floated date"
+                                               href="<c:url value='/members/show?id=${idea.member.id}' />">
                                                 <c:out value="${idea.member.name}"/>
                                             </a>
                                         </div>
@@ -72,7 +76,8 @@
                                 <c:when test="${idea.reviewStatus == 1}">
                                     <div class="ui olive card">
                                         <a class="content" href="<c:url value='/ideas/show?id=${idea.id}' />">
-                                            <span class="right floated"><fmt:formatDate value='${idea.createdDate}' pattern='MM / dd'/></span>
+                                            <span class="right floated"><fmt:formatDate value='${idea.createdDate}'
+                                                                                        pattern='MM / dd'/></span>
                                             <span class="header"><c:out value="${idea.title}"/></span>
                                             <span class="description"></span>
                                         </a>
@@ -80,11 +85,13 @@
                                             <form method="POST" action="<c:url value='/advice/manager/create' />"
                                                   class="left floated">
                                                 <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                <button type="submit" name="reviewStatus" value="${2}" class="circular ui mini icon green button">
+                                                <button type="submit" name="reviewStatus" value="${2}"
+                                                        class="circular ui mini icon green button">
                                                     <i class="fas fa-paper-plane"></i>
                                                 </button>
                                             </form>
-                                            <a class="right floated date" href="<c:url value='/members/show?id=${idea.member.id}' />">
+                                            <a class="right floated date"
+                                               href="<c:url value='/members/show?id=${idea.member.id}' />">
                                                 <c:out value="${idea.member.name}"/>
                                             </a>
                                         </div>
@@ -106,7 +113,8 @@
                                                 <i class="far fa-heart"></i>
                                                 <c:out value="${idea.favors}"/>
                                             </a>
-                                            <a class="right floated date" href="<c:url value='/members/show?id=${idea.member.id}' />">
+                                            <a class="right floated date"
+                                               href="<c:url value='/members/show?id=${idea.member.id}' />">
                                                 <c:out value="${idea.member.name}"/>
                                             </a>
                                         </div>
@@ -124,13 +132,16 @@
                                             <span class="description"></span>
                                         </a>
                                         <div class="extra content">
-                                            <form method="POST" action="<c:url value='/advice/director/create' />" class="left floated">
+                                            <form method="POST" action="<c:url value='/advice/director/create' />"
+                                                  class="left floated">
                                                 <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                <button type="submit" name="reviewStatus" value="${4}" class="circular ui mini icon blue button">
+                                                <button type="submit" name="reviewStatus" value="${4}"
+                                                        class="circular ui mini icon blue button">
                                                     <i class="fas fa-paper-plane"></i>
                                                 </button>
                                             </form>
-                                            <a class="right floated date" href="<c:url value='/members/show?id=${idea.member.id}' />">
+                                            <a class="right floated date"
+                                               href="<c:url value='/members/show?id=${idea.member.id}' />">
                                                 <c:out value="${idea.member.name}"/>
                                             </a>
                                         </div>
@@ -150,7 +161,8 @@
                                                 <i class="far fa-heart"></i>
                                                 <c:out value="${idea.favors}"/>
                                             </a>
-                                            <a class="right floated date" href="<c:url value='/members/show?id=${idea.member.id}' />">
+                                            <a class="right floated date"
+                                               href="<c:url value='/members/show?id=${idea.member.id}' />">
                                                 <c:out value="${idea.member.name}"/>
                                             </a>
                                         </div>
@@ -159,7 +171,8 @@
                                 <c:when test="${idea.reviewStatus == 6}">
                                     <div class="ui violet card">
                                         <a class="content" href="<c:url value='/ideas/show?id=${idea.id}' />"> <span
-                                                class="right floated"><fmt:formatDate value='${idea.createdDate}' pattern='MM / dd'/></span>
+                                                class="right floated"><fmt:formatDate value='${idea.createdDate}'
+                                                                                      pattern='MM / dd'/></span>
                                             <span class="header">
                                                 <c:out value="${idea.title}"/></span>
                                             <span class="description"></span>
@@ -169,7 +182,8 @@
                                                 <i class="far fa-heart"></i>
                                                 <c:out value="${idea.favors}"/>
                                             </a>
-                                            <a class="right floated date" href="<c:url value='/members/show?id=${idea.member.id}' />">
+                                            <a class="right floated date"
+                                               href="<c:url value='/members/show?id=${idea.member.id}' />">
                                                 <c:out value="${idea.member.name}"/>
                                             </a>
                                         </div>
