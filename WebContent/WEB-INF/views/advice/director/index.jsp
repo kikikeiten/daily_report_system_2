@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -6,11 +5,11 @@
         <c:choose>
             <c:when test="${sessionScope.loginMember.role == 0 || sessionScope.loginMember.role == 1 || sessionScope.loginMember.role == 2}">
                 <h2>With advice from the director</h2>
-                <c:import url="_circular.jsp"/>
+                <c:import url="_circles.jsp"/>
                 <div class="ui raised very padded container segment">
                     <c:choose>
                         <c:when test="${getDirectorAdviceCnt == 0}">
-                            <c:import url="_noIdea.jsp"/>
+                            <c:import url="_noAdvice.jsp"/>
                         </c:when>
                         <c:otherwise>
                             <div class="ui three stackable raised link cards">
@@ -38,7 +37,7 @@
                                 </c:forEach>
                             </div>
                             <div class="ui hidden divider"></div>
-                            <c:import url="_page.jsp"/>
+                            <c:import url="_pages.jsp"/>
                         </c:otherwise>
                     </c:choose>
                 </div>
