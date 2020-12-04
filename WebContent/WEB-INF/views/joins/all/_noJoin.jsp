@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="ui active dimmer">
     <div class="content">
-        <h3>You have no followers yet.</h3>
-        <p>If someone follows you, your followers will appear here.</p>
+        <h3>There's no stamp yet.</h3>
+        <p>It'll be displayed here when someone joins.</p>
     </div>
 </div>
 <div class="ui text container">
