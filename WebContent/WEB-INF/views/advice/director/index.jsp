@@ -45,7 +45,7 @@
             </c:when>
             <c:otherwise>
                 <h2>The data you were looking for wasn't found.</h2>
-                <button onclick="location.href='<c:url value='/members'/>'" class="circular ui icon button">
+                <button onclick="location.href='<c:url value='/'/>'" class="circular ui icon button">
                     <i class="fas fa-long-arrow-alt-left"></i>
                 </button>
             </c:otherwise>
