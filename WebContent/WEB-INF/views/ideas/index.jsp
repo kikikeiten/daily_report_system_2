@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <h2>All swatches</h2>
-        <c:import url="_circular.jsp"/>
+        <c:import url="_circles.jsp"/>
         <div class="ui raised very padded container segment">
             <c:choose>
                 <c:when test="${getIdeasCntButDrafts == 0}">
@@ -128,22 +127,7 @@
                         </c:forEach>
                     </div>
                     <div class="ui hidden divider"></div>
-                    <div class="ui centered mini pagination menu">
-                        <c:forEach var="i" begin="1" end="${((getIdeasCntButDrafts - 1) / 12) + 1}" step="1">
-                            <c:choose>
-                                <c:when test="${i == page}">
-                                    <div class="item active">
-                                        <c:out value="${i}"/>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="item" href="<c:url value='/ideas?page=${i}' />">
-                                        <c:out value="${i}"/>
-                                    </a>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </div>
+                    <c:import url="_pages.jsp"/>
                 </c:otherwise>
             </c:choose>
         </div>
