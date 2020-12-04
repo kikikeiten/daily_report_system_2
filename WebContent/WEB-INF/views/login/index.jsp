@@ -2,17 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:if test="${hasError}">
-            <div class="ui error message">
-                <i class="close icon"></i>
-                <script>
-                    $('.message .close').on('click', function () {
-                        $(this).closest('.message').transition('fade');
-                    });
-                </script>
-                社員番号かパスワードが間違っています。
-            </div>
-        </c:if>
+        <c:import url="_error.jsp"/>
         <div class="ui hidden divider"></div>
         <div class="ui raised very padded text container segment">
             <h2>Login</h2>
