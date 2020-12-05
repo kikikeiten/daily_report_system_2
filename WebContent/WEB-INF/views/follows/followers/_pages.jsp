@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="ui mini pagination menu">
     <c:forEach var="i" begin="1" end="${((getMyFollowerCnt - 1) / 12) + 1}" step="1">

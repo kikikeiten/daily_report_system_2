@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -25,7 +26,7 @@
                                 <c:forEach var="join" items="${getJoins}">
                                     <tr>
                                         <td>
-                                            <c:out value="${join.member.name}"/>
+                                            <c:out value="${join.member.name}"/>&nbsp;&nbsp;
                                             <c:if test="${join.joinStatus == 1}">
                                                 <div class="ui green label">
                                                     Joining now

@@ -37,28 +37,11 @@ public class IdeasShowServlet extends HttpServlet {
                     .setMaxResults(1) // 一件だけ表示
                     .getSingleResult();
 
-            request.setAttribute("advice", getReviews.getAdvice());
-            request.setAttribute("name", getReviews.getMember().getName());
+            // 最新のレビューのIDを取得
+            Review review = em.find(Review.class, getReviews.getId());
 
-            switch (getReviews.getMember().getRole()) {
-                case 2: // マネージャー
-                    request.setAttribute("role", "Manager");
-                    break;
-                case 3: // ディレクター
-                    request.setAttribute("role", "Director");
-                    break;
-            }
+            request.setAttribute("review", review);
 
-            // レビューの経過を取得しInteger型に変換
-            Integer reviewFlag = getReviews.getReviewStatus();
-
-            if (reviewFlag == 1 || reviewFlag == 3) {
-                request.setAttribute("reviewFlag", "差し戻し");
-
-            } else if (reviewFlag == 4 || reviewFlag == 6) {
-                request.setAttribute("reviewFlag", "承認");
-            }
-            request.setAttribute("reviewFlag", reviewFlag);
         } catch (Exception e) {
         }
 
@@ -70,5 +53,4 @@ public class IdeasShowServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ideas/show.jsp");
         rd.forward(request, response);
     }
-
 }

@@ -1,9 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:choose>
-            <c:when test="${sessionScope.loginMember.role == 2}">
+            <c:when test="${sessionScope.loginMember.role == 3}">
                 <h2>Waiting for the director's review</h2>
                 <c:import url="_circles.jsp"/>
                 <div class="ui raised very padded container segment">

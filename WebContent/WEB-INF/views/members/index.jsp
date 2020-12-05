@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:import url="../layout/app.jsp">
@@ -40,7 +41,7 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <form method="POST" action="<c:url value='/following/destroy/member' />" class="left floated">
-                                                        <button class="circular ui mini icon green button" type="submit" name="unfollowedId" value="${member.id}">
+                                                        <button class="circular ui mini icon red basic button" type="submit" name="unfollowedId" value="${member.id}">
                                                             <i class="fas fa-user-minus"></i>
                                                         </button>
                                                     </form>

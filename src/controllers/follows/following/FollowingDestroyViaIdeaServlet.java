@@ -50,7 +50,6 @@ public class FollowingDestroyViaIdeaServlet extends HttpServlet {
         // トーストメッセージをセッションにセット
         request.getSession().setAttribute("toast", idea.getMember().getName() + "さんのフォローを解除しました。");
 
-        response.sendRedirect(request.getContextPath() + "/ideas");
+        response.sendRedirect(request.getContextPath() + "/ideas/show?id=" + idea.getId());
     }
-
 }
