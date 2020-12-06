@@ -34,9 +34,8 @@ public class ManagementsFollowingDestroyServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", unfollowed.getFollowingId().getName() + "さんが" + unfollowed.getFollowedId().getName() + "さんのフォローを解除しました。");
+        request.getSession().setAttribute("toast", unfollowed.getFollowingId().getName() + " unfollowed " + unfollowed.getFollowedId().getName() + ".");
 
         response.sendRedirect(request.getContextPath() + "/management/following?id=" + unfollowed.getFollowingId().getId());
     }
-
 }
