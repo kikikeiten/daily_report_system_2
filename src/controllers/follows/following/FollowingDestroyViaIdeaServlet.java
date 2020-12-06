@@ -48,7 +48,7 @@ public class FollowingDestroyViaIdeaServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", idea.getMember().getName() + "さんのフォローを解除しました。");
+        request.getSession().setAttribute("toast", "You unfollowed " + idea.getMember().getName() + ".");
 
         response.sendRedirect(request.getContextPath() + "/ideas/show?id=" + idea.getId());
     }

@@ -54,5 +54,4 @@ public class FollowingIndexServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follows/following/index.jsp");
         rd.forward(request, response);
     }
-
 }

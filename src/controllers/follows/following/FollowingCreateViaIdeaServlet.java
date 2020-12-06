@@ -46,7 +46,7 @@ public class FollowingCreateViaIdeaServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", idea.getMember().getName() + "さんをフォローしました。");
+        request.getSession().setAttribute("toast", "You followed " + idea.getMember().getName() + ".");
 
         response.sendRedirect(request.getContextPath() + "/ideas/show?id=" + idea.getId());
     }
