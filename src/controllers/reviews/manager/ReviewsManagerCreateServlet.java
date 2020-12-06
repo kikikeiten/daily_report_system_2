@@ -57,34 +57,11 @@ public class ReviewsManagerCreateServlet extends HttpServlet {
         em.close();
 
         if (reviewStatus == 1) { // アイデアにアドバイスを付けて送り返す場合
-            switch (idea.getMember().getRole()) {
-                case 0: // アソシエイト宛て
-                    request.getSession().setAttribute("toast",
-                            "日報「" + idea.getTitle() + "」を" + idea.getMember().getName() + "社員に差し戻しました。");
-                    break;
-                case 1: // 管理者宛て
-                    request.getSession().setAttribute("toast",
-                            "日報「" + idea.getTitle() + "」を" + idea.getMember().getName() + "管理者に差し戻しました。");
-                    break;
-            }
+            request.getSession().setAttribute("toast", "You sent \"" + idea.getTitle() + "\" back to " + idea.getMember().getName() + ".");
         } else { // アイデアを承認する場合
-            switch (idea.getMember().getRole()) {
-                case 0: // アソシエイトから
-                    request.getSession().setAttribute("toast",
-                            idea.getMember().getName() + "社員の日報「" + idea.getTitle() + "」を承認しました。");
-                    break;
-                case 1: // 管理者から
-                    request.getSession().setAttribute("toast",
-                            idea.getMember().getName() + "管理者の日報「" + idea.getTitle() + "」を承認しました。");
-                    break;
-                case 2: // マネージャーから
-                    request.getSession().setAttribute("toast",
-                            idea.getMember().getName() + "課長の日報「" + idea.getTitle() + "」を承認しました。");
-                    break;
-            }
+            request.getSession().setAttribute("toast", "You approved " + idea.getMember().getName() + "'s idea \"" + idea.getTitle() + "\".");
         }
 
         response.sendRedirect(request.getContextPath() + "/reviews/manager");
     }
-
 }
