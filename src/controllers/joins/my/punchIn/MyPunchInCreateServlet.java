@@ -51,9 +51,8 @@ public class MyPunchInCreateServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", "出勤時間を打刻しました。");
+        request.getSession().setAttribute("toast", "Your joining time has been stamped.");
 
         response.sendRedirect(request.getContextPath() + "/");
     }
-
 }

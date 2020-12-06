@@ -36,5 +36,4 @@ public class AllPunchOutEditServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/joins/all/edit.jsp");
         rd.forward(request, response);
     }
-
 }

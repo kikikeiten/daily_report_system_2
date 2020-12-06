@@ -71,9 +71,8 @@ public class AllPunchOutUpdateServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", "退勤時間を修正しました。");
+        request.getSession().setAttribute("toast", "Fixed \"" + join.getMember().getName() + "\"'s leaving time.");
 
         response.sendRedirect(request.getContextPath() + "/joins/all");
     }
-
 }
