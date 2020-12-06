@@ -84,7 +84,7 @@ public class MembersUpdateServlet extends HttpServlet {
                 em.close();
 
                 // トーストメッセージをセッションにセット
-                request.getSession().setAttribute("toast", "Update completed!");
+                request.getSession().setAttribute("toast", "Updated information about" + member.getName() + ".");
 
                 request.getSession().removeAttribute("memberId");
 
@@ -92,5 +92,4 @@ public class MembersUpdateServlet extends HttpServlet {
             }
         }
     }
-
 }

@@ -68,11 +68,10 @@ public class MembersCreateServlet extends HttpServlet {
                 em.close();
 
                 // トーストメッセージをセッションにセット
-                request.getSession().setAttribute("toast", "登録が完了しました。");
+                request.getSession().setAttribute("toast", request.getParameter("name") + "has become a member of us.");
 
                 response.sendRedirect(request.getContextPath() + "/members");
             }
         }
     }
-
 }

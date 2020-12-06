@@ -41,10 +41,9 @@ public class MembersDestroyServlet extends HttpServlet {
             em.close();
 
             // トーストメッセージをセッションにセット
-            request.getSession().setAttribute("toast", "削除が完了しました。");
+            request.getSession().setAttribute("toast", "Deleted" + member.getName() + "'s information.");
 
             response.sendRedirect(request.getContextPath() + "/members");
         }
     }
-
 }
