@@ -74,8 +74,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <table class="ui celled striped table">
                             <thead>
                             <tr>
@@ -191,7 +189,6 @@
                             </c:if>
                             </tbody>
                         </table>
-
                         <c:choose>
                             <c:when test="${sessionScope.loginMember.id != idea.member.id}">
                                 <form method="POST" action="<c:url value='/favors/create'/>">
@@ -230,7 +227,6 @@
                                 </form>
                             </c:when>
                         </c:choose>
-
                         <c:if test="${(sessionScope.loginMember.role == 2 && idea.reviewStatus == 2 && sessionScope.loginMember.id != idea.member.id) || (sessionScope.loginMember.role == 3 && idea.reviewStatus == 4 && sessionScope.loginMember.id != idea.member.id)}">
                             <h3>Add your advice</h3>
                             <form class="ui form">
@@ -355,10 +351,6 @@
                                 </c:if>
                             </form>
                         </c:if>
-
-
-
-
                         <c:if test="${sessionScope.loginMember.id == idea.member.id}">
                             <c:if test="${idea.reviewStatus == 0 || idea.reviewStatus == 1 || idea.reviewStatus == 3}">
                                 <p>
@@ -370,9 +362,11 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <h2>お探しのデータは見つかりませんでした。</h2>
+                <h2>The data you were looking for wasn't found.</h2>
             </c:otherwise>
         </c:choose>
-
+        <button onclick="location.href='<c:url value='/ideas'/>'" class="circular ui icon button">
+            <i class="fas fa-long-arrow-alt-left"></i>
+        </button>
     </c:param>
 </c:import>
