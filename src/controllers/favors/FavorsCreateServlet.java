@@ -50,7 +50,7 @@ public class FavorsCreateServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", "You favored " + idea.getMember().getName() + "'s idea " + idea.getTitle() + ".");
+        request.getSession().setAttribute("toast", "You favored " + idea.getMember().getName() + "'s idea \"" + idea.getTitle() + "\".");
 
         response.sendRedirect(request.getContextPath() + "/ideas");
     }

@@ -83,21 +83,20 @@ public class IdeasCreateServlet extends HttpServlet {
                 em.close();
 
                 if (reviewStatus == 0) { // ドラフトとして保存した場合
-                    request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                    request.getSession().setAttribute("toast", "You saved \"" + request.getParameter("title") + "\" as a draft.");
 
                 } else if (reviewStatus == 2 && (loginMember.getRole() == 0 || loginMember.getRole() == 1)) { // アソシエイトまたは管理者
-                    request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を課長へ提出しました。");
+                    request.getSession().setAttribute("toast", "You submitted \"" + request.getParameter("title") + "\" to the manager.");
 
                 } else if (reviewStatus == 2 && loginMember.getRole() == 2) { // マネージャー
-                    request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を他課長へ提出しました。");
+                    request.getSession().setAttribute("toast", "You submitted \"" + request.getParameter("title") + "\" to the another manager.");
 
                 } else if (reviewStatus == 4 && loginMember.getRole() == 3) { // ディレクター
-                    request.getSession().setAttribute("toast", "日報「" + request.getParameter("title") + "」を他部長へ提出しました。");
+                    request.getSession().setAttribute("toast", "You submitted \"" + request.getParameter("title") + "\" to the another director.");
                 }
 
                 response.sendRedirect(request.getContextPath() + "/ideas");
             }
         }
     }
-
 }

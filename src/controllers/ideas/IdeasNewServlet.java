@@ -35,5 +35,4 @@ public class IdeasNewServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ideas/new.jsp");
         rd.forward(request, response);
     }
-
 }

@@ -42,13 +42,13 @@ public class DraftsUpdateServlet extends HttpServlet {
         switch (loginMember.getRole()) {
             case 0: // associateの場合
             case 1: // administratorの場合
-                request.getSession().setAttribute("toast", "You submitted " + idea.getTitle() + " to the manager.");
+                request.getSession().setAttribute("toast", "You submitted \"" + idea.getTitle() + "\" to the manager.");
                 break;
             case 2: // managerの場合
-                request.getSession().setAttribute("toast", "You submitted " + idea.getTitle() + "」to the director.");
+                request.getSession().setAttribute("toast", "You submitted \"" + idea.getTitle() + "\" to the director.");
                 break;
             case 3: // directorの場合
-                request.getSession().setAttribute("toast", "You submitted " + idea.getTitle() + " to the another director.");
+                request.getSession().setAttribute("toast", "You submitted \"" + idea.getTitle() + "\" to the another director.");
                 break;
         }
 

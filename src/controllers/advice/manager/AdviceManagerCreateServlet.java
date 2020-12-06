@@ -36,7 +36,7 @@ public class AdviceManagerCreateServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", "You resubmitted " + idea.getTitle() + " to the manager.");
+        request.getSession().setAttribute("toast", "You resubmitted \"" + idea.getTitle() + "\" to the manager.");
 
         response.sendRedirect(request.getContextPath() + "/advice/manager");
     }

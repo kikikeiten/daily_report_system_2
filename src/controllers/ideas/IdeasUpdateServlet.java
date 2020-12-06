@@ -74,16 +74,13 @@ public class IdeasUpdateServlet extends HttpServlet {
 
                     switch (reviewStatus) {
                         case 0: // ドラフトを再保存
-                            request.getSession().setAttribute("toast",
-                                    "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                            request.getSession().setAttribute("toast", "You saved \"" + request.getParameter("title") + "\" as a draft.");
                             break;
                         case 2: // ドラフトまたはマネージャーからのアドバイス付きアイデアを提出
-                            request.getSession().setAttribute("toast",
-                                    "日報「" + request.getParameter("title") + "」を課長に提出しました。");
+                            request.getSession().setAttribute("toast", "You submitted \"" + request.getParameter("title") + "\" to the manager.");
                             break;
                         case 4: // ディレクターからのアドバイス付きアイデアを提出
-                            request.getSession().setAttribute("toast",
-                                    "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
+                            request.getSession().setAttribute("toast", "You resubmitted \"" + request.getParameter("title") + "\" to the director.");
                             break;
                     }
                 }
@@ -93,16 +90,13 @@ public class IdeasUpdateServlet extends HttpServlet {
 
                     switch (reviewStatus) {
                         case 0: // ドラフトを再保存
-                            request.getSession().setAttribute("toast",
-                                    "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                            request.getSession().setAttribute("toast", "You saved \"" + request.getParameter("title") + "as a draft.");
                             break;
                         case 2: // ドラフトを提出
-                            request.getSession().setAttribute("toast",
-                                    "日報「" + request.getParameter("title") + "」を他課長に提出しました。");
+                            request.getSession().setAttribute("toast", "You submitted \"" + request.getParameter("title") + "\" to the another manager.");
                             break;
                         case 4: // ディレクターからのアドバイス付きアイデアを提出
-                            request.getSession().setAttribute("toast",
-                                    "日報「" + request.getParameter("title") + "」を部長に再提出しました。");
+                            request.getSession().setAttribute("toast", "You resubmitted \"" + request.getParameter("title") + "\" to the another director.");
                             break;
                     }
                 }
@@ -113,11 +107,11 @@ public class IdeasUpdateServlet extends HttpServlet {
                     switch (reviewStatus) {
                         case 0: // ドラフトを再保存
                             request.getSession().setAttribute("toast",
-                                    "日報「" + request.getParameter("title") + "」を下書きとして保存しました。");
+                                    "You saved \"" + request.getParameter("title") + "\" as a draft.");
                             break;
                         case 4: // ドラフトを提出
                             request.getSession().setAttribute("toast",
-                                    "日報「" + request.getParameter("title") + "」を他部長に提出しました。");
+                                    "You submitted \"" + request.getParameter("title") + "\" to the another director.");
                             break;
                     }
                 }
@@ -128,5 +122,4 @@ public class IdeasUpdateServlet extends HttpServlet {
             }
         }
     }
-
 }

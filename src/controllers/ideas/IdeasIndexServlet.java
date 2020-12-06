@@ -55,5 +55,4 @@ public class IdeasIndexServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ideas/index.jsp");
         rd.forward(request, response);
     }
-
 }
