@@ -45,7 +45,7 @@ public class FollowersCreateServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", followed.getFollowingId().getName() + "さんをフォローしました。");
+        request.getSession().setAttribute("toast", "You followed " + followed.getFollowingId().getName() + ".");
 
         response.sendRedirect(request.getContextPath() + "/followers");
     }

@@ -47,7 +47,7 @@ public class FollowersDestroyServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", follower.getFollowingId().getName() + "さんのフォローを解除しました。");
+        request.getSession().setAttribute("toast", "You unfollowed " + follower.getFollowingId().getName() + ".");
 
         response.sendRedirect(request.getContextPath() + "/followers");
     }
