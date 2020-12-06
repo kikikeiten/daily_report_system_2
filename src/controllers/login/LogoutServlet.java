@@ -24,9 +24,8 @@ public class LogoutServlet extends HttpServlet {
         request.getSession().removeAttribute("loginMember");
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", "ログアウトしました。");
+        request.getSession().setAttribute("toast", "You've logged out.");
 
         response.sendRedirect(request.getContextPath() + "/login");
     }
-
 }

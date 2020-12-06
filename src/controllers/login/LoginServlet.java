@@ -89,10 +89,9 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("loginMember", member);
 
             // トーストメッセージをセッションにセット
-            request.getSession().setAttribute("toast", "ログインしました。");
+            request.getSession().setAttribute("toast", "You're now logged.");
 
             response.sendRedirect(request.getContextPath() + "/");
         }
     }
-
 }
