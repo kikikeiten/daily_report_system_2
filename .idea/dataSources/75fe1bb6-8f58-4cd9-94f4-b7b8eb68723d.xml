@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="tipswatch@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.19">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.20">
     <root id="1">
       <ServerVersion>5.7.31</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -723,7 +723,7 @@
     </collation>
     <user id="226" parent="1" name="repuser3">
       <Host>localhost</Host>
-      <ObjectGrants>ALL PRIVILEGES|tipswatch:null
+      <ObjectGrants>ALL PRIVILEGES|tipswatch
 </ObjectGrants>
     </user>
     <table id="227" parent="3" name="favors">
@@ -738,9 +738,7 @@
     <table id="230" parent="3" name="joins">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="231" parent="3" name="members">
-      <Engine>MyISAM</Engine>
-    </table>
+    <table id="231" parent="3" name="members"/>
     <table id="232" parent="3" name="reviews">
       <Engine>MyISAM</Engine>
     </table>
@@ -958,7 +956,7 @@
     </column>
     <column id="276" parent="231" name="password">
       <Position>6</Position>
-      <DataType>varchar(64)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="277" parent="231" name="role">
@@ -971,7 +969,7 @@
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="279" parent="231" name="UK_cmli4m80li1bnn3r9i270wfed">
+    <index id="279" parent="231" name="members_code_uindex">
       <ColNames>code</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
@@ -981,9 +979,9 @@
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="281" parent="231" name="UK_cmli4m80li1bnn3r9i270wfed">
+    <key id="281" parent="231" name="members_code_uindex">
       <ColNames>code</ColNames>
-      <UnderlyingIndexName>UK_cmli4m80li1bnn3r9i270wfed</UnderlyingIndexName>
+      <UnderlyingIndexName>members_code_uindex</UnderlyingIndexName>
     </key>
     <column id="282" parent="232" name="id">
       <Position>1</Position>
