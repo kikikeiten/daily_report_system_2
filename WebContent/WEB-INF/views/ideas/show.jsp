@@ -92,7 +92,7 @@
                                     Idea
                                 </td>
                                 <td>
-                                    <pre><c:out value="${idea.content}"/></pre>
+                                    <pre style="white-space: pre-wrap ;"><c:out value="${idea.content}"/></pre>
                                 </td>
                             </tr>
                             <tr>
