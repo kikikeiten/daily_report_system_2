@@ -59,6 +59,13 @@
                                         </button>
                                     </span>
                                     </c:if>
+                                    <c:if test="${sessionScope.loginMember.id == member.id}">
+                                    <span class="left floated">
+                                        <button onclick="location.href='<c:url value='/members/edit?id=${member.id}'/>'" class="circular ui mini icon button">
+                                            <i class="fas fa-cogs"></i>
+                                        </button>
+                                    </span>
+                                    </c:if>
                                 </div>
                             </div>
                         </c:forEach>

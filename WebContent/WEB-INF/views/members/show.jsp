@@ -64,9 +64,11 @@
                 <button onclick="location.href='<c:url value='/members'/>'" class="circular ui icon button">
                     <i class="fas fa-long-arrow-alt-left"></i>
                 </button>
+                <c:if test="${sessionScope.loginMember.id == member.id || sessionScope.loginMember.id == 1}">
                 <button onclick="location.href='<c:url value='/members/edit?id=${member.id}'/>'" class="circular ui icon button">
                     <i class="fas fa-cogs"></i>
                 </button>
+                </c:if>
             </c:when>
             <c:otherwise>
                 <h2>The data you were looking for wasn't found.</h2>

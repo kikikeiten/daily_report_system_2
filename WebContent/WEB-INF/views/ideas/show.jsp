@@ -101,11 +101,12 @@
                                 </td>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${advice == null}">
+                                        <c:when test="${review.id == null}"> </c:when>
+                                        <c:when test="${review.advice == null}">
                                             No advice.
                                         </c:when>
                                         <c:otherwise>
-                                            <c:out value="${advice}"/>
+                                            <pre style="white-space: pre-wrap ;"><c:out value="${review.advice}"/></pre>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -115,6 +116,9 @@
                                     Status
                                 </td>
                                 <td>
+                                    <button onclick="location.href='<c:url value='/advice/history?id=${idea.id}'/>'" class="circular ui pink icon button">
+                                        <i class="fas fa-history"></i>
+                                    </button>
                                     <c:if test="${sessionScope.loginMember.role == 0 || sessionScope.loginMember.role == 1}">
                                         <c:choose>
                                             <c:when test="${idea.reviewStatus == 0 && sessionScope.loginMember.id == idea.member.id}"><a href="<c:url value='/drafts' />">Draft</a></c:when>
@@ -165,7 +169,7 @@
                                             No approver
                                         </c:when>
                                         <c:otherwise>
-                                            <c:out value="${review.member.name}"/>
+                                            <a href="<c:url value="/members/show?id=${review.member.id}"/> "><c:out value="${review.member.name}"/></a>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -193,7 +197,7 @@
                                     <input type="hidden" name="ideaId" value="${idea.id}">
                                     <div class="ui labeled button" tabindex="0">
                                         <button type="submit" name="favors" value="${1}" class="ui button">
-                                            <i class="heart icon"></i>Like
+                                            <i class="heart icon"></i>Favor
                                         </button>
                                         <c:if test="${idea.favors != 0}">
                                             <a href="<c:url value='/favors?id=${idea.id}'/>" class="ui basic label">
@@ -211,7 +215,7 @@
                                     <input type="hidden" name="ideaId" value="${idea.id}">
                                     <div class="ui labeled button" tabindex="0">
                                         <button type="submit" name="favors" value="${1}" class="ui disabled button">
-                                            <i class="heart icon"></i>Like
+                                            <i class="heart icon"></i>Favor
                                         </button>
                                         <c:if test="${idea.favors != 0}">
                                             <a href="<c:url value='/favors?id=${idea.id}' />" class="ui basic label">
@@ -227,127 +231,131 @@
                         </c:choose>
                         <c:if test="${(sessionScope.loginMember.role == 2 && idea.reviewStatus == 2 && sessionScope.loginMember.id != idea.member.id) || (sessionScope.loginMember.role == 3 && idea.reviewStatus == 4 && sessionScope.loginMember.id != idea.member.id)}">
                             <h3>Add your advice</h3>
-                            <form class="ui form">
-                                <textarea name="comment" rows="10" cols="30" form="formId"></textarea>
-                                <div class="ui hidden divider"></div>
-                                <c:if test="${sessionScope.loginMember.role == 0 || sessionScope.loginMember.role == 1}">
-                                    <c:choose>
-                                        <c:when test="${idea.reviewStatus == 0 && sessionScope.loginMember.id == idea.member.id}">
-                                            <form method="POST" action="<c:url value='/drafts/update'/>">
+                            <c:if test="${sessionScope.loginMember.role == 0 || sessionScope.loginMember.role == 1}">
+                                <c:choose>
+                                    <c:when test="${idea.reviewStatus == 0 && sessionScope.loginMember.id == idea.member.id}">
+                                        <form method="POST" action="<c:url value='/drafts/update'/>">
+                                            <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                            <button type="submit" name="reviewStatus" value="${2}" class="circular ui icon green button">
+                                                <i class="far fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 1 && sessionScope.loginMember.id == idea.member.id}">
+                                        <form method="POST" action="<c:url value='/advice/manager/create'/>">
+                                            <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                            <button type="submit" name="reviewStatus" value="${2}" class="circular ui icon green button">
+                                                <i class="far fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 2}"/>
+                                    <c:when test="${idea.reviewStatus == 3 && sessionScope.loginMember.id == idea.member.id}">
+                                        <form method="POST" action="<c:url value='/advice/director/create'/>">
+                                            <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                            <button type="submit" name="reviewStatus" value="${4}" class="circular ui icon blue button">
+                                                <i class="far fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 4}"/>
+                                    <c:when test="${idea.reviewStatus == 6}"/>
+                                </c:choose>
+                            </c:if>
+                            <c:if test="${sessionScope.loginMember.role == 2}">
+                                <c:choose>
+                                    <c:when test="${idea.reviewStatus == 0 && sessionScope.loginMember.id == idea.member.id}">
+                                        <form method="POST" action="<c:url value='/drafts/update'/>">
+                                            <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                            <button type="submit" name="reviewStatus" value="${2}" class="circular ui icon green button">
+                                                <i class="far fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 1}"/>
+                                    <c:when test="${idea.reviewStatus == 2 && sessionScope.loginMember.id != idea.member.id && idea.member.role != 2}">
+                                        <div style="display: inline-flex">
+                                            <form method="POST" action="<c:url value='/reviews/manager/create'/>" class="ui form">
+                                                <textarea name="advice" rows="10" cols="100"></textarea>
+                                                <div class="ui hidden divider"></div>
                                                 <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                <button type="submit" name="reviewStatus" value="${2}" class="circular ui icon green button">
-                                                    <i class="far fa-paper-plane"></i>
+                                                <button type="submit" name="reviewStatus" value="${4}" class="circular ui icon blue button">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                                <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                                <button type="submit" name="reviewStatus" value="${1}" class="circular ui icon olive button">
+                                                    <i class="fas fa-undo-alt"></i>
                                                 </button>
                                             </form>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 1 && sessionScope.loginMember.id == idea.member.id}">
-                                            <form method="POST" action="<c:url value='/advice/manager/create'/>">
-                                                <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                <button type="submit" name="reviewStatus" value="${2}" class="circular ui icon green button">
-                                                    <i class="far fa-paper-plane"></i>
-                                                </button>
-                                            </form>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 2}"/>
-                                        <c:when test="${idea.reviewStatus == 3 && sessionScope.loginMember.id == idea.member.id}">
-                                            <form method="POST" action="<c:url value='/advice/director/create'/>">
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 2 && sessionScope.loginMember.id != idea.member.id && idea.member.role == 2}">
+                                        <div style="display: inline-flex">
+                                            <form method="POST" action="<c:url value='/reviews/manager/create'/>" class="ui form">
+                                                <textarea name="advice" rows="10" cols="100"></textarea>
+                                                <div class="ui hidden divider"></div>
                                                 <input type="hidden" name="ideaId" value="${idea.id}"/>
                                                 <button type="submit" name="reviewStatus" value="${4}" class="circular ui icon blue button">
                                                     <i class="far fa-paper-plane"></i>
                                                 </button>
                                             </form>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 4}"/>
-                                        <c:when test="${idea.reviewStatus == 6}"/>
-                                    </c:choose>
-                                </c:if>
-                                <c:if test="${sessionScope.loginMember.role == 2}">
-                                    <c:choose>
-                                        <c:when test="${idea.reviewStatus == 0 && sessionScope.loginMember.id == idea.member.id}">
-                                            <form method="POST" action="<c:url value='/drafts/update'/>">
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 3 && sessionScope.loginMember.id == idea.member.id}">
+                                        <form method="POST" action="<c:url value='/advice/director/create'/>">
+                                            <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                            <button type="submit" name="reviewStatus" value="${4}" class="circular ui icon blue button">
+                                                <i class="far fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 4}"/>
+                                    <c:when test="${idea.reviewStatus == 6}"/>
+                                </c:choose>
+                            </c:if>
+                            <c:if test="${sessionScope.loginMember.role == 3}">
+                                <c:choose>
+                                    <c:when test="${idea.reviewStatus == 0 && sessionScope.loginMember.id == idea.member.id}">
+                                        <form method="POST" action="<c:url value='/drafts/update'/>">
+                                            <input type="hidden" name="ideaId" value="${idea.id}"/>
+                                            <button type="submit" name="reviewStatus" value="${4}" class="circular ui icon blue button">
+                                                <i class="far fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 1}"/>
+                                    <c:when test="${idea.reviewStatus == 2}"/>
+                                    <c:when test="${idea.reviewStatus == 3}"/>
+                                    <c:when test="${idea.reviewStatus == 4 && sessionScope.loginMember.id != idea.member.id && idea.member.role != 3}">
+                                        <div style="display: inline-flex">
+                                            <form method="POST" action="<c:url value='/reviews/director/create'/>" class="ui form">
+                                                <textarea name="advice" rows="10" cols="100"></textarea>
+                                                <div class="ui hidden divider"></div>
+                                                <button type="submit" name="reviewStatus" value="${6}" class="circular ui icon violet button">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
                                                 <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                <button type="submit" name="reviewStatus" value="${2}" class="circular ui icon green button">
-                                                    <i class="far fa-paper-plane"></i>
+                                                <button type="submit" name="reviewStatus" value="${3}" class="circular ui icon teal button">
+                                                    <i class="fas fa-undo-alt"></i>
                                                 </button>
                                             </form>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 1}"/>
-                                        <c:when test="${idea.reviewStatus == 2 && sessionScope.loginMember.id != idea.member.id && idea.member.role != 2}">
-                                            <div style="display: inline-flex">
-                                                <form method="POST" action="<c:url value='/reviews/manager/create'/>" id="formId">
-                                                    <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                    <button type="submit" name="reviewStatus" value="${4}" class="circular ui icon blue button">
-                                                        <i class="fas fa-check"></i>
-                                                    </button>
-                                                    <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                    <button type="submit" name="reviewStatus" value="${1}" class="circular ui icon olive button">
-                                                        <i class="fas fa-undo-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 2 && sessionScope.loginMember.id != idea.member.id && idea.member.role == 2}">
-                                            <div style="display: inline-flex">
-                                                <form method="POST" action="<c:url value='/reviews/manager/create'/>" id="formId">
-                                                    <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                    <button type="submit" name="reviewStatus" value="${4}" class="circular ui icon blue button">
-                                                        <i class="far fa-paper-plane"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 3 && sessionScope.loginMember.id == idea.member.id}">
-                                            <form method="POST" action="<c:url value='/advice/director/create'/>">
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 4 && sessionScope.loginMember.id != idea.member.id && idea.member.role == 3}">
+                                        <div style="display: inline-flex">
+                                            <form method="POST" action="<c:url value='/reviews/director/create'/>" class="ui form">
+                                                <textarea name="advice" rows="10" cols="100"></textarea>
+                                                <div class="ui hidden divider"></div>
                                                 <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                <button type="submit" name="reviewStatus" value="${4}" class="circular ui icon blue button">
-                                                    <i class="far fa-paper-plane"></i>
+                                                <button type="submit" name="reviewStatus" value="${6}" class="circular ui icon violet button">
+                                                    <i class="fas fa-check"></i>
                                                 </button>
                                             </form>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 4}"/>
-                                        <c:when test="${idea.reviewStatus == 6}"/>
-                                    </c:choose>
-                                </c:if>
-                                <c:if test="${sessionScope.loginMember.role == 3}">
-                                    <c:choose>
-                                        <c:when test="${idea.reviewStatus == 0 && sessionScope.loginMember.id == idea.member.id}">
-                                            <form method="POST" action="<c:url value='/drafts/update'/>">
-                                                <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                <button type="submit" name="reviewStatus" value="${4}" class="circular ui icon blue button">
-                                                    <i class="far fa-paper-plane"></i>
-                                                </button>
-                                            </form>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 1}"/>
-                                        <c:when test="${idea.reviewStatus == 2}"/>
-                                        <c:when test="${idea.reviewStatus == 3}"/>
-                                        <c:when test="${idea.reviewStatus == 4 && sessionScope.loginMember.id != idea.member.id && idea.member.role != 3}">
-                                            <div style="display: inline-flex">
-                                                <form method="POST" action="<c:url value='/reviews/director/create'/>" id="formId">
-                                                    <button type="submit" name="reviewStatus" value="${6}" class="circular ui icon violet button">
-                                                        <i class="fas fa-check"></i>
-                                                    </button>
-                                                    <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                    <button type="submit" name="reviewStatus" value="${3}" class="circular ui icon teal button">
-                                                        <i class="fas fa-undo-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 4 && sessionScope.loginMember.id != idea.member.id && idea.member.role == 3}">
-                                            <div style="display: inline-flex">
-                                                <form method="POST" action="<c:url value='/reviews/director/create'/>" id="formId">
-                                                    <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                    <button type="submit" name="reviewStatus" value="${6}" class="circular ui icon violet button">
-                                                        <i class="fas fa-check"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </c:when>
-                                        <c:when test="${idea.reviewStatus == 6}"/>
-                                    </c:choose>
-                                </c:if>
-                            </form>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${idea.reviewStatus == 6}"/>
+                                </c:choose>
+                            </c:if>
                         </c:if>
                         <c:if test="${sessionScope.loginMember.id == idea.member.id}">
                             <div class="ui hidden divider"></div>

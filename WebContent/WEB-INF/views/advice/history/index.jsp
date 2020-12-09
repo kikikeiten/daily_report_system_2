@@ -31,7 +31,7 @@
                                             No advice.
                                         </c:when>
                                         <c:otherwise>
-                                            <pre><c:out value="${review.advice}"/></pre>
+                                            <pre style="white-space: pre-wrap ;"><c:out value="${review.advice}"/></pre>
                                         </c:otherwise>
                                     </c:choose>
                                 </div>

@@ -29,7 +29,7 @@
                                             <c:if test="${sessionScope.loginMember.id != idea.member.id && idea.member.role != 2}">
                                                 <form method="POST" action="<c:url value='/reviews/manager/create' />" class="left floated">
                                                     <input type="hidden" name="ideaId" value="${idea.id}"/>
-                                                    <button type="submit" name="reviewsStatus" value="${1}" class="circular ui mini icon olive button">
+                                                    <button type="submit" name="reviewStatus" value="${1}" class="circular ui mini icon olive button">
                                                         <i class="fas fa-comment-medical"></i>
                                                     </button>
                                                 </form>
