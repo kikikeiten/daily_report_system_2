@@ -67,7 +67,7 @@
         <button class="ui button" onclick="location.href='<c:url value='/joins/my'/>'">
             My stamps
         </button>
-        <c:if test="${sessionScope.loginMember.role == 2 || sessionScope.loginMember.role == 3}">
+        <c:if test="${sessionScope.loginMember.role != 0}">
             <button class="ui button" onclick="location.href='<c:url value='/joins/all'/>'">
                 All stamps
             </button>
