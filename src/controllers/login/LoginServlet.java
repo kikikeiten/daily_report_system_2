@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Member;
 import utils.DBUtil;
+import utils.EncryptUtil;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -55,13 +56,9 @@ public class LoginServlet extends HttpServlet {
 
             EntityManager em = DBUtil.createEntityManager();
 
-            String password = "1";
-
-            /*
             String password = EncryptUtil.getPasswordEncrypt(
                     plainPass,
                     (String) this.getServletContext().getAttribute("pepper"));
-                    */
 
             // 社員番号とパスワードが正しいかチェックする
             try {

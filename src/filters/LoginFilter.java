@@ -1,9 +1,7 @@
 package filters;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
-import javax.persistence.EntityManager;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -16,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import models.Member;
-import utils.DBUtil;
 
 @WebFilter("/*") // 全てに適応
 public class LoginFilter implements Filter {
@@ -38,25 +35,6 @@ public class LoginFilter implements Filter {
 
             // セッションスコープに保存されたメンバー（ログインメンバー）情報を取得
             Member loginMember = (Member) session.getAttribute("loginMember");
-
-            EntityManager em = DBUtil.createEntityManager();
-
-            Member member = new Member();
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-           /*
-            member.setCode("1");
-            member.setName("1");
-            member.setPassword("1");
-            member.setRole(3);
-            member.setDeleteFlag(0);
-            member.setCreatedAt(timestamp);
-            member.setUpdatedAt(timestamp);
-
-            em.getTransaction().begin();
-            em.persist(member);
-            em.getTransaction().commit();
-            em.close();*/
 
             if (!servletPath.equals("/login")) {
                 // ログイン画面以外について
