@@ -350,10 +350,11 @@
                             </form>
                         </c:if>
                         <c:if test="${sessionScope.loginMember.id == idea.member.id}">
+                            <div class="ui hidden divider"></div>
                             <c:if test="${idea.reviewStatus == 0 || idea.reviewStatus == 1 || idea.reviewStatus == 3}">
-                                <p>
-                                    <a href="<c:url value="/ideas/edit?id=${idea.id}" />">この日報を編集する</a>
-                                </p>
+                                <button onclick="location.href='<c:url value='/ideas/edit?id=${idea.id}'/>'" class="circular ui icon button">
+                                    <i class="fas fa-cogs"></i>
+                                </button>
                             </c:if>
                         </c:if>
                     </div>
