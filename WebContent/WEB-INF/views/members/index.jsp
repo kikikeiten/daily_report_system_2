@@ -4,7 +4,7 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <h2>All members</h2>
-        <c:if test="${sessionScope.loginMember.role != 0}">
+        <c:if test="${sessionScope.loginMember.role == 1}">
             <button onclick="location.href='<c:url value='/members/new'/>'" class="circular ui icon positive button">
                 <i class="fas fa-user-plus"></i>
             </button>
@@ -49,14 +49,16 @@
                                             </c:choose>
                                         </c:when>
                                     </c:choose>
+                                    <c:if test="${sessionScope.loginMember.role == 1}">
                                     <span class="right floated">
-                                        <button onclick="location.href='<c:url value='/management/following?id=${member.id}'/>'" class="circular ui mini icon blue button">
-                                            <i class="far fa-paper-plane"></i>
+                                        <button onclick="location.href='<c:url value='/management/following?id=${member.id}'/>'" class="circular ui mini icon button">
+                                            <i class="fas fa-user-minus"></i>
                                         </button>
-                                        <button onclick="location.href='<c:url value='/management/unfollowing?id=${member.id}'/>'" class="circular ui mini icon blue button">
-                                            <i class="far fa-paper-plane"></i>
+                                        <button onclick="location.href='<c:url value='/management/unfollowing?id=${member.id}'/>'" class="circular ui mini icon button">
+                                            <i class="fas fa-user-plus"></i>
                                         </button>
                                     </span>
+                                    </c:if>
                                 </div>
                             </div>
                         </c:forEach>
