@@ -39,11 +39,9 @@
                     </div>
                 </c:if>
                 <div class="ui link list">
-                    <c:if test="${sessionScope.loginMember.role == 1 || sessionScope.loginMember.role == 2 || sessionScope.loginMember.role == 3}">
-                        <a href="<c:url value='/members' />" class="item">
-                            All members
-                        </a>
-                    </c:if>
+                    <a href="<c:url value='/members' />" class="item">
+                        All members
+                    </a>
                     <a href="<c:url value='/ideas' />" class="item">
                         All ideas
                     </a>

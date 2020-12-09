@@ -726,61 +726,319 @@
       <ObjectGrants>ALL PRIVILEGES|tipswatch
 </ObjectGrants>
     </user>
-    <table id="227" parent="3" name="members"/>
-    <column id="228" parent="227" name="id">
+    <table id="227" parent="3" name="favors">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="228" parent="3" name="follows">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="229" parent="3" name="ideas">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="230" parent="3" name="joins">
+      <Engine>MyISAM</Engine>
+    </table>
+    <table id="231" parent="3" name="members"/>
+    <table id="232" parent="3" name="reviews">
+      <Engine>MyISAM</Engine>
+    </table>
+    <column id="233" parent="227" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="229" parent="227" name="code">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="230" parent="227" name="name">
-      <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="231" parent="227" name="password">
-      <Position>4</Position>
-      <DataType>varchar(64)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="232" parent="227" name="role">
-      <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="233" parent="227" name="deleteFlag">
-      <Position>6</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
     <column id="234" parent="227" name="createdAt">
-      <Position>7</Position>
+      <Position>2</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="235" parent="227" name="updatedAt">
-      <Position>8</Position>
+      <Position>3</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="236" parent="227" name="members_code_uindex">
-      <ColNames>code</ColNames>
-      <Unique>1</Unique>
+    <column id="236" parent="227" name="idea">
+      <Position>4</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="237" parent="227" name="member">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="238" parent="227" name="FKtg9pwyujuxs2xovmoag6pthjo">
+      <ColNames>idea</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="237" parent="227" name="PRIMARY">
+    <index id="239" parent="227" name="FKo15o6mqlb7u6549gv4xv0gvgw">
+      <ColNames>member</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="240" parent="227" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="238" parent="227" name="members_code_uindex">
+    <column id="241" parent="228" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="242" parent="228" name="createdAt">
+      <Position>2</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="243" parent="228" name="updatedAt">
+      <Position>3</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="244" parent="228" name="followedId">
+      <Position>4</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="245" parent="228" name="followingId">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="246" parent="228" name="FKhu6ibgakha74mdfy79ay1smh9">
+      <ColNames>followedId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="247" parent="228" name="FKkxsex92ws5cl7ndtiyak8vh4r">
+      <ColNames>followingId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="248" parent="228" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="249" parent="229" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="250" parent="229" name="content">
+      <Position>2</Position>
+      <DataType>longtext|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="251" parent="229" name="createdAt">
+      <Position>3</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="252" parent="229" name="createdDate">
+      <Position>4</Position>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="253" parent="229" name="favors">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="254" parent="229" name="reviewStatus">
+      <Position>6</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="255" parent="229" name="title">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="256" parent="229" name="updatedAt">
+      <Position>8</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="257" parent="229" name="member">
+      <Position>9</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="258" parent="229" name="FKb2cbr2rayjt15k73uopyw4lpe">
+      <ColNames>member</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="259" parent="229" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="260" parent="230" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="261" parent="230" name="createdAt">
+      <Position>2</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="262" parent="230" name="joinDate">
+      <Position>3</Position>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="263" parent="230" name="joinStatus">
+      <Position>4</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="264" parent="230" name="punchIn">
+      <Position>5</Position>
+      <DataType>time|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="265" parent="230" name="punchOut">
+      <Position>6</Position>
+      <DataType>time|0s</DataType>
+    </column>
+    <column id="266" parent="230" name="updatedAt">
+      <Position>7</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="267" parent="230" name="workingTime">
+      <Position>8</Position>
+      <DataType>time|0s</DataType>
+    </column>
+    <column id="268" parent="230" name="member">
+      <Position>9</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="269" parent="230" name="FK7338icodtg0r1mw5exmqqwos5">
+      <ColNames>member</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="270" parent="230" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="271" parent="231" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="272" parent="231" name="code">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="273" parent="231" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="274" parent="231" name="password">
+      <Position>4</Position>
+      <DataType>varchar(64)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="275" parent="231" name="role">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="276" parent="231" name="deleteFlag">
+      <Position>6</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="277" parent="231" name="createdAt">
+      <Position>7</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="278" parent="231" name="updatedAt">
+      <Position>8</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="279" parent="231" name="UK_cmli4m80li1bnn3r9i270wfed">
+      <ColNames>code</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="280" parent="231" name="members_code_uindex">
+      <ColNames>code</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="281" parent="231" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="282" parent="231" name="UK_cmli4m80li1bnn3r9i270wfed">
+      <ColNames>code</ColNames>
+      <UnderlyingIndexName>UK_cmli4m80li1bnn3r9i270wfed</UnderlyingIndexName>
+    </key>
+    <key id="283" parent="231" name="members_code_uindex">
       <ColNames>code</ColNames>
       <UnderlyingIndexName>members_code_uindex</UnderlyingIndexName>
+    </key>
+    <column id="284" parent="232" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="285" parent="232" name="advice">
+      <Position>2</Position>
+      <DataType>longtext|0s</DataType>
+    </column>
+    <column id="286" parent="232" name="createdAt">
+      <Position>3</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="287" parent="232" name="reviewStatus">
+      <Position>4</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="288" parent="232" name="updatedAt">
+      <Position>5</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="289" parent="232" name="idea">
+      <Position>6</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="290" parent="232" name="member">
+      <Position>7</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="291" parent="232" name="FKb46grh23r2eq2tfa4gjqg8jxh">
+      <ColNames>idea</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="292" parent="232" name="FKpf5eca7me2qbtjuwal2bokkue">
+      <ColNames>member</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="293" parent="232" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
     </key>
   </database-model>
 </dataSource>
