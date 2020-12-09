@@ -62,7 +62,7 @@ public class MyPunchOutCreateServlet extends HttpServlet {
         em.close();
 
         // トーストメッセージをセッションにセット
-        request.getSession().setAttribute("toast", "退勤時間を打刻しました。");
+        request.getSession().setAttribute("toast", "Your leaving time has been stamped.");
 
         response.sendRedirect(request.getContextPath() + "/");
     }
