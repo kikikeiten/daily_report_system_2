@@ -68,9 +68,7 @@
                                             </c:choose>
                                         </div>
                                     </div>
-                                    <div class="description">
-                                        Elliot Fu is a film-maker from New York.
-                                    </div>
+                                    <div class="description"></div>
                                 </div>
                             </div>
                         </div>
