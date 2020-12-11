@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id "io.freefair.lombok" version "5.3.0"
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'mysql:mysql-connector-java:5.1.45'
+    implementation 'org.hibernate:hibernate-core:5.2.13.Final'
+    implementation 'org.apache.taglibs:taglibs-standard-impl:1.2.5'
+    implementation 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
+    implementation 'org.thymeleaf:thymeleaf:3.0.11.RELEASE'
+    implementation 'javax.servlet:javax.servlet-api:3.1.0'
+    implementation 'javax.servlet.jsp:jsp-api:2.2'
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.16'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+}
+
+group = 'jp.example'
+version = '0.0.1-SNAPSHOT'
+description = 'tipswatch'
+java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
