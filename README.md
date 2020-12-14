@@ -22,3 +22,21 @@
   **An app that allows anyone to casually manage colorful ideas.**  
   
 </div>
+
+<hr />
+
+## TOC <!-- omit in toc -->
+- [Major features](#major-features)
+
+<hr />
+
+## Major features
+
+- 🎁 Idea box that anyone can easily post
+- 🔖 Ideas can be approved and remanded with advice
+- 👭 Members are invited, so it can be used privately
+- ⏰ You can record the participation time
+- 💕 Mark your favorite ideas
+- 🎨 Color-coded display of idea management status
+- 📢 Notify ideas of forgotten submissions and approvals
+- 🕶 Vheck ideas of members you followed on the timeline
