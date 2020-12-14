@@ -27,6 +27,7 @@
 
 ## TOC <!-- omit in toc -->
 - [Major features](#major-features)
+  - [Motivation](#motivation) 
 
 <hr />
 
@@ -39,4 +40,7 @@
 - 💕 Mark your favorite ideas
 - 🎨 Color-coded display of idea management status
 - 📢 Notify ideas of forgotten submissions and approvals
-- 🕶 Vheck ideas of members you followed on the timeline
+- 🕶 Check ideas of members you followed on the timeline
+
+### Motivation
+
