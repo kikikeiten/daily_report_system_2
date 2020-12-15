@@ -30,6 +30,8 @@
   - [Motivation](#motivation)
 - [Technology used](#technology-used)
   - [Development environment](#development-environment)
+  - [Dependencies](#dependencies)
+  - [GitHub Actions](#gitHub-actions)
 
 <hr />
 
@@ -72,3 +74,8 @@ Mr. Taro Kono, who became Minister for Administrative Reform & Regulatory Reform
 - [tomcat7-maven-plugin](https://github.com/apache/tomcat-maven-plugin) 2.2
 - [Hibernate](https://hibernate.org) 5.4.11.Final
 - [Lombok](https://github.com/rzwitserloot/lombok) 1.18.16
+
+### GitHub Actions
+
+- Java CI with Maven
+- CodeQL
