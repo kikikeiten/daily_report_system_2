@@ -12,9 +12,9 @@
   [![Hibernate](https://img.shields.io/badge/hibernate-5.4.11.Final-D971DE.svg?style=for-the-badge)](https://hibernate.org/orm/releases/5.4/)
   [![license](https://img.shields.io/github/license/kikikeiten/tipswatch?color=D380FA&style=for-the-badge)](https://github.com/kikikeiten/tipswatch/blob/main/LICENSE.md)
   
-  [![GitHub deployments](https://img.shields.io/github/deployments/kikikeiten/tipswatch/tipswatch?color=F1CDFD&style=for-the-badge)](https://github.com/kikikeiten/tipswatch/deployments/activity_log?environment=tipswatch)
-  [![GitHub issues](https://img.shields.io/github/issues/kikikeiten/tipswatch?style=for-the-badge&color=CCB8E3)](https://github.com/kikikeiten/tipswatch/issues)
-  [![GitHub pull requests](https://img.shields.io/github/issues-pr/kikikeiten/tipswatch?style=for-the-badge&color=DDD6FA)](https://github.com/kikikeiten/tipswatch/pulls)
+  [![GitHub deployments](https://img.shields.io/github/deployments/kikikeiten/tipswatch/tipswatch?color=AEFDE0&style=for-the-badge)](https://github.com/kikikeiten/tipswatch/deployments/activity_log?environment=tipswatch)
+  [![GitHub issues](https://img.shields.io/github/issues/kikikeiten/tipswatch?style=for-the-badge&color=B9FABD)](https://github.com/kikikeiten/tipswatch/issues)
+  [![GitHub pull requests](https://img.shields.io/github/issues-pr/kikikeiten/tipswatch?style=for-the-badge&color=DFFDAE)](https://github.com/kikikeiten/tipswatch/pulls)
     
   [![CodeQL](https://github.com/kikikeiten/tipswatch/workflows/CodeQL/badge.svg)](https://github.com/kikikeiten/tipswatch/actions?query=workflow%3ACodeQL)
   [![Java CI with Maven](https://github.com/kikikeiten/tipswatch/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/kikikeiten/tipswatch/actions?query=workflow%3A%22Java+CI+with+Maven%22)
