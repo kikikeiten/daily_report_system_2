@@ -44,3 +44,4 @@
 
 ### Motivation
 
+Mr. Taro Kono, who became Minister for Administrative Reform & Regulatory Reform in September 2020, started the Administrative Reform Guide Box ([kaikaku110](https://www.taro.org/kaikaku110)). This posting site anonymously accepts information about unnecessary regulations, regulations that hinder work, and problems with the vertical division of government offices. Since the start, many opinions have been received and it has been forced to stop. From this, I thought that even if there was potential improvement in the company or group, it would be difficult to convey it. And I made this app thinking that it would be nice if there was a platform in the world where people could easily exchange opinions. First of all, the configuration is designed to be operated individually by a small company or group on a trial basis.
