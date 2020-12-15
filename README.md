@@ -12,9 +12,9 @@
   [![Hibernate](https://img.shields.io/badge/hibernate-5.4.11.Final-D971DE.svg?style=for-the-badge)](https://hibernate.org/orm/releases/5.4/)
   [![license](https://img.shields.io/github/license/kikikeiten/tipswatch?color=D380FA&style=for-the-badge)](https://github.com/kikikeiten/tipswatch/blob/main/LICENSE.md)
   
-  [![GitHub deployments](https://img.shields.io/github/deployments/kikikeiten/tipswatch/tipswatch?color=AEFDE0&style=for-the-badge)](https://github.com/kikikeiten/tipswatch/deployments/activity_log?environment=tipswatch)
-  [![GitHub issues](https://img.shields.io/github/issues/kikikeiten/tipswatch?style=for-the-badge&color=B9FABD)](https://github.com/kikikeiten/tipswatch/issues)
-  [![GitHub pull requests](https://img.shields.io/github/issues-pr/kikikeiten/tipswatch?style=for-the-badge&color=DFFDAE)](https://github.com/kikikeiten/tipswatch/pulls)
+  [![GitHub deployments](https://img.shields.io/github/deployments/kikikeiten/tipswatch/tipswatch?color=FDC8B3&style=for-the-badge)](https://github.com/kikikeiten/tipswatch/deployments/activity_log?environment=tipswatch)
+  [![GitHub issues](https://img.shields.io/github/issues/kikikeiten/tipswatch?style=for-the-badge&color=FBE1BE)](https://github.com/kikikeiten/tipswatch/issues)
+  [![GitHub pull requests](https://img.shields.io/github/issues-pr/kikikeiten/tipswatch?style=for-the-badge&color=FDECB3)](https://github.com/kikikeiten/tipswatch/pulls)
     
   [![CodeQL](https://github.com/kikikeiten/tipswatch/workflows/CodeQL/badge.svg)](https://github.com/kikikeiten/tipswatch/actions?query=workflow%3ACodeQL)
   [![Java CI with Maven](https://github.com/kikikeiten/tipswatch/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/kikikeiten/tipswatch/actions?query=workflow%3A%22Java+CI+with+Maven%22)
@@ -27,7 +27,9 @@
 
 ## TOC <!-- omit in toc -->
 - [Major features](#major-features)
-  - [Motivation](#motivation) 
+  - [Motivation](#motivation)
+- [Technology used](#technology-used)
+  - [Development environment](#development-environment)
 
 <hr />
 
@@ -45,3 +47,15 @@
 ### Motivation
 
 Mr. Taro Kono, who became Minister for Administrative Reform & Regulatory Reform in September 2020, started the Administrative Reform Guide Box ([kaikaku110](https://www.taro.org/kaikaku110)). This posting site anonymously accepts information about unnecessary regulations, regulations that hinder work, and problems with the vertical division of government offices. Since the start, many opinions have been received and it has been forced to stop. From this, I thought that even if there was potential improvement in the company or group, it would be difficult to convey it. And I made this app thinking that it would be nice if there was a platform in the world where people could easily exchange opinions. First of all, the configuration is designed to be operated individually by a small company or group on a trial basis.
+
+<hr />
+
+## Technology used
+
+### Development environment
+
+- IDE -> IntelliJ IDEA Ultimate 2020.3 (Eclipse 2020-12 Pleiades)
+  - Either can be developed
+- JDK -> Amazon Corretto 11.0.9.1
+  - Due to the inclusion of Hibernate, it only supports up to Java 11
+  - Click here for details -> [Hibernate](https://hibernate.org/orm/releases/)
