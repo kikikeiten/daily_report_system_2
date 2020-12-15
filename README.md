@@ -85,6 +85,7 @@ I moved from Maven to Gradle once, but the replacement of `tomcat7-maven-plugin`
 - [tomcat7-maven-plugin](https://github.com/apache/tomcat-maven-plugin): `2.2`
 - [Hibernate](https://hibernate.org): `5.4.11.Final`
 - [Lombok](https://github.com/rzwitserloot/lombok): `1.18.16`
+- [Fomantic-UI](https://fomantic-ui.com): `2.8.7`
 
 ### GitHub Actions
 
