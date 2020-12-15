@@ -63,12 +63,12 @@ Mr. Taro Kono, who became Minister for Administrative Reform & Regulatory Reform
 
 ### Dependencies
 
-- jstl-api 1.2.1
-- jsp-api 2.2
-- servlet-api 3.1.0
-- jaxb-api 2.3.0
-- mysql-connector-java 5.1.45
-- taglibs-standard-impl 1.2.5
-- tomcat7-maven-plugin 2.2
-- hibernate-agroal 5.4.11.Final
-- lombok 1.18.16
+- JSTL API 1.2.1
+- [JSP API](https://github.com/eclipse-ee4j/jsp-api) 2.2
+- [Servlet API](https://github.com/javaee/servlet-spec) 3.1.0
+- [JAXB API](https://github.com/javaee/jaxb-spec) 2.3.0
+- [Connector/J](https://github.com/mysql/mysql-connector-j) 5.1.45
+- [taglibs-standard-impl](https://github.com/apache/tomcat-taglibs-standard) 1.2.5
+- [tomcat7-maven-plugin](https://github.com/apache/tomcat-maven-plugin) 2.2
+- [Hibernate](https://hibernate.org) 5.4.11.Final
+- [Lombok](https://github.com/rzwitserloot/lombok) 1.18.16
