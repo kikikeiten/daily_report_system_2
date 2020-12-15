@@ -32,7 +32,9 @@
   - [Development environment](#development-environment)
   - [Build tool](#build-tool)
   - [Dependencies](#dependencies)
-  - [GitHub Actions](#gitHub-actions)
+  - [GitHub Actions](#github-actions)
+- [Roadmap to 3.0](#roadmap-to-30)
+- [License](#license)
 
 <hr />
 
@@ -87,3 +89,15 @@ I moved from Maven to Gradle once, but the replacement of `tomcat7-maven-plugin`
 
 - Java CI with Maven
 - CodeQL
+
+<hr />
+
+## Roadmap to 3.0
+
+Basic function improvement items are posted in [Projects](https://github.com/kikikeiten/tipswatch/projects/1). please refer🙆‍♀️♂️
+
+<hr />
+
+## License
+
+**Tipswatch** is under Apache-2.0 License. See the [LICENSE](https://github.com/kikikeiten/tipswatch/blob/main/LICENSE.md) file for more info.
