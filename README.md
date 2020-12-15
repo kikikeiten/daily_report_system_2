@@ -56,24 +56,24 @@ Mr. Taro Kono, who became Minister for Administrative Reform & Regulatory Reform
 
 ### Development environment
 
-- IDE -> IntelliJ IDEA Ultimate 2020.3 (Eclipse 2020-12 Pleiades)
+- IDE -> IntelliJ IDEA Ultimate `2020.3` (Eclipse `2020-12` Pleiades)
   - Either can be developed
-- JDK -> Amazon Corretto 11.0.9.1
+- JDK -> Amazon Corretto `11.0.9.1`
   - [Download](https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-11-ug/downloads-list.html)
   - Due to the inclusion of Hibernate, it only supports up to Java 11
   - Click here for details -> [Hibernate](https://hibernate.org/orm/releases/)
 
 ### Dependencies
 
-- JSTL API 1.2.1
-- [JSP API](https://github.com/eclipse-ee4j/jsp-api) 2.2
-- [Servlet API](https://github.com/javaee/servlet-spec) 3.1.0
-- [JAXB API](https://github.com/javaee/jaxb-spec) 2.3.0
-- [Connector/J](https://github.com/mysql/mysql-connector-j) 5.1.45
-- [taglibs-standard-impl](https://github.com/apache/tomcat-taglibs-standard) 1.2.5
-- [tomcat7-maven-plugin](https://github.com/apache/tomcat-maven-plugin) 2.2
-- [Hibernate](https://hibernate.org) 5.4.11.Final
-- [Lombok](https://github.com/rzwitserloot/lombok) 1.18.16
+- JSTL API: `1.2.1`
+- [JSP API](https://github.com/eclipse-ee4j/jsp-api): `2.2`
+- [Servlet API](https://github.com/javaee/servlet-spec): `3.1.0`
+- [JAXB API](https://github.com/javaee/jaxb-spec): `2.3.0`
+- [Connector/J](https://github.com/mysql/mysql-connector-j): `5.1.45`
+- [taglibs-standard-impl](https://github.com/apache/tomcat-taglibs-standard): `1.2.5`
+- [tomcat7-maven-plugin](https://github.com/apache/tomcat-maven-plugin): `2.2`
+- [Hibernate](https://hibernate.org): `5.4.11.Final`
+- [Lombok](https://github.com/rzwitserloot/lombok): `1.18.16`
 
 ### GitHub Actions
 
