@@ -57,5 +57,18 @@ Mr. Taro Kono, who became Minister for Administrative Reform & Regulatory Reform
 - IDE -> IntelliJ IDEA Ultimate 2020.3 (Eclipse 2020-12 Pleiades)
   - Either can be developed
 - JDK -> Amazon Corretto 11.0.9.1
+  - [Download](https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-11-ug/downloads-list.html)
   - Due to the inclusion of Hibernate, it only supports up to Java 11
   - Click here for details -> [Hibernate](https://hibernate.org/orm/releases/)
+
+### Dependencies
+
+- jstl-api 1.2.1
+- jsp-api 2.2
+- servlet-api 3.1.0
+- jaxb-api 2.3.0
+- mysql-connector-java 5.1.45
+- taglibs-standard-impl 1.2.5
+- tomcat7-maven-plugin 2.2
+- hibernate-agroal 5.4.11.Final
+- lombok 1.18.16
