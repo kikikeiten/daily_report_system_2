@@ -25,7 +25,7 @@
 
 <hr />
 
-## 🗒 TOC <!-- omit in toc -->
+## TOC <!-- omit in toc -->
 - [Major features](#major-features)
   - [Motivation](#motivation)
 - [Technology used](#technology-used)
@@ -33,12 +33,13 @@
   - [Build tool](#build-tool)
   - [Dependencies](#dependencies)
   - [GitHub Actions](#github-actions)
+- [Usage](#usage)
 - [Roadmap to 3.0](#roadmap-to-30)
 - [License](#license)
 
 <hr />
 
-## ✨ Major features
+## Major features
 
 - 🎁 Idea box that anyone can easily post
 - 🔖 Ideas can be approved and remanded with advice
@@ -49,15 +50,15 @@
 - 📢 Notify ideas of forgotten submissions and approvals
 - 🕶 Check ideas of members you followed on the timeline
 
-### 🔥 Motivation
+### Motivation
 
 Mr. Taro Kono, who became Minister for Administrative Reform & Regulatory Reform in September 2020, started the Administrative Reform Guide Box ([kaikaku110](https://www.taro.org/kaikaku110)). This posting site anonymously accepts information about unnecessary regulations, regulations that hinder work, and problems with the vertical division of government offices. Since the start, many opinions have been received and it has been forced to stop. From this, I thought that even if there was potential improvement in the company or group, it would be difficult to convey it. And I made this app thinking that it would be nice if there was a platform in the world where people could easily exchange opinions. First of all, the configuration is designed to be operated individually by a small company or group on a trial basis.
 
 <hr />
 
-## ⚡️ Technology used
+## Technology used
 
-### 📦 Development environment
+### Development environment
 
 - IDE -> IntelliJ IDEA Ultimate `2020.3` (Eclipse `2020-12` Pleiades)
   - Either can be developed
@@ -66,14 +67,14 @@ Mr. Taro Kono, who became Minister for Administrative Reform & Regulatory Reform
   - Due to the inclusion of Hibernate, it only supports up to Java 11
   - Click here for details -> [Hibernate](https://hibernate.org/orm/releases/)
   
-### 🏗 Build tool
+### Build tool
 
 - Maven `3.6.3`
 - (Gradle `6.7.1`)
 
 I moved from Maven to Gradle once, but the replacement of `tomcat7-maven-plugin` didn't work, so I changed it back. You can change it if it can be ported.
 
-### 📌 Dependencies
+### Dependencies
 
 - JSTL API: `1.2.1`
 - [JSP API](https://github.com/eclipse-ee4j/jsp-api): `2.2`
@@ -85,19 +86,25 @@ I moved from Maven to Gradle once, but the replacement of `tomcat7-maven-plugin`
 - [Hibernate](https://hibernate.org): `5.4.11.Final`
 - [Lombok](https://github.com/rzwitserloot/lombok): `1.18.16`
 
-### 👷‍♀️ GitHub Actions
+### GitHub Actions
 
 - Java CI with Maven
 - CodeQL
 
 <hr />
 
-## 🗺 Roadmap to 3.0
+## Usage
+
+- The basic functions and usage are summarized in the [Wiki](https://github.com/kikikeiten/tipswatch/wiki)🕵️‍♀️
+
+<hr />
+
+## Roadmap to 3.0
 
 Basic function improvement items are posted in [Projects](https://github.com/kikikeiten/tipswatch/projects/1). please refer🙆‍♀️♂️
 
 <hr />
 
-## 📄 License
+## License
 
 **Tipswatch** is under Apache-2.0 License. See the [LICENSE](https://github.com/kikikeiten/tipswatch/blob/main/LICENSE.md) file for more info.
