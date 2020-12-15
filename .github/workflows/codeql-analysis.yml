@@ -51,7 +51,6 @@ jobs:
     # If this step fails, then you should remove it and run the build manually (see below)
     #- name: Autobuild
     #  uses: github/codeql-action/autobuild@v1
-      
 
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -63,11 +62,6 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
