@@ -30,6 +30,7 @@
   - [Motivation](#motivation)
 - [Technology used](#technology-used)
   - [Development environment](#development-environment)
+  - [Build tool](#build-tool)
   - [Dependencies](#dependencies)
   - [GitHub Actions](#gitHub-actions)
 
@@ -62,6 +63,13 @@ Mr. Taro Kono, who became Minister for Administrative Reform & Regulatory Reform
   - [Download](https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-11-ug/downloads-list.html)
   - Due to the inclusion of Hibernate, it only supports up to Java 11
   - Click here for details -> [Hibernate](https://hibernate.org/orm/releases/)
+  
+### Build tool
+
+- Maven `3.6.3`
+- (Gradle `6.7.1`)
+
+I moved from Maven to Gradle once, but the replacement of `tomcat7-maven-plugin` didn't work, so I changed it back. You can change it if it can be ported.
 
 ### Dependencies
 
