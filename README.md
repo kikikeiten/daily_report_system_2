@@ -33,7 +33,7 @@
   - [Build tool](#build-tool)
   - [Dependencies](#dependencies)
   - [GitHub Actions](#github-actions)
-- [Usage](#usage)
+- [Usage and screenshots](#usage-and-screenshots)
 - [Roadmap to 3.0](#roadmap-to-30)
 - [License](#license)
 
@@ -94,7 +94,7 @@ I moved from Maven to Gradle once, but the replacement of `tomcat7-maven-plugin`
 
 <hr />
 
-## Usage
+## Usage and screenshots
 
 - The basic functions and usage are summarized in the [Wiki](https://github.com/kikikeiten/tipswatch/wiki)🕵️‍♀️
 
@@ -102,7 +102,7 @@ I moved from Maven to Gradle once, but the replacement of `tomcat7-maven-plugin`
 
 ## Roadmap to 3.0
 
-Basic function improvement items are posted in [Projects](https://github.com/kikikeiten/tipswatch/projects/1). please refer🙆‍♀️♂️
+Basic function improvement items are posted in [Projects](https://github.com/kikikeiten/tipswatch/projects/1). please refer🙆‍♀️
 
 <hr />
 
