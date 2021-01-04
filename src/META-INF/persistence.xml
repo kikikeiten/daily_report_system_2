@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="tipswatch" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>models.Member</class>
@@ -10,14 +12,14 @@
         <class>models.Join</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="b8861dd7d51e58"/>
-            <property name="javax.persistence.jdbc.password" value="7f2bec5d"/>
-            <property name="javax.persistence.schema-generation.database.action" value="none"/>
-            <property name="javax.persistence.schema-generation.scripts.action" value="none"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost/tipswatch?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8"/>
+            <property name="javax.persistence.jdbc.user" value="repuser3"/>
+            <property name="javax.persistence.jdbc.password" value="reppass3"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-east-02.cleardb.com/heroku_7f8850c6ba4f87c?reconnect=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8&amp;characterSetResults=utf8"/>
         </properties>
     </persistence-unit>
 </persistence>
