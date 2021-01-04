@@ -18,7 +18,7 @@
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
           <element id="library" level="project" name="Maven: io.agroal:agroal-pool:1.9" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.4.1.Final" />
-          <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.4.26.Final" />
+          <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.4.27.Final" />
           <element id="library" level="project" name="Maven: javax.persistence:javax.persistence-api:2.2" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.27.0-GA" />
           <element id="library" level="project" name="Maven: net.bytebuddy:byte-buddy:1.10.17" />
