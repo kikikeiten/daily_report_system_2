@@ -36,7 +36,7 @@ public class MemberValidator {
     private static String _validateCode(String code, Boolean codeDuplicateCheckFlag) {
         // 必須入力チェック
         if (code == null || code.equals("")) {
-            return "メンバーIDを入力してください。";
+            return "Please enter your member ID.";
         }
 
         // すでに登録されているメンバーIDとの重複チェック
@@ -49,7 +49,7 @@ public class MemberValidator {
             em.close();
 
             if (checkRegisteredCode > 0) {
-                return "入力されたメンバーIDはすでに存在しています。";
+                return "The member ID you entered already exists.";
             }
         }
         return "";
@@ -58,7 +58,7 @@ public class MemberValidator {
     // メンバー名の必須入力チェック
     private static String _validateName(String name) {
         if (name == null || name.equals("")) {
-            return "氏名を入力してください。";
+            return "Please enter your name.";
         }
         return "";
     }
@@ -68,7 +68,7 @@ public class MemberValidator {
 
         // パスワードを変更する場合のみ実行
         if (passwordCheckFlag && (password == null || password.equals(""))) {
-            return "パスワードを入力してください。";
+            return "Please enter your password.";
         }
         return "";
     }
