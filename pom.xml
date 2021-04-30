@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-agroal</artifactId>
-            <version>5.4.30.Final</version>
+            <version>5.4.31.Final</version>
             <type>pom</type>
         </dependency>
         <dependency>
