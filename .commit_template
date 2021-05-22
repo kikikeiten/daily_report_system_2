@@ -1,0 +1,72 @@
+
+
+# ==== Frequently used prefixes ====
+# ✨ :sparkles: 新機能の追加
+# 💄 :lipstick: UIやスタイルの追加または更新
+# 🐛 :bug: バグの修正
+# 🔥 :fire: コードまたはファイルの削除
+# ♻️ :recycle: リファクタリング
+# 🚚 :truck: リソースの移動またはリネーム
+# 💡 :bulb: コメントの追加または更新
+# ✏️ :pencil2: タイポの修正
+# 🎨 :art: コードの構造 / フォーマットの改善
+# ⚡️ :zap: パフォーマンスの改善
+# 💬 :speech_balloon: テキストとリテラルの追加または更新
+# 🚸 :children_crossing: UX / ユーザビリティの改善
+# 📝 :memo: ドキュメンテーションの追加または更新
+# 🗃 :card_file_box: データベース関連の変更
+
+# ==== Prefixes that are rarely used but occasionally used ====
+# 🍱 :bento: アセットの追加または更新
+# 🔧 :wrench: 構成ファイルの追加または更新
+# 🔨 :hammer: スクリプト開発の追加または更新
+# 💩 :poop: 改善が必要な低品質なコード
+# 🔒 :lock: セキュリティの問題を修正
+# 🚑 :ambulance: ホットフィックス
+# 📦 :package: コンパイルされたファイルまたはパッケージの追加または更新
+# ♿️ :wheelchair: 利便性の改善
+# 🔊 :loud_sound: ログの追加または変更
+# 🔇 :mute: ログの削除
+# 🏗 :building_construction: アーキテクチャの変更
+# 📱 :iphone: レスポンシブデザイン化
+# 🙈 :see_no_evil: .gitignoreの追加または更新
+# ⚗ :alembic: 実験
+# 🔍 :mag: SEOの改善
+# 🥅 :goal_net: エラーのキャッチ
+# 💫 :dizzy: アニメーションとトランジションの追加または更新
+# 🗑 :wastebasket: クリーンアップが必要な非推奨のコード
+# ✅ :white_check_mark: テストの追加または更新
+
+# ==== First-time limited prefixes ====
+# 🎉 :tada: プロジェクトの開始
+# 🚀 :rocket: デプロイ
+
+# ==== CI prefixes ====
+# 💚 :green_heart: CIビルドの修正
+# 👷 :construction_worker: CIビルドの追加または更新.
+
+# ==== Dependency prefix ====
+# ➕ :heavy_plus_sign: 依存関係の追加
+# ➖ :heavy_minus_sign: 依存関係の削除
+# ⬆️ :arrow_up: 依存関係のアップデート
+# ⬇️ :arrow_down: 依存関係のダウングレード
+# 📌 :pushpin: 依存関係を特定のバージョンに固定
+
+# ==== Prefixes that are rarely used ====
+# 📈 :chart_with_upwards_trend: 分析またはトラックコードの追加または更新
+# 🔖 :bookmark: リリース / バージョンタグ
+# 🚨 :rotating_light: linterの警告を削除
+# 🌐 :globe_with_meridians: 国際化と地域化
+# 👽 :alien: 外部APIの変更によるコードの更新
+# 📄 :page_facing_up: ライセンスの追加または更新
+# 💥 :boom: 重大な変更を導入
+# 🍻 :beers: 酔って書いたコード
+# 👥 :busts_in_silhouette: コントリビューターの追加または更新
+# 🤡 :clown_face: モック
+# 🥚 :egg: 隠し機能の追加または更新
+# 📸 :camera_flash: スナップショットの追加または更新
+# 🏷️ :label: 型の追加または更新
+# 🌱 :seedling: シードファイルの追加または更新
+# 🚩 :triangular_flag_on_post: フィーチャフラグの追加、更新または削除
+
+# Update date 2020-11-15
