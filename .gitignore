@@ -159,3 +159,11 @@ WebContent/META-INF/application.properties
 
 # CSS
 WebContent/css/style.css
+
+# other
+/.idea/
+/gradle/
+/gradlew
+/gradlew.bat
+/system.properties
+/tipswatch.iml
